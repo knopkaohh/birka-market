@@ -156,6 +156,7 @@ button { cursor: pointer; }
   display: grid; place-content: center; justify-items: center;
   color: var(--ink); background: var(--yellow);
   transition: opacity .55s ease, visibility .55s ease;
+  animation: loaderExit .55s 1.4s forwards;
 }
 .loader-hidden { opacity: 0; visibility: hidden; pointer-events: none; }
 .loader-tag {
@@ -173,6 +174,9 @@ button { cursor: pointer; }
 .loader-line i { display: block; height: 100%; background: var(--ink); animation: load 1.05s ease forwards; }
 .loader p { margin-top: 15px; font-size: 11px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; }
 @keyframes load { from { width: 0; } to { width: 100%; } }
+@keyframes loaderExit {
+  to { opacity: 0; visibility: hidden; pointer-events: none; }
+}
 
 .site-header {
   position: sticky; top: 0; z-index: 100;
