@@ -39,3 +39,7 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# incoming leads and uploaded mockups
+/data/leads.json
+/data/uploads
