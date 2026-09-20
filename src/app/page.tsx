@@ -116,7 +116,7 @@ export default function Home() {
           <div className="hero-copy">
             <div className="eyebrow"><span />Производим в Москве • Доставляем по России</div>
             <h1>Ваш бренд<br />начинается <em>с деталей</em></h1>
-            <p className="hero-lead">Бирки, упаковка и фурнитура для одежды — от бесплатного макета до готового тиража. Поможем выбрать материал и рассчитаем заказ за 15 минут.</p>
+            <p className="hero-lead">Бирки, упаковка и фурнитура для одежды — от бесплатного макета до готового тиража. Поможем выбрать материал и быстро рассчитаем заказ.</p>
             <div className="hero-actions">
               <button className="primary-cta" onClick={() => goToForm()}>Рассчитать стоимость<ArrowRight size={19} /></button>
               <a className="text-link" href="#products">Смотреть продукцию<ArrowDownRight size={18} /></a>
@@ -136,7 +136,7 @@ export default function Home() {
             <div className="photo-card photo-small">
               <Image src="/images/product-cotton.jpg" alt="Хлопковые бирки с логотипом" fill sizes="220px" />
             </div>
-            <div className="quality-stamp"><span>8 лет</span><small>заботимся<br />о брендах</small></div>
+            <div className="quality-stamp"><span>с 2017</span><small>заботимся<br />о брендах</small></div>
             <div className="scroll-cue"><span>Листайте</span><ArrowDownRight /></div>
           </div>
         </section>
@@ -227,7 +227,7 @@ export default function Home() {
           <div className="calculator-intro">
             <span className="section-number light">05 / БЫСТРЫЙ РАСЧЁТ</span><h2>Расскажите<br />о вашей задаче</h2>
             <p>Можно не знать точных параметров. Оставьте телефон — менеджер свяжется, поможет с выбором и подготовит расчёт.</p>
-            <div className="calc-promise"><Clock3 /><span><strong>Ответим в течение 15 минут</strong><br />в рабочее время</span></div>
+            <div className="calc-promise"><Clock3 /><span><strong>Свяжемся и уточним параметры</strong><br />в рабочее время</span></div>
           </div>
           <form className="calc-form" onSubmit={submit}>
             <div className="field full">
@@ -277,9 +277,9 @@ export default function Home() {
           <button className="footer-circle" onClick={() => goToForm()}>Обсудить<br />задачу<ArrowDownRight /></button>
         </div>
         <div className="footer-grid">
-          <div><span>СВЯЗАТЬСЯ</span><a href="tel:+74950038881">+7 495 003-88-81</a><a href="mailto:info@birka-market.ru">info@birka-market.ru</a></div>
+          <div><span>СВЯЗАТЬСЯ</span><a href="tel:+74950038881">+7 495 003-88-81</a><a href="mailto:prod@birka-market.ru">prod@birka-market.ru</a></div>
           <div><span>АДРЕС</span><p>Москва, Строительный проезд,<br />дом 2, стр. 1, офис № 1</p></div>
-          <div><span>МЕССЕНДЖЕРЫ</span><a href="#calc">Telegram</a><a href="#calc">WhatsApp</a></div>
+          <div><span>МЕССЕНДЖЕРЫ</span><a href="https://t.me/birka_market_ru" target="_blank" rel="noreferrer">Telegram</a><a href="https://wa.me/79163549287" target="_blank" rel="noreferrer">WhatsApp</a></div>
           <div><span>РЕЖИМ РАБОТЫ</span><p>Пн–Пт, 09:00–18:00</p></div>
         </div>
         <div className="footer-bottom"><span>© 2026 БИРКА МАРКЕТ</span><span>Бирки • упаковка • фурнитура</span><a href="#top">Наверх ↑</a></div>
