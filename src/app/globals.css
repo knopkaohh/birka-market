@@ -537,6 +537,7 @@ body.quick-calc-open .mobile-bottom { display: none !important; }
 .hero-proof span { color: var(--muted-ink); font-size: 9px; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; }
 
 .hero-visual { position: relative; min-height: 620px; background: #ded9ce; overflow: hidden; }
+[data-parallax] { will-change: transform; }
 .hero-yellow-shape {
   position: absolute; width: 78%; aspect-ratio: 1; right: -18%; top: -8%;
   border-radius: 50%; background: var(--yellow); filter: saturate(.9);
@@ -649,6 +650,92 @@ body.quick-calc-open .mobile-bottom { display: none !important; }
 .step p { max-width: 470px; margin: 0; color: var(--muted-ink); font-size: 12px; line-height: 1.5; }
 .step > svg { color: #96978f; width: 18px; }
 .step:last-child > svg { color: #8e721f; }
+
+.process-parallax { height: 340vh; background: #1c1d1c; }
+.process-parallax-sticky {
+  position: sticky; top: 0; height: 100dvh; overflow: hidden;
+  display: flex; flex-direction: column;
+  color: var(--paper);
+}
+.process-parallax-stage {
+  flex: 1; display: grid; grid-template-columns: 1.08fr .92fr; min-height: 0;
+}
+.process-parallax-visual { position: relative; overflow: hidden; background: #2a2b2a; }
+.process-parallax-shot {
+  position: absolute; inset: -8%;
+  opacity: 0; visibility: hidden;
+  transition: opacity .45s ease, visibility .45s ease;
+}
+.process-parallax-shot.is-active { opacity: 1; visibility: visible; }
+.process-parallax-shot img { object-fit: cover; filter: saturate(.82) contrast(1.05); }
+.process-parallax-caption {
+  position: absolute; left: 22px; bottom: 22px; z-index: 2;
+  padding: 8px 12px; color: var(--ink); background: var(--yellow);
+  font-size: 9px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase;
+}
+.process-parallax-copy {
+  position: relative; display: flex; flex-direction: column;
+  padding: 96px clamp(28px, 4vw, 64px) 28px;
+}
+.process-parallax-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; }
+.process-hint {
+  display: inline-flex; align-items: center; gap: 8px; margin: 0;
+  color: #9a9a92; font-size: 9px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase;
+}
+.process-hint svg { animation: processHint 1.4s ease-in-out infinite; }
+@keyframes processHint {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(5px); }
+}
+.process-parallax-index {
+  position: absolute; right: 6%; top: 118px;
+  font-family: var(--font-cormorant), Georgia, serif;
+  color: var(--yellow); font-size: clamp(88px, 12vw, 160px); font-weight: 500;
+  line-height: .8; letter-spacing: -.08em; opacity: .9; pointer-events: none;
+}
+.process-parallax-copy h2 {
+  position: relative; z-index: 1; max-width: 9ch;
+  margin: 22px 0 0; font-size: clamp(36px, 4.4vw, 58px); font-weight: 650;
+  line-height: .95; letter-spacing: -.055em;
+}
+.process-parallax-copy h2 em {
+  font-family: var(--font-cormorant), Georgia, serif; font-weight: 500; font-style: italic; color: var(--yellow);
+}
+.process-parallax-step { position: relative; z-index: 1; max-width: 420px; margin-top: 28px; min-height: 118px; }
+.process-parallax-step h3 { margin: 0 0 10px; font-size: clamp(26px, 3vw, 34px); letter-spacing: -.04em; }
+.process-parallax-step p { margin: 0; color: #b1b0a8; font-size: 15px; line-height: 1.65; }
+.process-parallax-cta {
+  display: inline-flex; align-items: center; gap: 12px; width: max-content;
+  margin-top: 8px; min-height: 52px; padding: 0 22px;
+  color: var(--ink); background: var(--yellow); font-size: 12px; font-weight: 800;
+}
+.process-track {
+  position: relative; display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 8px; padding: 0 clamp(22px, 4vw, 56px) 28px;
+}
+.process-track-bar {
+  position: absolute; left: clamp(22px, 4vw, 56px); right: clamp(22px, 4vw, 56px); top: 7px;
+  height: 2px; background: #3d3e3c;
+}
+.process-track-bar i {
+  display: block; height: 100%; width: 0; background: var(--yellow);
+  box-shadow: 0 0 12px rgba(237, 193, 71, .45);
+}
+.process-track-stop {
+  position: relative; z-index: 1; display: flex; flex-direction: column; align-items: flex-start; gap: 10px;
+  padding: 0; border: 0; color: #8d8e86; background: transparent; text-align: left; cursor: pointer;
+}
+.process-track-stop b {
+  width: 16px; height: 16px; border: 1px solid #6a6b64; background: #1c1d1c;
+}
+.process-track-stop span { font-size: 9px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; }
+.process-track-stop.is-on b { border-color: var(--yellow); background: var(--yellow); }
+.process-track-stop.is-current, .process-track-stop.is-on span { color: var(--paper); }
+.process-track-stop.is-current span { color: var(--yellow); }
+
+@media (prefers-reduced-motion: reduce) {
+  .process-hint svg { animation: none; }
+}
 
 .calculator-section { display: grid; grid-template-columns: .82fr 1.18fr; gap: 7vw; padding: 120px var(--page-gutter); color: var(--paper); background: #2a2b2a; }
 .calculator-intro h2 {
@@ -787,6 +874,16 @@ footer .logo-mark { color: var(--ink); background: var(--yellow); }
   .process-photo-label { width: 120px; height: 120px; right: 16px; bottom: 16px; }
   .process-content { padding: 75px 18px; }
   .steps { margin-top: 45px; }
+  .process-parallax { height: 300vh; }
+  .process-parallax-stage { grid-template-columns: 1fr; grid-template-rows: 36vh 1fr; }
+  .process-parallax-copy { padding: 18px 18px 6px; }
+  .process-parallax-index { top: 8px; right: 12px; font-size: 72px; }
+  .process-parallax-copy h2 { max-width: none; margin-top: 8px; font-size: 34px; }
+  .process-parallax-step { min-height: 88px; margin-top: 16px; }
+  .process-parallax-step h3 { font-size: 24px; }
+  .process-track { padding: 0 18px 16px; }
+  .process-track-bar { left: 18px; right: 18px; }
+  .process-hint { max-width: 120px; text-align: right; }
   .calculator-section { display: block; padding: 80px 18px; }
   .calculator-intro > p { font-size: 13px; }
   .calc-promise { margin: 28px 0 35px; }

@@ -3,10 +3,7 @@ import Link from "next/link";
 import {
   ArrowDownRight,
   ArrowRight,
-  ChevronRight,
-  CircleCheck,
   MessageCircle,
-  PackageCheck,
   Sparkles,
 } from "lucide-react";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
@@ -14,6 +11,7 @@ import { CalculatorBlock } from "@/components/calculator-block";
 import { CategoryTile } from "@/components/category-tile";
 import { Loader } from "@/components/loader";
 import { Marquee } from "@/components/marquee";
+import { ProcessParallax } from "@/components/process-parallax";
 import { ProductCard } from "@/components/product-card";
 import { YandexMap } from "@/components/yandex-map";
 import {
@@ -23,7 +21,6 @@ import {
   featuredSlugs,
   getProduct,
   portfolio,
-  processSteps,
 } from "@/lib/site";
 
 export default function Home() {
@@ -73,12 +70,12 @@ export default function Home() {
           </div>
         </div>
         <div className="hero-visual" aria-label="Примеры изготовленных бирок">
-          <div className="hero-yellow-shape" />
-          <div className="floating-note note-one">
+          <div className="hero-yellow-shape" data-parallax="0.14" />
+          <div className="floating-note note-one" data-parallax="0.22" data-parallax-base="rotate(-3deg)">
             <Sparkles size={16} />
             Реальные работы
           </div>
-          <div className="photo-card photo-main">
+          <div className="photo-card photo-main" data-parallax="0.06" data-parallax-base="rotate(3deg)">
             <Image
               src="/images/products/jacquard.jpg"
               alt="Жаккардовые бирки, изготовленные Бирка Маркет"
@@ -87,10 +84,10 @@ export default function Home() {
               priority
             />
           </div>
-          <div className="photo-card photo-small">
+          <div className="photo-card photo-small" data-parallax="0.18" data-parallax-base="rotate(-7deg)">
             <Image src="/images/products/cotton.jpg" alt="Хлопковые бирки с логотипом" fill sizes="220px" />
           </div>
-          <div className="quality-stamp">
+          <div className="quality-stamp" data-parallax="0.1" data-parallax-base="rotate(7deg)">
             <span>с 2017</span>
             <small>
               заботимся
@@ -201,39 +198,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="process-section" id="process">
-        <div className="process-photo">
-          <Image src="/images/process.jpg" alt="Процесс производства и контроля продукции" fill sizes="(max-width: 900px) 100vw, 45vw" />
-          <div className="process-photo-label">
-            <PackageCheck />
-            <span>
-              Контролируем
-              <br />
-              каждый тираж
-            </span>
-          </div>
-        </div>
-        <div className="process-content">
-          <span className="section-number">05 / КАК МЫ РАБОТАЕМ</span>
-          <h2>
-            Понятный путь
-            <br />
-            от идеи до тиража
-          </h2>
-          <div className="steps">
-            {processSteps.map(([title, text], index) => (
-              <div className="step" key={title}>
-                <span>0{index + 1}</span>
-                <div>
-                  <h3>{title}</h3>
-                  <p>{text}</p>
-                </div>
-                {index === 3 ? <CircleCheck /> : <ChevronRight />}
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      <ProcessParallax />
 
       <CalculatorBlock />
 

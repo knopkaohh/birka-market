@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { SideMenu } from "@/components/side-menu";
 import { SiteHeader } from "@/components/site-header";
 import { QuickCalc } from "@/components/quick-calc";
+import { ScrollFX } from "@/components/scroll-fx";
 
 export function SiteChrome({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
@@ -42,6 +43,7 @@ export function SiteChrome({ children }: { children: React.ReactNode }) {
       />
       {children}
       <QuickCalc />
+      <ScrollFX />
     </>
   );
 }
