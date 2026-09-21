@@ -34,7 +34,7 @@ export function ProcessParallax() {
 
     let frame = 0;
     let current = 0;
-    const last = Math.max(processSteps.length - 1, 1);
+    const count = processSteps.length;
 
     const measure = () => {
       const track = trackRef.current;
@@ -45,9 +45,9 @@ export function ProcessParallax() {
       const total = Math.max(track.offsetHeight - window.innerHeight, 1);
       const passed = Math.min(Math.max(-track.getBoundingClientRect().top, 0), total);
       const progress = passed / total;
-      const scaled = progress * last;
-      const nextIndex = Math.min(last, Math.floor(scaled + 0.001));
-      const local = Math.min(1, Math.max(0, scaled - nextIndex));
+      const segment = progress * count;
+      const nextIndex = Math.min(count - 1, Math.floor(segment));
+      const local = Math.min(1, Math.max(0, segment - nextIndex));
 
       if (barRef.current) barRef.current.style.width = `${(progress * 100).toFixed(2)}%`;
       const shots = shotsRef.current?.children;
@@ -91,12 +91,13 @@ export function ProcessParallax() {
     };
   }, []);
 
-  const last = Math.max(processSteps.length - 1, 1);
+  const count = processSteps.length;
+  const last = count - 1;
   const goTo = (step: number) => {
     const track = trackRef.current;
     if (!track) return;
     const total = track.offsetHeight - window.innerHeight;
-    const top = track.getBoundingClientRect().top + window.scrollY + (step / last) * total;
+    const top = track.offsetTop + ((step + 0.12) / count) * total;
     window.scrollTo({ top, behavior: "smooth" });
   };
 
