@@ -1,6 +1,6 @@
 "use client";
 
-import { FormEvent, useId, useState } from "react";
+import { FormEvent, useEffect, useId, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ArrowRight, X } from "lucide-react";
@@ -18,6 +18,22 @@ export function QuickCalc() {
     setOpen(false);
     setStatus("idle");
   }
+
+  useEffect(() => {
+    document.body.classList.toggle("quick-calc-open", open);
+    if (!open) return;
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setOpen(false);
+        setStatus("idle");
+      }
+    };
+    window.addEventListener("keydown", onKey);
+    return () => {
+      window.removeEventListener("keydown", onKey);
+      document.body.classList.remove("quick-calc-open");
+    };
+  }, [open]);
 
   const slug = pathname.replace(/^\//, "").split("/")[0] ?? "";
   const product = getProduct(slug);
