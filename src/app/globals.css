@@ -592,18 +592,21 @@ button { cursor: pointer; }
 }
 .field textarea { height: 82px; padding-top: 13px; resize: vertical; }
 .field select:focus, .field input:focus, .field textarea:focus { border-color: #777870; }
-.sample-toggle { grid-column: 1 / -1; display: flex; align-items: center; gap: 10px; font-size: 11px; cursor: pointer; }
-.sample-toggle input { position: absolute; opacity: 0; }
+.sample-toggle { position: relative; grid-column: 1 / -1; display: flex; align-items: center; gap: 10px; font-size: 11px; cursor: pointer; }
+.sample-toggle input { position: absolute; inset: 0; margin: 0; width: 100%; height: 100%; opacity: 0; cursor: pointer; }
 .sample-toggle > span { width: 20px; height: 20px; display: grid; place-content: center; border: 1px solid #aaa69b; }
 .sample-toggle svg { width: 14px; opacity: 0; }
 .sample-toggle input:checked + span { border-color: var(--yellow); background: var(--yellow); }
 .sample-toggle input:checked + span svg { opacity: 1; }
-.file-field { grid-column: 1 / -1; min-height: 80px; padding: 16px 18px; display: flex; align-items: center; gap: 14px; border: 1px dashed #b8b4a9; cursor: pointer; }
+.file-field { position: relative; grid-column: 1 / -1; min-height: 80px; padding: 16px 18px; display: flex; align-items: center; gap: 14px; border: 1px dashed #b8b4a9; cursor: pointer; }
 .file-field > svg { color: #777870; }
 .file-field > span { display: flex; flex-direction: column; gap: 4px; }
 .file-field strong { font-size: 11px; }
 .file-field small { color: #898a84; font-size: 9px; }
-.file-field input { margin-left: auto; max-width: 185px; font-size: 9px; }
+.file-field input[type="file"] {
+  position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; max-width: none;
+  opacity: 0; cursor: pointer; font-size: 0;
+}
 .submit-button {
   grid-column: 1 / -1; width: 100%; height: 56px; display: flex; justify-content: space-between !important;
   padding: 0 20px !important; border-radius: 0 !important; color: var(--ink) !important; background: var(--yellow) !important;
@@ -637,6 +640,11 @@ footer .logo-mark { color: var(--ink); background: var(--yellow); }
 .footer-grid a, .footer-grid p { margin: 0; color: #d5d2ca; font-size: 11px; line-height: 1.55; }
 .footer-grid a:hover { color: var(--yellow); }
 .footer-bottom { padding-top: 22px; display: flex; justify-content: space-between; color: #777872; font-size: 8px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+.back-to-top {
+  border: 0; padding: 0; color: inherit; background: none;
+  font: inherit; letter-spacing: inherit; text-transform: inherit;
+}
+.back-to-top:hover { color: var(--yellow); }
 .mobile-bottom { display: none; }
 
 @media (max-width: 1500px) {
@@ -702,7 +710,6 @@ footer .logo-mark { color: var(--ink); background: var(--yellow); }
   .calc-form { grid-template-columns: 1fr; padding: 22px 16px; gap: 17px; }
   .field.full, .sample-toggle, .file-field, .submit-button, .privacy, .form-message { grid-column: auto; }
   .file-field { align-items: flex-start; }
-  .file-field input { display: none; }
   .faq-section { display: block; }
   .faq-title { margin-bottom: 40px; }
   .faq-trigger { font-size: 14px !important; }

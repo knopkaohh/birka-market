@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { ArrowDownRight } from "lucide-react";
+import { BackToTop } from "@/components/back-to-top";
 import { Logo } from "@/components/logo";
 import { categories, company, navLinks } from "@/lib/site";
 
@@ -63,7 +64,7 @@ export function SiteFooter() {
       <div className="footer-bottom">
         <span>© {new Date().getFullYear()} БИРКА МАРКЕТ</span>
         <span>Бирки • упаковка • фурнитура • мерч</span>
-        <Link href="#top">Наверх ↑</Link>
+        <BackToTop />
       </div>
     </footer>
   );
