@@ -61,9 +61,19 @@ export function UiFallbackScript() {
     }
     if (target.closest(".quick-calc-close") || target.id === "quick-calc-overlay") {
       event.preventDefault();
+      event.stopPropagation();
       calcOpen(false);
     }
   });
+  document.addEventListener("pointerdown", function (event) {
+    if (ready()) return;
+    var target = event.target;
+    if (!target || !target.closest) return;
+    if (target.closest(".quick-calc-close")) {
+      event.preventDefault();
+      calcOpen(false);
+    }
+  }, true);
   document.addEventListener("keydown", function (event) {
     if (ready()) return;
     if (event.key !== "Escape") return;

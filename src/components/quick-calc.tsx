@@ -85,12 +85,28 @@ export function QuickCalc() {
         className={`quick-calc-overlay ${open ? "is-open" : ""}`}
         role="presentation"
         onClick={(event) => {
-          if (event.target === event.currentTarget) close();
+          const target = event.target as HTMLElement | null;
+          if (!target) return;
+          if (target === event.currentTarget || target.closest(".quick-calc-close")) close();
         }}
       >
         <div className="quick-calc-panel" role="dialog" aria-modal={open} aria-labelledby={titleId}>
-          <button type="button" className="quick-calc-close" onClick={close} aria-label="Закрыть">
-            <X size={22} />
+          <button
+            type="button"
+            className="quick-calc-close"
+            aria-label="Закрыть"
+            onPointerDown={(event) => {
+              event.preventDefault();
+              event.stopPropagation();
+              close();
+            }}
+            onClick={(event) => {
+              event.preventDefault();
+              event.stopPropagation();
+              close();
+            }}
+          >
+            <X size={22} aria-hidden="true" />
           </button>
           <span className="eyebrow">
             <span />
