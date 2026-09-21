@@ -13,7 +13,7 @@ export const rubberLanding: LandingContent = {
   proof: [
     { value: "от 100", label: "штук в тираже" },
     { value: "10–14", label: "рабочих дней" },
-    { value: "0 ₽", label: "технический макет" },
+    { value: "0 ₽", label: "макет для печати" },
   ],
   hero: [p("rubber"), g("rubber", 1), g("rubber", 3)],
   heroAlts: ["ПВХ-патчи с логотипом", "Объёмные нашивки", "Резиновые патчи"],
@@ -129,7 +129,7 @@ export const rubberLanding: LandingContent = {
   ],
   terms: [
     { value: "10–14", label: "рабочих дней после макета" },
-    { value: "0 ₽", label: "технический макет" },
+    { value: "0 ₽", label: "макет для печати" },
     { value: "от 100", label: "штук минимальный тираж" },
     { value: "Москва", label: "производство и контроль" },
   ],
@@ -178,7 +178,7 @@ export const flextranLanding: LandingContent = {
   proof: [
     { value: "от 50", label: "штук в тираже" },
     { value: "7–10", label: "рабочих дней" },
-    { value: "0 ₽", label: "технический макет" },
+    { value: "0 ₽", label: "макет для печати" },
   ],
   hero: [p("flextran"), g("flextran", 1), g("flextran", 3)],
   heroAlts: ["FlexTran на одежде", "Объёмное нанесение", "3D-логотип на текстиле"],
@@ -294,7 +294,7 @@ export const flextranLanding: LandingContent = {
   ],
   terms: [
     { value: "7–10", label: "рабочих дней после макета" },
-    { value: "0 ₽", label: "технический макет" },
+    { value: "0 ₽", label: "макет для печати" },
     { value: "от 50", label: "штук минимальный тираж" },
     { value: "Москва", label: "производство и контроль" },
   ],
@@ -343,7 +343,7 @@ export const dtfLanding: LandingContent = {
   proof: [
     { value: "от 10", label: "штук в тираже" },
     { value: "3–6", label: "рабочих дней" },
-    { value: "0 ₽", label: "технический макет" },
+    { value: "0 ₽", label: "макет для печати" },
   ],
   hero: [p("directtofilm"), g("directtofilm", 1), g("directtofilm", 3)],
   heroAlts: ["DTF-печать на одежде", "Полноцветный термоперенос", "Печать на футболках"],

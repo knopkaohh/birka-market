@@ -13,7 +13,7 @@ export const printingLanding: LandingContent = {
   proof: [
     { value: "от 50", label: "штук в тираже" },
     { value: "3–7", label: "рабочих дней" },
-    { value: "0 ₽", label: "технический макет" },
+    { value: "0 ₽", label: "макет для печати" },
   ],
   hero: [p("printing"), g("printing", 1), g("printing", 3)],
   heroAlts: ["Полиграфия для бизнеса", "Визитки и листовки", "Печать для компаний"],
@@ -129,7 +129,7 @@ export const printingLanding: LandingContent = {
   ],
   terms: [
     { value: "3–7", label: "рабочих дней после макета" },
-    { value: "0 ₽", label: "технический макет" },
+    { value: "0 ₽", label: "макет для печати" },
     { value: "от 50", label: "штук — зависит от носителя" },
     { value: "Москва", label: "печать и контроль" },
   ],
@@ -147,7 +147,7 @@ export const printingLanding: LandingContent = {
     },
     {
       q: "Есть ли дизайнер?",
-      a: "Технический макет готовим бесплатно. Если нужен смысловой дизайн «с нуля», обсудим объём отдельно.",
+      a: "Макет для печати готовим бесплатно. Если нужен смысловой дизайн «с нуля», обсудим объём отдельно.",
     },
     {
       q: "Какой минимальный тираж?",
@@ -178,7 +178,7 @@ export const businesscardLanding: LandingContent = {
   proof: [
     { value: "от 100", label: "штук в тираже" },
     { value: "2–4", label: "рабочих дня" },
-    { value: "0 ₽", label: "технический макет" },
+    { value: "0 ₽", label: "макет для печати" },
   ],
   hero: [p("businesscard"), g("businesscard", 1), g("businesscard", 3)],
   heroAlts: ["Визитки", "Двусторонние визитки", "Плотные визитки"],
@@ -294,7 +294,7 @@ export const businesscardLanding: LandingContent = {
   ],
   terms: [
     { value: "2–4", label: "рабочих дня после макета" },
-    { value: "0 ₽", label: "технический макет" },
+    { value: "0 ₽", label: "макет для печати" },
     { value: "от 100", label: "штук минимальный тираж" },
     { value: "Москва", label: "печать и контроль" },
   ],
@@ -343,7 +343,7 @@ export const stickerLanding: LandingContent = {
   proof: [
     { value: "от 50", label: "штук в тираже" },
     { value: "3–5", label: "рабочих дней" },
-    { value: "0 ₽", label: "технический макет" },
+    { value: "0 ₽", label: "макет для печати" },
   ],
   hero: [p("sticker"), g("sticker", 1), g("sticker", 3)],
   heroAlts: ["Наклейки с логотипом", "Вырубные стикеры", "Этикетки для упаковки"],
@@ -459,7 +459,7 @@ export const stickerLanding: LandingContent = {
   ],
   terms: [
     { value: "3–5", label: "рабочих дней после макета" },
-    { value: "0 ₽", label: "технический макет" },
+    { value: "0 ₽", label: "макет для печати" },
     { value: "от 50", label: "штук минимальный тираж" },
     { value: "Москва", label: "печать и контроль" },
   ],
@@ -508,7 +508,7 @@ export const leafletLanding: LandingContent = {
   proof: [
     { value: "от 100", label: "штук в тираже" },
     { value: "2–4", label: "рабочих дня" },
-    { value: "0 ₽", label: "технический макет" },
+    { value: "0 ₽", label: "макет для печати" },
   ],
   hero: [p("leaflet"), g("leaflet", 1), g("leaflet", 3)],
   heroAlts: ["Листовки", "Флаеры", "Промо-печать"],
@@ -623,7 +623,7 @@ export const leafletLanding: LandingContent = {
   ],
   terms: [
     { value: "2–4", label: "рабочих дня после макета" },
-    { value: "0 ₽", label: "технический макет" },
+    { value: "0 ₽", label: "макет для печати" },
     { value: "от 100", label: "штук минимальный тираж" },
     { value: "Москва", label: "печать и контроль" },
   ],
@@ -672,7 +672,7 @@ export const bookletLanding: LandingContent = {
   proof: [
     { value: "от 50", label: "штук в тираже" },
     { value: "3–6", label: "рабочих дней" },
-    { value: "0 ₽", label: "технический макет" },
+    { value: "0 ₽", label: "макет для печати" },
   ],
   hero: [p("booklet"), g("booklet", 1), g("booklet", 3)],
   heroAlts: ["Буклеты", "Евробуклеты", "Сфальцованные листовки"],
@@ -788,7 +788,7 @@ export const bookletLanding: LandingContent = {
   ],
   terms: [
     { value: "3–6", label: "рабочих дней после макета" },
-    { value: "0 ₽", label: "технический макет" },
+    { value: "0 ₽", label: "макет для печати" },
     { value: "от 50", label: "штук минимальный тираж" },
     { value: "Москва", label: "печать и фальцовка" },
   ],
@@ -837,7 +837,7 @@ export const magazineLanding: LandingContent = {
   proof: [
     { value: "от 50", label: "штук в тираже" },
     { value: "7–14", label: "рабочих дней" },
-    { value: "0 ₽", label: "технический макет" },
+    { value: "0 ₽", label: "макет для печати" },
   ],
   hero: [p("magazine"), g("magazine", 1), g("magazine", 3)],
   heroAlts: ["Печать журналов", "Lookbook", "Каталоги"],
@@ -1003,7 +1003,7 @@ export const flagsLanding: LandingContent = {
   proof: [
     { value: "от 1", label: "штуки" },
     { value: "5–8", label: "рабочих дней" },
-    { value: "0 ₽", label: "технический макет" },
+    { value: "0 ₽", label: "макет для печати" },
   ],
   hero: [p("flags"), g("flags", 1), g("flags", 3)],
   heroAlts: ["Печать флагов", "Флаги для мероприятий", "Фирменные флаги"],
@@ -1120,7 +1120,7 @@ export const flagsLanding: LandingContent = {
   ],
   terms: [
     { value: "5–8", label: "рабочих дней после макета" },
-    { value: "0 ₽", label: "технический макет" },
+    { value: "0 ₽", label: "макет для печати" },
     { value: "от 1", label: "штуки" },
     { value: "Москва", label: "печать и сборка" },
   ],

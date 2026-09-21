@@ -13,7 +13,7 @@ export const zipLanding: LandingContent = {
   proof: [
     { value: "от 500", label: "штук в тираже" },
     { value: "5–7", label: "рабочих дней" },
-    { value: "0 ₽", label: "технический макет" },
+    { value: "0 ₽", label: "макет для печати" },
   ],
   hero: [p("zip-pack"), g("zip-pack", 1), g("zip-pack", 3)],
   heroAlts: ["ZIP Lock пакеты с логотипом", "Пакеты для одежды", "Прозрачные пакеты с замком"],
@@ -129,7 +129,7 @@ export const zipLanding: LandingContent = {
   ],
   terms: [
     { value: "5–7", label: "рабочих дней после макета" },
-    { value: "0 ₽", label: "технический макет" },
+    { value: "0 ₽", label: "макет для печати" },
     { value: "от 500", label: "штук минимальный тираж" },
     { value: "Москва", label: "производство и контроль" },
   ],
@@ -178,7 +178,7 @@ export const kraftLanding: LandingContent = {
   proof: [
     { value: "от 100", label: "штук в тираже" },
     { value: "5–8", label: "рабочих дней" },
-    { value: "0 ₽", label: "технический макет" },
+    { value: "0 ₽", label: "макет для печати" },
   ],
   hero: [p("kraft"), g("kraft", 1), g("kraft", 3)],
   heroAlts: ["Крафтовые пакеты с логотипом", "Пакеты для шоурума", "Плотная крафт-бумага"],
@@ -294,7 +294,7 @@ export const kraftLanding: LandingContent = {
   ],
   terms: [
     { value: "5–8", label: "рабочих дней после макета" },
-    { value: "0 ₽", label: "технический макет" },
+    { value: "0 ₽", label: "макет для печати" },
     { value: "от 100", label: "штук минимальный тираж" },
     { value: "Москва", label: "производство и контроль" },
   ],
@@ -343,7 +343,7 @@ export const paperLanding: LandingContent = {
   proof: [
     { value: "от 100", label: "штук в тираже" },
     { value: "5–8", label: "рабочих дней" },
-    { value: "0 ₽", label: "технический макет" },
+    { value: "0 ₽", label: "макет для печати" },
   ],
   hero: [p("paper"), g("paper", 1), g("paper", 3)],
   heroAlts: ["Бумажные пакеты с логотипом", "Фирменные пакеты", "Пакеты для бутика"],
@@ -459,7 +459,7 @@ export const paperLanding: LandingContent = {
   ],
   terms: [
     { value: "5–8", label: "рабочих дней после макета" },
-    { value: "0 ₽", label: "технический макет" },
+    { value: "0 ₽", label: "макет для печати" },
     { value: "от 100", label: "штук минимальный тираж" },
     { value: "Москва", label: "производство и контроль" },
   ],
@@ -508,7 +508,7 @@ export const ldpeLanding: LandingContent = {
   proof: [
     { value: "от 500", label: "штук в тираже" },
     { value: "5–7", label: "рабочих дней" },
-    { value: "0 ₽", label: "технический макет" },
+    { value: "0 ₽", label: "макет для печати" },
   ],
   hero: [p("ldpebag"), g("ldpebag", 1), g("ldpebag", 3)],
   heroAlts: ["ПВД-пакеты с логотипом", "Пакеты с вырубной ручкой", "Пакеты для розницы"],
@@ -624,7 +624,7 @@ export const ldpeLanding: LandingContent = {
   ],
   terms: [
     { value: "5–7", label: "рабочих дней после макета" },
-    { value: "0 ₽", label: "технический макет" },
+    { value: "0 ₽", label: "макет для печати" },
     { value: "от 500", label: "штук минимальный тираж" },
     { value: "Москва", label: "производство и контроль" },
   ],
@@ -673,7 +673,7 @@ export const boxLanding: LandingContent = {
   proof: [
     { value: "от 100", label: "штук в тираже" },
     { value: "7–12", label: "рабочих дней" },
-    { value: "0 ₽", label: "технический макет" },
+    { value: "0 ₽", label: "макет для печати" },
   ],
   hero: [p("cardboardbox"), g("cardboardbox", 1), g("cardboardbox", 3)],
   heroAlts: ["Картонные коробки с логотипом", "Подарочные коробки", "Самосборные коробки"],
@@ -789,7 +789,7 @@ export const boxLanding: LandingContent = {
   ],
   terms: [
     { value: "7–12", label: "рабочих дней после макета" },
-    { value: "0 ₽", label: "технический макет" },
+    { value: "0 ₽", label: "макет для печати" },
     { value: "от 100", label: "штук минимальный тираж" },
     { value: "Москва", label: "производство и контроль" },
   ],

@@ -13,7 +13,7 @@ export const kartonLanding: LandingContent = {
   proof: [
     { value: "от 1 000", label: "штук в тираже" },
     { value: "2–4", label: "рабочих дня" },
-    { value: "0 ₽", label: "технический макет" },
+    { value: "0 ₽", label: "макет для печати" },
   ],
   hero: [p("birki-karton"), g("birki-karton", 1), g("birki-karton", 3)],
   heroAlts: ["Картонные навесные бирки", "Бирки с логотипом", "Фигурные картонные ярлыки"],
@@ -129,7 +129,7 @@ export const kartonLanding: LandingContent = {
   ],
   terms: [
     { value: "2–4", label: "рабочих дня после макета" },
-    { value: "0 ₽", label: "технический макет" },
+    { value: "0 ₽", label: "макет для печати" },
     { value: "от 1 000", label: "штук минимальный тираж" },
     { value: "Москва", label: "производство и контроль" },
   ],
@@ -178,7 +178,7 @@ export const tracingLanding: LandingContent = {
   proof: [
     { value: "от 500", label: "штук в тираже" },
     { value: "4–6", label: "рабочих дней" },
-    { value: "0 ₽", label: "технический макет" },
+    { value: "0 ₽", label: "макет для печати" },
   ],
   hero: [p("tracing"), g("tracing", 1), g("tracing", 3)],
   heroAlts: ["Бирки из кальки", "Полупрозрачные навесные ярлыки", "Калька с печатью логотипа"],
@@ -294,7 +294,7 @@ export const tracingLanding: LandingContent = {
   ],
   terms: [
     { value: "4–6", label: "рабочих дней после макета" },
-    { value: "0 ₽", label: "технический макет" },
+    { value: "0 ₽", label: "макет для печати" },
     { value: "от 500", label: "штук минимальный тираж" },
     { value: "Москва", label: "производство и контроль" },
   ],
@@ -343,7 +343,7 @@ export const plasticLanding: LandingContent = {
   proof: [
     { value: "от 100", label: "штук в тираже" },
     { value: "5–7", label: "рабочих дней" },
-    { value: "0 ₽", label: "технический макет" },
+    { value: "0 ₽", label: "макет для печати" },
   ],
   hero: [p("plastic"), g("plastic", 1), g("plastic", 3)],
   heroAlts: ["Пластиковые бирки", "Бирки для кабелей", "Промышленная маркировка"],
@@ -459,7 +459,7 @@ export const plasticLanding: LandingContent = {
   ],
   terms: [
     { value: "5–7", label: "рабочих дней после макета" },
-    { value: "0 ₽", label: "технический макет" },
+    { value: "0 ₽", label: "макет для печати" },
     { value: "от 100", label: "штук минимальный тираж" },
     { value: "Москва", label: "производство и контроль" },
   ],
