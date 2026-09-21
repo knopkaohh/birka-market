@@ -459,7 +459,7 @@ button { cursor: pointer; }
 .primary-cta { min-height: 58px; padding: 0 26px; font-size: 13px; }
 .quick-calc-dock {
   position: fixed;
-  left: calc(var(--side) + 16px);
+  right: 16px;
   bottom: 20px;
   z-index: 120;
 }
@@ -708,7 +708,7 @@ footer .logo-mark { color: var(--ink); background: var(--yellow); }
   .hero-lead { font-size: 14px; }
   .hero-actions { align-items: flex-start; flex-direction: column; gap: 12px; margin-top: 28px; }
   .primary-cta, .ghost-cta { width: 100%; justify-content: space-between; }
-  .quick-calc-dock { left: 12px; bottom: 76px; }
+  .quick-calc-dock { right: 12px; bottom: 76px; }
   .hero-proof { justify-content: space-between; gap: 12px; margin-top: 34px; padding-top: 25px; border-top: 1px solid #d0ccc1; }
   .hero-proof strong { font-size: 18px; }
   .hero-proof span { max-width: 80px; font-size: 7px; }
