@@ -9,22 +9,57 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { products } from "@/lib/site";
 
+export type LeadVariantOption = { id: string; name: string };
+
+export type LeadDetailFields = {
+  variantLabel?: string;
+  sizeLabel?: string;
+  sizePlaceholder?: string;
+  extraLabel?: string;
+  extraPlaceholder?: string;
+  commentPlaceholder?: string;
+};
+
 type LeadFormProps = {
   defaultProduct?: string;
   compact?: boolean;
   details?: boolean;
   defaultVariant?: string;
+  variants?: LeadVariantOption[];
+  detailFields?: LeadDetailFields;
 };
+
+const defaultJacquardVariants: LeadVariantOption[] = [
+  { id: "standard", name: "Стандарт" },
+  { id: "loop", name: "Петелька" },
+  { id: "flag", name: "Флаг" },
+  { id: "volume", name: "Объём" },
+];
 
 export function LeadForm({
   defaultProduct = "unknown",
   compact = false,
   details = false,
-  defaultVariant = "standard",
+  defaultVariant,
+  variants,
+  detailFields,
 }: LeadFormProps) {
   const router = useRouter();
   const [product, setProduct] = useState(defaultProduct);
   const [status, setStatus] = useState<"idle" | "sending" | "error">("idle");
+  const variantOptions = variants?.length ? variants : defaultJacquardVariants;
+  const selectedVariant = defaultVariant && variantOptions.some((item) => item.id === defaultVariant)
+    ? defaultVariant
+    : variantOptions[0]?.id;
+  const fields = {
+    variantLabel: "Вариант",
+    sizeLabel: "Размер",
+    sizePlaceholder: "Например, 20 × 50",
+    extraLabel: "Дополнительные параметры",
+    extraPlaceholder: "Цвета, плотность, материал",
+    commentPlaceholder: details ? "Изделие и особые пожелания" : "Размер, материал, сроки — всё, что уже известно",
+    ...detailFields,
+  };
 
   const selected = useMemo(
     () => products.find((item) => item.slug === product),
@@ -51,23 +86,24 @@ export function LeadForm({
     <form className="calc-form" onSubmit={submit}>
       {details ? (
         <>
-          <input type="hidden" name="product" value="jacquard" />
+          <input type="hidden" name="product" value={defaultProduct} />
           <div className="field">
-            <label htmlFor="variant">Вариант бирки</label>
-            <select id="variant" name="variant" defaultValue={defaultVariant}>
-              <option value="standard">Стандарт</option>
-              <option value="loop">Петелька</option>
-              <option value="flag">Флаг</option>
-              <option value="volume">Объём</option>
+            <label htmlFor="variant">{fields.variantLabel}</label>
+            <select id="variant" name="variant" defaultValue={selectedVariant}>
+              {variantOptions.map((item) => (
+                <option key={item.id} value={item.id}>
+                  {item.name}
+                </option>
+              ))}
             </select>
           </div>
           <div className="field">
-            <label htmlFor="size">Размер, мм</label>
-            <Input id="size" name="size" placeholder="Например, 20 × 50" />
+            <label htmlFor="size">{fields.sizeLabel}</label>
+            <Input id="size" name="size" placeholder={fields.sizePlaceholder} />
           </div>
           <div className="field">
-            <label htmlFor="colors">Количество цветов</label>
-            <Input id="colors" name="colors" placeholder="2, 3 или больше" />
+            <label htmlFor="colors">{fields.extraLabel}</label>
+            <Input id="colors" name="colors" placeholder={fields.extraPlaceholder} />
           </div>
         </>
       ) : (
@@ -119,11 +155,7 @@ export function LeadForm({
       )}
       <div className="field full">
         <label htmlFor="comment">Комментарий</label>
-        <Textarea
-          id="comment"
-          name="comment"
-          placeholder={details ? "Изделие, плотность, особые пожелания" : "Размер, материал, сроки — всё, что уже известно"}
-        />
+        <Textarea id="comment" name="comment" placeholder={fields.commentPlaceholder} />
       </div>
       {selected?.sample && (
         <label className="sample-toggle">

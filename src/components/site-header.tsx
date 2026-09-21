@@ -4,12 +4,14 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ArrowDownRight, Menu, Phone } from "lucide-react";
 import { Logo } from "@/components/logo";
-import { company, navLinks } from "@/lib/site";
+import { company, navLinks, products } from "@/lib/site";
+
+const productPaths = new Set(products.map((item) => `/${item.slug}`));
 
 export function SiteHeader({ onOpenMenu }: { onOpenMenu: () => void }) {
   const pathname = usePathname();
   const isActive = (href: string) => {
-    if (href === "/katalog") return pathname.startsWith("/katalog") || pathname === "/jacquard";
+    if (href === "/katalog") return pathname.startsWith("/katalog") || productPaths.has(pathname);
     return pathname.startsWith(href);
   };
 
