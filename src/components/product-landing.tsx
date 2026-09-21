@@ -5,7 +5,6 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 import { Breadcrumbs } from "@/components/breadcrumbs";
 import { LeadForm } from "@/components/lead-form";
 import { ProductCard } from "@/components/product-card";
-import { QuickCalc } from "@/components/quick-calc";
 import type { LandingContent } from "@/lib/landings/types";
 import { company, getCategory, getProduct } from "@/lib/site";
 
@@ -324,7 +323,6 @@ export function ProductLanding({ content, variant }: { content: LandingContent; 
           <ArrowRight />
         </a>
       </section>
-      <QuickCalc product={content.slug} />
     </>
   );
 }

@@ -3,18 +3,29 @@
 import { FormEvent, useEffect, useId, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { ArrowRight, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { company } from "@/lib/site";
+import { company, getProduct } from "@/lib/site";
 
-export function QuickCalc({ product }: { product: string }) {
+export function QuickCalc() {
   const router = useRouter();
+  const pathname = usePathname();
   const titleId = useId();
   const triggerRef = useRef<HTMLButtonElement>(null);
   const [open, setOpen] = useState(false);
   const [status, setStatus] = useState<"idle" | "sending" | "error">("idle");
+  const [path, setPath] = useState(pathname);
+
+  if (path !== pathname) {
+    setPath(pathname);
+    setOpen(false);
+    setStatus("idle");
+  }
+
+  const slug = pathname.replace(/^\//, "").split("/")[0] ?? "";
+  const product = getProduct(slug);
 
   useEffect(() => {
     if (!open) return;
@@ -35,6 +46,8 @@ export function QuickCalc({ product }: { product: string }) {
     };
   }, [open]);
 
+  if (pathname === "/spasibo") return null;
+
   const close = () => {
     setOpen(false);
     setStatus("idle");
@@ -45,7 +58,7 @@ export function QuickCalc({ product }: { product: string }) {
     event.preventDefault();
     setStatus("sending");
     const data = new FormData(event.currentTarget);
-    data.set("product", product);
+    data.set("product", product?.slug ?? "unknown");
     data.set("page", window.location.pathname);
     data.set("quick", "1");
     try {
@@ -75,7 +88,11 @@ export function QuickCalc({ product }: { product: string }) {
                 Быстрый расчёт
               </span>
               <h2 id={titleId}>Оставьте имя и телефон</h2>
-              <p>Перезвоним в рабочее время {company.hours} и посчитаем тираж по этому материалу.</p>
+              <p>
+                {product
+                  ? `Перезвоним в рабочее время ${company.hours} и посчитаем тираж по этому материалу.`
+                  : `Перезвоним в рабочее время ${company.hours} и посчитаем тираж.`}
+              </p>
               <form className="calc-form" onSubmit={submit}>
                 <div className="field full">
                   <label htmlFor={`${titleId}-name`}>Имя</label>
