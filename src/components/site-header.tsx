@@ -2,13 +2,19 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { ArrowDownRight, Menu, Phone } from "lucide-react";
+import { ArrowDownRight, Menu, Phone, X } from "lucide-react";
 import { Logo } from "@/components/logo";
 import { company, navLinks, products } from "@/lib/site";
 
 const productPaths = new Set(products.map((item) => `/${item.slug}`));
 
-export function SiteHeader({ onOpenMenu }: { onOpenMenu: () => void }) {
+export function SiteHeader({
+  menuOpen,
+  onToggleMenu,
+}: {
+  menuOpen: boolean;
+  onToggleMenu: () => void;
+}) {
   const pathname = usePathname();
   const isActive = (href: string) => {
     if (href === "/katalog") return pathname.startsWith("/katalog") || productPaths.has(pathname);
@@ -39,8 +45,18 @@ export function SiteHeader({ onOpenMenu }: { onOpenMenu: () => void }) {
             Расчет заказа
             <ArrowDownRight size={17} />
           </Link>
-          <button className="menu-toggle" aria-label="Открыть меню каталога" onClick={onOpenMenu}>
-            <Menu />
+          <button
+            type="button"
+            className={`menu-toggle ${menuOpen ? "is-open" : ""}`}
+            aria-label={menuOpen ? "Закрыть меню" : "Открыть меню каталога"}
+            aria-expanded={menuOpen}
+            aria-controls="side-menu"
+            onClick={(event) => {
+              event.stopPropagation();
+              onToggleMenu();
+            }}
+          >
+            {menuOpen ? <X size={22} /> : <Menu size={22} />}
           </button>
         </div>
       </div>

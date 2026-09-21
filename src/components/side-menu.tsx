@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
-import { ChevronDown } from "lucide-react";
+import { ChevronDown, X } from "lucide-react";
 import { Logo } from "@/components/logo";
 import { categories, navLinks, productsByCategory } from "@/lib/site";
 
@@ -26,15 +26,30 @@ export function SideMenu({ open, onClose }: SideMenuProps) {
 
   return (
     <>
-      <button
-        className={`side-overlay ${open ? "is-visible" : ""}`}
-        aria-label="Закрыть меню"
-        onClick={onClose}
-      />
-      <aside className={`side-menu ${open ? "is-open" : ""}`} aria-label="Каталог продукции">
+      {open ? (
+        <button
+          type="button"
+          className="side-overlay is-visible"
+          aria-label="Закрыть меню"
+          onClick={onClose}
+        />
+      ) : null}
+      <aside
+        id="side-menu"
+        className={`side-menu ${open ? "is-open" : ""}`}
+        aria-label="Каталог продукции"
+      >
         <div className="side-menu-inner">
           <div className="side-menu-logo">
             <Logo />
+            <button
+              type="button"
+              className="side-menu-close"
+              aria-label="Закрыть меню"
+              onClick={onClose}
+            >
+              <X size={22} />
+            </button>
           </div>
           <Link
             href="/katalog"
