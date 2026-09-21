@@ -465,9 +465,12 @@ button { cursor: pointer; }
 }
 .quick-cta:hover { background: #ece7db; }
 .quick-calc-overlay {
-  position: fixed; inset: 0; z-index: 240; display: grid; place-items: center;
+  position: fixed; inset: 0; z-index: 500; display: grid; place-items: center;
   padding: 18px; background: rgba(25, 25, 26, .62);
 }
+body.quick-calc-open .site-header,
+body.quick-calc-open .side-menu { z-index: 1; }
+body.quick-calc-open .mobile-bottom { display: none !important; }
 .quick-calc-dialog {
   position: relative; width: min(460px, 100%); max-height: min(92vh, 720px);
   overflow: auto; padding: 32px 28px 28px; color: var(--ink); background: var(--paper);
