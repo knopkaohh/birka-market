@@ -11,6 +11,7 @@ const nextConfig: NextConfig = {
       { source: "/delivery", destination: "/dostavka", permanent: true },
       { source: "/payment", destination: "/oplata", permanent: true },
       { source: "/contacts", destination: "/kontakty", permanent: true },
+      { source: "/news", destination: "/novosti", permanent: true },
       { source: "/thanks", destination: "/spasibo", permanent: true },
     ];
   },

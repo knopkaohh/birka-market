@@ -1,6 +1,8 @@
+import Image from "next/image";
 import type { Metadata } from "next";
 import { Breadcrumbs } from "@/components/breadcrumbs";
 import { CalculatorBlock } from "@/components/calculator-block";
+import { YandexMap } from "@/components/yandex-map";
 import { company, team } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -46,27 +48,40 @@ export default function ContactsPage() {
           <article>
             <h2>Офис и склад</h2>
             <p>{company.address}</p>
-            <p>{company.hours}. Выдача готовой продукции: {company.pickupHours}.</p>
+            <p>
+              {company.hours}. Выдача готовой продукции: {company.pickupHours}.
+            </p>
           </article>
           <article>
             <h2>Как добраться</h2>
-            <p>
-              Метро Сходненская, 2-й выход, трамвай 6 до остановки «Западный мост». Дальше 2 минуты пешком: коричневые ворота, направо во двор, отдельный подъём с железной дверью. Позвоните в звонок слева.
-            </p>
+            <p>{company.howToGet}</p>
+          </article>
+          <article>
+            <h2>На карте</h2>
+            <p>{company.map.description}. Строительный проезд, 2с1 — офис в первом подъезде со стороны двора.</p>
+            <a href={company.map.route} target="_blank" rel="noreferrer">
+              Открыть Яндекс Карты
+            </a>
           </article>
         </div>
         <h2 className="block-title">Команда</h2>
         <div className="team-grid">
           {managers.map((person) => (
             <article key={person.name}>
-              <h3>{person.name}</h3>
-              <p>{person.role}</p>
-              {person.email && <a href={`mailto:${person.email}`}>{person.email}</a>}
-              {person.phone && <a href={`tel:${person.phone.replace(/[^\d+]/g, "")}`}>{person.phone}</a>}
+              <div className="team-photo">
+                <Image src={person.photo} alt={person.name} fill sizes="280px" />
+              </div>
+              <div className="team-copy">
+                <h3>{person.name}</h3>
+                <p>{person.role}</p>
+                {person.email && <a href={`mailto:${person.email}`}>{person.email}</a>}
+                {person.phone && <a href={`tel:${person.phone.replace(/[^\d+]/g, "")}`}>{person.phone}</a>}
+              </div>
             </article>
           ))}
         </div>
       </div>
+      <YandexMap compact height={560} />
       <CalculatorBlock />
     </>
   );

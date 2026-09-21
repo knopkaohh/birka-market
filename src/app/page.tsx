@@ -12,7 +12,9 @@ import {
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { CalculatorBlock } from "@/components/calculator-block";
 import { Loader } from "@/components/loader";
+import { Marquee } from "@/components/marquee";
 import { ProductCard } from "@/components/product-card";
+import { YandexMap } from "@/components/yandex-map";
 import {
   categories,
   company,
@@ -101,23 +103,7 @@ export default function Home() {
         </div>
       </section>
 
-      <div className="marquee" aria-hidden="true">
-        <div>
-          <span>БИРКИ</span>
-          <i>✦</i>
-          <span>УПАКОВКА</span>
-          <i>✦</i>
-          <span>ФУРНИТУРА</span>
-          <i>✦</i>
-          <span>МЕРЧ</span>
-          <i>✦</i>
-          <span>ПОЛИГРАФИЯ</span>
-          <i>✦</i>
-          <span>БИРКИ</span>
-          <i>✦</i>
-          <span>УПАКОВКА</span>
-        </div>
-      </div>
+      <Marquee />
 
       <section className="section" id="categories">
         <div className="section-heading">
@@ -282,6 +268,8 @@ export default function Home() {
           ))}
         </Accordion>
       </section>
+
+      <YandexMap />
     </>
   );
 }

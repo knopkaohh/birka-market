@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { Logo } from "@/components/logo";
-import { categories, productsByCategory } from "@/lib/site";
+import { categories, navLinks, productsByCategory } from "@/lib/site";
 
 type SideMenuProps = {
   open: boolean;
@@ -80,6 +80,21 @@ export function SideMenu({ open, onClose }: SideMenuProps) {
               );
             })}
           </ul>
+          <div className="side-menu-pages">
+            <span>КОМПАНИЯ</span>
+            {navLinks
+              .filter((item) => item.href !== "/katalog")
+              .map((item) => (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className={pathname.startsWith(item.href) ? "is-current" : undefined}
+                  onClick={onClose}
+                >
+                  {item.label}
+                </Link>
+              ))}
+          </div>
         </div>
       </aside>
     </>

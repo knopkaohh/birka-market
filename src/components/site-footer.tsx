@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { ArrowDownRight } from "lucide-react";
 import { Logo } from "@/components/logo";
-import { categories, company } from "@/lib/site";
+import { categories, company, navLinks } from "@/lib/site";
 
 export function SiteFooter() {
   return (
@@ -25,6 +25,12 @@ export function SiteFooter() {
           <span>СВЯЗАТЬСЯ</span>
           <a href={company.phoneHref}>{company.phone}</a>
           <a href={`mailto:${company.email}`}>{company.email}</a>
+          <a href={company.telegram} target="_blank" rel="noreferrer">
+            Telegram
+          </a>
+          <a href={company.whatsapp} target="_blank" rel="noreferrer">
+            WhatsApp
+          </a>
         </div>
         <div>
           <span>АДРЕС</span>
@@ -43,13 +49,14 @@ export function SiteFooter() {
           ))}
         </div>
         <div>
-          <span>МЕССЕНДЖЕРЫ</span>
-          <a href={company.telegram} target="_blank" rel="noreferrer">
-            Telegram
-          </a>
-          <a href={company.whatsapp} target="_blank" rel="noreferrer">
-            WhatsApp
-          </a>
+          <span>КОМПАНИЯ</span>
+          {navLinks
+            .filter((item) => item.href !== "/katalog")
+            .map((item) => (
+              <Link key={item.href} href={item.href}>
+                {item.label}
+              </Link>
+            ))}
           <Link href="/privacy">Конфиденциальность</Link>
         </div>
       </div>

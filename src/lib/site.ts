@@ -13,7 +13,55 @@ export const company = {
   brands: "19 250",
   labels: "180 млн+",
   kinds: "28+",
+  map: {
+    lat: 55.83802,
+    lng: 37.436238,
+    zoom: 16,
+    title: "Birka Market",
+    description: "Производство бирок и упаковки для одежды",
+    widget: "https://yandex.ru/map-widget/v1/?ll=37.436238%2C55.83802&z=16&pt=37.436238,55.83802,pm2rdm&l=map",
+    route: "https://yandex.ru/maps/?pt=37.436238,55.83802&z=16&l=map",
+    sprav: "https://yandex.ru/sprav/widget/rating-badge/242141870878?type=award",
+  },
+  howToGet:
+    "Метро Сходненская, 2-й выход, трамвай 6 до остановки «Западный мост». Дальше 2 минуты пешком: коричневые ворота, направо во двор, отдельный подъём с железной дверью. Позвоните в звонок слева.",
 };
+
+export const navLinks = [
+  { href: "/katalog", label: "Продукция" },
+  { href: "/o-kompanii", label: "О Компании" },
+  { href: "/dostavka", label: "Доставка" },
+  { href: "/oplata", label: "Оплата" },
+  { href: "/kontakty", label: "Контакты" },
+  { href: "/novosti", label: "Новости" },
+  { href: "/faq", label: "FAQ" },
+] as const;
+
+export const tickerItems = [
+  { label: "ЖАККАРД", href: "/jacquard" },
+  { label: "КАРТОН", href: "/birki-karton" },
+  { label: "СИЛИКОН", href: "/silikon" },
+  { label: "САТИН", href: "/satin" },
+  { label: "НЕЙЛОН", href: "/neylon" },
+  { label: "ХЛОПОК", href: "/cotton" },
+  { label: "ZIP-LOCK ПАКЕТЫ", href: "/zip-pack" },
+  { label: "ВЫШИВКА", href: "/embroideryprint" },
+  { label: "ПРИНТЫ", href: "/embroideryprint" },
+  { label: "БИРКОДЕРЖАТЕЛИ", href: "/fasteners" },
+  { label: "КРАФТОВЫЕ ПАКЕТЫ", href: "/kraft" },
+  { label: "ПВХ-ПАТЧИ", href: "/rubber" },
+  { label: "ФЛЕКСТРАН", href: "/flextran" },
+  { label: "БАННЕРЫ", href: "/banner" },
+  { label: "КОРПОРАТИВНЫЙ МЕРЧ", href: "/merchi" },
+  { label: "ДЖИБИТСЫ", href: "/jibbitz" },
+  { label: "БУМАЖНЫЕ ПАКЕТЫ", href: "/paper" },
+  { label: "ПОЛИГРАФИЯ", href: "/printing" },
+  { label: "ФЛАГИ", href: "/flags" },
+  { label: "СТИКЕРЫ", href: "/stickerpack" },
+  { label: "КОРОБКИ", href: "/cardboardbox" },
+  { label: "ЖУРНАЛЫ", href: "/magazine" },
+  { label: "DTF-ПЕЧАТЬ", href: "/directtofilm" },
+] as const;
 
 export type Product = {
   slug: string;
@@ -551,15 +599,67 @@ export const products: Product[] = [
   },
 ];
 
-export const team = [
-  { name: "Антон Федотов", role: "Исполнительный директор", email: "af@birka-market.ru" },
-  { name: "Роман Хрусталёв", role: "Руководитель отдела продаж", email: "rh@birka-market.ru", phone: "+7 967 061-31-23" },
-  { name: "Кристина Хрусталёва", role: "Руководитель отдела маркетинга", email: "kh@birka-market.ru" },
-  { name: "Гинтарас Палтарацкас", role: "Корпоративные продажи", email: "pg@birka-market.ru", phone: "+7 988 758-88-98" },
-  { name: "Никита Царьков", role: "Руководитель производства", email: "nc@birka-market.ru", phone: "+7 916 676-27-21" },
-  { name: "Нариман Алескеров", role: "Старший менеджер по продажам", email: "na@birka-market.ru", phone: "+7 985 238-85-05" },
-  { name: "Максим Шалагинов", role: "Менеджер по продажам", email: "ms@birka-market.ru", phone: "+7 916 503-45-44" },
-  { name: "Алёна Аверьянова", role: "Производство" },
+export type TeamMember = {
+  name: string;
+  role: string;
+  email?: string;
+  phone?: string;
+  photo: string;
+};
+
+export const team: TeamMember[] = [
+  {
+    name: "Антон Федотов",
+    role: "Исполнительный директор",
+    email: "af@birka-market.ru",
+    photo: "/images/team/anton.jpg",
+  },
+  {
+    name: "Роман Хрусталёв",
+    role: "Руководитель отдела продаж",
+    email: "rh@birka-market.ru",
+    phone: "+7 967 061-31-23",
+    photo: "/images/team/roman.jpg",
+  },
+  {
+    name: "Кристина Хрусталёва",
+    role: "Руководитель отдела маркетинга",
+    email: "kh@birka-market.ru",
+    photo: "/images/team/kristina.jpg",
+  },
+  {
+    name: "Гинтарас Палтарацкас",
+    role: "Корпоративные продажи",
+    email: "pg@birka-market.ru",
+    phone: "+7 988 758-88-98",
+    photo: "/images/team/gintaras.jpg",
+  },
+  {
+    name: "Никита Царьков",
+    role: "Руководитель производства",
+    email: "nc@birka-market.ru",
+    phone: "+7 916 676-27-21",
+    photo: "/images/team/nikita.png",
+  },
+  {
+    name: "Нариман Алескеров",
+    role: "Старший менеджер по продажам",
+    email: "na@birka-market.ru",
+    phone: "+7 985 238-85-05",
+    photo: "/images/team/nariman.jpg",
+  },
+  {
+    name: "Максим Шалагинов",
+    role: "Менеджер по продажам",
+    email: "ms@birka-market.ru",
+    phone: "+7 916 503-45-44",
+    photo: "/images/team/maxim.png",
+  },
+  {
+    name: "Алёна Аверьянова",
+    role: "Производство",
+    photo: "/images/team/alena.jpg",
+  },
 ];
 
 export const faqItems = [
