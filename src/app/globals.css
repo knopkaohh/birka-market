@@ -798,7 +798,7 @@ footer .logo-mark { color: var(--ink); background: var(--yellow); }
 }
 .jq-hero-copy h1 {
   max-width: 720px; margin: 22px 0 22px;
-  font-size: clamp(44px, 5.4vw, 84px); font-weight: 700; line-height: .92; letter-spacing: -.07em;
+  font-size: clamp(40px, 4.6vw, 70px); font-weight: 700; line-height: .94; letter-spacing: -.07em;
 }
 .jq-hero-copy h1 em { font-family: var(--font-cormorant), Georgia, serif; font-weight: 500; color: #8e721f; }
 .jq-hero-copy > p { max-width: 560px; margin: 0; color: var(--muted-ink); font-size: 16px; line-height: 1.65; }
@@ -918,4 +918,5 @@ footer .logo-mark { color: var(--ink); background: var(--yellow); }
   .jq-gallery figure:nth-child(6) { grid-row: auto; }
   .jq-calc, .jq-tech, .jq-process, .jq-terms, .jq-final { padding: 72px 18px; }
   .jq-variant { min-height: 0; }
+  .jq-hero-copy .primary-cta, .jq-hero-copy .ghost-cta { width: 100%; justify-content: space-between; }
 }
