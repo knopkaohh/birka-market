@@ -1,5 +1,6 @@
 export const company = {
   name: "Бирка Маркет",
+  slogan: "Ваш бренд - наша забота!",
   phone: "+7 495 003-88-81",
   phoneHref: "tel:+74950038881",
   email: "prod@birka-market.ru",

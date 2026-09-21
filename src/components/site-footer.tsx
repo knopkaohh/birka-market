@@ -9,9 +9,9 @@ export function SiteFooter() {
       <div className="footer-top">
         <Logo />
         <h2>
-          Пусть ваш бренд
+          Ваш бренд -
           <br />
-          <em>запомнят</em>
+          наша <em>забота!</em>
         </h2>
         <Link className="footer-circle" href="/raschet">
           Обсудить

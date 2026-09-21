@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { company } from "@/lib/site";
 
 export function Loader() {
   const [hidden, setHidden] = useState(false);
@@ -19,7 +20,7 @@ export function Loader() {
       <div className="loader-line">
         <i />
       </div>
-      <p>Детали, которые создают бренд</p>
+      <p>{company.slogan}</p>
     </div>
   );
 }
