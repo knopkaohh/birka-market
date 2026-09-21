@@ -651,11 +651,15 @@ body.quick-calc-open .mobile-bottom { display: none !important; }
 .step:last-child > svg { color: #8e721f; }
 
 .calculator-section { display: grid; grid-template-columns: .82fr 1.18fr; gap: 7vw; padding: 120px var(--page-gutter); color: var(--paper); background: #2a2b2a; }
-.calculator-intro h2 { margin-top: 25px; }
+.calculator-intro h2 {
+  margin-top: 25px;
+  font-size: clamp(40px, 4.2vw, 62px);
+}
 .calculator-intro h2 em {
   font-family: var(--font-cormorant), Georgia, serif;
   font-weight: 500;
   color: var(--yellow);
+  white-space: nowrap;
 }
 .calculator-intro > p { max-width: 480px; margin: 30px 0 0; color: #b1b0a8; font-size: 14px; line-height: 1.7; }
 .calc-promise { display: flex; align-items: center; gap: 14px; margin-top: 45px; color: #a9a9a1; font-size: 11px; line-height: 1.6; }
