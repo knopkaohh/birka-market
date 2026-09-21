@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { Logo } from "@/components/logo";
-import { menuGroups } from "@/lib/site";
+import { categories, productsByCategory } from "@/lib/site";
 
 type SideMenuProps = {
   open: boolean;
@@ -13,13 +13,14 @@ type SideMenuProps = {
 
 export function SideMenu({ open, onClose }: SideMenuProps) {
   const pathname = usePathname();
-  const currentGroup = menuGroups.find(
-    (group) => group.href === pathname || group.items.some((item) => item.href === pathname),
-  )?.name;
-  const [opened, setOpened] = useState<string | null>(currentGroup ?? null);
+  const currentSlug = categories.find((category) => {
+    if (pathname === `/katalog/${category.slug}`) return true;
+    return productsByCategory(category.slug).some((item) => pathname === `/${item.slug}`);
+  })?.slug;
+  const [opened, setOpened] = useState<string | null>(currentSlug ?? null);
 
-  const toggle = (name: string) => {
-    setOpened((value) => (value === name ? null : name));
+  const toggle = (slug: string) => {
+    setOpened((value) => (value === slug ? null : slug));
   };
 
   return (
@@ -34,34 +35,43 @@ export function SideMenu({ open, onClose }: SideMenuProps) {
           <div className="side-menu-logo">
             <Logo />
           </div>
+          <Link
+            href="/katalog"
+            className={`side-catalog-link ${pathname === "/katalog" ? "is-current" : ""}`}
+            onClick={onClose}
+          >
+            Вся продукция
+          </Link>
           <ul className="side-menu-list">
-            {menuGroups.map((group) => {
-              const isOpen = opened === group.name;
-              const isCurrent = currentGroup === group.name;
+            {categories.map((category) => {
+              const items = productsByCategory(category.slug);
+              const href = `/katalog/${category.slug}`;
+              const isOpen = opened === category.slug;
+              const isCurrent = currentSlug === category.slug;
+
               return (
-                <li key={group.name} className="side-menu-item">
-                  <button
-                    type="button"
-                    className={`side-menu-btn ${isOpen || isCurrent ? "is-active" : ""}`}
-                    aria-expanded={isOpen}
-                    onClick={() => toggle(group.name)}
-                  >
-                    {group.name}
-                  </button>
+                <li key={category.slug} className="side-menu-item">
+                  <div className={`side-menu-row ${isOpen || isCurrent ? "is-active" : ""}`}>
+                    <Link href={href} className="side-menu-link" onClick={onClose}>
+                      {category.name}
+                    </Link>
+                    <button
+                      type="button"
+                      className={`side-menu-plus ${isOpen ? "is-open" : ""}`}
+                      aria-label={isOpen ? `Свернуть ${category.name}` : `Показать товары: ${category.name}`}
+                      aria-expanded={isOpen}
+                      onClick={() => toggle(category.slug)}
+                    />
+                  </div>
                   <ul className={`side-submenu ${isOpen ? "is-open" : ""}`}>
-                    <li>
-                      <Link href={group.href} className="side-submenu-link" onClick={onClose}>
-                        Все в разделе
-                      </Link>
-                    </li>
-                    {group.items.map((item) => (
-                      <li key={`${group.name}-${item.href}-${item.label}`}>
+                    {items.map((item) => (
+                      <li key={item.slug}>
                         <Link
-                          href={item.href}
-                          className={`side-submenu-link ${pathname === item.href ? "is-current" : ""}`}
+                          href={`/${item.slug}`}
+                          className={`side-submenu-link ${pathname === `/${item.slug}` ? "is-current" : ""}`}
                           onClick={onClose}
                         >
-                          {item.label}
+                          {item.name}
                         </Link>
                       </li>
                     ))}
