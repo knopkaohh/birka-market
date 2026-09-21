@@ -75,18 +75,23 @@ export function ProductLanding({ content, variant }: { content: LandingContent; 
         </div>
         <div className="jq-variants">
           {content.variants.map((item) => (
-            <article className={`jq-variant is-${item.tone}`} key={item.id}>
+            <Link
+              href={`${path}?variant=${item.id}#calc`}
+              prefetch={false}
+              className={`jq-variant is-${item.tone}`}
+              key={item.id}
+            >
               <div className="jq-variant-photo">
                 <Image src={item.image} alt={item.name} fill sizes="280px" />
               </div>
-              <span>{item.fold}</span>
+              <span className="jq-variant-fold">{item.fold}</span>
               <h3>{item.name}</h3>
               <p>{item.text}</p>
-              <Link href={`${path}?variant=${item.id}#calc`}>
+              <span className="jq-variant-cta">
                 Рассчитать этот вариант
                 <ArrowRight size={16} />
-              </Link>
-            </article>
+              </span>
+            </Link>
           ))}
         </div>
       </section>
