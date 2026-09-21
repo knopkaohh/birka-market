@@ -5,6 +5,7 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 import { Breadcrumbs } from "@/components/breadcrumbs";
 import { LeadForm } from "@/components/lead-form";
 import { ProductCard } from "@/components/product-card";
+import { QuickCalc } from "@/components/quick-calc";
 import type { LandingContent } from "@/lib/landings/types";
 import { company, getCategory, getProduct } from "@/lib/site";
 
@@ -41,6 +42,7 @@ export function ProductLanding({ content, variant }: { content: LandingContent; 
               Рассчитать стоимость
               <ArrowRight size={19} />
             </a>
+            <QuickCalc product={content.slug} />
             <a className="ghost-cta" href="#variants">
               Подобрать вариант
             </a>
@@ -318,10 +320,13 @@ export function ProductLanding({ content, variant }: { content: LandingContent; 
           </h2>
           <p>{content.finalText}</p>
         </div>
-        <a className="primary-cta" href="#calc">
-          Рассчитать стоимость
-          <ArrowRight />
-        </a>
+        <div className="hero-actions">
+          <a className="primary-cta" href="#calc">
+            Рассчитать стоимость
+            <ArrowRight />
+          </a>
+          <QuickCalc product={content.slug} />
+        </div>
       </section>
     </>
   );
