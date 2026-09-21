@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
+import { ChevronDown } from "lucide-react";
 import { Logo } from "@/components/logo";
 import { categories, navLinks, productsByCategory } from "@/lib/site";
 
@@ -48,6 +49,7 @@ export function SideMenu({ open, onClose }: SideMenuProps) {
               const href = `/katalog/${category.slug}`;
               const isOpen = opened === category.slug;
               const isCurrent = currentSlug === category.slug;
+              const panelId = `side-cat-${category.slug}`;
 
               return (
                 <li key={category.slug} className="side-menu-item">
@@ -57,25 +59,30 @@ export function SideMenu({ open, onClose }: SideMenuProps) {
                     </Link>
                     <button
                       type="button"
-                      className={`side-menu-plus ${isOpen ? "is-open" : ""}`}
-                      aria-label={isOpen ? `Свернуть ${category.name}` : `Показать товары: ${category.name}`}
+                      className={`side-menu-arrow ${isOpen ? "is-open" : ""}`}
+                      aria-label={isOpen ? `Свернуть ${category.name}` : `Показать материалы: ${category.name}`}
                       aria-expanded={isOpen}
+                      aria-controls={panelId}
                       onClick={() => toggle(category.slug)}
-                    />
+                    >
+                      <ChevronDown size={18} strokeWidth={2.4} />
+                    </button>
                   </div>
-                  <ul className={`side-submenu ${isOpen ? "is-open" : ""}`}>
-                    {items.map((item) => (
-                      <li key={item.slug}>
-                        <Link
-                          href={`/${item.slug}`}
-                          className={`side-submenu-link ${pathname === `/${item.slug}` ? "is-current" : ""}`}
-                          onClick={onClose}
-                        >
-                          {item.name}
-                        </Link>
-                      </li>
-                    ))}
-                  </ul>
+                  <div className={`side-submenu ${isOpen ? "is-open" : ""}`} id={panelId}>
+                    <ul className="side-submenu-panel">
+                      {items.map((item) => (
+                        <li key={item.slug}>
+                          <Link
+                            href={`/${item.slug}`}
+                            className={`side-submenu-link ${pathname === `/${item.slug}` ? "is-current" : ""}`}
+                            onClick={onClose}
+                          >
+                            {item.name}
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
                 </li>
               );
             })}
