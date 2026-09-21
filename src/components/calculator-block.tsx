@@ -4,26 +4,29 @@ import { LeadForm } from "@/components/lead-form";
 export function CalculatorBlock({
   defaultProduct,
   title = "Расскажите\nо вашей задаче",
+  titleAccent,
+  lead = "Можно не знать точных параметров. Оставьте телефон — менеджер уточнит задачу, поможет с материалом и подготовит расчёт.",
 }: {
   defaultProduct?: string;
   title?: string;
+  titleAccent?: string;
+  lead?: string;
 }) {
+  const lines = title.split("\n");
   return (
     <section className="calculator-section" id="calc">
       <div className="calculator-intro">
         <span className="section-number light">РАСЧЁТ ЗАКАЗА</span>
         <h2>
-          {title.split("\n").map((line) => (
+          {lines.map((line, index) => (
             <span key={line}>
               {line}
-              <br />
+              {(index < lines.length - 1 || titleAccent) && <br />}
             </span>
           ))}
+          {titleAccent ? <em>{titleAccent}</em> : null}
         </h2>
-        <p>
-          Можно не знать точных параметров. Оставьте телефон — менеджер уточнит задачу,
-          поможет с материалом и подготовит расчёт.
-        </p>
+        <p>{lead}</p>
         <div className="calc-promise">
           <Clock3 />
           <span>

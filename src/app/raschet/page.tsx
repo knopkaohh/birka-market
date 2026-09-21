@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { Breadcrumbs } from "@/components/breadcrumbs";
 import { CalculatorBlock } from "@/components/calculator-block";
 import { getProduct } from "@/lib/site";
 
@@ -17,24 +16,15 @@ export default async function CalcPage({
   const selected = product ? getProduct(product) : undefined;
 
   return (
-    <>
-      <div className="inner-page">
-        <div className="inner-hero">
-          <Breadcrumbs items={[{ label: "Расчёт" }]} />
-          <span className="section-number">ЗАЯВКА</span>
-          <h1>
-            Рассчитать
-            <br />
-            <em>стоимость заказа</em>
-          </h1>
-          <p>
-            {selected
-              ? `Вы выбрали: ${selected.name}. Укажите тираж и телефон — остальное уточним.`
-              : "Выберите продукцию или оставьте заявку на подбор. Макет подготовим бесплатно."}
-          </p>
-        </div>
-      </div>
-      <CalculatorBlock defaultProduct={selected?.slug ?? "unknown"} />
-    </>
+    <CalculatorBlock
+      defaultProduct={selected?.slug ?? "unknown"}
+      title="Рассчитать"
+      titleAccent="стоимость заказа"
+      lead={
+        selected
+          ? `Вы выбрали: ${selected.name}. Укажите тираж и телефон — остальное уточним.`
+          : "Выберите продукцию или оставьте заявку на подбор. Макет подготовим бесплатно."
+      }
+    />
   );
 }
