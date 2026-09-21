@@ -651,11 +651,13 @@ body.quick-calc-open .mobile-bottom { display: none !important; }
 .step > svg { color: #96978f; width: 18px; }
 .step:last-child > svg { color: #8e721f; }
 
-.process-parallax { height: 340vh; background: #1c1d1c; }
+.process-parallax { height: 380vh; background: #1c1d1c; }
 .process-parallax-sticky {
   position: sticky; top: 0; height: 100dvh; overflow: hidden;
   display: flex; flex-direction: column;
   color: var(--paper);
+  padding-top: 82px;
+  box-sizing: border-box;
 }
 .process-parallax-stage {
   flex: 1; display: grid; grid-template-columns: 1.08fr .92fr; min-height: 0;
@@ -676,7 +678,7 @@ body.quick-calc-open .mobile-bottom { display: none !important; }
 }
 .process-parallax-copy {
   position: relative; display: flex; flex-direction: column;
-  padding: 96px clamp(28px, 4vw, 64px) 28px;
+  padding: 28px clamp(28px, 4vw, 64px) 20px;
 }
 .process-parallax-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; }
 .process-hint {
@@ -689,10 +691,11 @@ body.quick-calc-open .mobile-bottom { display: none !important; }
   50% { transform: translateY(5px); }
 }
 .process-parallax-index {
-  position: absolute; right: 6%; top: 118px;
-  font-family: var(--font-cormorant), Georgia, serif;
-  color: var(--yellow); font-size: clamp(88px, 12vw, 160px); font-weight: 500;
-  line-height: .8; letter-spacing: -.08em; opacity: .9; pointer-events: none;
+  position: absolute; right: 6%; top: 36px;
+  font-family: var(--font-manrope), sans-serif;
+  color: var(--yellow); font-size: clamp(72px, 10vw, 128px); font-weight: 800;
+  line-height: .8; letter-spacing: -.08em; opacity: .88; pointer-events: none;
+  font-variant-numeric: tabular-nums;
 }
 .process-parallax-copy h2 {
   position: relative; z-index: 1; max-width: 9ch;
@@ -713,6 +716,7 @@ body.quick-calc-open .mobile-bottom { display: none !important; }
 .process-track {
   position: relative; display: grid; grid-template-columns: repeat(4, 1fr);
   gap: 8px; padding: 0 clamp(22px, 4vw, 56px) 28px;
+  padding-right: 168px;
 }
 .process-track-bar {
   position: absolute; left: clamp(22px, 4vw, 56px); right: clamp(22px, 4vw, 56px); top: 7px;
@@ -875,14 +879,15 @@ footer .logo-mark { color: var(--ink); background: var(--yellow); }
   .process-photo-label { width: 120px; height: 120px; right: 16px; bottom: 16px; }
   .process-content { padding: 75px 18px; }
   .steps { margin-top: 45px; }
-  .process-parallax { height: 300vh; }
-  .process-parallax-stage { grid-template-columns: 1fr; grid-template-rows: 36vh 1fr; }
-  .process-parallax-copy { padding: 18px 18px 6px; }
-  .process-parallax-index { top: 8px; right: 12px; font-size: 72px; }
+  .process-parallax { height: 320vh; }
+  .process-parallax-sticky { padding-top: 64px; }
+  .process-parallax-stage { grid-template-columns: 1fr; grid-template-rows: 34vh 1fr; }
+  .process-parallax-copy { padding: 16px 18px 6px; }
+  .process-parallax-index { top: 4px; right: 12px; font-size: 64px; }
   .process-parallax-copy h2 { max-width: none; margin-top: 8px; font-size: 34px; }
   .process-parallax-step { min-height: 88px; margin-top: 16px; }
   .process-parallax-step h3 { font-size: 24px; }
-  .process-track { padding: 0 18px 16px; }
+  .process-track { padding: 0 18px 88px; }
   .process-track-bar { left: 18px; right: 18px; }
   .process-hint { max-width: 120px; text-align: right; }
   .calculator-section { display: block; padding: 80px 18px; }
