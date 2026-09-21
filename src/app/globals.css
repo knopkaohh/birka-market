@@ -457,13 +457,20 @@ button { cursor: pointer; }
 .hero-lead { max-width: 600px; margin: 0; color: var(--muted-ink); font-size: clamp(15px, 1.25vw, 18px); line-height: 1.62; }
 .hero-actions { display: flex; align-items: center; flex-wrap: wrap; gap: 16px 18px; margin-top: 38px; }
 .primary-cta { min-height: 58px; padding: 0 26px; font-size: 13px; }
-.quick-cta {
-  display: inline-flex; align-items: center; justify-content: center; gap: 10px;
-  min-height: 58px; padding: 0 22px; border: 0; color: var(--ink);
-  background: var(--paper); box-shadow: inset 0 0 0 1.5px var(--ink);
-  font-size: 13px; font-weight: 800; touch-action: manipulation;
+.quick-calc-dock {
+  position: fixed;
+  left: calc(var(--side) + 16px);
+  bottom: 20px;
+  z-index: 120;
 }
-.quick-cta:hover { background: #ece7db; }
+.quick-cta {
+  display: inline-flex; align-items: center; justify-content: center;
+  min-height: 52px; padding: 0 18px; border: 0; color: var(--ink);
+  background: var(--yellow); box-shadow: 0 12px 28px rgba(34, 35, 34, .2);
+  font-size: 12px; font-weight: 800; touch-action: manipulation;
+}
+.quick-cta:hover { background: #f7cc50; }
+body.quick-calc-open .quick-calc-dock { visibility: hidden; pointer-events: none; }
 .quick-calc-overlay {
   position: fixed; inset: 0; z-index: 500; display: grid; place-items: center;
   padding: 18px; background: rgba(25, 25, 26, .62);
@@ -700,7 +707,8 @@ footer .logo-mark { color: var(--ink); background: var(--yellow); }
   .hero h1 { margin: 25px 0 22px; font-size: clamp(48px, 16vw, 70px); line-height: .92; }
   .hero-lead { font-size: 14px; }
   .hero-actions { align-items: flex-start; flex-direction: column; gap: 12px; margin-top: 28px; }
-  .primary-cta, .quick-cta, .ghost-cta { width: 100%; justify-content: space-between; }
+  .primary-cta, .ghost-cta { width: 100%; justify-content: space-between; }
+  .quick-calc-dock { left: 12px; bottom: 76px; }
   .hero-proof { justify-content: space-between; gap: 12px; margin-top: 34px; padding-top: 25px; border-top: 1px solid #d0ccc1; }
   .hero-proof strong { font-size: 18px; }
   .hero-proof span { max-width: 80px; font-size: 7px; }
@@ -1028,10 +1036,6 @@ footer .logo-mark { color: var(--ink); background: var(--yellow); }
   display: flex; align-items: end; justify-content: space-between; gap: 40px;
   padding: 90px var(--page-gutter); background: var(--yellow);
 }
-.jq-final .hero-actions {
-  margin-top: 0; flex-direction: column; align-items: stretch; min-width: min(320px, 100%);
-}
-.jq-final .quick-cta { background: var(--paper); }
 .jq-final h2 { margin: 0 0 16px; font-size: clamp(40px, 5vw, 64px); letter-spacing: -.06em; line-height: .95; }
 .jq-final p { max-width: 520px; margin: 0; font-size: 15px; line-height: 1.6; }
 
@@ -1056,5 +1060,5 @@ footer .logo-mark { color: var(--ink); background: var(--yellow); }
   .jq-gallery figure:nth-child(6) { grid-row: auto; }
   .jq-calc, .jq-tech, .jq-process, .jq-terms, .jq-final { padding: 72px 18px; }
   .jq-variant { min-height: 0; }
-  .jq-hero-copy .primary-cta, .jq-hero-copy .ghost-cta, .jq-hero-copy .quick-cta { width: 100%; justify-content: space-between; }
+  .jq-hero-copy .primary-cta, .jq-hero-copy .ghost-cta { width: 100%; justify-content: space-between; }
 }

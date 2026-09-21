@@ -122,19 +122,21 @@ export function QuickCalc({ product }: { product: string }) {
 
   return (
     <>
-      <button
-        ref={triggerRef}
-        type="button"
-        className="quick-cta"
-        aria-haspopup="dialog"
-        aria-expanded={open}
-        onClick={() => {
-          setStatus("idle");
-          setOpen(true);
-        }}
-      >
-        Быстрый расчет
-      </button>
+      <div className="quick-calc-dock">
+        <button
+          ref={triggerRef}
+          type="button"
+          className="quick-cta"
+          aria-haspopup="dialog"
+          aria-expanded={open}
+          onClick={() => {
+            setStatus("idle");
+            setOpen(true);
+          }}
+        >
+          Быстрый расчет
+        </button>
+      </div>
       {dialog}
     </>
   );

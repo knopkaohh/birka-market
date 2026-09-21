@@ -42,7 +42,6 @@ export function ProductLanding({ content, variant }: { content: LandingContent; 
               Рассчитать стоимость
               <ArrowRight size={19} />
             </a>
-            <QuickCalc product={content.slug} />
             <a className="ghost-cta" href="#variants">
               Подобрать вариант
             </a>
@@ -320,14 +319,12 @@ export function ProductLanding({ content, variant }: { content: LandingContent; 
           </h2>
           <p>{content.finalText}</p>
         </div>
-        <div className="hero-actions">
-          <a className="primary-cta" href="#calc">
-            Рассчитать стоимость
-            <ArrowRight />
-          </a>
-          <QuickCalc product={content.slug} />
-        </div>
+        <a className="primary-cta" href="#calc">
+          Рассчитать стоимость
+          <ArrowRight />
+        </a>
       </section>
+      <QuickCalc product={content.slug} />
     </>
   );
 }
