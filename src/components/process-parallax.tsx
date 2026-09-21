@@ -15,8 +15,15 @@ const scenes = [
 
 export function ProcessParallax() {
   const trackRef = useRef<HTMLElement>(null);
+  const barRef = useRef<HTMLElement>(null);
+  const numberRef = useRef<HTMLElement>(null);
+  const titleRef = useRef<HTMLHeadingElement>(null);
+  const textRef = useRef<HTMLParagraphElement>(null);
+  const captionRef = useRef<HTMLSpanElement>(null);
+  const shotsRef = useRef<HTMLDivElement>(null);
+  const stopsRef = useRef<HTMLDivElement>(null);
   const [reduced, setReduced] = useState(false);
-  const [progress, setProgress] = useState(0);
+  const [index, setIndex] = useState(0);
 
   useEffect(() => {
     const motion = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -26,12 +33,48 @@ export function ProcessParallax() {
     }
 
     let frame = 0;
+    let current = 0;
+    const last = Math.max(processSteps.length - 1, 1);
+
     const measure = () => {
       const track = trackRef.current;
-      if (!track) return;
-      const total = track.offsetHeight - window.innerHeight;
-      const passed = Math.min(Math.max(-track.getBoundingClientRect().top, 0), Math.max(total, 1));
-      setProgress(total > 0 ? passed / total : 0);
+      if (!track) {
+        frame = 0;
+        return;
+      }
+      const total = Math.max(track.offsetHeight - window.innerHeight, 1);
+      const passed = Math.min(Math.max(-track.getBoundingClientRect().top, 0), total);
+      const progress = passed / total;
+      const scaled = progress * last;
+      const nextIndex = Math.min(last, Math.floor(scaled + 0.001));
+      const local = Math.min(1, Math.max(0, scaled - nextIndex));
+
+      if (barRef.current) barRef.current.style.width = `${(progress * 100).toFixed(2)}%`;
+      const shots = shotsRef.current?.children;
+      if (shots) {
+        for (let i = 0; i < shots.length; i += 1) {
+          const shot = shots[i] as HTMLElement;
+          const active = i === nextIndex;
+          shot.classList.toggle("is-active", active);
+          shot.style.transform = active
+            ? `translate3d(0, ${(local * 28 - 10).toFixed(1)}px, 0) scale(1.08)`
+            : "";
+        }
+      }
+      if (nextIndex !== current) {
+        current = nextIndex;
+        const step = processSteps[nextIndex];
+        if (numberRef.current) numberRef.current.textContent = `0${nextIndex + 1}`;
+        if (titleRef.current && step) titleRef.current.textContent = step[0];
+        if (textRef.current && step) textRef.current.textContent = step[1];
+        if (captionRef.current) captionRef.current.textContent = scenes[nextIndex]?.caption ?? "";
+        stopsRef.current?.querySelectorAll(".process-track-stop").forEach((stop, stopIndex) => {
+          stop.classList.toggle("is-on", stopIndex <= nextIndex);
+          stop.classList.toggle("is-current", stopIndex === nextIndex);
+          stop.setAttribute("aria-selected", stopIndex === nextIndex ? "true" : "false");
+        });
+        setIndex(nextIndex);
+      }
       frame = 0;
     };
     const onScroll = () => {
@@ -49,11 +92,6 @@ export function ProcessParallax() {
   }, []);
 
   const last = Math.max(processSteps.length - 1, 1);
-  const scaled = progress * last;
-  const index = Math.min(last, Math.floor(scaled + 0.001));
-  const local = Math.min(1, Math.max(0, scaled - index));
-  const current = processSteps[index] ?? processSteps[0];
-
   const goTo = (step: number) => {
     const track = trackRef.current;
     if (!track) return;
@@ -100,23 +138,26 @@ export function ProcessParallax() {
     );
   }
 
+  const current = processSteps[index] ?? processSteps[0];
+
   return (
     <section className="process-parallax" id="process" ref={trackRef}>
       <div className="process-parallax-sticky">
         <div className="process-parallax-stage">
           <div className="process-parallax-visual">
-            {scenes.map((scene, sceneIndex) => (
-              <div
-                key={scene.image}
-                className={`process-parallax-shot ${sceneIndex === index ? "is-active" : ""}`}
-                style={{
-                  transform: sceneIndex === index ? `translate3d(0, ${(local * 28 - 10).toFixed(1)}px, 0) scale(1.08)` : undefined,
-                }}
-              >
-                <Image src={scene.image} alt={scene.caption} fill sizes="(max-width: 900px) 100vw, 52vw" />
-              </div>
-            ))}
-            <span className="process-parallax-caption">{scenes[index]?.caption}</span>
+            <div className="process-parallax-shots" ref={shotsRef}>
+              {scenes.map((scene, sceneIndex) => (
+                <div
+                  key={scene.image}
+                  className={`process-parallax-shot ${sceneIndex === index ? "is-active" : ""}`}
+                >
+                  <Image src={scene.image} alt={scene.caption} fill sizes="(max-width: 900px) 100vw, 52vw" />
+                </div>
+              ))}
+            </div>
+            <span className="process-parallax-caption" ref={captionRef}>
+              {scenes[index]?.caption ?? scenes[0].caption}
+            </span>
           </div>
 
           <div className="process-parallax-copy">
@@ -127,8 +168,8 @@ export function ProcessParallax() {
                 <ArrowDown size={14} />
               </p>
             </div>
-            <strong className="process-parallax-index" aria-hidden="true">
-              0{index + 1}
+            <strong className="process-parallax-index" aria-hidden="true" ref={numberRef}>
+              01
             </strong>
             <h2>
               Понятный путь
@@ -136,8 +177,8 @@ export function ProcessParallax() {
               <em>от идеи до тиража</em>
             </h2>
             <div className="process-parallax-step" aria-live="polite">
-              <h3>{current[0]}</h3>
-              <p>{current[1]}</p>
+              <h3 ref={titleRef}>{current[0]}</h3>
+              <p ref={textRef}>{current[1]}</p>
             </div>
             {index === last && (
               <Link href="/raschet" prefetch={false} className="process-parallax-cta">
@@ -148,9 +189,9 @@ export function ProcessParallax() {
           </div>
         </div>
 
-        <div className="process-track" role="tablist" aria-label="Этапы работы">
+        <div className="process-track" role="tablist" aria-label="Этапы работы" ref={stopsRef}>
           <div className="process-track-bar">
-            <i style={{ width: `${progress * 100}%` }} />
+            <i ref={barRef} />
           </div>
           {processSteps.map(([title], stepIndex) => (
             <button
