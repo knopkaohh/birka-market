@@ -697,11 +697,58 @@ footer .logo-mark { color: var(--ink); background: var(--yellow); }
 .inner-hero h1 em { font-family: var(--font-cormorant), Georgia, serif; font-weight: 500; color: #8e721f; }
 .inner-hero p { max-width: 680px; margin: 0; color: var(--muted-ink); font-size: 16px; line-height: 1.65; }
 .category-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
-.category-tile { min-height: 230px; padding: 26px; display: flex; flex-direction: column; background: #eae5db; }
-.category-tile span { color: #8a8b84; font-size: 9px; font-weight: 800; letter-spacing: .12em; }
-.category-tile h3 { margin: 28px 0 12px; font-size: 28px; letter-spacing: -.04em; }
-.category-tile p { margin: 0; color: var(--muted-ink); font-size: 13px; line-height: 1.55; }
-.category-tile em { margin-top: auto; padding-top: 22px; display: flex; align-items: center; justify-content: space-between; font-style: normal; font-size: 11px; font-weight: 800; }
+.category-tile {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: #eae5db;
+}
+.category-photo {
+  position: relative;
+  aspect-ratio: 1.45;
+  overflow: hidden;
+  background: #d7d3c9;
+}
+.category-photo img {
+  object-fit: cover;
+  filter: saturate(.72);
+  transition: transform .65s ease, filter .4s;
+}
+.category-tile:hover .category-photo img {
+  transform: scale(1.045);
+  filter: saturate(1);
+}
+.category-photo span {
+  position: absolute;
+  left: 16px;
+  top: 16px;
+  z-index: 1;
+  display: grid;
+  place-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  color: var(--ink);
+  background: var(--paper);
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: .08em;
+}
+.category-copy { padding: 22px 24px 24px; display: flex; flex-direction: column; flex: 1; }
+.category-copy h3 { margin: 0 0 10px; font-size: 28px; letter-spacing: -.04em; }
+.category-copy p { margin: 0; color: var(--muted-ink); font-size: 13px; line-height: 1.55; }
+.category-copy em {
+  margin-top: auto;
+  padding-top: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-style: normal;
+  font-size: 11px;
+  font-weight: 800;
+}
+.category-copy svg { width: 18px; transition: transform .2s; }
+.category-tile:hover .category-copy svg { transform: translateX(4px); }
 .catalog-all { margin-top: 90px; }
 .product-image { display: block; }
 .product-layout { display: grid; grid-template-columns: .92fr 1.08fr; gap: 48px; align-items: start; }

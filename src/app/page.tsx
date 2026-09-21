@@ -11,6 +11,7 @@ import {
 } from "lucide-react";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { CalculatorBlock } from "@/components/calculator-block";
+import { CategoryTile } from "@/components/category-tile";
 import { Loader } from "@/components/loader";
 import { Marquee } from "@/components/marquee";
 import { ProductCard } from "@/components/product-card";
@@ -118,15 +119,7 @@ export default function Home() {
         </div>
         <div className="category-grid">
           {categories.map((item, index) => (
-            <Link className="category-tile" href={`/katalog/${item.slug}`} key={item.slug}>
-              <span>0{index + 1}</span>
-              <h3>{item.name}</h3>
-              <p>{item.intro}</p>
-              <em>
-                Смотреть
-                <ArrowRight />
-              </em>
-            </Link>
+            <CategoryTile key={item.slug} category={item} index={index} />
           ))}
         </div>
       </section>

@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
-import Link from "next/link";
-import { ArrowRight } from "lucide-react";
 import { Breadcrumbs } from "@/components/breadcrumbs";
+import { CategoryTile } from "@/components/category-tile";
 import { ProductCard } from "@/components/product-card";
 import { categories, products } from "@/lib/site";
 
@@ -27,15 +26,7 @@ export default function CatalogPage() {
       </div>
       <div className="category-grid">
         {categories.map((item, index) => (
-          <Link className="category-tile" href={`/katalog/${item.slug}`} key={item.slug}>
-            <span>0{index + 1}</span>
-            <h3>{item.name}</h3>
-            <p>{item.intro}</p>
-            <em>
-              Смотреть
-              <ArrowRight />
-            </em>
-          </Link>
+          <CategoryTile key={item.slug} category={item} index={index} />
         ))}
       </div>
       <div className="section-heading compact catalog-all">
