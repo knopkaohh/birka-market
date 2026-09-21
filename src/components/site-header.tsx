@@ -8,6 +8,10 @@ import { company, navLinks } from "@/lib/site";
 
 export function SiteHeader({ onOpenMenu }: { onOpenMenu: () => void }) {
   const pathname = usePathname();
+  const isActive = (href: string) => {
+    if (href === "/katalog") return pathname.startsWith("/katalog") || pathname === "/jacquard";
+    return pathname.startsWith(href);
+  };
 
   return (
     <header className="site-header">
@@ -18,7 +22,7 @@ export function SiteHeader({ onOpenMenu }: { onOpenMenu: () => void }) {
             <Link
               key={item.href}
               href={item.href}
-              className={pathname.startsWith(item.href) ? "is-active" : undefined}
+              className={isActive(item.href) ? "is-active" : undefined}
             >
               {item.label}
             </Link>

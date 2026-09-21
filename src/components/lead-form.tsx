@@ -12,9 +12,16 @@ import { products } from "@/lib/site";
 type LeadFormProps = {
   defaultProduct?: string;
   compact?: boolean;
+  details?: boolean;
+  defaultVariant?: string;
 };
 
-export function LeadForm({ defaultProduct = "unknown", compact = false }: LeadFormProps) {
+export function LeadForm({
+  defaultProduct = "unknown",
+  compact = false,
+  details = false,
+  defaultVariant = "standard",
+}: LeadFormProps) {
   const router = useRouter();
   const [product, setProduct] = useState(defaultProduct);
   const [status, setStatus] = useState<"idle" | "sending" | "error">("idle");
@@ -42,22 +49,45 @@ export function LeadForm({ defaultProduct = "unknown", compact = false }: LeadFo
 
   return (
     <form className="calc-form" onSubmit={submit}>
-      <div className="field full">
-        <label htmlFor="product">Что нужно изготовить?</label>
-        <select
-          id="product"
-          name="product"
-          value={product}
-          onChange={(event) => setProduct(event.target.value)}
-        >
-          <option value="unknown">Нужна помощь с выбором</option>
-          {products.map((item) => (
-            <option key={item.slug} value={item.slug}>
-              {item.name}
-            </option>
-          ))}
-        </select>
-      </div>
+      {details ? (
+        <>
+          <input type="hidden" name="product" value="jacquard" />
+          <div className="field">
+            <label htmlFor="variant">Вариант бирки</label>
+            <select id="variant" name="variant" defaultValue={defaultVariant}>
+              <option value="standard">Стандарт</option>
+              <option value="loop">Петелька</option>
+              <option value="flag">Флаг</option>
+              <option value="volume">Объём</option>
+            </select>
+          </div>
+          <div className="field">
+            <label htmlFor="size">Размер, мм</label>
+            <Input id="size" name="size" placeholder="Например, 20 × 50" />
+          </div>
+          <div className="field">
+            <label htmlFor="colors">Количество цветов</label>
+            <Input id="colors" name="colors" placeholder="2, 3 или больше" />
+          </div>
+        </>
+      ) : (
+        <div className="field full">
+          <label htmlFor="product">Что нужно изготовить?</label>
+          <select
+            id="product"
+            name="product"
+            value={product}
+            onChange={(event) => setProduct(event.target.value)}
+          >
+            <option value="unknown">Нужна помощь с выбором</option>
+            {products.map((item) => (
+              <option key={item.slug} value={item.slug}>
+                {item.name}
+              </option>
+            ))}
+          </select>
+        </div>
+      )}
       <div className="field">
         <label htmlFor="quantity">Тираж, шт.</label>
         <Input
@@ -73,11 +103,11 @@ export function LeadForm({ defaultProduct = "unknown", compact = false }: LeadFo
         <label htmlFor="name">Ваше имя</label>
         <Input id="name" name="name" placeholder="Как к вам обращаться?" />
       </div>
-      <div className="field full">
+      <div className={details ? "field" : "field full"}>
         <label htmlFor="phone">Телефон</label>
         <Input id="phone" name="phone" type="tel" placeholder="+7 999 000-00-00" required />
       </div>
-      {!compact && (
+      {!compact && !details && (
         <div className="field full">
           <label htmlFor="contact">Как удобнее связаться</label>
           <select id="contact" name="contact" defaultValue="phone">
@@ -92,7 +122,7 @@ export function LeadForm({ defaultProduct = "unknown", compact = false }: LeadFo
         <Textarea
           id="comment"
           name="comment"
-          placeholder="Размер, материал, сроки — всё, что уже известно"
+          placeholder={details ? "Изделие, плотность, особые пожелания" : "Размер, материал, сроки — всё, что уже известно"}
         />
       </div>
       {selected?.sample && (

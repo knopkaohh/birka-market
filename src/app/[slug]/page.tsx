@@ -11,7 +11,7 @@ import { getCategory, getProduct, products, relatedProducts } from "@/lib/site";
 type Params = { slug: string };
 
 export function generateStaticParams() {
-  return products.map((item) => ({ slug: item.slug }));
+  return products.filter((item) => item.slug !== "jacquard").map((item) => ({ slug: item.slug }));
 }
 
 export async function generateMetadata({ params }: { params: Promise<Params> }): Promise<Metadata> {
