@@ -30,6 +30,7 @@ export function SiteHeader({
             <Link
               key={item.href}
               href={item.href}
+              prefetch={false}
               className={isActive(item.href) ? "is-active" : undefined}
             >
               {item.label}
@@ -41,7 +42,7 @@ export function SiteHeader({
             <Phone size={15} />
             {company.phone}
           </a>
-          <Link className="header-cta" href="/raschet">
+          <Link className="header-cta" href="/raschet" prefetch={false}>
             Расчет заказа
             <ArrowDownRight size={17} />
           </Link>

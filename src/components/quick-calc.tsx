@@ -1,19 +1,14 @@
 "use client";
 
-import { FormEvent, useEffect, useId, useRef, useState } from "react";
+import { FormEvent, useId, useState } from "react";
 import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { ArrowRight, X } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import { company, getProduct } from "@/lib/site";
 
 export function QuickCalc() {
-  const router = useRouter();
   const pathname = usePathname();
   const titleId = useId();
-  const triggerRef = useRef<HTMLButtonElement>(null);
-  const dialogRef = useRef<HTMLDialogElement>(null);
   const [open, setOpen] = useState(false);
   const [status, setStatus] = useState<"idle" | "sending" | "error">("idle");
   const [path, setPath] = useState(pathname);
@@ -27,22 +22,11 @@ export function QuickCalc() {
   const slug = pathname.replace(/^\//, "").split("/")[0] ?? "";
   const product = getProduct(slug);
 
-  useEffect(() => {
-    const dialog = dialogRef.current;
-    if (open && dialog && !dialog.open) {
-      dialog.showModal();
-      dialog.querySelector<HTMLInputElement>("input[name='name']")?.focus();
-    }
-    if (!open && dialog?.open) dialog.close();
-    document.body.classList.toggle("quick-calc-open", open && pathname !== "/spasibo");
-  }, [open, pathname]);
-
   if (pathname === "/spasibo") return null;
 
   const close = () => {
     setOpen(false);
     setStatus("idle");
-    triggerRef.current?.focus();
   };
 
   const submit = async (event: FormEvent<HTMLFormElement>) => {
@@ -55,7 +39,7 @@ export function QuickCalc() {
     try {
       const response = await fetch("/api/lead", { method: "POST", body: data });
       if (!response.ok) throw new Error("Request failed");
-      router.push("/spasibo");
+      window.location.assign("/spasibo");
     } catch {
       setStatus("error");
     }
@@ -65,39 +49,30 @@ export function QuickCalc() {
     <>
       <div className="quick-calc-dock">
         <button
-          ref={triggerRef}
           type="button"
           className="quick-cta"
           aria-haspopup="dialog"
           aria-expanded={open}
-          onPointerDown={(event) => {
-            event.stopPropagation();
-          }}
+          aria-controls="quick-calc-overlay"
           onClick={(event) => {
             event.preventDefault();
             event.stopPropagation();
             setStatus("idle");
             setOpen(true);
-            const dialog = dialogRef.current;
-            if (dialog && !dialog.open) dialog.showModal();
           }}
         >
           Быстрый расчет
         </button>
       </div>
-      <dialog
-        ref={dialogRef}
-        className="quick-calc-dialog"
-        aria-labelledby={titleId}
-        onClose={() => {
-          setOpen(false);
-          setStatus("idle");
-        }}
+      <div
+        id="quick-calc-overlay"
+        className={`quick-calc-overlay ${open ? "is-open" : ""}`}
+        role="presentation"
         onClick={(event) => {
           if (event.target === event.currentTarget) close();
         }}
       >
-        <div className="quick-calc-panel">
+        <div className="quick-calc-panel" role="dialog" aria-modal={open} aria-labelledby={titleId}>
           <button type="button" className="quick-calc-close" onClick={close} aria-label="Закрыть">
             <X size={22} />
           </button>
@@ -112,9 +87,11 @@ export function QuickCalc() {
               : `Перезвоним в рабочее время ${company.hours} и посчитаем тираж.`}
           </p>
           <form className="calc-form" onSubmit={submit}>
+            <input type="hidden" name="product" value={product?.slug ?? "unknown"} />
+            <input type="hidden" name="quick" value="1" />
             <div className="field full">
               <label htmlFor={`${titleId}-name`}>Имя</label>
-              <Input
+              <input
                 id={`${titleId}-name`}
                 name="name"
                 autoComplete="name"
@@ -124,7 +101,7 @@ export function QuickCalc() {
             </div>
             <div className="field full">
               <label htmlFor={`${titleId}-phone`}>Номер телефона</label>
-              <Input
+              <input
                 id={`${titleId}-phone`}
                 name="phone"
                 type="tel"
@@ -134,13 +111,16 @@ export function QuickCalc() {
                 required
               />
             </div>
-            <Button type="submit" disabled={status === "sending"} className="submit-button">
+            <button type="submit" disabled={status === "sending"} className="submit-button">
               {status === "sending" ? "Отправляем…" : "Получить расчёт"}
               <ArrowRight />
-            </Button>
+            </button>
             <p className="privacy">
               Нажимая кнопку, вы соглашаетесь с{" "}
-              <Link href="/privacy">политикой конфиденциальности</Link>.
+              <Link href="/privacy" prefetch={false}>
+                политикой конфиденциальности
+              </Link>
+              .
             </p>
             {status === "error" && (
               <div className="form-message error-message">
@@ -149,7 +129,7 @@ export function QuickCalc() {
             )}
           </form>
         </div>
-      </dialog>
+      </div>
     </>
   );
 }

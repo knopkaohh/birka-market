@@ -157,6 +157,7 @@ button { cursor: pointer; }
   position: fixed; inset: 0; z-index: 200;
   display: grid; place-content: center; justify-items: center;
   color: var(--ink); background: var(--yellow);
+  pointer-events: none;
   transition: opacity .55s ease, visibility .55s ease;
   animation: loaderExit .55s 1.4s forwards;
 }
@@ -238,7 +239,7 @@ button { cursor: pointer; }
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 170;
+  z-index: 180;
   width: min(280px, calc(100vw - 56px));
   height: 100vh;
   display: flex;
@@ -307,6 +308,7 @@ button { cursor: pointer; }
   color: #e9ebed;
   background: none;
   cursor: pointer;
+  touch-action: manipulation;
 }
 .side-menu-arrow svg {
   display: block;
@@ -403,12 +405,12 @@ button { cursor: pointer; }
 }
 
 @media (max-width: 1150px) {
-  .menu-toggle { display: grid; place-items: center; }
-  .side-menu-close { display: grid; place-items: center; }
+  .menu-toggle { display: grid; place-content: center; }
+  .side-menu-close { display: grid; place-content: center; }
   .side-overlay {
     position: fixed;
     inset: 0;
-    z-index: 140;
+    z-index: 165;
     display: block;
     border: 0;
     background: rgba(17, 17, 18, .45);
@@ -433,6 +435,7 @@ button { cursor: pointer; }
     visibility: visible;
     pointer-events: auto;
   }
+  body.menu-open { overflow: hidden; }
 }
 
 .hero {
@@ -470,15 +473,17 @@ button { cursor: pointer; }
   font-size: 12px; font-weight: 800; touch-action: manipulation;
 }
 .quick-cta:hover { background: #f7cc50; }
+body.quick-calc-open { overflow: hidden; }
 body.quick-calc-open .mobile-bottom { display: none !important; }
-.quick-calc-dialog {
-  width: min(460px, calc(100% - 36px)); max-height: min(92vh, 720px);
-  margin: auto; padding: 0; border: 0; color: var(--ink); background: transparent;
+.quick-calc-overlay {
+  position: fixed; inset: 0; z-index: 600;
+  display: none; place-items: center; padding: 18px;
+  background: rgba(25, 25, 26, .62);
 }
-.quick-calc-dialog::backdrop { background: rgba(25, 25, 26, .62); }
+.quick-calc-overlay.is-open { display: grid; }
 .quick-calc-panel {
-  position: relative; overflow: auto; max-height: min(92vh, 720px);
-  padding: 32px 28px 28px; background: var(--paper);
+  position: relative; width: min(460px, 100%); max-height: min(92vh, 720px);
+  overflow: auto; padding: 32px 28px 28px; color: var(--ink); background: var(--paper);
   box-shadow: 0 24px 60px rgba(25, 25, 26, .28);
 }
 .quick-calc-close {

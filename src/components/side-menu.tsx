@@ -26,14 +26,12 @@ export function SideMenu({ open, onClose }: SideMenuProps) {
 
   return (
     <>
-      {open ? (
-        <button
-          type="button"
-          className="side-overlay is-visible"
-          aria-label="Закрыть меню"
-          onClick={onClose}
-        />
-      ) : null}
+      <button
+        type="button"
+        className={`side-overlay ${open ? "is-visible" : ""}`}
+        aria-label="Закрыть меню"
+        onClick={onClose}
+      />
       <aside
         id="side-menu"
         className={`side-menu ${open ? "is-open" : ""}`}
@@ -54,6 +52,7 @@ export function SideMenu({ open, onClose }: SideMenuProps) {
           <Link
             href="/katalog"
             className={`side-catalog-link ${pathname === "/katalog" ? "is-current" : ""}`}
+            prefetch={false}
             onClick={onClose}
           >
             Вся продукция
@@ -69,7 +68,7 @@ export function SideMenu({ open, onClose }: SideMenuProps) {
               return (
                 <li key={category.slug} className="side-menu-item">
                   <div className={`side-menu-row ${isOpen || isCurrent ? "is-active" : ""}`}>
-                    <Link href={href} className="side-menu-link" onClick={onClose}>
+                    <Link href={href} className="side-menu-link" prefetch={false} onClick={onClose}>
                       {category.name}
                     </Link>
                     <button
@@ -90,6 +89,7 @@ export function SideMenu({ open, onClose }: SideMenuProps) {
                           <Link
                             href={`/${item.slug}`}
                             className={`side-submenu-link ${pathname === `/${item.slug}` ? "is-current" : ""}`}
+                            prefetch={false}
                             onClick={onClose}
                           >
                             {item.name}
@@ -111,6 +111,7 @@ export function SideMenu({ open, onClose }: SideMenuProps) {
                   key={item.href}
                   href={item.href}
                   className={pathname.startsWith(item.href) ? "is-current" : undefined}
+                  prefetch={false}
                   onClick={onClose}
                 >
                   {item.label}

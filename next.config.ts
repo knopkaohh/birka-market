@@ -1,6 +1,26 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  allowedDevOrigins: [
+    "127.0.0.1",
+    "*.trycloudflare.com",
+    "**.trycloudflare.com",
+    "*.cursor.com",
+    "**.cursor.com",
+    "*.cursor.sh",
+    "**.cursor.sh",
+    "*.cursor.app",
+    "**.cursor.app",
+    "*.on-cursor.com",
+    "**.on-cursor.com",
+    "*.ngrok.io",
+    "**.ngrok.io",
+    "*.ngrok-free.app",
+    "**.ngrok-free.app",
+    "*.loca.lt",
+    "**.loca.lt",
+    ...(process.env.ALLOWED_DEV_ORIGINS?.split(",").map((item) => item.trim()).filter(Boolean) ?? []),
+  ],
   async redirects() {
     return [
       { source: "/products", destination: "/katalog", permanent: true },

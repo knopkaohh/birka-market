@@ -17,6 +17,7 @@ export function SiteChrome({ children }: { children: React.ReactNode }) {
   }
 
   useEffect(() => {
+    document.documentElement.dataset.uiReady = "1";
     document.body.style.overflow = menuOpen ? "hidden" : "";
     return () => {
       document.body.style.overflow = "";

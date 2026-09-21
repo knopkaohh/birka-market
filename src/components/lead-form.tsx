@@ -1,7 +1,6 @@
 "use client";
 
 import { FormEvent, useMemo, useState } from "react";
-import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { ArrowRight, Check, FileUp } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -44,7 +43,6 @@ export function LeadForm({
   variants,
   detailFields,
 }: LeadFormProps) {
-  const router = useRouter();
   const [product, setProduct] = useState(defaultProduct);
   const [status, setStatus] = useState<"idle" | "sending" | "error">("idle");
   const variantOptions = variants?.length ? variants : defaultJacquardVariants;
@@ -76,7 +74,7 @@ export function LeadForm({
     try {
       const response = await fetch("/api/lead", { method: "POST", body: data });
       if (!response.ok) throw new Error("Request failed");
-      router.push("/spasibo");
+      window.location.assign("/spasibo");
     } catch {
       setStatus("error");
     }
