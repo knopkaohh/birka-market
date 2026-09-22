@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
+import { createPortal } from "react-dom";
 import { ThanksCard } from "@/components/thanks-card";
 
 export function ThanksOverlay({
@@ -24,11 +25,12 @@ export function ThanksOverlay({
     };
   }, [open, onClose]);
 
-  if (!open) return null;
+  if (!open || typeof document === "undefined") return null;
 
-  return (
+  return createPortal(
     <div className="thanks-overlay" onClick={onClose}>
       <ThanksCard onClose={onClose} />
-    </div>
+    </div>,
+    document.body,
   );
 }
