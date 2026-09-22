@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { LogoMark } from "@/components/logo";
 import { company } from "@/lib/site";
 
 let introPlayed = false;
@@ -24,10 +25,7 @@ export function Loader() {
 
   return (
     <div className="loader" aria-hidden="true">
-      <div className="loader-tag">
-        <span>БИРКА</span>
-        <span>МАРКЕТ</span>
-      </div>
+      <LogoMark className="loader-logo" />
       <div className="loader-line">
         <i />
       </div>
