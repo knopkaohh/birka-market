@@ -14,7 +14,7 @@ export function Loader() {
     const timer = window.setTimeout(() => {
       introPlayed = true;
       setHidden(true);
-    }, 1100);
+    }, 2300);
     return () => {
       window.clearTimeout(timer);
       introPlayed = true;
@@ -25,9 +25,11 @@ export function Loader() {
 
   return (
     <div className="loader" aria-hidden="true">
-      <LogoMark className="loader-logo" />
-      <div className="loader-line">
-        <i />
+      <div className="loader-wordmark">
+        <LogoMark className="loader-logo loader-logo-ghost" />
+        <div className="loader-logo-fill">
+          <LogoMark className="loader-logo" />
+        </div>
       </div>
       <p>{company.slogan}</p>
     </div>
