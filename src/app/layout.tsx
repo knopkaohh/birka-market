@@ -53,8 +53,13 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="ru" className={`${manrope.variable} ${cormorant.variable}`}>
       <body>
+        <a className="skip-link" href="#top">
+          К содержанию
+        </a>
         <SiteChrome>
-          <main id="top">{children}</main>
+          <main id="top" tabIndex={-1}>
+            {children}
+          </main>
           <SiteFooter />
           <MobileBar />
         </SiteChrome>

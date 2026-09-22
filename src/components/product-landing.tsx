@@ -9,6 +9,22 @@ import type { LandingContent, QuotePrefill } from "@/lib/landings/types";
 import { quoteComment, quoteHref } from "@/lib/landings/types";
 import { company, getCategory, getProduct } from "@/lib/site";
 
+function specRows(
+  specs: { title: string; text: string }[],
+  minQty: number,
+  leadTime: string,
+) {
+  const rows = [...specs];
+  const titles = rows.map((item) => item.title.toLowerCase()).join(" ");
+  if (!/тира[жш]|запуск/.test(titles)) {
+    rows.push({ title: "Минимальный тираж", text: `от ${minQty} шт.` });
+  }
+  if (!/срок/.test(titles)) {
+    rows.push({ title: "Срок", text: leadTime });
+  }
+  return rows;
+}
+
 export function ProductLanding({
   content,
   variant,
@@ -122,12 +138,23 @@ export function ProductLanding({
         </div>
       </section>
 
-      <section className="jq-section">
+      <section className="jq-section" id="orientir">
         <div className="jq-heading">
           <span className="section-number">03 / ОРИЕНТИР</span>
           <h2>{content.quotesTitle}</h2>
           <p>{content.quotesIntro}</p>
         </div>
+        <table className="jq-tech-table">
+          <caption>Параметры материала, тираж и срок</caption>
+          <tbody>
+            {specRows(content.specs, product.minQty, product.leadTime).map((item) => (
+              <tr key={item.title}>
+                <th scope="row">{item.title}</th>
+                <td>{item.text}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
         <div className="jq-quotes">
           {content.quotes.map((item) => (
             <Link

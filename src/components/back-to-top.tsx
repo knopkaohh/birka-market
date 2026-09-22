@@ -5,6 +5,7 @@ export function BackToTop() {
     <button
       type="button"
       className="back-to-top"
+      aria-label="Наверх"
       onClick={() => {
         const html = document.documentElement;
         html.style.setProperty("overflow-anchor", "none");

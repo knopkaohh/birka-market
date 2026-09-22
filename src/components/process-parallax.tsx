@@ -27,10 +27,19 @@ export function ProcessParallax() {
 
   useEffect(() => {
     const motion = window.matchMedia("(prefers-reduced-motion: reduce)");
-    if (motion.matches) {
-      setReduced(true);
-      return;
-    }
+    const mobile = window.matchMedia("(max-width: 760px)");
+    const apply = () => setReduced(motion.matches || mobile.matches);
+    apply();
+    motion.addEventListener("change", apply);
+    mobile.addEventListener("change", apply);
+    return () => {
+      motion.removeEventListener("change", apply);
+      mobile.removeEventListener("change", apply);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (reduced) return;
 
     let frame = 0;
     let current = 0;
@@ -89,7 +98,7 @@ export function ProcessParallax() {
       window.removeEventListener("resize", onScroll);
       if (frame) window.cancelAnimationFrame(frame);
     };
-  }, []);
+  }, [reduced]);
 
   const count = processSteps.length;
   const last = count - 1;

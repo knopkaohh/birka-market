@@ -26,7 +26,7 @@ export function UiFallbackScript() {
       menuOpen(!(menu && menu.classList.contains("is-open")));
       return;
     }
-    if (target.closest(".side-menu-close") || target.closest(".side-overlay")) {
+    if (target.closest(".side-overlay")) {
       event.preventDefault();
       menuOpen(false);
       return;

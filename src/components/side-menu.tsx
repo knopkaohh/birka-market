@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useMemo, useState } from "react";
-import { ChevronDown, Search, X } from "lucide-react";
+import { ChevronDown, Search } from "lucide-react";
 import { Logo } from "@/components/logo";
 import { categories, matchesProduct, navLinks, products, productsByCategory } from "@/lib/site";
 
@@ -46,14 +46,6 @@ export function SideMenu({ open, onClose }: SideMenuProps) {
         <div className="side-menu-inner">
           <div className="side-menu-logo">
             <Logo />
-            <button
-              type="button"
-              className="side-menu-close"
-              aria-label="Закрыть меню"
-              onClick={onClose}
-            >
-              <X size={22} />
-            </button>
           </div>
           <label className="side-search">
             <Search size={15} />
