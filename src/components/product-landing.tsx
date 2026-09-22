@@ -3,6 +3,7 @@ import Link from "next/link";
 import { ArrowRight, Check } from "lucide-react";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Breadcrumbs } from "@/components/breadcrumbs";
+import { CalcResponder } from "@/components/calc-responder";
 import { LeadForm } from "@/components/lead-form";
 import { ProductCard } from "@/components/product-card";
 import type { LandingContent, QuotePrefill } from "@/lib/landings/types";
@@ -50,7 +51,7 @@ export function ProductLanding({
           <p>{content.lead}</p>
           <div className="hero-actions">
             <a className="primary-cta" href="#calc">
-              Рассчитать стоимость
+              Рассчитать заказ
               <ArrowRight size={19} />
             </a>
             <a className="ghost-cta" href="#variants">
@@ -168,6 +169,7 @@ export function ProductLanding({
           <p>
             {content.calcIntro} Ответим в рабочее время {company.hours}.
           </p>
+          <CalcResponder light />
           <ul>
             {content.calcBullets.map((item) => (
               <li key={item}>
@@ -348,7 +350,7 @@ export function ProductLanding({
           <p>{content.finalText}</p>
         </div>
         <a className="primary-cta" href="#calc">
-          Рассчитать стоимость
+          Рассчитать заказ
           <ArrowRight />
         </a>
       </section>

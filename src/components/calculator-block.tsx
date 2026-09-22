@@ -1,5 +1,5 @@
-import { Clock3 } from "lucide-react";
 import { LeadForm } from "@/components/lead-form";
+import { CalcResponder } from "@/components/calc-responder";
 
 export function CalculatorBlock({
   defaultProduct,
@@ -27,13 +27,7 @@ export function CalculatorBlock({
           {titleAccent ? <em>{titleAccent}</em> : null}
         </h2>
         <p>{lead}</p>
-        <div className="calc-promise">
-          <Clock3 />
-          <span>
-            <strong>Свяжемся в рабочее время</strong>
-            <br />Пн–Пт, 09:00–18:00
-          </span>
-        </div>
+        <CalcResponder />
       </div>
       <LeadForm key={defaultProduct ?? "unknown"} defaultProduct={defaultProduct} />
     </section>

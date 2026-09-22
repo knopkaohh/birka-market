@@ -43,7 +43,7 @@ export function SiteHeader({
             {company.phone}
           </a>
           <Link className="header-cta" href="/raschet" prefetch={false}>
-            Расчет заказа
+            Рассчитать заказ
             <ArrowDownRight size={17} />
           </Link>
           <button

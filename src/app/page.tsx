@@ -36,17 +36,17 @@ export default function Home() {
             Производим в Москве • Доставляем по России
           </div>
           <h1>
-            Ваш бренд -
+            Бирки, упаковка
             <br />
-            наша <em>забота!</em>
+            и мерч <em>на заказ</em>
           </h1>
           <p className="hero-lead">
-            Бирки, упаковка, фурнитура, мерч и полиграфия — от бесплатного макета до готового тиража.
+            {company.slogan} Производим в Москве: от бесплатного макета до готового тиража.
             Поможем выбрать материал и рассчитаем заказ.
           </p>
           <div className="hero-actions">
             <Link className="primary-cta" href="/raschet">
-              Рассчитать стоимость
+              Рассчитать заказ
               <ArrowRight size={19} />
             </Link>
             <Link className="text-link" href="/katalog">
@@ -144,7 +144,7 @@ export default function Home() {
             <h3>Опишите изделие — подберём материал за вас</h3>
           </div>
           <Link href="/raschet">
-            Нужна помощь
+            Рассчитать заказ
             <ArrowRight />
           </Link>
         </div>

@@ -183,7 +183,7 @@ export function ProcessParallax() {
             </div>
             {index === last && (
               <Link href="/raschet" prefetch={false} className="process-parallax-cta">
-                Рассчитать стоимость
+                Рассчитать заказ
                 <ArrowRight size={18} />
               </Link>
             )}

@@ -8,7 +8,7 @@ export function MobileBar() {
       <a href={company.phoneHref}>
         <Phone /> Позвонить
       </a>
-      <Link href="/raschet">Рассчитать</Link>
+      <Link href="/raschet">Рассчитать заказ</Link>
     </div>
   );
 }

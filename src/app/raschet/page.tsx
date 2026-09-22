@@ -3,7 +3,7 @@ import { CalculatorBlock } from "@/components/calculator-block";
 import { getProduct } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Рассчитать стоимость",
+  title: "Рассчитать заказ",
   description: "Оставьте параметры заказа — менеджер и технолог подготовят расчёт и бесплатный макет.",
 };
 

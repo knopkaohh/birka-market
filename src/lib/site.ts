@@ -26,6 +26,7 @@ export const company = {
   },
   howToGet:
     "Метро Сходненская, 2-й выход, трамвай 6 до остановки «Западный мост». Дальше 2 минуты пешком: коричневые ворота, направо во двор, отдельный подъём с железной дверью. Позвоните в звонок слева.",
+  legal: "ИП Федотов Антон Вадимович",
 };
 
 export const navLinks = [
@@ -34,7 +35,6 @@ export const navLinks = [
   { href: "/dostavka", label: "Доставка" },
   { href: "/oplata", label: "Оплата" },
   { href: "/kontakty", label: "Контакты" },
-  { href: "/novosti", label: "Новости" },
   { href: "/faq", label: "FAQ" },
 ] as const;
 
@@ -669,6 +669,8 @@ export const team: TeamMember[] = [
     photo: "/images/team/alena.jpg",
   },
 ];
+
+export const salesContact = team.find((person) => person.role === "Руководитель отдела продаж") ?? team[1];
 
 export const faqItems = [
   {

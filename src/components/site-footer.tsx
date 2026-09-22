@@ -15,9 +15,9 @@ export function SiteFooter() {
           наша <em>забота!</em>
         </h2>
         <Link className="footer-circle" href="/raschet">
-          Обсудить
+          Рассчитать
           <br />
-          задачу
+          заказ
           <ArrowDownRight />
         </Link>
       </div>
@@ -62,7 +62,7 @@ export function SiteFooter() {
         </div>
       </div>
       <div className="footer-bottom">
-        <span>© {new Date().getFullYear()} БИРКА МАРКЕТ</span>
+        <span>© {new Date().getFullYear()} БИРКА МАРКЕТ · {company.legal}</span>
         <span>Бирки • упаковка • фурнитура • мерч</span>
         <BackToTop />
       </div>

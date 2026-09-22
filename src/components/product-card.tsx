@@ -27,7 +27,7 @@ export function ProductCard({ product, index }: { product: Product; index?: numb
             Подробнее
             <ArrowRight />
           </Link>
-          <Link href={`/raschet?product=${product.slug}`}>Рассчитать</Link>
+          <Link href={`/raschet?product=${product.slug}`}>Рассчитать заказ</Link>
         </div>
       </div>
     </article>

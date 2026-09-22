@@ -16,13 +16,6 @@ export function UiFallbackScript() {
     document.body.classList.toggle("menu-open", open);
     if (toggle) toggle.setAttribute("aria-expanded", open ? "true" : "false");
   }
-  function calcOpen(open) {
-    var overlay = document.getElementById("quick-calc-overlay");
-    var button = document.querySelector(".quick-cta");
-    if (overlay) overlay.classList.toggle("is-open", open);
-    document.body.classList.toggle("quick-calc-open", open);
-    if (button) button.setAttribute("aria-expanded", open ? "true" : "false");
-  }
   document.addEventListener("click", function (event) {
     if (ready()) return;
     var target = event.target;
@@ -52,47 +45,11 @@ export function UiFallbackScript() {
       arrow.setAttribute("aria-expanded", willOpen ? "true" : "false");
       return;
     }
-    if (target.closest(".quick-cta")) {
-      event.preventDefault();
-      calcOpen(true);
-      var name = document.querySelector("#quick-calc-overlay input[name='name']");
-      if (name) name.focus();
-      return;
-    }
-    if (target.closest(".quick-calc-close") || target.id === "quick-calc-overlay") {
-      event.preventDefault();
-      event.stopPropagation();
-      calcOpen(false);
-    }
   });
-  document.addEventListener("pointerdown", function (event) {
-    if (ready()) return;
-    var target = event.target;
-    if (!target || !target.closest) return;
-    if (target.closest(".quick-calc-close")) {
-      event.preventDefault();
-      calcOpen(false);
-    }
-  }, true);
   document.addEventListener("keydown", function (event) {
     if (ready()) return;
     if (event.key !== "Escape") return;
     menuOpen(false);
-    calcOpen(false);
-  });
-  document.addEventListener("submit", function (event) {
-    if (ready()) return;
-    var form = event.target && event.target.closest ? event.target.closest("#quick-calc-overlay form") : null;
-    if (!form) return;
-    event.preventDefault();
-    var data = new FormData(form);
-    data.set("page", location.pathname);
-    data.set("quick", "1");
-    fetch("/api/lead", { method: "POST", body: data })
-      .then(function (response) {
-        if (response.ok) location.assign("/spasibo");
-      })
-      .catch(function () {});
   });
 })();
         `.trim(),
