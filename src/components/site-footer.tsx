@@ -62,7 +62,7 @@ export function SiteFooter() {
         </div>
       </div>
       <div className="footer-bottom">
-        <span>© {new Date().getFullYear()} БИРКА МАРКЕТ · {company.legal}</span>
+        <span>© {new Date().getFullYear()} БИРКА МАРКЕТ · {company.legal} · ИНН {company.inn} · ОГРНИП {company.ogrnip}</span>
         <span>Бирки • упаковка • фурнитура • мерч</span>
         <BackToTop />
       </div>

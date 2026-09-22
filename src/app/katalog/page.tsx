@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { Breadcrumbs } from "@/components/breadcrumbs";
 import { CategoryTile } from "@/components/category-tile";
-import { ProductCard } from "@/components/product-card";
-import { categories, products } from "@/lib/site";
+import { CatalogBrowser } from "@/components/catalog-browser";
+import { categories } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Каталог продукции",
@@ -29,17 +29,7 @@ export default function CatalogPage() {
           <CategoryTile key={item.slug} category={item} index={index} />
         ))}
       </div>
-      <div className="section-heading compact catalog-all">
-        <div>
-          <span className="section-number">ВСЕ ПОЗИЦИИ</span>
-          <h2>Полный перечень</h2>
-        </div>
-      </div>
-      <div className="product-grid">
-        {products.map((item, index) => (
-          <ProductCard key={item.slug} product={item} index={index} />
-        ))}
-      </div>
+      <CatalogBrowser />
     </div>
   );
 }

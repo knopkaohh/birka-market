@@ -13,7 +13,7 @@ export function CalcResponder({ light = false }: { light?: boolean }) {
       <p>
         <strong>Вам ответит {person.name}</strong>
         <span>
-          {person.role}. Обычно перезваниваем в течение 2 часов в рабочие дни, {company.hours}.
+          {person.role}. Ответим за 2 рабочих часа. {company.hours}.
         </span>
       </p>
     </div>

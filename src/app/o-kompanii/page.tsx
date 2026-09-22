@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Breadcrumbs } from "@/components/breadcrumbs";
 import { CalculatorBlock } from "@/components/calculator-block";
+import { CasesSection } from "@/components/cases-section";
 import { company, team } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -69,6 +70,7 @@ export default function AboutPage() {
             <p>Бирки, упаковка, фурнитура, нанесение и полиграфия — без сборки заказа у пяти разных подрядчиков.</p>
           </article>
         </div>
+        <CasesSection eyebrow="КЕЙСЫ" compact />
         <h2 className="block-title">Знакомьтесь с командой</h2>
         <p className="team-intro">
           Быстрая производственная команда: продажи, маркетинг и цех в одном контуре. Напишите человеку по задаче или оставьте общую заявку.

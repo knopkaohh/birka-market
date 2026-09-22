@@ -11,6 +11,7 @@ import { CalculatorBlock } from "@/components/calculator-block";
 import { CategoryTile } from "@/components/category-tile";
 import { Loader } from "@/components/loader";
 import { Marquee } from "@/components/marquee";
+import { CasesSection } from "@/components/cases-section";
 import { ProcessParallax } from "@/components/process-parallax";
 import { ProductCard } from "@/components/product-card";
 import { YandexMap } from "@/components/yandex-map";
@@ -197,6 +198,8 @@ export default function Home() {
           ))}
         </div>
       </section>
+
+      <CasesSection />
 
       <ProcessParallax />
 

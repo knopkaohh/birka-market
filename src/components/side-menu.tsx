@@ -2,10 +2,10 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
-import { ChevronDown, X } from "lucide-react";
+import { useMemo, useState } from "react";
+import { ChevronDown, Search, X } from "lucide-react";
 import { Logo } from "@/components/logo";
-import { categories, navLinks, productsByCategory } from "@/lib/site";
+import { categories, matchesProduct, navLinks, products, productsByCategory } from "@/lib/site";
 
 type SideMenuProps = {
   open: boolean;
@@ -19,6 +19,12 @@ export function SideMenu({ open, onClose }: SideMenuProps) {
     return productsByCategory(category.slug).some((item) => pathname === `/${item.slug}`);
   })?.slug;
   const [opened, setOpened] = useState<string | null>(currentSlug ?? null);
+  const [query, setQuery] = useState("");
+  const matches = useMemo(
+    () => products.filter((item) => matchesProduct(item, query)),
+    [query],
+  );
+  const searching = query.trim().length > 0;
 
   const toggle = (slug: string) => {
     setOpened((value) => (value === slug ? null : slug));
@@ -49,59 +55,91 @@ export function SideMenu({ open, onClose }: SideMenuProps) {
               <X size={22} />
             </button>
           </div>
+          <label className="side-search">
+            <Search size={15} />
+            <span className="visually-hidden">Поиск по каталогу</span>
+            <input
+              type="search"
+              value={query}
+              onChange={(event) => setQuery(event.target.value)}
+              placeholder="Найти сатин, ZIP…"
+              autoComplete="off"
+            />
+          </label>
           <Link
-            href="/katalog"
+            href={searching ? `/katalog?q=${encodeURIComponent(query.trim())}` : "/katalog"}
             className={`side-catalog-link ${pathname === "/katalog" ? "is-current" : ""}`}
             prefetch={false}
             onClick={onClose}
           >
-            Вся продукция
+            {searching ? `Все результаты (${matches.length})` : "Вся продукция"}
           </Link>
-          <ul className="side-menu-list">
-            {categories.map((category) => {
-              const items = productsByCategory(category.slug);
-              const href = `/katalog/${category.slug}`;
-              const isOpen = opened === category.slug;
-              const isCurrent = currentSlug === category.slug;
-              const panelId = `side-cat-${category.slug}`;
-
-              return (
-                <li key={category.slug} className="side-menu-item">
-                  <div className={`side-menu-row ${isOpen || isCurrent ? "is-active" : ""}`}>
-                    <Link href={href} className="side-menu-link" prefetch={false} onClick={onClose}>
-                      {category.name}
-                    </Link>
-                    <button
-                      type="button"
-                      className={`side-menu-arrow ${isOpen ? "is-open" : ""}`}
-                      aria-label={isOpen ? `Свернуть ${category.name}` : `Показать материалы: ${category.name}`}
-                      aria-expanded={isOpen}
-                      aria-controls={panelId}
-                      onClick={() => toggle(category.slug)}
+          {searching ? (
+            <ul className="side-search-results">
+              {matches.length ? (
+                matches.map((item) => (
+                  <li key={item.slug}>
+                    <Link
+                      href={`/${item.slug}`}
+                      className={`side-submenu-link ${pathname === `/${item.slug}` ? "is-current" : ""}`}
+                      prefetch={false}
+                      onClick={onClose}
                     >
-                      <ChevronDown size={18} strokeWidth={2.4} />
-                    </button>
-                  </div>
-                  <div className={`side-submenu ${isOpen ? "is-open" : ""}`} id={panelId}>
-                    <ul className="side-submenu-panel">
-                      {items.map((item) => (
-                        <li key={item.slug}>
-                          <Link
-                            href={`/${item.slug}`}
-                            className={`side-submenu-link ${pathname === `/${item.slug}` ? "is-current" : ""}`}
-                            prefetch={false}
-                            onClick={onClose}
-                          >
-                            {item.name}
-                          </Link>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </li>
-              );
-            })}
-          </ul>
+                      {item.shortName}
+                    </Link>
+                  </li>
+                ))
+              ) : (
+                <li className="side-search-empty">Ничего не нашли. Попробуйте «жаккард» или «пакет».</li>
+              )}
+            </ul>
+          ) : (
+            <ul className="side-menu-list">
+              {categories.map((category) => {
+                const items = productsByCategory(category.slug);
+                const href = `/katalog/${category.slug}`;
+                const isOpen = opened === category.slug;
+                const isCurrent = currentSlug === category.slug;
+                const panelId = `side-cat-${category.slug}`;
+
+                return (
+                  <li key={category.slug} className="side-menu-item">
+                    <div className={`side-menu-row ${isOpen || isCurrent ? "is-active" : ""}`}>
+                      <Link href={href} className="side-menu-link" prefetch={false} onClick={onClose}>
+                        {category.name}
+                      </Link>
+                      <button
+                        type="button"
+                        className={`side-menu-arrow ${isOpen ? "is-open" : ""}`}
+                        aria-label={isOpen ? `Свернуть ${category.name}` : `Показать материалы: ${category.name}`}
+                        aria-expanded={isOpen}
+                        aria-controls={panelId}
+                        onClick={() => toggle(category.slug)}
+                      >
+                        <ChevronDown size={18} strokeWidth={2.4} />
+                      </button>
+                    </div>
+                    <div className={`side-submenu ${isOpen ? "is-open" : ""}`} id={panelId}>
+                      <ul className="side-submenu-panel">
+                        {items.map((item) => (
+                          <li key={item.slug}>
+                            <Link
+                              href={`/${item.slug}`}
+                              className={`side-submenu-link ${pathname === `/${item.slug}` ? "is-current" : ""}`}
+                              prefetch={false}
+                              onClick={onClose}
+                            >
+                              {item.name}
+                            </Link>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </li>
+                );
+              })}
+            </ul>
+          )}
           <div className="side-menu-pages">
             <span>КОМПАНИЯ</span>
             {navLinks

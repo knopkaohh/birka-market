@@ -27,6 +27,8 @@ export const company = {
   howToGet:
     "Метро Сходненская, 2-й выход, трамвай 6 до остановки «Западный мост». Дальше 2 минуты пешком: коричневые ворота, направо во двор, отдельный подъём с железной дверью. Позвоните в звонок слева.",
   legal: "ИП Федотов Антон Вадимович",
+  inn: "771412910075",
+  ogrnip: "323774600620762",
 };
 
 export const navLinks = [
@@ -707,11 +709,56 @@ export const processSteps = [
 ];
 
 export const portfolio = [
-  { image: "/images/work-1.jpg", label: "Сатин • составники" },
-  { image: "/images/work-2.jpg", label: "Жаккард • брендинг" },
-  { image: "/images/work-4.jpg", label: "Хлопок • локальный бренд" },
-  { image: "/images/work-5.jpg", label: "Упаковка и мерч" },
+  { image: "/images/work-1.jpg", label: "Картон • навесные бирки" },
+  { image: "/images/work-2.jpg", label: "ПВХ • патчи" },
+  { image: "/images/work-4.jpg", label: "ZIP Lock • упаковка" },
+  { image: "/images/work-5.jpg", label: "Крафт • пакеты" },
 ];
+
+export const cases = [
+  {
+    slug: "birki-karton",
+    image: "/images/work-1.jpg",
+    tag: "Картон",
+    title: "Навесные бирки с QR",
+    text: "Фигурные ярлыки для внешней маркировки: логотип, QR и контакты на одном носителе.",
+  },
+  {
+    slug: "rubber",
+    image: "/images/work-2.jpg",
+    tag: "ПВХ-патчи",
+    title: "Объёмные патчи на одежду",
+    text: "Рельефные ПВХ-нашивки с логотипом. Для курток, рюкзаков и коллекций, где нужен объём.",
+  },
+  {
+    slug: "banner",
+    image: "/images/work-3.jpg",
+    tag: "Баннеры",
+    title: "Тканевый баннер на улицу",
+    text: "Печать на ткани под конструкцию: акции, входные группы и сезонные коммуникации.",
+  },
+  {
+    slug: "zip-pack",
+    image: "/images/work-4.jpg",
+    tag: "ZIP Lock",
+    title: "Пакеты с бегунком под бренд",
+    text: "ZIP Lock с одноцветной печатью. Тираж от 500 штук, считаем по размеру и плотности.",
+  },
+  {
+    slug: "kraft",
+    image: "/images/work-5.jpg",
+    tag: "Крафт",
+    title: "Крафтовые пакеты для выдачи",
+    text: "Плотные пакеты с кручёными ручками под магазин, шоурум и доставку заказа.",
+  },
+  {
+    slug: "elastic",
+    image: "/images/work-6.jpg",
+    tag: "Жаккардовая резинка",
+    title: "Тканая лента с надписью",
+    text: "Резинка и жаккардовая тесьма с логотипом для пояса, манжеты и внутренней отделки.",
+  },
+] as const;
 
 export function getProduct(slug: string) {
   return products.find((item) => item.slug === slug);
@@ -723,6 +770,15 @@ export function getCategory(slug: string) {
 
 export function productsByCategory(slug: string) {
   return products.filter((item) => item.category === slug);
+}
+
+export function matchesProduct(product: Product, query: string) {
+  const needle = query.trim().toLowerCase();
+  if (!needle) return true;
+  return [product.name, product.shortName, product.summary, product.type, product.slug]
+    .join(" ")
+    .toLowerCase()
+    .includes(needle);
 }
 
 export function relatedProducts(product: Product, limit = 3) {

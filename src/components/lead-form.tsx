@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { formatRuPhone, isCompleteRuPhone } from "@/lib/phone";
-import { products } from "@/lib/site";
+import { categories, products, productsByCategory } from "@/lib/site";
 
 export type LeadVariantOption = { id: string; name: string };
 
@@ -141,10 +141,14 @@ export function LeadForm({
             onChange={(event) => setProduct(event.target.value)}
           >
             <option value="unknown">Нужна помощь с выбором</option>
-            {products.map((item) => (
-              <option key={item.slug} value={item.slug}>
-                {item.name}
-              </option>
+            {categories.map((category) => (
+              <optgroup key={category.slug} label={category.name}>
+                {productsByCategory(category.slug).map((item) => (
+                  <option key={item.slug} value={item.slug}>
+                    {item.name}
+                  </option>
+                ))}
+              </optgroup>
             ))}
           </select>
         </div>
