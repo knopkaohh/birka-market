@@ -7,6 +7,7 @@ export type LandingVariant = {
   text: string;
   image: string;
   tone: LandingTone;
+  href?: string;
 };
 
 export type LandingQuote = {
@@ -15,6 +16,7 @@ export type LandingQuote = {
   spec: string;
   time: string;
   price: string;
+  hrefSlug?: string;
 };
 
 export type LandingContent = {
@@ -49,6 +51,8 @@ export type LandingContent = {
     extraLabel: string;
     extraPlaceholder: string;
     commentPlaceholder: string;
+    quantityLabel?: string;
+    quantityPlaceholder?: string;
   };
   reasonsLabel: string;
   reasonsTitle: string;
@@ -67,6 +71,9 @@ export type LandingContent = {
   faq: { q: string; a: string }[];
   finalTitle: string;
   finalText: string;
+  detailsTitle?: string;
+  detailsIntro?: string;
+  processTitle?: string;
 };
 
 export function g(slug: string, n: number) {
@@ -119,6 +126,7 @@ export function quoteHref(
   quote: LandingQuote,
   variants: Pick<LandingVariant, "id" | "name" | "fold">[],
 ) {
+  const dest = quote.hrefSlug ?? slug;
   const params = new URLSearchParams();
   const qty = quoteQuantity(quote.qty);
   if (qty) params.set("qty", qty);
@@ -126,9 +134,11 @@ export function quoteHref(
   params.set("spec", quote.spec);
   params.set("time", quote.time);
   params.set("price", quote.price);
-  const variant = matchQuoteVariant(quote.spec, variants);
-  if (variant) params.set("variant", variant);
-  return `/${slug}?${params.toString()}#calc`;
+  if (!quote.hrefSlug) {
+    const variant = matchQuoteVariant(quote.spec, variants);
+    if (variant) params.set("variant", variant);
+  }
+  return `/${dest}?${params.toString()}#calc`;
 }
 
 export function quoteComment(quote: QuotePrefill) {

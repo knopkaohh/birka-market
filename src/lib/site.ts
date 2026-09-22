@@ -65,6 +65,9 @@ export const tickerItems = [
   { label: "КОРОБКИ", href: "/cardboardbox" },
   { label: "ЖУРНАЛЫ", href: "/magazine" },
   { label: "DTF-ПЕЧАТЬ", href: "/directtofilm" },
+  { label: "РАЗРАБОТКА САЙТОВ", href: "/razrabotka-saytov" },
+  { label: "ЛЕНДИНГ", href: "/lending" },
+  { label: "ИНТЕРНЕТ-МАГАЗИН", href: "/internet-magazin" },
 ] as const;
 
 export type Product = {
@@ -124,6 +127,12 @@ export const categories = [
     name: "Полиграфия",
     intro: "Визитки, наклейки, флаеры, буклеты, журналы, флаги и баннеры для бизнеса.",
     image: "/images/products/printing.jpg",
+  },
+  {
+    slug: "sayty",
+    name: "Разработка сайтов",
+    intro: "Лендинги, интернет-магазины и корпоративные сайты. Структура бесплатно, считаем после задачи.",
+    image: "/images/products/razrabotka-saytov.jpg",
   },
 ] as const;
 
@@ -607,6 +616,66 @@ export const products: Product[] = [
     minQty: 1,
     leadTime: "3–6 рабочих дней",
     features: ["До 320 см", "Улица и интерьер", "Люверсы и размер", "Яркая печать"],
+  },
+  {
+    slug: "razrabotka-saytov",
+    name: "Разработка сайтов",
+    shortName: "Сайты",
+    category: "sayty",
+    type: "Под ключ",
+    summary: "Лендинг, магазин или сайт компании. Структура бесплатно, КП после задачи.",
+    description:
+      "Сайты для брендов одежды и производств: одна страница под запуск, витрина с корзиной или корпоративный многостраничник. Тексты и карту сайта готовим до визуала.",
+    image: "/images/products/razrabotka-saytov.jpg",
+    sample: false,
+    minQty: 1,
+    leadTime: "от 10 рабочих дней",
+    features: ["3 формата", "Структура до макета", "КП после задачи", "Адаптив"],
+  },
+  {
+    slug: "lending",
+    name: "Лендинг",
+    shortName: "Лендинг",
+    category: "sayty",
+    type: "Одна страница",
+    summary: "Запуск коллекции, акция или запись. Одна страница, одна кнопка, форма заявки.",
+    description:
+      "Одностраничный сайт под конкретный оффер: дроп, акция, запись в шоурум или квиз. Собираем структуру, тексты, макет и публикуем. Обычно 10–15 рабочих дней после согласования блоков.",
+    image: "/images/products/lending.jpg",
+    sample: false,
+    minQty: 1,
+    leadTime: "10–15 рабочих дней",
+    features: ["Один оффер", "Форма заявки", "10–15 рабочих дней", "Телефон в приоритете"],
+  },
+  {
+    slug: "internet-magazin",
+    name: "Интернет-магазин",
+    shortName: "Магазин",
+    category: "sayty",
+    type: "Каталог и оплата",
+    summary: "Карточки, корзина, доставка. Свой канал продаж рядом с маркетплейсом.",
+    description:
+      "Интернет-магазин считаем от числа артикулов и способа оплаты. Можно начать с витрины без кассы и подключить корзину, когда готовы документы и остатки.",
+    image: "/images/products/internet-magazin.jpg",
+    sample: false,
+    minQty: 1,
+    leadTime: "5–9 недель",
+    features: ["Каталог и карточки", "Корзина по готовности", "Опт и розница", "Админка без программиста"],
+  },
+  {
+    slug: "korporativnyy-sayt",
+    name: "Корпоративный сайт",
+    shortName: "Корпоративный",
+    category: "sayty",
+    type: "О компании",
+    summary: "О нас, услуги, контакты и реквизиты. Чтобы закупке было куда переслать ссылку.",
+    description:
+      "Многостраничный сайт компании: производство, услуги, команда, карта и юрблок. Не путаем с магазином — корзину не накручиваем, если счёт выставляет менеджер.",
+    image: "/images/products/korporativnyy-sayt.jpg",
+    sample: false,
+    minQty: 1,
+    leadTime: "3–6 недель",
+    features: ["Карта сайта до макета", "Услуги как в каталоге", "Контакты и карта", "Реквизиты на виду"],
   },
 ];
 

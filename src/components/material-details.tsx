@@ -12,8 +12,8 @@ export function MaterialDetails({ content }: { content: LandingContent }) {
     <section className="jq-section jq-more" id="details">
       <div className="jq-heading">
         <span className="section-number">05 / ПОДРОБНЕЕ</span>
-        <h2>Подробнее о материале</h2>
-        <p>Техника, условия и ответы — по желанию, после расчёта.</p>
+        <h2>{content.detailsTitle ?? "Подробнее о материале"}</h2>
+        <p>{content.detailsIntro ?? "Техника, условия и ответы — по желанию, после расчёта."}</p>
       </div>
       <Accordion className="jq-more-list" multiple defaultValue={[]}>
         <AccordionItem value="reasons" className="jq-more-item">
@@ -94,7 +94,7 @@ export function MaterialDetails({ content }: { content: LandingContent }) {
         <AccordionItem value="process" className="jq-more-item">
           <AccordionTrigger className="jq-more-trigger">
             <span>05</span>
-            От заявки до готового тиража
+            {content.processTitle ?? "От заявки до готового тиража"}
           </AccordionTrigger>
           <AccordionContent className="jq-more-panel">
             <div className="jq-more-dark">

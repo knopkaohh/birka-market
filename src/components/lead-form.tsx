@@ -19,6 +19,8 @@ export type LeadDetailFields = {
   extraLabel?: string;
   extraPlaceholder?: string;
   commentPlaceholder?: string;
+  quantityLabel?: string;
+  quantityPlaceholder?: string;
 };
 
 type LeadFormProps = {
@@ -78,6 +80,8 @@ export function LeadForm({
     extraLabel: "Дополнительные параметры",
     extraPlaceholder: "Цвета, плотность, материал",
     commentPlaceholder: details ? "Изделие и особые пожелания" : "Размер, материал, сроки — всё, что уже известно",
+    quantityLabel: "Тираж, шт.",
+    quantityPlaceholder: undefined,
     ...detailFields,
   };
 
@@ -158,13 +162,13 @@ export function LeadForm({
         </div>
       )}
       <div className="field">
-        <label htmlFor="quantity">Тираж, шт.</label>
+        <label htmlFor="quantity">{fields.quantityLabel ?? "Тираж, шт."}</label>
         <Input
           id="quantity"
           name="quantity"
           type="number"
           min={selected?.minQty ?? 1}
-          placeholder={selected ? `От ${selected.minQty}` : "Например, 1000"}
+          placeholder={fields.quantityPlaceholder ?? (selected ? `От ${selected.minQty}` : "Например, 1000")}
           defaultValue={defaultQuantity}
           required
         />

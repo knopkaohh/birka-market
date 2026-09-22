@@ -1237,7 +1237,7 @@ footer .logo svg { height: 56px; }
 .jq-heading h2 { margin: 0 0 14px; font-size: clamp(36px, 4.4vw, 58px); font-weight: 650; line-height: .98; letter-spacing: -.055em; }
 .jq-heading p { margin: 0; color: var(--muted-ink); font-size: 15px; line-height: 1.6; }
 
-.jq-variants { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+.jq-variants { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; }
 .jq-variant {
   min-height: 420px; padding: 18px 18px 22px; display: flex; flex-direction: column;
   text-decoration: none; color: inherit; cursor: pointer;

@@ -103,7 +103,7 @@ export function ProductLanding({
         <div className="jq-variants">
           {content.variants.map((item) => (
             <Link
-              href={`${path}?variant=${item.id}#calc`}
+              href={item.href ?? `${path}?variant=${item.id}#calc`}
               prefetch={false}
               className={`jq-variant is-${item.tone}`}
               key={item.id}
@@ -115,7 +115,7 @@ export function ProductLanding({
               <h3>{item.name}</h3>
               <p>{item.text}</p>
               <span className="jq-variant-cta">
-                Рассчитать заказ
+                {item.href ? "Открыть страницу" : "Рассчитать заказ"}
                 <ArrowRight size={16} />
               </span>
             </Link>
@@ -208,7 +208,7 @@ export function ProductLanding({
           defaultProduct={content.slug}
           details
           defaultVariant={selectedVariant}
-          defaultQuantity={quote?.qty}
+          defaultQuantity={quote?.qty ?? content.form.quantityPlaceholder}
           defaultSize={quote?.size}
           defaultExtra={quote?.spec}
           defaultComment={prefillComment}
