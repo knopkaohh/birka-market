@@ -208,9 +208,7 @@ button { cursor: pointer; }
 .logo {
   display: inline-flex;
   align-items: center;
-  padding: 8px 12px;
   color: #000;
-  background: #fff;
 }
 .logo svg { display: block; width: auto; height: 40px; }
 .desktop-nav { display: flex; align-items: center; flex-wrap: wrap; gap: 10px clamp(14px, 1.6vw, 26px); }
@@ -286,7 +284,7 @@ button { cursor: pointer; }
   gap: 12px;
   padding: 0 24px 20px;
 }
-.side-menu-logo .logo { color: #000; background: #fff; }
+.side-menu-logo .logo { color: #f2c555; background: transparent; }
 .side-menu-logo .logo svg { height: 36px; }
 .side-catalog-link {
   display: block;
@@ -776,7 +774,7 @@ button { cursor: pointer; }
 .faq-content { padding: 0 50px 25px 45px !important; color: var(--muted-ink); font-size: 13px; line-height: 1.65; }
 
 footer { padding: 95px var(--page-gutter) 24px; color: var(--paper); background: #1f201f; }
-footer .logo { color: #000; background: #fff; }
+footer .logo { color: #f2c555; background: transparent; }
 footer .logo svg { height: 56px; }
 .footer-top { display: grid; grid-template-columns: .4fr 1.3fr .3fr; align-items: start; gap: 30px; padding-bottom: 90px; }
 .footer-top h2 { margin: -10px 0 0; font-size: clamp(56px, 7vw, 100px); font-weight: 590; line-height: .88; letter-spacing: -.07em; }
