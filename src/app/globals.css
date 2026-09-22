@@ -181,13 +181,13 @@ button { cursor: pointer; }
 .loader {
   position: fixed; inset: 0; z-index: 200;
   display: grid; place-content: center; justify-items: center;
-  color: var(--ink); background: var(--yellow);
+  color: #000; background: #fff;
   pointer-events: none;
   transition: opacity .55s ease, visibility .55s ease;
   animation: loaderExit .55s 1.4s forwards;
 }
 .loader-hidden { opacity: 0; visibility: hidden; pointer-events: none; }
-.loader-logo { width: 220px; height: auto; color: var(--ink); }
+.loader-logo { width: 220px; height: auto; color: #000; }
 .loader-line { width: 210px; height: 2px; margin-top: 50px; background: rgba(34,35,34,.25); overflow: hidden; }
 .loader-line i { display: block; height: 100%; background: var(--ink); animation: load 1.05s ease forwards; }
 .loader p { margin-top: 15px; font-size: 11px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; }
@@ -199,14 +199,19 @@ button { cursor: pointer; }
 .site-header {
   position: sticky; top: 0; z-index: 160;
   border-bottom: 1px solid rgba(34,35,34,.13);
-  background: color-mix(in srgb, var(--paper) 91%, transparent);
-  backdrop-filter: blur(15px);
+  background: #fff;
 }
 .header-inner {
   width: min(100% - 64px, 1380px); min-height: 82px; margin: 0 auto; padding: 10px 0;
   display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px 16px;
 }
-.logo { display: inline-flex; align-items: center; color: #8e721f; }
+.logo {
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 12px;
+  color: #000;
+  background: #fff;
+}
 .logo svg { display: block; width: auto; height: 40px; }
 .desktop-nav { display: flex; align-items: center; flex-wrap: wrap; gap: 10px clamp(14px, 1.6vw, 26px); }
 .desktop-nav a { position: relative; font-size: 14px; font-weight: 750; letter-spacing: .01em; }
@@ -281,7 +286,7 @@ button { cursor: pointer; }
   gap: 12px;
   padding: 0 24px 20px;
 }
-.side-menu-logo .logo { color: #f2c555; }
+.side-menu-logo .logo { color: #000; background: #fff; }
 .side-menu-logo .logo svg { height: 36px; }
 .side-catalog-link {
   display: block;
@@ -771,7 +776,7 @@ button { cursor: pointer; }
 .faq-content { padding: 0 50px 25px 45px !important; color: var(--muted-ink); font-size: 13px; line-height: 1.65; }
 
 footer { padding: 95px var(--page-gutter) 24px; color: var(--paper); background: #1f201f; }
-footer .logo { color: #f2c555; }
+footer .logo { color: #000; background: #fff; }
 footer .logo svg { height: 56px; }
 .footer-top { display: grid; grid-template-columns: .4fr 1.3fr .3fr; align-items: start; gap: 30px; padding-bottom: 90px; }
 .footer-top h2 { margin: -10px 0 0; font-size: clamp(56px, 7vw, 100px); font-weight: 590; line-height: .88; letter-spacing: -.07em; }
