@@ -5,15 +5,27 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 import { Breadcrumbs } from "@/components/breadcrumbs";
 import { LeadForm } from "@/components/lead-form";
 import { ProductCard } from "@/components/product-card";
-import type { LandingContent } from "@/lib/landings/types";
+import type { LandingContent, QuotePrefill } from "@/lib/landings/types";
+import { quoteComment, quoteHref } from "@/lib/landings/types";
 import { company, getCategory, getProduct } from "@/lib/site";
 
-export function ProductLanding({ content, variant }: { content: LandingContent; variant?: string }) {
+export function ProductLanding({
+  content,
+  variant,
+  quote,
+}: {
+  content: LandingContent;
+  variant?: string;
+  quote?: QuotePrefill;
+}) {
   const product = getProduct(content.slug);
   if (!product) return null;
   const category = getCategory(product.category);
   const related = content.complement.map((slug) => getProduct(slug)).filter(Boolean);
   const path = `/${content.slug}`;
+  const selectedVariant = variant ?? content.variants[0]?.id;
+  const formKey = [selectedVariant, quote?.qty, quote?.size, quote?.spec, quote?.price].filter(Boolean).join("-");
+  const prefillComment = quote ? quoteComment(quote) : "";
 
   return (
     <>
@@ -119,17 +131,25 @@ export function ProductLanding({ content, variant }: { content: LandingContent; 
         </div>
         <div className="jq-quotes">
           {content.quotes.map((item) => (
-            <article key={`${item.qty}-${item.spec}`}>
+            <Link
+              href={quoteHref(content.slug, item, content.variants)}
+              prefetch={false}
+              className="jq-quote"
+              key={`${item.qty}-${item.size}-${item.spec}`}
+            >
               <strong>{item.price}</strong>
-              <span>{content.quoteUnit ?? "за штуку"}</span>
+              <span className="jq-quote-unit">{content.quoteUnit ?? "за штуку"}</span>
               <ul>
                 <li>{item.qty}</li>
                 <li>{item.size}</li>
                 <li>{item.spec}</li>
                 <li>{item.time}</li>
               </ul>
-              <a href="#calc">Запросить такой расчёт</a>
-            </article>
+              <span className="jq-quote-cta">
+                Запросить такой расчёт
+                <ArrowRight size={16} />
+              </span>
+            </Link>
           ))}
         </div>
       </section>
@@ -157,10 +177,14 @@ export function ProductLanding({ content, variant }: { content: LandingContent; 
           </ul>
         </div>
         <LeadForm
-          key={variant ?? content.variants[0]?.id ?? "default"}
+          key={formKey || "default"}
           defaultProduct={content.slug}
           details
-          defaultVariant={variant ?? content.variants[0]?.id}
+          defaultVariant={selectedVariant}
+          defaultQuantity={quote?.qty}
+          defaultSize={quote?.size}
+          defaultExtra={quote?.spec}
+          defaultComment={prefillComment}
           variants={content.variants.map((item) => ({ id: item.id, name: item.name }))}
           detailFields={content.form}
           compact

@@ -5,7 +5,14 @@ import { getLanding } from "@/lib/landings";
 import { getProduct, products } from "@/lib/site";
 
 type Params = { slug: string };
-type Search = { variant?: string };
+type Search = {
+  variant?: string;
+  qty?: string;
+  size?: string;
+  spec?: string;
+  time?: string;
+  price?: string;
+};
 
 export function generateStaticParams() {
   return products.filter((item) => item.slug !== "jacquard").map((item) => ({ slug: item.slug }));
@@ -30,8 +37,14 @@ export default async function ProductPage({
   searchParams: Promise<Search>;
 }) {
   const { slug } = await params;
-  const { variant } = await searchParams;
+  const { variant, qty, size, spec, time, price } = await searchParams;
   const landing = getLanding(slug);
   if (!landing) notFound();
-  return <ProductLanding content={landing} variant={variant} />;
+  return (
+    <ProductLanding
+      content={landing}
+      variant={variant}
+      quote={{ qty, size, spec, time, price }}
+    />
+  );
 }

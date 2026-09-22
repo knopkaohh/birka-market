@@ -83,3 +83,61 @@ export function gallery(slug: string, alts: string[]) {
     alt,
   }));
 }
+
+export type QuotePrefill = {
+  qty?: string;
+  size?: string;
+  spec?: string;
+  time?: string;
+  price?: string;
+};
+
+export function quoteQuantity(qty: string) {
+  return qty.replace(/\D/g, "");
+}
+
+export function matchQuoteVariant(
+  spec: string,
+  variants: Pick<LandingVariant, "id" | "name" | "fold">[],
+) {
+  const hay = spec.toLowerCase();
+  const scored = variants
+    .map((item) => {
+      const needles = [item.name, item.fold, item.id]
+        .map((value) => value.toLowerCase())
+        .filter((value) => value.length > 2);
+      const hit = needles.find((needle) => hay.includes(needle));
+      return { id: item.id, score: hit ? hit.length : 0 };
+    })
+    .filter((item) => item.score > 0)
+    .sort((a, b) => b.score - a.score);
+  return scored[0]?.id;
+}
+
+export function quoteHref(
+  slug: string,
+  quote: LandingQuote,
+  variants: Pick<LandingVariant, "id" | "name" | "fold">[],
+) {
+  const params = new URLSearchParams();
+  const qty = quoteQuantity(quote.qty);
+  if (qty) params.set("qty", qty);
+  params.set("size", quote.size);
+  params.set("spec", quote.spec);
+  params.set("time", quote.time);
+  params.set("price", quote.price);
+  const variant = matchQuoteVariant(quote.spec, variants);
+  if (variant) params.set("variant", variant);
+  return `/${slug}?${params.toString()}#calc`;
+}
+
+export function quoteComment(quote: QuotePrefill) {
+  const parts = [
+    quote.price,
+    quote.qty ? (/\d/.test(quote.qty) && !quote.qty.includes("шт") ? `${quote.qty} шт.` : quote.qty) : "",
+    quote.size,
+    quote.spec,
+    quote.time,
+  ].filter(Boolean);
+  return parts.length ? `Ориентир: ${parts.join(" · ")}` : "";
+}

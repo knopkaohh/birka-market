@@ -1,6 +1,6 @@
 "use client";
 
-import { FormEvent, useMemo, useState } from "react";
+import { FormEvent, useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { ArrowRight, Check, FileUp } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -24,6 +24,10 @@ type LeadFormProps = {
   compact?: boolean;
   details?: boolean;
   defaultVariant?: string;
+  defaultQuantity?: string;
+  defaultSize?: string;
+  defaultExtra?: string;
+  defaultComment?: string;
   variants?: LeadVariantOption[];
   detailFields?: LeadDetailFields;
 };
@@ -40,6 +44,10 @@ export function LeadForm({
   compact = false,
   details = false,
   defaultVariant,
+  defaultQuantity,
+  defaultSize,
+  defaultExtra,
+  defaultComment,
   variants,
   detailFields,
 }: LeadFormProps) {
@@ -49,6 +57,16 @@ export function LeadForm({
   const selectedVariant = defaultVariant && variantOptions.some((item) => item.id === defaultVariant)
     ? defaultVariant
     : variantOptions[0]?.id;
+
+  useEffect(() => {
+    if (typeof window === "undefined" || window.location.hash !== "#calc") return;
+    const node = document.getElementById("calc");
+    if (!node) return;
+    const frame = window.requestAnimationFrame(() => {
+      node.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+    return () => window.cancelAnimationFrame(frame);
+  }, []);
   const fields = {
     variantLabel: "Вариант",
     sizeLabel: "Размер",
@@ -97,11 +115,11 @@ export function LeadForm({
           </div>
           <div className="field">
             <label htmlFor="size">{fields.sizeLabel}</label>
-            <Input id="size" name="size" placeholder={fields.sizePlaceholder} />
+            <Input id="size" name="size" placeholder={fields.sizePlaceholder} defaultValue={defaultSize} />
           </div>
           <div className="field">
             <label htmlFor="colors">{fields.extraLabel}</label>
-            <Input id="colors" name="colors" placeholder={fields.extraPlaceholder} />
+            <Input id="colors" name="colors" placeholder={fields.extraPlaceholder} defaultValue={defaultExtra} />
           </div>
         </>
       ) : (
@@ -130,6 +148,7 @@ export function LeadForm({
           type="number"
           min={selected?.minQty ?? 1}
           placeholder={selected ? `От ${selected.minQty}` : "Например, 1000"}
+          defaultValue={defaultQuantity}
           required
         />
       </div>
@@ -153,7 +172,7 @@ export function LeadForm({
       )}
       <div className="field full">
         <label htmlFor="comment">Комментарий</label>
-        <Textarea id="comment" name="comment" placeholder={fields.commentPlaceholder} />
+        <Textarea id="comment" name="comment" placeholder={fields.commentPlaceholder} defaultValue={defaultComment} />
       </div>
       {selected?.sample && (
         <label className="sample-toggle">

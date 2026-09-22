@@ -7,9 +7,22 @@ export const metadata: Metadata = {
   description: jacquardLanding.seoDescription,
 };
 
-type Search = { variant?: string };
+type Search = {
+  variant?: string;
+  qty?: string;
+  size?: string;
+  spec?: string;
+  time?: string;
+  price?: string;
+};
 
 export default async function JacquardPage({ searchParams }: { searchParams: Promise<Search> }) {
-  const { variant } = await searchParams;
-  return <ProductLanding content={jacquardLanding} variant={variant} />;
+  const { variant, qty, size, spec, time, price } = await searchParams;
+  return (
+    <ProductLanding
+      content={jacquardLanding}
+      variant={variant}
+      quote={{ qty, size, spec, time, price }}
+    />
+  );
 }
