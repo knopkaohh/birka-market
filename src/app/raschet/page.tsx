@@ -17,6 +17,7 @@ export default async function CalcPage({
 
   return (
     <CalculatorBlock
+      heading="h1"
       defaultProduct={selected?.slug ?? "unknown"}
       title="Рассчитать"
       titleAccent="заказ"

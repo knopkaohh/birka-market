@@ -6,18 +6,21 @@ export function CalculatorBlock({
   title = "Расскажите\nо вашей задаче",
   titleAccent,
   lead = "Можно не знать точных параметров. Оставьте телефон — менеджер уточнит задачу, поможет с материалом и подготовит расчёт.",
+  heading = "h2",
 }: {
   defaultProduct?: string;
   title?: string;
   titleAccent?: string;
   lead?: string;
+  heading?: "h1" | "h2";
 }) {
   const lines = title.split("\n");
+  const Heading = heading;
   return (
     <section className="calculator-section" id="calc">
       <div className="calculator-intro">
         <span className="section-number light">РАСЧЁТ ЗАКАЗА</span>
-        <h2>
+        <Heading>
           {lines.map((line, index) => (
             <span key={line}>
               {line}
@@ -25,7 +28,7 @@ export function CalculatorBlock({
             </span>
           ))}
           {titleAccent ? <em>{titleAccent}</em> : null}
-        </h2>
+        </Heading>
         <p>{lead}</p>
         <CalcResponder />
       </div>

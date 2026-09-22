@@ -1,11 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, Check } from "lucide-react";
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Breadcrumbs } from "@/components/breadcrumbs";
 import { CalcResponder } from "@/components/calc-responder";
 import { LeadForm } from "@/components/lead-form";
-import { ProductCard } from "@/components/product-card";
+import { MaterialDetails } from "@/components/material-details";
 import type { LandingContent, QuotePrefill } from "@/lib/landings/types";
 import { quoteComment, quoteHref } from "@/lib/landings/types";
 import { company, getCategory, getProduct } from "@/lib/site";
@@ -22,7 +21,6 @@ export function ProductLanding({
   const product = getProduct(content.slug);
   if (!product) return null;
   const category = getCategory(product.category);
-  const related = content.complement.map((slug) => getProduct(slug)).filter(Boolean);
   const path = `/${content.slug}`;
   const selectedVariant = variant ?? content.variants[0]?.id;
   const formKey = [selectedVariant, quote?.qty, quote?.size, quote?.spec, quote?.price].filter(Boolean).join("-");
@@ -193,152 +191,11 @@ export function ProductLanding({
         />
       </section>
 
-      <section className="jq-section">
-        <div className="jq-heading">
-          <span className="section-number">05 / {content.reasonsLabel}</span>
-          <h2>{content.reasonsTitle}</h2>
-        </div>
-        <div className="jq-reasons">
-          {content.reasons.map((item, index) => (
-            <article key={item.title}>
-              <span>0{index + 1}</span>
-              <h3>{item.title}</h3>
-              <p>{item.text}</p>
-            </article>
-          ))}
-        </div>
-      </section>
-
-      <section className="jq-tech">
-        <div className="jq-heading">
-          <span className="section-number">06 / ПАРАМЕТРЫ</span>
-          <h2>Технические возможности</h2>
-        </div>
-        <div className="jq-specs">
-          {content.specs.map((item) => (
-            <article key={item.title}>
-              <h3>{item.title}</h3>
-              <p>{item.text}</p>
-            </article>
-          ))}
-        </div>
-      </section>
-
-      <section className="jq-section">
-        <div className="jq-heading">
-          <span className="section-number">07 / ПОДБОР</span>
-          <h2>{content.fitTitle}</h2>
-        </div>
-        <div className="jq-fit">
-          {content.fit.map((item) => (
-            <article key={item.title}>
-              <h3>{item.title}</h3>
-              <p>{item.text}</p>
-            </article>
-          ))}
-        </div>
-      </section>
-
-      <section className="jq-section">
-        <div className="jq-heading">
-          <span className="section-number">08 / НА ИЗДЕЛИИ</span>
-          <h2>{content.onProductTitle}</h2>
-          <p>{content.onProductIntro}</p>
-        </div>
-        <div className="jq-onproduct">
-          {content.onProduct.map((item) => (
-            <figure key={item.title}>
-              <div>
-                <Image src={item.image} alt={item.title} fill sizes="(max-width: 700px) 90vw, 30vw" />
-              </div>
-              <figcaption>
-                <h3>{item.title}</h3>
-                <p>{item.text}</p>
-              </figcaption>
-            </figure>
-          ))}
-        </div>
-      </section>
-
-      <section className="jq-process">
-        <div className="jq-heading">
-          <span className="section-number light">09 / ПРОЦЕСС</span>
-          <h2>От заявки до готового тиража</h2>
-        </div>
-        <div className="jq-steps">
-          {content.steps.map(([title, text], index) => (
-            <article key={title}>
-              <span>0{index + 1}</span>
-              <h3>{title}</h3>
-              <p>{text}</p>
-            </article>
-          ))}
-        </div>
-      </section>
-
-      <section className="jq-terms">
-        <div className="jq-heading">
-          <span className="section-number light">10 / УСЛОВИЯ</span>
-          <h2>Условия для спокойного запуска</h2>
-        </div>
-        <div className="jq-term-grid">
-          {content.terms.map((item) => (
-            <article key={item.label}>
-              <strong>{item.value}</strong>
-              <span>{item.label}</span>
-            </article>
-          ))}
-        </div>
-      </section>
-
-      <section className="jq-section">
-        <div className="jq-heading">
-          <span className="section-number">11 / КОНТРОЛЬ</span>
-          <h2>Проверяем не только внешний вид</h2>
-        </div>
-        <div className="jq-checks">
-          {content.checks.map((item) => (
-            <article key={item.title}>
-              <Check />
-              <h3>{item.title}</h3>
-              <p>{item.text}</p>
-            </article>
-          ))}
-        </div>
-      </section>
-
-      <section className="jq-section">
-        <div className="jq-heading">
-          <span className="section-number">12 / КОМПЛЕКТ</span>
-          <h2>Дополните комплект</h2>
-          <p>{content.complementIntro}</p>
-        </div>
-        <div className="product-grid">
-          {related.map((item, index) => item && <ProductCard key={item.slug} product={item} index={index} />)}
-        </div>
-      </section>
-
-      <section className="jq-section jq-faq">
-        <div className="jq-heading">
-          <span className="section-number">13 / FAQ</span>
-          <h2>Вопросы и ответы</h2>
-        </div>
-        <Accordion className="faq-list">
-          {content.faq.map((item, index) => (
-            <AccordionItem value={`${content.slug}-${index}`} key={item.q} className="faq-item">
-              <AccordionTrigger className="faq-trigger">
-                <span>0{index + 1}</span>
-                {item.q}
-              </AccordionTrigger>
-              <AccordionContent className="faq-content">{item.a}</AccordionContent>
-            </AccordionItem>
-          ))}
-        </Accordion>
-      </section>
+      <MaterialDetails content={content} />
 
       <section className="jq-final">
         <div>
-          <span className="section-number">14 / ЗАЯВКА</span>
+          <span className="section-number">06 / ЗАЯВКА</span>
           <h2>
             {content.finalTitle.split("\n").map((line) => (
               <span key={line}>

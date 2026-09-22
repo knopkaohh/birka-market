@@ -6,6 +6,7 @@ import { ArrowRight, Check, FileUp } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { formatRuPhone, isCompleteRuPhone } from "@/lib/phone";
 import { products } from "@/lib/site";
 
 export type LeadVariantOption = { id: string; name: string };
@@ -52,6 +53,8 @@ export function LeadForm({
   detailFields,
 }: LeadFormProps) {
   const [product, setProduct] = useState(defaultProduct);
+  const [phone, setPhone] = useState("");
+  const [phoneError, setPhoneError] = useState("");
   const [status, setStatus] = useState<"idle" | "sending" | "error">("idle");
   const variantOptions = variants?.length ? variants : defaultJacquardVariants;
   const selectedVariant = defaultVariant && variantOptions.some((item) => item.id === defaultVariant)
@@ -84,10 +87,16 @@ export function LeadForm({
 
   const submit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    if (!isCompleteRuPhone(phone)) {
+      setPhoneError("Введите номер в формате +7 (999) 000-00-00");
+      return;
+    }
+    setPhoneError("");
     setStatus("sending");
     const form = event.currentTarget;
     const data = new FormData(form);
     data.set("product", product);
+    data.set("phone", phone);
     data.set("page", window.location.pathname);
     try {
       const response = await fetch("/api/lead", { method: "POST", body: data });
@@ -158,7 +167,27 @@ export function LeadForm({
       </div>
       <div className={details ? "field" : "field full"}>
         <label htmlFor="phone">Телефон</label>
-        <Input id="phone" name="phone" type="tel" placeholder="+7 999 000-00-00" required />
+        <Input
+          id="phone"
+          name="phone"
+          type="tel"
+          inputMode="tel"
+          autoComplete="tel"
+          placeholder="+7 (999) 000-00-00"
+          value={phone}
+          aria-invalid={phoneError ? true : undefined}
+          aria-describedby={phoneError ? "phone-error" : undefined}
+          onChange={(event) => {
+            setPhone(formatRuPhone(event.target.value));
+            if (phoneError) setPhoneError("");
+          }}
+          required
+        />
+        {phoneError ? (
+          <p id="phone-error" className="field-error">
+            {phoneError}
+          </p>
+        ) : null}
       </div>
       {!compact && !details && (
         <div className="field full">

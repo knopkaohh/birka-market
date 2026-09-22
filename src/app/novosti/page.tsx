@@ -7,6 +7,7 @@ import { company } from "@/lib/site";
 export const metadata: Metadata = {
   title: "Новости",
   description: "Новости и обновления Бирка Маркет. Следите за публикациями в Telegram и VK.",
+  robots: { index: false, follow: false },
 };
 
 export default function NewsPage() {

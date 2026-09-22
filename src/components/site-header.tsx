@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ArrowDownRight, Menu, Phone, X } from "lucide-react";
 import { Logo } from "@/components/logo";
+import { WhatsAppIcon } from "@/components/whatsapp-icon";
 import { company, navLinks, products } from "@/lib/site";
 
 const productPaths = new Set(products.map((item) => `/${item.slug}`));
@@ -41,6 +42,15 @@ export function SiteHeader({
           <a className="phone-link" href={company.phoneHref}>
             <Phone size={15} />
             {company.phone}
+          </a>
+          <a
+            className="header-wa"
+            href={company.whatsapp}
+            target="_blank"
+            rel="noreferrer"
+            aria-label="Написать в WhatsApp"
+          >
+            <WhatsAppIcon size={18} />
           </a>
           <Link className="header-cta" href="/raschet" prefetch={false}>
             Рассчитать заказ
