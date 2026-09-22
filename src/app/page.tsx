@@ -9,7 +9,6 @@ import {
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { CalculatorBlock } from "@/components/calculator-block";
 import { CategoryTile } from "@/components/category-tile";
-import { Loader } from "@/components/loader";
 import { Marquee } from "@/components/marquee";
 import { CasesSection } from "@/components/cases-section";
 import { ProcessParallax } from "@/components/process-parallax";
@@ -29,7 +28,6 @@ export default function Home() {
 
   return (
     <>
-      <Loader />
       <section className="hero">
         <div className="hero-copy">
           <div className="eyebrow">

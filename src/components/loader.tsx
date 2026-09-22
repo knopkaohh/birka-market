@@ -17,7 +17,6 @@ export function Loader() {
     }, 2300);
     return () => {
       window.clearTimeout(timer);
-      introPlayed = true;
     };
   }, [hidden]);
 
