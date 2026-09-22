@@ -206,6 +206,7 @@ export function LeadForm({
             <option value="phone">Телефон</option>
             <option value="whatsapp">WhatsApp</option>
             <option value="telegram">Telegram</option>
+            <option value="max">Макс</option>
           </select>
         </div>
       )}

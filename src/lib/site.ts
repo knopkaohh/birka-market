@@ -6,6 +6,7 @@ export const company = {
   email: "prod@birka-market.ru",
   telegram: "https://t.me/birka_market_ru",
   whatsapp: "https://wa.me/79163549287",
+  max: "https://max.ru/",
   vk: "https://vk.com/birka_market",
   address: "Москва, Строительный проезд, дом 2, стр. 1, офис № 1",
   hours: "Пн–Пт, 09:00–18:00",

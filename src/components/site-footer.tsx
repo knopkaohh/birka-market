@@ -32,6 +32,9 @@ export function SiteFooter() {
           <a href={company.whatsapp} target="_blank" rel="noreferrer">
             WhatsApp
           </a>
+          <a href={company.max} target="_blank" rel="noreferrer">
+            Макс
+          </a>
         </div>
         <div>
           <span>АДРЕС</span>

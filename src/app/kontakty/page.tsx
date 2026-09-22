@@ -43,6 +43,10 @@ export default function ContactsPage() {
             <span>WHATSAPP</span>
             <strong>+7 916 354-92-87</strong>
           </a>
+          <a href={company.max} target="_blank" rel="noreferrer">
+            <span>МАКС</span>
+            <strong>max.ru</strong>
+          </a>
         </div>
         <div className="content-grid">
           <article>

@@ -1,6 +1,6 @@
 import { Phone } from "lucide-react";
 import Link from "next/link";
-import { WhatsAppIcon } from "@/components/whatsapp-icon";
+import { MobileMessengers } from "@/components/messengers";
 import { company } from "@/lib/site";
 
 export function MobileBar() {
@@ -9,10 +9,10 @@ export function MobileBar() {
       <a href={company.phoneHref}>
         <Phone /> Позвонить
       </a>
-      <a href={company.whatsapp} target="_blank" rel="noreferrer">
-        <WhatsAppIcon size={15} /> WhatsApp
-      </a>
-      <Link href="/raschet">Рассчитать заказ</Link>
+      <MobileMessengers />
+      <Link className="mobile-calc" href="/raschet">
+        Рассчитать заказ
+      </Link>
     </div>
   );
 }

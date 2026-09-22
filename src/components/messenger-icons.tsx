@@ -8,3 +8,30 @@ export function WhatsAppIcon({ size = 18 }: { size?: number }) {
     </svg>
   );
 }
+
+export function TelegramIcon({ size = 18 }: { size?: number }) {
+  return (
+    <svg viewBox="0 0 24 24" width={size} height={size} aria-hidden="true" focusable="false">
+      <path
+        fill="currentColor"
+        d="M21.5 3.4 2.8 10.6c-1.28.5-1.27 1.2-.23 1.5l4.8 1.5 1.86 5.72c.23.64.11.9.75.9.39 0 .56-.18.78-.4l2.24-2.18 4.66 3.44c.86.47 1.47.23 1.68-.8L22.9 4.7c.3-1.2-.46-1.74-1.4-1.3ZM8.2 13.86l10.08-6.36c.48-.3.92-.13.56.2l-8.14 7.35-.32 3.62-2.18-4.81Z"
+      />
+    </svg>
+  );
+}
+
+export function MaxIcon({ size = 18 }: { size?: number }) {
+  return (
+    <svg viewBox="0 0 24 24" width={size} height={size} aria-hidden="true" focusable="false">
+      <rect x="2.2" y="2.2" width="19.6" height="19.6" rx="5.2" fill="currentColor" />
+      <path
+        d="M7.2 16.2V7.8l4.8 6.2 4.8-6.2v8.4"
+        fill="none"
+        stroke="#f4f1e9"
+        strokeWidth="1.85"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
