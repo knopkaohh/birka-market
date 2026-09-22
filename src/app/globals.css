@@ -147,7 +147,7 @@ html { scroll-behavior: smooth; }
 }
 .skip-link {
   position: absolute;
-  left: 16px;
+  left: max(16px, calc(var(--side) + 16px));
   top: 12px;
   z-index: 4000;
   display: inline-flex;
@@ -793,13 +793,16 @@ footer .logo-mark { color: var(--ink); background: var(--yellow); }
 .footer-grid span { margin-bottom: 8px; color: #85867f; font-size: 8px; font-weight: 800; letter-spacing: .15em; }
 .footer-grid a, .footer-grid p { margin: 0; color: #d5d2ca; font-size: 11px; line-height: 1.55; }
 .footer-grid a:hover { color: var(--yellow); }
-.footer-bottom { padding-top: 22px; display: flex; justify-content: space-between; color: #777872; font-size: 8px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+.footer-bottom { padding-top: 22px; display: flex; justify-content: space-between; align-items: center; gap: 16px; color: #777872; font-size: 8px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+@media (min-width: 761px) {
+  .footer-bottom { padding-right: 190px; }
+}
 .back-to-top {
   display: inline-flex; align-items: center; justify-content: center;
-  min-width: 44px; min-height: 44px; padding: 0 10px;
+  min-width: 44px; min-height: 44px; padding: 0 12px;
   border: 0; color: inherit; background: none;
-  font: inherit; letter-spacing: inherit; text-transform: inherit;
-  cursor: pointer;
+  font: inherit; font-size: 11px; letter-spacing: inherit; text-transform: inherit;
+  cursor: pointer; position: relative; z-index: 510;
 }
 .back-to-top:hover { color: var(--yellow); }
 .mobile-bottom { display: none; }
