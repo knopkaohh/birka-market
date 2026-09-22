@@ -175,11 +175,17 @@ export function LeadForm({
           autoComplete="tel"
           placeholder="+7 (999) 000-00-00"
           value={phone}
+          pattern="^\+7 \(\d{3}\) \d{3}-\d{2}-\d{2}$"
           aria-invalid={phoneError ? true : undefined}
           aria-describedby={phoneError ? "phone-error" : undefined}
           onChange={(event) => {
-            setPhone(formatRuPhone(event.target.value));
+            const next = formatRuPhone(event.target.value);
+            setPhone(next);
+            event.target.setCustomValidity(isCompleteRuPhone(next) ? "" : "Введите номер в формате +7 (999) 000-00-00");
             if (phoneError) setPhoneError("");
+          }}
+          onInvalid={(event) => {
+            event.currentTarget.setCustomValidity("Введите номер в формате +7 (999) 000-00-00");
           }}
           required
         />
