@@ -147,7 +147,7 @@ export function ProductLanding({
                 <li>{item.time}</li>
               </ul>
               <span className="jq-quote-cta">
-                Запросить такой расчёт
+                Рассчитать заказ
                 <ArrowRight size={16} />
               </span>
             </Link>
