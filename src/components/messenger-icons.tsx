@@ -23,12 +23,12 @@ export function TelegramIcon({ size = 18 }: { size?: number }) {
 export function MaxIcon({ size = 18 }: { size?: number }) {
   return (
     <svg viewBox="0 0 24 24" width={size} height={size} aria-hidden="true" focusable="false">
-      <rect x="2.2" y="2.2" width="19.6" height="19.6" rx="5.2" fill="currentColor" />
+      <rect x="3" y="3" width="18" height="18" rx="4.4" fill="none" stroke="currentColor" strokeWidth="1.9" />
       <path
-        d="M7.2 16.2V7.8l4.8 6.2 4.8-6.2v8.4"
+        d="M7.4 16.2V8.2l4.6 6 4.6-6v8"
         fill="none"
-        stroke="#f4f1e9"
-        strokeWidth="1.85"
+        stroke="currentColor"
+        strokeWidth="1.9"
         strokeLinecap="round"
         strokeLinejoin="round"
       />
