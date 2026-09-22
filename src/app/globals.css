@@ -1085,10 +1085,92 @@ footer .logo-mark { color: var(--ink); background: var(--yellow); }
 .prose-page { max-width: 760px; }
 .prose-page h1 { font-size: clamp(36px, 5vw, 56px); letter-spacing: -.05em; }
 .prose-page p { color: var(--muted-ink); font-size: 15px; line-height: 1.7; }
-.thanks-page { min-height: 70vh; display: grid; place-content: center; justify-items: center; text-align: center; padding: 80px 24px; }
-.thanks-page svg { width: 54px; height: 54px; color: #8e721f; }
-.thanks-page h1 { margin: 18px 0 12px; font-size: clamp(40px, 6vw, 72px); letter-spacing: -.06em; }
-.thanks-page p { max-width: 520px; color: var(--muted-ink); }
+.thanks-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 700;
+  display: grid;
+  place-items: center;
+  padding: 24px 16px 96px;
+  background: rgba(28, 29, 28, .58);
+  animation: thanks-fade .22s ease;
+}
+.thanks-screen {
+  min-height: calc(100svh - 110px);
+  display: grid;
+  place-items: center;
+  padding: 48px 16px 96px;
+}
+.thanks-card {
+  position: relative;
+  width: min(100%, 540px);
+  padding: 44px 36px 36px;
+  background: var(--paper);
+  box-shadow: 0 28px 64px rgba(34, 35, 34, .22);
+  text-align: center;
+  animation: thanks-up .32s cubic-bezier(.2, .8, .2, 1);
+}
+.thanks-card > svg {
+  width: 52px;
+  height: 52px;
+  color: #8e721f;
+}
+.thanks-card h1 {
+  margin: 16px 0 14px;
+  font-size: clamp(36px, 5vw, 52px);
+  font-weight: 650;
+  letter-spacing: -.06em;
+  line-height: .95;
+}
+.thanks-card h1 em {
+  font-family: var(--font-cormorant), Georgia, serif;
+  font-weight: 500;
+  color: #8e721f;
+}
+.thanks-card > p {
+  margin: 0 auto;
+  max-width: 420px;
+  color: var(--muted-ink);
+  font-size: 15px;
+  line-height: 1.65;
+}
+.thanks-card .calc-responder {
+  margin: 24px auto 0;
+  text-align: left;
+}
+.thanks-messengers {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin: 28px 0 24px;
+}
+.thanks-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 16px 20px;
+}
+.thanks-close {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 44px;
+  height: 44px;
+  border: 0;
+  color: var(--ink);
+  background: none;
+  font-size: 28px;
+  line-height: 1;
+}
+@keyframes thanks-fade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes thanks-up {
+  from { opacity: 0; transform: translateY(18px) scale(.98); }
+  to { opacity: 1; transform: none; }
+}
 .privacy a { text-decoration: underline; }
 .header-cta { text-decoration: none; }
 

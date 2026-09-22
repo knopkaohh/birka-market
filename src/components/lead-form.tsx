@@ -8,6 +8,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { formatRuPhone, isCompleteRuPhone } from "@/lib/phone";
 import { categories, products, productsByCategory } from "@/lib/site";
+import { ThanksOverlay } from "@/components/thanks-overlay";
 
 export type LeadVariantOption = { id: string; name: string };
 
@@ -55,7 +56,7 @@ export function LeadForm({
   const [product, setProduct] = useState(defaultProduct);
   const [phone, setPhone] = useState("");
   const [phoneError, setPhoneError] = useState("");
-  const [status, setStatus] = useState<"idle" | "sending" | "error">("idle");
+  const [status, setStatus] = useState<"idle" | "sending" | "error" | "done">("idle");
   const variantOptions = variants?.length ? variants : defaultJacquardVariants;
   const selectedVariant = defaultVariant && variantOptions.some((item) => item.id === defaultVariant)
     ? defaultVariant
@@ -101,13 +102,16 @@ export function LeadForm({
     try {
       const response = await fetch("/api/lead", { method: "POST", body: data });
       if (!response.ok) throw new Error("Request failed");
-      window.location.assign("/spasibo");
+      form.reset();
+      setPhone("");
+      setStatus("done");
     } catch {
       setStatus("error");
     }
   };
 
   return (
+    <>
     <form className="calc-form" onSubmit={submit}>
       {details ? (
         <>
@@ -245,5 +249,7 @@ export function LeadForm({
         </div>
       )}
     </form>
+    <ThanksOverlay open={status === "done"} onClose={() => setStatus("idle")} />
+    </>
   );
 }
