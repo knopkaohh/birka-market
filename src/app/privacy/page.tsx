@@ -13,7 +13,7 @@ export default function PrivacyPage() {
       <Breadcrumbs items={[{ label: "Конфиденциальность" }]} />
       <h1>Политика обработки персональных данных</h1>
       <p>
-        Оператор: Федотов Антон Вадимович. Контакт для вопросов по данным:{" "}
+        Оператор: {company.legal}. Контакт для вопросов по данным:{" "}
         <a href={`mailto:${company.email}`}>{company.email}</a>, {company.phone}.
       </p>
       <p>

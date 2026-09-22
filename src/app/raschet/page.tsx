@@ -19,7 +19,7 @@ export default async function CalcPage({
     <CalculatorBlock
       defaultProduct={selected?.slug ?? "unknown"}
       title="Рассчитать"
-      titleAccent="стоимость заказа"
+      titleAccent="заказ"
       lead={
         selected
           ? `Вы выбрали: ${selected.name}. Укажите тираж и телефон — остальное уточним.`

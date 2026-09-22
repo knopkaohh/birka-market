@@ -101,7 +101,7 @@ export function ProductLanding({
               <h3>{item.name}</h3>
               <p>{item.text}</p>
               <span className="jq-variant-cta">
-                Рассчитать этот вариант
+                Рассчитать заказ
                 <ArrowRight size={16} />
               </span>
             </Link>
