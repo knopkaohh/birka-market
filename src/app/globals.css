@@ -988,53 +988,34 @@ footer .logo svg { height: 56px; }
   margin: 90px 0 22px;
 }
 .catalog-toolbar h2 { margin: 0; font-size: clamp(34px, 4vw, 52px); letter-spacing: -.05em; }
-.catalog-search { flex: 0 1 380px; }
-.search-tag {
+.catalog-search { flex: 0 1 280px; }
+.search-line {
   display: flex;
-  align-items: stretch;
-  min-height: 48px;
-  overflow: hidden;
-  border: 1px solid #d7d3c8;
-  border-radius: 4px;
-  background: #fff;
+  align-items: center;
+  gap: 10px;
+  min-height: 36px;
+  padding: 0 0 6px;
+  border: 0;
+  border-bottom: 1px solid transparent;
+  background: none;
+  color: #8a8b84;
 }
-.search-tag-tab {
-  position: relative;
-  flex: 0 0 46px;
-  display: grid;
-  place-content: center;
-  padding-top: 6px;
-  color: var(--ink);
-  background: var(--yellow);
-}
-.search-tag-tab svg { display: block; margin-top: 6px; }
-.search-tag-eyelet {
-  position: absolute;
-  top: 7px;
-  left: 50%;
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: #fff;
-  box-shadow: inset 0 0 0 1px rgba(34, 35, 34, .16);
-  transform: translateX(-50%);
-}
-.search-tag input {
+.search-line svg { flex: 0 0 auto; display: block; }
+.search-line input {
   flex: 1;
   min-width: 0;
-  height: auto;
-  padding: 0 16px;
+  height: 28px;
+  padding: 0;
   border: 0;
   background: transparent;
   color: var(--ink);
   font-size: 14px;
   outline: none;
 }
-.search-tag input::placeholder { color: #8a8b84; }
-.search-tag input::-webkit-search-decoration,
-.search-tag input::-webkit-search-cancel-button { appearance: none; }
-.search-tag:focus-within { border-color: var(--ink); }
-.search-tag:focus-within .search-tag-tab { background: #f7cc50; }
+.search-line input::placeholder { color: #9a9b95; }
+.search-line input::-webkit-search-decoration,
+.search-line input::-webkit-search-cancel-button { appearance: none; }
+.search-line:focus-within { color: var(--ink); border-bottom-color: rgba(34, 35, 34, .22); }
 .catalog-chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 28px; }
 .catalog-chips button {
   min-height: 38px; padding: 0 14px; border: 1px solid #d7d3c8; background: transparent;
@@ -1059,15 +1040,11 @@ footer .logo svg { height: 56px; }
   font-size: 12px; font-weight: 800;
 }
 
-.side-search { margin: 0 16px 14px; }
-.search-tag-dark {
-  border-color: #2f2f2f;
-  background: #111;
-}
-.search-tag-dark .search-tag-eyelet { background: #19191a; }
-.search-tag-dark input { color: #f4f1e9; font-size: 13px; }
-.search-tag-dark input::placeholder { color: #7c7d77; }
-.search-tag-dark:focus-within { border-color: var(--yellow); }
+.side-search { margin: 0 24px 16px; }
+.search-line-dark { color: #6f706a; }
+.search-line-dark input { color: #e9ebed; font-size: 13px; }
+.search-line-dark input::placeholder { color: #6f706a; }
+.search-line-dark:focus-within { color: var(--yellow); border-bottom-color: rgba(237, 193, 71, .35); }
 .side-search-results { margin: 0 0 18px; padding: 0; list-style: none; }
 .side-search-results .side-submenu-link { padding-left: 28px; }
 .side-search-empty { padding: 10px 28px 18px; color: #8a8b84; font-size: 13px; line-height: 1.5; }

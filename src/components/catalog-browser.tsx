@@ -26,11 +26,8 @@ function CatalogBrowserInner() {
           <span className="section-number">ВСЕ ПОЗИЦИИ</span>
           <h2>Полный перечень</h2>
         </div>
-        <label className="search-tag catalog-search">
-          <span className="search-tag-tab" aria-hidden="true">
-            <i className="search-tag-eyelet" />
-            <Search size={16} strokeWidth={2.2} />
-          </span>
+        <label className="search-line catalog-search">
+          <Search size={16} strokeWidth={1.8} aria-hidden="true" />
           <span className="visually-hidden">Поиск по каталогу</span>
           <input
             type="search"
