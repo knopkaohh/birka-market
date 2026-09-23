@@ -247,6 +247,7 @@ button { cursor: pointer; }
 .header-msg {
   display: grid; place-content: center; width: 44px; height: 44px;
   border: 1px solid #d7d3c8;
+  border-radius: 12px;
 }
 .header-msg.is-wa { color: #128c7e; }
 .header-msg.is-tg { color: #2aabee; }
@@ -908,8 +909,11 @@ footer .logo svg { height: 56px; }
   .mobile-bottom a, .mobile-bottom button { display: flex; align-items: center; justify-content: center; gap: 7px; border: 0; font-size: 10px; font-weight: 800; }
   .mobile-bottom a { color: var(--paper); }
   .mobile-bottom a svg { width: 15px; }
-  .mobile-messengers { display: flex; align-items: stretch; justify-content: space-around; min-width: 0; }
-  .mobile-messengers a { flex: 1; min-width: 44px; height: 100%; }
+  .mobile-messengers { display: flex; align-items: stretch; justify-content: space-around; gap: 4px; min-width: 0; }
+  .mobile-messengers a {
+    flex: 1; min-width: 44px; height: 100%;
+    border-radius: 10px;
+  }
   .mobile-calc { color: var(--ink) !important; background: var(--yellow); }
 }
 
@@ -1088,6 +1092,7 @@ footer .logo svg { height: 56px; }
 .inner-note { margin-top: 40px; color: var(--muted-ink); }
 .contact-board { display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px; margin-bottom: 28px; }
 .contact-board a { min-height: 140px; padding: 24px; display: flex; flex-direction: column; justify-content: space-between; color: var(--paper); background: var(--ink); }
+.contact-board a.is-messenger { border-radius: 16px; }
 .contact-board span { color: #aaa99f; font-size: 9px; font-weight: 800; letter-spacing: .12em; }
 .contact-board strong { font-size: 18px; letter-spacing: -.03em; }
 .prose-page { max-width: 760px; }
