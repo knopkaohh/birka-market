@@ -47,14 +47,17 @@ export function SideMenu({ open, onClose }: SideMenuProps) {
           <div className="side-menu-logo">
             <Logo />
           </div>
-          <label className="side-search">
-            <Search size={15} />
+          <label className="search-tag search-tag-dark side-search">
+            <span className="search-tag-tab" aria-hidden="true">
+              <i className="search-tag-eyelet" />
+              <Search size={15} strokeWidth={2.2} />
+            </span>
             <span className="visually-hidden">Поиск по каталогу</span>
             <input
               type="search"
               value={query}
               onChange={(event) => setQuery(event.target.value)}
-              placeholder="Найти сатин, ZIP…"
+              placeholder="Сатин, ZIP, лендинг…"
               autoComplete="off"
             />
           </label>
