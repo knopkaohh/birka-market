@@ -43,20 +43,14 @@ export function ProductLanding({
   const selectedVariant = variant ?? content.variants[0]?.id;
   const formKey = [selectedVariant, quote?.qty, quote?.size, quote?.spec, quote?.price].filter(Boolean).join("-");
   const prefillComment = quote ? quoteComment(quote) : "";
-  const usedPhotos = new Set<string>();
-  for (const src of content.hero) usedPhotos.add(photoKey(src));
-  const variantHasPhoto = content.variants.map((item) => {
-    const key = photoKey(item.image);
-    if (usedPhotos.has(key)) return false;
-    usedPhotos.add(key);
-    return true;
-  });
-  const gallery = content.gallery.filter((item) => {
+  const usedPhotos = new Set<string>(content.hero.map((src) => photoKey(src)));
+  const gallery = [...content.gallery, ...content.variants.map((item) => ({ src: item.image, alt: item.name })), ...content.onProduct.map((item) => ({ src: item.image, alt: item.title }))].filter((item) => {
     const key = photoKey(item.src);
     if (usedPhotos.has(key)) return false;
     usedPhotos.add(key);
     return true;
   });
+  const variantHasPhoto = content.variants.map((item) => !usedPhotos.has(photoKey(item.image)));
 
   return (
     <>
@@ -152,7 +146,7 @@ export function ProductLanding({
             <h2>{content.galleryTitle}</h2>
             <p>{content.galleryIntro}</p>
           </div>
-          <div className="jq-gallery">
+          <div className={`jq-gallery is-${gallery.length}`}>
             {gallery.map((item) => (
               <figure key={item.src}>
                 <Image src={item.src} alt={item.alt} fill sizes="(max-width: 700px) 50vw, 25vw" />
