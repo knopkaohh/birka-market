@@ -27,20 +27,28 @@ export function validateLeadInput({
   quantity,
   minQty,
   name,
+  quick = false,
 }: {
   phone: string;
   quantity: number;
   minQty: number;
   name: string;
+  quick?: boolean;
 }): LeadValidation {
+  if (name.length > 120) {
+    return { ok: false, message: "Имя слишком длинное." };
+  }
+  if (quick) {
+    if (!name || !phone) {
+      return { ok: false, message: "Укажите имя и телефон." };
+    }
+    return { ok: true };
+  }
   if (!phone) {
     return { ok: false, message: "Укажите телефон." };
   }
   if (!Number.isFinite(quantity) || quantity < minQty) {
     return { ok: false, message: `Укажите тираж от ${minQty} штук.` };
-  }
-  if (name.length > 120) {
-    return { ok: false, message: "Имя слишком длинное." };
   }
   return { ok: true };
 }

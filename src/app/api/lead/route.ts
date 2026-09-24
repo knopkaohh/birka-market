@@ -12,8 +12,9 @@ export async function POST(request: Request) {
   const productSlug = String(form.get("product") ?? "unknown");
   const product = getProduct(productSlug);
   const minQty = product?.minQty ?? 1;
+  const quick = String(form.get("quick") ?? "") === "1";
 
-  const check = validateLeadInput({ phone, quantity, minQty, name });
+  const check = validateLeadInput({ phone, quantity, minQty, name, quick });
   if (!check.ok) {
     return NextResponse.json({ ok: false, message: check.message }, { status: 400 });
   }
@@ -35,7 +36,7 @@ export async function POST(request: Request) {
     createdAt: new Date().toISOString(),
     product: productSlug,
     productName: product?.name ?? "Нужна помощь с выбором",
-    quantity,
+    quantity: quick ? 0 : quantity,
     name,
     phone,
     contact: String(form.get("contact") ?? "phone"),

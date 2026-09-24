@@ -1,6 +1,8 @@
+"use client";
+
 import { Phone } from "lucide-react";
-import Link from "next/link";
 import { MobileMessengers } from "@/components/messengers";
+import { openQuickCalc } from "@/components/quick-calc";
 import { company } from "@/lib/site";
 
 export function MobileBar() {
@@ -10,9 +12,9 @@ export function MobileBar() {
         <Phone /> Позвонить
       </a>
       <MobileMessengers />
-      <Link className="mobile-calc" href="/raschet">
-        Рассчитать заказ
-      </Link>
+      <button type="button" className="mobile-calc" onClick={openQuickCalc}>
+        Быстрый расчёт
+      </button>
     </div>
   );
 }
