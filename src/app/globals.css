@@ -504,8 +504,11 @@ button { cursor: pointer; }
 }
 .quick-cta:hover { background: #f7cc50; }
 body.quick-calc-open > *:not(.quick-calc-overlay):not(.thanks-overlay) {
+  filter: blur(0);
+  transition: filter .55s ease;
+}
+body.quick-calc-open.quick-calc-in > *:not(.quick-calc-overlay):not(.thanks-overlay) {
   filter: blur(10px);
-  transition: filter .28s ease;
 }
 .quick-calc-overlay {
   position: fixed;
@@ -514,10 +517,13 @@ body.quick-calc-open > *:not(.quick-calc-overlay):not(.thanks-overlay) {
   display: grid;
   place-items: center;
   padding: 24px 16px 96px;
+  background: rgba(28, 29, 28, 0);
+  opacity: 0;
+  transition: opacity .5s ease, background-color .5s ease;
+}
+.quick-calc-overlay.is-in {
   background: rgba(28, 29, 28, .28);
-  backdrop-filter: blur(16px) saturate(1.05);
-  -webkit-backdrop-filter: blur(16px) saturate(1.05);
-  animation: thanks-fade .28s ease;
+  opacity: 1;
 }
 .quick-calc-panel {
   position: relative;
@@ -525,7 +531,13 @@ body.quick-calc-open > *:not(.quick-calc-overlay):not(.thanks-overlay) {
   padding: 32px 28px 28px;
   background: #f4f1e9;
   box-shadow: 0 28px 64px rgba(34, 35, 34, .22);
-  animation: thanks-up .36s cubic-bezier(.2, .8, .2, 1);
+  opacity: 0;
+  transform: translate3d(0, 40px, 0);
+  transition: opacity .5s ease, transform .55s cubic-bezier(.22, 1, .36, 1);
+}
+.quick-calc-overlay.is-in .quick-calc-panel {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
 }
 .quick-calc-head {
   display: flex;
@@ -950,6 +962,13 @@ footer .logo svg { height: 56px; }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+  .quick-calc-overlay,
+  .quick-calc-overlay *,
+  .quick-calc-panel,
+  body.quick-calc-open > * {
+    animation-duration: .5s !important;
+    transition-duration: .5s !important;
+  }
 }
 
 .inner-page { width: min(100% - 80px, 1380px); margin: 0 auto; padding: 42px 0 110px; }

@@ -21,6 +21,7 @@ export function QuickCalc() {
   const [path, setPath] = useState(pathname);
   const [calcVisible, setCalcVisible] = useState(false);
   const [open, setOpen] = useState(false);
+  const [shown, setShown] = useState(false);
   const [mounted, setMounted] = useState(false);
   const [phone, setPhone] = useState("");
   const [phoneError, setPhoneError] = useState("");
@@ -31,6 +32,7 @@ export function QuickCalc() {
     setPath(pathname);
     setCalcVisible(false);
     setOpen(false);
+    setShown(false);
   }
 
   const slug = pathname.replace(/^\//, "").split("/")[0] ?? "";
@@ -41,6 +43,11 @@ export function QuickCalc() {
     setMounted(true);
   }, []);
 
+  const close = () => {
+    setShown(false);
+    document.body.classList.remove("quick-calc-in");
+  };
+
   useEffect(() => {
     const onOpen = () => setOpen(true);
     window.addEventListener(OPEN_QUICK_CALC, onOpen);
@@ -48,21 +55,32 @@ export function QuickCalc() {
   }, []);
 
   useEffect(() => {
-    if (!open) return;
+    if (!open) {
+      setShown(false);
+      document.body.classList.remove("quick-calc-open", "quick-calc-in");
+      return;
+    }
     const previous = document.body.style.overflow;
     document.body.style.overflow = "hidden";
     document.body.classList.add("quick-calc-open");
+    const enter = window.requestAnimationFrame(() => {
+      window.requestAnimationFrame(() => {
+        setShown(true);
+        document.body.classList.add("quick-calc-in");
+      });
+    });
     const onKey = (event: KeyboardEvent) => {
-      if (event.key === "Escape") setOpen(false);
+      if (event.key === "Escape") close();
     };
     window.addEventListener("keydown", onKey);
     const focus = window.setTimeout(() => {
       document.getElementById("quick-name")?.focus();
-    }, 80);
+    }, 280);
     return () => {
       document.body.style.overflow = previous;
-      document.body.classList.remove("quick-calc-open");
+      document.body.classList.remove("quick-calc-open", "quick-calc-in");
       window.removeEventListener("keydown", onKey);
+      window.cancelAnimationFrame(enter);
       window.clearTimeout(focus);
     };
   }, [open]);
@@ -103,7 +121,7 @@ export function QuickCalc() {
       }
       form.reset();
       setPhone("");
-      setOpen(false);
+      close();
       setStatus("done");
     } catch (error) {
       setErrorText(
@@ -128,11 +146,17 @@ export function QuickCalc() {
       ) : null}
       {mounted && open
         ? createPortal(
-            <div className="quick-calc-overlay" onClick={() => setOpen(false)}>
+            <div
+              className={`quick-calc-overlay ${shown ? "is-in" : ""}`}
+              onClick={close}
+              onTransitionEnd={(event) => {
+                if (event.target === event.currentTarget && !shown) setOpen(false);
+              }}
+            >
               <form className="quick-calc-panel" onSubmit={submit} onClick={(event) => event.stopPropagation()}>
                 <div className="quick-calc-head">
                   <strong>Быстрый расчёт</strong>
-                  <button type="button" onClick={() => setOpen(false)} aria-label="Закрыть">
+                  <button type="button" onClick={close} aria-label="Закрыть">
                     <X size={18} />
                   </button>
                 </div>
