@@ -30,6 +30,7 @@ const nextConfig: NextConfig = {
       { source: "/payment", destination: "/oplata", permanent: true },
       { source: "/contacts", destination: "/kontakty", permanent: true },
       { source: "/news", destination: "/novosti", permanent: true },
+      { source: "/news/:path*", destination: "/novosti", permanent: true },
       { source: "/thanks", destination: "/spasibo", permanent: true },
       { source: "/sayty", destination: "/razrabotka-saytov", permanent: true },
       { source: "/landing", destination: "/lending", permanent: true },

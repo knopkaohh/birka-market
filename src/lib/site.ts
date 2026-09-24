@@ -36,6 +36,7 @@ export const company = {
 export const navLinks = [
   { href: "/katalog", label: "Продукция" },
   { href: "/o-kompanii", label: "О Компании" },
+  { href: "/novosti", label: "Новости" },
   { href: "/dostavka", label: "Доставка" },
   { href: "/oplata", label: "Оплата" },
   { href: "/kontakty", label: "Контакты" },
