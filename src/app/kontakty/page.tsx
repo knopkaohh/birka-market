@@ -12,7 +12,12 @@ export const metadata: Metadata = {
 };
 
 export default function ContactsPage() {
-  const managers = team.filter((person) => person.phone || person.email);
+  const contactRoles = new Set([
+    "Исполнительный директор",
+    "Руководитель отдела продаж",
+    "Менеджер по продажам",
+  ]);
+  const managers = team.filter((person) => contactRoles.has(person.role));
 
   return (
     <>

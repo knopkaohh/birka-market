@@ -710,7 +710,7 @@ export const team: TeamMember[] = [
   },
   {
     name: "Гинтарас Палтарацкас",
-    role: "Корпоративные продажи",
+    role: "Менеджер по продажам",
     email: "pg@birka-market.ru",
     phone: "+7 988 758-88-98",
     photo: "/images/team/gintaras.jpg",
@@ -724,7 +724,7 @@ export const team: TeamMember[] = [
   },
   {
     name: "Нариман Алескеров",
-    role: "Старший менеджер по продажам",
+    role: "Менеджер по продажам",
     email: "na@birka-market.ru",
     phone: "+7 985 238-85-05",
     photo: "/images/team/nariman.jpg",
