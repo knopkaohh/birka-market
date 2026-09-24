@@ -161,27 +161,38 @@ export function QuickCalc() {
                   </button>
                 </div>
                 <p>Имя и телефон — перезвоним в течение 10 минут.</p>
-                <label htmlFor="quick-name">Имя</label>
-                <Input id="quick-name" name="name" placeholder="Как к вам обращаться?" required />
-                <label htmlFor="quick-phone">Телефон</label>
-                <Input
-                  id="quick-phone"
-                  name="phone"
-                  type="tel"
-                  inputMode="tel"
-                  autoComplete="tel"
-                  placeholder="+7 (999) 000-00-00"
-                  value={phone}
-                  pattern="^\+7 \(\d{3}\) \d{3}-\d{2}-\d{2}$"
-                  aria-invalid={phoneError ? true : undefined}
-                  onChange={(event) => {
-                    const next = formatRuPhone(event.target.value);
-                    setPhone(next);
-                    event.target.setCustomValidity(isCompleteRuPhone(next) ? "" : "Введите номер в формате +7 (999) 000-00-00");
-                    if (phoneError) setPhoneError("");
-                  }}
-                  required
-                />
+                <label className="search-line quick-line" htmlFor="quick-name">
+                  <span>Имя</span>
+                  <Input
+                    id="quick-name"
+                    className="quick-line-input"
+                    name="name"
+                    placeholder="Как к вам обращаться?"
+                    required
+                  />
+                </label>
+                <label className="search-line quick-line" htmlFor="quick-phone">
+                  <span>Телефон</span>
+                  <Input
+                    id="quick-phone"
+                    className="quick-line-input"
+                    name="phone"
+                    type="tel"
+                    inputMode="tel"
+                    autoComplete="tel"
+                    placeholder="+7 (999) 000-00-00"
+                    value={phone}
+                    pattern="^\+7 \(\d{3}\) \d{3}-\d{2}-\d{2}$"
+                    aria-invalid={phoneError ? true : undefined}
+                    onChange={(event) => {
+                      const next = formatRuPhone(event.target.value);
+                      setPhone(next);
+                      event.target.setCustomValidity(isCompleteRuPhone(next) ? "" : "Введите номер в формате +7 (999) 000-00-00");
+                      if (phoneError) setPhoneError("");
+                    }}
+                    required
+                  />
+                </label>
                 {phoneError ? <span className="field-error">{phoneError}</span> : null}
                 <Button type="submit" disabled={status === "sending"} className="submit-button">
                   {status === "sending" ? "Отправляем…" : "Отправить"}
