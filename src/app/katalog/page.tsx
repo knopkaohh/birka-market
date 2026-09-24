@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import Link from "next/link";
+import { ArrowDownRight } from "lucide-react";
 import { Breadcrumbs } from "@/components/breadcrumbs";
 import { CategoryTile } from "@/components/category-tile";
 import { CatalogBrowser } from "@/components/catalog-browser";
@@ -24,6 +26,13 @@ export default function CatalogPage() {
         <p>
           36 позиций: бирки, упаковка, фурнитура, мерч, полиграфия и сайты. Откройте категорию или сразу переходите к расчёту.
         </p>
+      </div>
+      <div className="guide-banner">
+        <p>Не разбираетесь в материалах и сгибах? Три вопроса подскажут жаккард или сатин, подгибку, цвета и тираж.</p>
+        <Link href="/kak-vybrat">
+          Как выбрать бирки
+          <ArrowDownRight size={16} />
+        </Link>
       </div>
       <div className="category-grid">
         {categories.map((item, index) => (

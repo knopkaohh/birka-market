@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Breadcrumbs } from "@/components/breadcrumbs";
 import { CalculatorBlock } from "@/components/calculator-block";
@@ -31,7 +32,17 @@ export default function FaqPage() {
                 <span>0{index + 1}</span>
                 {item.q}
               </AccordionTrigger>
-              <AccordionContent className="faq-content">{item.a}</AccordionContent>
+              <AccordionContent className="faq-content">
+                {item.q.includes("материал и сгиб") ? (
+                  <>
+                    Откройте страницу <Link href="/kak-vybrat">Как выбрать</Link>: три вопроса подскажут материал,
+                    подгибку, цвета и тираж. Если останетесь в сомнении — оставьте телефон, менеджер соберёт комплект за
+                    10 минут.
+                  </>
+                ) : (
+                  item.a
+                )}
+              </AccordionContent>
             </AccordionItem>
           ))}
         </Accordion>

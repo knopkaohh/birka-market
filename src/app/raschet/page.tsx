@@ -11,15 +11,16 @@ export const metadata: Metadata = {
 export default async function CalcPage({
   searchParams,
 }: {
-  searchParams: Promise<{ product?: string }>;
+  searchParams: Promise<{ product?: string; comment?: string }>;
 }) {
-  const { product } = await searchParams;
+  const { product, comment } = await searchParams;
   const selected = product ? getProduct(product) : undefined;
 
   return (
     <CalculatorBlock
       heading="h1"
       defaultProduct={selected?.slug ?? "unknown"}
+      defaultComment={comment}
       title="Рассчитать"
       titleAccent="заказ"
       lead={

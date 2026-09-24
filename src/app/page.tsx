@@ -52,6 +52,10 @@ export default function Home() {
               Смотреть каталог
               <ArrowDownRight size={18} />
             </Link>
+            <Link className="text-link" href="/kak-vybrat">
+              Как выбрать бирки
+              <ArrowDownRight size={18} />
+            </Link>
           </div>
           <div className="hero-proof">
             <div>

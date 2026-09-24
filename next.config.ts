@@ -35,6 +35,8 @@ const nextConfig: NextConfig = {
       { source: "/sayty", destination: "/razrabotka-saytov", permanent: true },
       { source: "/landing", destination: "/lending", permanent: true },
       { source: "/landing-page", destination: "/lending", permanent: true },
+      { source: "/guide", destination: "/kak-vybrat", permanent: true },
+      { source: "/podbor", destination: "/kak-vybrat", permanent: true },
     ];
   },
 };

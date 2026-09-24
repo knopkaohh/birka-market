@@ -3,12 +3,14 @@ import { CalcResponder } from "@/components/calc-responder";
 
 export function CalculatorBlock({
   defaultProduct,
+  defaultComment,
   title = "Расскажите\nо вашей задаче",
   titleAccent,
   lead = "Можно не знать точных параметров. Оставьте телефон — менеджер свяжется в течение 10 минут, уточнит задачу и подготовит расчёт.",
   heading = "h2",
 }: {
   defaultProduct?: string;
+  defaultComment?: string;
   title?: string;
   titleAccent?: string;
   lead?: string;
@@ -32,7 +34,11 @@ export function CalculatorBlock({
         <p>{lead}</p>
         <CalcResponder />
       </div>
-      <LeadForm key={defaultProduct ?? "unknown"} defaultProduct={defaultProduct} />
+      <LeadForm
+        key={`${defaultProduct ?? "unknown"}-${defaultComment ?? ""}`}
+        defaultProduct={defaultProduct}
+        defaultComment={defaultComment}
+      />
     </section>
   );
 }
