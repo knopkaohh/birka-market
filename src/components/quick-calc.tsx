@@ -51,6 +51,7 @@ export function QuickCalc() {
     if (!open) return;
     const previous = document.body.style.overflow;
     document.body.style.overflow = "hidden";
+    document.body.classList.add("quick-calc-open");
     const onKey = (event: KeyboardEvent) => {
       if (event.key === "Escape") setOpen(false);
     };
@@ -60,6 +61,7 @@ export function QuickCalc() {
     }, 80);
     return () => {
       document.body.style.overflow = previous;
+      document.body.classList.remove("quick-calc-open");
       window.removeEventListener("keydown", onKey);
       window.clearTimeout(focus);
     };
