@@ -22,6 +22,8 @@ ym(${METRIKA_COUNTER_ID}, "init", {
       </Script>
       <noscript>
         <div>
+          {/* Official Metrika pixel; next/image cannot run in noscript */}
+          {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={`https://mc.yandex.ru/watch/${METRIKA_COUNTER_ID}`}
             style={{ position: "absolute", left: "-9999px" }}
