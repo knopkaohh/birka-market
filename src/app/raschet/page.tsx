@@ -3,8 +3,9 @@ import { CalculatorBlock } from "@/components/calculator-block";
 import { getProduct } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Рассчитать заказ",
-  description: "Оставьте параметры заказа — менеджер и технолог подготовят расчёт и бесплатный макет.",
+  title: "Рассчитать заказ бирок и упаковки",
+  description:
+    "Оставьте заявку на расчёт бирок, упаковки или мерча. Макет бесплатно, производство в Москве. Менеджер свяжется в течение 10 минут.",
 };
 
 export default async function CalcPage({

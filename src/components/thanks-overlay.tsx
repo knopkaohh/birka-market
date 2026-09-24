@@ -1,8 +1,9 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
 import { ThanksCard } from "@/components/thanks-card";
+import { trackLeadConversion } from "@/lib/analytics";
 
 export function ThanksOverlay({
   open,
@@ -11,8 +12,17 @@ export function ThanksOverlay({
   open: boolean;
   onClose: () => void;
 }) {
+  const tracked = useRef(false);
+
   useEffect(() => {
-    if (!open) return;
+    if (!open) {
+      tracked.current = false;
+      return;
+    }
+    if (!tracked.current) {
+      tracked.current = true;
+      trackLeadConversion();
+    }
     const previous = document.body.style.overflow;
     document.body.style.overflow = "hidden";
     const onKey = (event: KeyboardEvent) => {

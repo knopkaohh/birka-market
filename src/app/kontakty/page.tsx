@@ -1,18 +1,16 @@
-import Image from "next/image";
 import type { Metadata } from "next";
 import { Breadcrumbs } from "@/components/breadcrumbs";
 import { CalculatorBlock } from "@/components/calculator-block";
 import { YandexMap } from "@/components/yandex-map";
-import { company, team } from "@/lib/site";
+import { company } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Контакты",
-  description: "Телефон, почта, адрес офиса и склада Бирка Маркет в Москве.",
+  title: "Контакты производства в Москве",
+  description:
+    "Телефон +7 495 003-88-81, почта, Telegram, WhatsApp и адрес склада Бирка Маркет в Москве. Менеджер свяжется за 10 минут в рабочее время.",
 };
 
 export default function ContactsPage() {
-  const managers = team.filter((person) => person.phone || person.email);
-
   return (
     <>
       <div className="inner-page">
@@ -67,22 +65,6 @@ export default function ContactsPage() {
               Открыть Яндекс Карты
             </a>
           </article>
-        </div>
-        <h2 className="block-title">Команда</h2>
-        <div className="team-grid">
-          {managers.map((person) => (
-            <article key={person.name}>
-              <div className="team-photo">
-                <Image src={person.photo} alt={person.name} fill sizes="280px" />
-              </div>
-              <div className="team-copy">
-                <h3>{person.name}</h3>
-                <p>{person.role}</p>
-                {person.email && <a href={`mailto:${person.email}`}>{person.email}</a>}
-                {person.phone && <a href={`tel:${person.phone.replace(/[^\d+]/g, "")}`}>{person.phone}</a>}
-              </div>
-            </article>
-          ))}
         </div>
       </div>
       <YandexMap compact height={560} />

@@ -6,7 +6,8 @@ import { CalcResponder } from "@/components/calc-responder";
 import { LeadForm } from "@/components/lead-form";
 import { MaterialDetails } from "@/components/material-details";
 import type { LandingContent, QuotePrefill } from "@/lib/landings/types";
-import { quoteComment, quoteHref } from "@/lib/landings/types";
+import { quoteComment, quoteHref, quoteQuantity } from "@/lib/landings/types";
+import { landingJsonLd } from "@/lib/seo";
 import { company, getCategory, getProduct } from "@/lib/site";
 
 function specRows(
@@ -44,6 +45,10 @@ export function ProductLanding({
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(landingJsonLd(content, product)) }}
+      />
       <section className="jq-hero">
         <div className="jq-hero-copy">
           <Breadcrumbs
@@ -192,7 +197,7 @@ export function ProductLanding({
             ))}
           </h2>
           <p>
-            {content.calcIntro} Ответим в рабочее время {company.hours}.
+            {content.calcIntro} Менеджер свяжется в течение {company.replyIn} в рабочее время {company.hours}.
           </p>
           <CalcResponder light />
           <ul>
@@ -208,7 +213,7 @@ export function ProductLanding({
           defaultProduct={content.slug}
           details
           defaultVariant={selectedVariant}
-          defaultQuantity={quote?.qty ?? content.form.quantityPlaceholder}
+          defaultQuantity={quote?.qty ? quoteQuantity(quote.qty) : content.form.quantityPlaceholder}
           defaultSize={quote?.size}
           defaultExtra={quote?.spec}
           defaultComment={prefillComment}

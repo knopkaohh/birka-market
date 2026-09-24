@@ -15,7 +15,10 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
   const { category } = await params;
   const item = getCategory(category);
   if (!item) return {};
-  return { title: item.name, description: item.intro };
+  return {
+    title: `${item.name} на заказ в Москве`,
+    description: `${item.intro} Оставьте заявку — менеджер свяжется за 10 минут.`,
+  };
 }
 
 export default async function CategoryPage({ params }: { params: Promise<Params> }) {

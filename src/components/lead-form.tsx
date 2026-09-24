@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { formatRuPhone, isCompleteRuPhone } from "@/lib/phone";
+import { MAX_FILE_BYTES } from "@/lib/lead";
 import { categories, products, productsByCategory } from "@/lib/site";
 import { ThanksOverlay } from "@/components/thanks-overlay";
 
@@ -59,6 +60,7 @@ export function LeadForm({
   const [phone, setPhone] = useState("");
   const [phoneError, setPhoneError] = useState("");
   const [status, setStatus] = useState<"idle" | "sending" | "error" | "done">("idle");
+  const [errorText, setErrorText] = useState("Не удалось отправить заявку. Позвоните: +7 495 003-88-81.");
   const variantOptions = variants?.length ? variants : defaultJacquardVariants;
   const selectedVariant = defaultVariant && variantOptions.some((item) => item.id === defaultVariant)
     ? defaultVariant
@@ -97,19 +99,35 @@ export function LeadForm({
       return;
     }
     setPhoneError("");
-    setStatus("sending");
     const form = event.currentTarget;
+    const attached = form.querySelector<HTMLInputElement>('input[name="file"]')?.files?.[0];
+    if (attached && attached.size > MAX_FILE_BYTES) {
+      setErrorText("Файл больше 15 МБ. Сожмите макет или пришлите ссылку в комментарии.");
+      setStatus("error");
+      return;
+    }
+    setStatus("sending");
     const data = new FormData(form);
     data.set("product", product);
     data.set("phone", phone);
     data.set("page", window.location.pathname);
     try {
       const response = await fetch("/api/lead", { method: "POST", body: data });
-      if (!response.ok) throw new Error("Request failed");
+      const payload = (await response.json().catch(() => null)) as
+        | { ok?: boolean; message?: string }
+        | null;
+      if (!response.ok || !payload?.ok) {
+        throw new Error(payload?.message || "Request failed");
+      }
       form.reset();
       setPhone("");
       setStatus("done");
-    } catch {
+    } catch (error) {
+      setErrorText(
+        error instanceof Error && error.message && error.message !== "Request failed"
+          ? error.message
+          : "Не удалось отправить заявку. Позвоните: +7 495 003-88-81.",
+      );
       setStatus("error");
     }
   };
@@ -249,7 +267,7 @@ export function LeadForm({
       </p>
       {status === "error" && (
         <div className="form-message error-message">
-          Не удалось отправить заявку. Позвоните: +7 495 003-88-81.
+          {errorText}
         </div>
       )}
     </form>

@@ -4,11 +4,12 @@ import Link from "next/link";
 import { Breadcrumbs } from "@/components/breadcrumbs";
 import { CalculatorBlock } from "@/components/calculator-block";
 import { CasesSection } from "@/components/cases-section";
-import { company, team } from "@/lib/site";
+import { company } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "О компании",
-  description: "Бирка Маркет с 2017 года производит бирки, упаковку и фурнитуру для брендов одежды.",
+  title: "О компании — производство в Москве с 2017",
+  description:
+    "Бирка Маркет с 2017 года производит бирки, упаковку и фурнитуру в Москве. 19 250 брендов, бесплатный макет, свой контур от расчёта до тиража.",
 };
 
 export default function AboutPage() {
@@ -71,25 +72,6 @@ export default function AboutPage() {
           </article>
         </div>
         <CasesSection eyebrow="КЕЙСЫ" compact />
-        <h2 className="block-title">Знакомьтесь с командой</h2>
-        <p className="team-intro">
-          Быстрая производственная команда: продажи, маркетинг и цех в одном контуре. Напишите человеку по задаче или оставьте общую заявку.
-        </p>
-        <div className="team-grid">
-          {team.map((person) => (
-            <article key={person.name}>
-              <div className="team-photo">
-                <Image src={person.photo} alt={person.name} fill sizes="280px" />
-              </div>
-              <div className="team-copy">
-                <h3>{person.name}</h3>
-                <p>{person.role}</p>
-                {person.email && <a href={`mailto:${person.email}`}>{person.email}</a>}
-                {person.phone && <a href={`tel:${person.phone.replace(/[^\d+]/g, "")}`}>{person.phone}</a>}
-              </div>
-            </article>
-          ))}
-        </div>
         <p className="inner-note">
           Нужно обсудить задачу напрямую? Перейдите в <Link href="/kontakty">контакты</Link> или сразу оставьте заявку.
         </p>

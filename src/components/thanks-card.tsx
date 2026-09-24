@@ -2,8 +2,8 @@
 
 import Link from "next/link";
 import { CircleCheck, Phone } from "lucide-react";
-import { CalcResponder } from "@/components/calc-responder";
 import { messengerLinks } from "@/components/messengers";
+import { LEAD_GOAL } from "@/lib/lead";
 import { company } from "@/lib/site";
 
 export function ThanksCard({
@@ -13,10 +13,13 @@ export function ThanksCard({
 }) {
   return (
     <div
-      className="thanks-card"
+      id="lead-thanks"
+      className="thanks-card metrika-goal-lead"
       role="dialog"
       aria-modal="true"
       aria-labelledby="thanks-title"
+      data-goal={LEAD_GOAL}
+      data-metrika-goal={LEAD_GOAL}
       onClick={(event) => event.stopPropagation()}
     >
       {onClose ? (
@@ -31,10 +34,9 @@ export function ThanksCard({
         <em>за заявку</em>
       </h1>
       <p>
-        Мы получили обращение и уже передали его менеджеру. Ответим в течение 2 рабочих часов
-        в {company.hours}. Если задача срочная — позвоните или напишите в мессенджер.
+        Мы получили обращение. Менеджер свяжется в течение {company.replyIn} в рабочее время {company.hours}.
+        Если задача срочная — позвоните или напишите в мессенджер.
       </p>
-      <CalcResponder light />
       <div className="thanks-messengers">
         {messengerLinks.map(({ id, href, label, tone, Icon }) => (
           <a

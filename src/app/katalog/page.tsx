@@ -5,8 +5,9 @@ import { CatalogBrowser } from "@/components/catalog-browser";
 import { categories } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Каталог продукции",
-  description: "Вшивные и навесные бирки, упаковка, фурнитура, мерч, нанесение, полиграфия и разработка сайтов на заказ.",
+  title: "Каталог бирок, упаковки и мерча на заказ",
+  description:
+    "36 позиций на заказ в Москве: вшивные и навесные бирки, упаковка, фурнитура, мерч, полиграфия и сайты. Тираж от 100 штук, макет бесплатно.",
 };
 
 export default function CatalogPage() {

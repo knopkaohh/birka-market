@@ -1,21 +1,12 @@
-import Image from "next/image";
-import { company, salesContact } from "@/lib/site";
+import { company } from "@/lib/site";
 
 export function CalcResponder({ light = false }: { light?: boolean }) {
-  const person = salesContact;
-  if (!person) return null;
-
   return (
-    <div className={`calc-responder ${light ? "is-light" : ""}`}>
-      <div className="calc-responder-photo">
-        <Image src={person.photo} alt={person.name} fill sizes="56px" />
-      </div>
-      <p>
-        <strong>Вам ответит {person.name}</strong>
-        <span>
-          {person.role}. Ответим за 2 рабочих часа. {company.hours}.
-        </span>
-      </p>
-    </div>
+    <p className={`calc-promise ${light ? "is-light" : ""}`}>
+      <strong>Менеджер свяжется в течение {company.replyIn}</strong>
+      <span>
+        В рабочее время {company.hours}. Если задача срочная — позвоните или напишите в мессенджер.
+      </span>
+    </p>
   );
 }

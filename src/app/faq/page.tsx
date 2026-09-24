@@ -5,8 +5,9 @@ import { CalculatorBlock } from "@/components/calculator-block";
 import { faqItems } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Вопросы и ответы",
-  description: "Сроки, макеты, образцы, минимальные тиражи, оплата и доставка Бирка Маркет.",
+  title: "Вопросы о тираже, сроках и оплате",
+  description:
+    "Минимальный тираж, бесплатный макет, образцы, сроки производства, оплата и доставка бирок Бирка Маркет в Москве.",
 };
 
 export default function FaqPage() {

@@ -4,6 +4,7 @@ import { MobileBar } from "@/components/mobile-bar";
 import { SiteChrome } from "@/components/site-chrome";
 import { SiteFooter } from "@/components/site-footer";
 import { UiFallbackScript } from "@/components/ui-fallback-script";
+import { YandexMetrika } from "@/components/yandex-metrika";
 import { company } from "@/lib/site";
 import "./globals.css";
 
@@ -21,27 +22,35 @@ const cormorant = Cormorant_Garamond({
 export const metadata: Metadata = {
   metadataBase: new URL("https://birka-market.ru"),
   title: {
-    default: "Бирки, упаковка и мерч на заказ | Бирка Маркет",
+    default: "Бирки, упаковка и мерч на заказ в Москве | Бирка Маркет",
     template: "%s | Бирка Маркет",
   },
   description:
-    "Производство бирок, упаковки, фурнитуры, мерча и полиграфии для одежды. Тираж от 100 штук, бесплатный макет, доставка по России.",
+    "Производство бирок, упаковки, фурнитуры, мерча и полиграфии в Москве. Тираж от 100 штук, макет бесплатно, доставка по России. Оставьте заявку — менеджер свяжется за 10 минут.",
+  alternates: { canonical: "https://birka-market.ru/" },
   openGraph: {
     title: `Бирка Маркет — ${company.slogan}`,
-    description: "Бирки, упаковка и фурнитура от макета до готового тиража.",
+    description:
+      "Бирки, упаковка и фурнитура на заказ в Москве: бесплатный макет, тираж от 100 штук, доставка по России.",
     type: "website",
     locale: "ru_RU",
+    url: "https://birka-market.ru/",
+    images: [{ url: "/images/products/jacquard.jpg", alt: "Жаккардовые бирки Бирка Маркет" }],
   },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   const organization = {
     "@context": "https://schema.org",
-    "@type": "Organization",
+    "@type": "LocalBusiness",
     name: company.name,
     url: "https://birka-market.ru",
     telephone: company.phoneHref.replace("tel:", ""),
     email: company.email,
+    image: "https://birka-market.ru/images/products/jacquard.jpg",
+    priceRange: "₽₽",
+    openingHours: "Mo-Fr 09:00-18:00",
+    areaServed: ["RU", "Москва"],
     address: {
       "@type": "PostalAddress",
       addressLocality: "Москва",
@@ -67,6 +76,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organization) }}
         />
+        <YandexMetrika />
         <UiFallbackScript />
       </body>
     </html>

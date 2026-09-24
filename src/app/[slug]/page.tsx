@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { ProductLanding } from "@/components/product-landing";
 import { getLanding } from "@/lib/landings";
+import { landingMetadata } from "@/lib/seo";
 import { getProduct, products } from "@/lib/site";
 
 type Params = { slug: string };
@@ -23,10 +24,7 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
   const landing = getLanding(slug);
   const product = getProduct(slug);
   if (!landing || !product) return {};
-  return {
-    title: landing.seoTitle,
-    description: landing.seoDescription,
-  };
+  return landingMetadata(landing, product);
 }
 
 export default async function ProductPage({

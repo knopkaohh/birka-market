@@ -93,10 +93,10 @@ export default function Home() {
               <br />о брендах
             </small>
           </div>
-          <div className="scroll-cue">
+          <a className="scroll-cue" href="#categories">
             <span>Листайте</span>
             <ArrowDownRight />
-          </div>
+          </a>
         </div>
       </section>
 
@@ -186,13 +186,13 @@ export default function Home() {
         </div>
         <div className="works-grid">
           {portfolio.map((item, index) => (
-            <figure className={`work-card work-${index + 1}`} key={item.image}>
+            <Link href={item.href} className={`work-card work-${index + 1}`} key={item.image}>
               <Image src={item.image} alt={`Пример работы Бирка Маркет: ${item.label}`} fill sizes="(max-width: 700px) 90vw, 45vw" />
-              <figcaption>
+              <span>
                 <span>{item.label}</span>
                 <ArrowDownRight />
-              </figcaption>
-            </figure>
+              </span>
+            </Link>
           ))}
         </div>
       </section>

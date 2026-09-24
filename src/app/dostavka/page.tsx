@@ -4,8 +4,9 @@ import { CalculatorBlock } from "@/components/calculator-block";
 import { company } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Доставка",
-  description: "Доставка бирок и упаковки по Москве, России и СНГ. Самовывоз со склада в Москве.",
+  title: "Доставка по Москве и России",
+  description:
+    "Доставка бирок и упаковки по Москве, России и СНГ. Курьер, СДЭК, Почта России. Самовывоз со склада в Москве, Строительный проезд 2с1.",
 };
 
 export default function DeliveryPage() {

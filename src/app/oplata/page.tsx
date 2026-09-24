@@ -3,8 +3,9 @@ import { Breadcrumbs } from "@/components/breadcrumbs";
 import { CalculatorBlock } from "@/components/calculator-block";
 
 export const metadata: Metadata = {
-  title: "Оплата",
-  description: "Оплата заказов Бирка Маркет: расчётный счёт для юрлиц, электронный платёж и сплит.",
+  title: "Оплата заказа без НДС",
+  description:
+    "Оплата тиража Бирка Маркет: расчётный счёт для юрлиц, электронный платёж и сплит. Работаем без НДС. Счёт после согласования макета.",
 };
 
 export default function PaymentPage() {

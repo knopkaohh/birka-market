@@ -10,6 +10,7 @@ export const company = {
   vk: "https://vk.com/birka_market",
   address: "Москва, Строительный проезд, дом 2, стр. 1, офис № 1",
   hours: "Пн–Пт, 09:00–18:00",
+  replyIn: "10 минут",
   pickupHours: "Самовывоз: Пн–Пт, 10:00–18:00",
   since: 2017,
   brands: "19 250",
@@ -742,8 +743,6 @@ export const team: TeamMember[] = [
   },
 ];
 
-export const salesContact = team.find((person) => person.role === "Руководитель отдела продаж") ?? team[1];
-
 export const faqItems = [
   {
     q: "Какой минимальный тираж?",
@@ -779,10 +778,10 @@ export const processSteps = [
 ];
 
 export const portfolio = [
-  { image: "/images/work-1.jpg", label: "Картон • навесные бирки" },
-  { image: "/images/work-2.jpg", label: "ПВХ • патчи" },
-  { image: "/images/work-4.jpg", label: "ZIP Lock • упаковка" },
-  { image: "/images/work-5.jpg", label: "Крафт • пакеты" },
+  { image: "/images/work-1.jpg", label: "Картон • навесные бирки", href: "/birki-karton" },
+  { image: "/images/work-2.jpg", label: "ПВХ • патчи", href: "/rubber" },
+  { image: "/images/work-4.jpg", label: "ZIP Lock • упаковка", href: "/zip-pack" },
+  { image: "/images/work-5.jpg", label: "Крафт • пакеты", href: "/kraft" },
 ];
 
 export const cases = [
