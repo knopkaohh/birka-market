@@ -1,6 +1,7 @@
 "use client";
 
 import { FormEvent, useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 import { usePathname } from "next/navigation";
 import { ArrowRight, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -20,6 +21,7 @@ export function QuickCalc() {
   const [path, setPath] = useState(pathname);
   const [calcVisible, setCalcVisible] = useState(false);
   const [open, setOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const [phone, setPhone] = useState("");
   const [phoneError, setPhoneError] = useState("");
   const [status, setStatus] = useState<"idle" | "sending" | "error" | "done">("idle");
@@ -36,10 +38,32 @@ export function QuickCalc() {
   const hiddenPage = pathname === "/raschet" || pathname === "/spasibo";
 
   useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  useEffect(() => {
     const onOpen = () => setOpen(true);
     window.addEventListener(OPEN_QUICK_CALC, onOpen);
     return () => window.removeEventListener(OPEN_QUICK_CALC, onOpen);
   }, []);
+
+  useEffect(() => {
+    if (!open) return;
+    const previous = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setOpen(false);
+    };
+    window.addEventListener("keydown", onKey);
+    const focus = window.setTimeout(() => {
+      document.getElementById("quick-name")?.focus();
+    }, 80);
+    return () => {
+      document.body.style.overflow = previous;
+      window.removeEventListener("keydown", onKey);
+      window.clearTimeout(focus);
+    };
+  }, [open]);
 
   useEffect(() => {
     if (hiddenPage) return;
@@ -93,52 +117,56 @@ export function QuickCalc() {
 
   return (
     <>
-      {showTrigger || open ? (
-        <div className={`quick-calc-dock ${open ? "is-open" : ""}`}>
-          {open ? (
-            <form className="quick-calc-panel" onSubmit={submit}>
-              <div className="quick-calc-head">
-                <strong>Быстрый расчёт</strong>
-                <button type="button" onClick={() => setOpen(false)} aria-label="Закрыть">
-                  <X size={18} />
-                </button>
-              </div>
-              <p>Имя и телефон — перезвоним в течение 10 минут.</p>
-              <label htmlFor="quick-name">Имя</label>
-              <Input id="quick-name" name="name" placeholder="Как к вам обращаться?" required />
-              <label htmlFor="quick-phone">Телефон</label>
-              <Input
-                id="quick-phone"
-                name="phone"
-                type="tel"
-                inputMode="tel"
-                autoComplete="tel"
-                placeholder="+7 (999) 000-00-00"
-                value={phone}
-                pattern="^\+7 \(\d{3}\) \d{3}-\d{2}-\d{2}$"
-                aria-invalid={phoneError ? true : undefined}
-                onChange={(event) => {
-                  const next = formatRuPhone(event.target.value);
-                  setPhone(next);
-                  event.target.setCustomValidity(isCompleteRuPhone(next) ? "" : "Введите номер в формате +7 (999) 000-00-00");
-                  if (phoneError) setPhoneError("");
-                }}
-                required
-              />
-              {phoneError ? <span className="field-error">{phoneError}</span> : null}
-              <Button type="submit" disabled={status === "sending"} className="submit-button">
-                {status === "sending" ? "Отправляем…" : "Отправить"}
-                <ArrowRight />
-              </Button>
-              {status === "error" ? <div className="form-message error-message">{errorText}</div> : null}
-            </form>
-          ) : (
-            <button type="button" className="quick-cta" onClick={() => setOpen(true)}>
-              Быстрый расчёт
-            </button>
-          )}
+      {showTrigger ? (
+        <div className="quick-calc-dock">
+          <button type="button" className="quick-cta" onClick={() => setOpen(true)}>
+            Быстрый расчёт
+          </button>
         </div>
       ) : null}
+      {mounted && open
+        ? createPortal(
+            <div className="quick-calc-overlay" onClick={() => setOpen(false)}>
+              <form className="quick-calc-panel" onSubmit={submit} onClick={(event) => event.stopPropagation()}>
+                <div className="quick-calc-head">
+                  <strong>Быстрый расчёт</strong>
+                  <button type="button" onClick={() => setOpen(false)} aria-label="Закрыть">
+                    <X size={18} />
+                  </button>
+                </div>
+                <p>Имя и телефон — перезвоним в течение 10 минут.</p>
+                <label htmlFor="quick-name">Имя</label>
+                <Input id="quick-name" name="name" placeholder="Как к вам обращаться?" required />
+                <label htmlFor="quick-phone">Телефон</label>
+                <Input
+                  id="quick-phone"
+                  name="phone"
+                  type="tel"
+                  inputMode="tel"
+                  autoComplete="tel"
+                  placeholder="+7 (999) 000-00-00"
+                  value={phone}
+                  pattern="^\+7 \(\d{3}\) \d{3}-\d{2}-\d{2}$"
+                  aria-invalid={phoneError ? true : undefined}
+                  onChange={(event) => {
+                    const next = formatRuPhone(event.target.value);
+                    setPhone(next);
+                    event.target.setCustomValidity(isCompleteRuPhone(next) ? "" : "Введите номер в формате +7 (999) 000-00-00");
+                    if (phoneError) setPhoneError("");
+                  }}
+                  required
+                />
+                {phoneError ? <span className="field-error">{phoneError}</span> : null}
+                <Button type="submit" disabled={status === "sending"} className="submit-button">
+                  {status === "sending" ? "Отправляем…" : "Отправить"}
+                  <ArrowRight />
+                </Button>
+                {status === "error" ? <div className="form-message error-message">{errorText}</div> : null}
+              </form>
+            </div>,
+            document.body,
+          )
+        : null}
       <ThanksOverlay open={status === "done"} onClose={() => setStatus("idle")} />
     </>
   );
