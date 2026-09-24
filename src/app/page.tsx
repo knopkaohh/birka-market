@@ -80,7 +80,7 @@ export default function Home() {
           </div>
           <div className="photo-card photo-main" data-parallax="0.06" data-parallax-base="rotate(3deg)">
             <Image
-              src="/images/products/jacquard.jpg"
+              src="/images/jacquard/g2.jpg"
               alt="Жаккардовые бирки, изготовленные Бирка Маркет"
               fill
               sizes="(max-width: 900px) 80vw, 35vw"
@@ -88,7 +88,7 @@ export default function Home() {
             />
           </div>
           <div className="photo-card photo-small" data-parallax="0.18" data-parallax-base="rotate(-7deg)">
-            <Image src="/images/products/cotton.jpg" alt="Хлопковые бирки с логотипом" fill sizes="220px" />
+            <Image src="/images/cotton/g10.jpg" alt="Хлопковая бирка в руках" fill sizes="220px" />
           </div>
           <div className="quality-stamp" data-parallax="0.1" data-parallax-base="rotate(7deg)">
             <span>с 2017</span>
@@ -136,7 +136,21 @@ export default function Home() {
           <p>Восемь позиций, которые чаще всего открывают сотрудничество. Полный перечень — в каталоге.</p>
         </div>
         <div className="product-grid">
-          {featured.map((item, index) => item && <ProductCard key={item.slug} product={item} index={index} />)}
+          {featured.map((item, index) => item && (
+            <ProductCard
+              key={item.slug}
+              product={item}
+              index={index}
+              image={
+                {
+                  jacquard: "/images/jacquard/g5.jpg",
+                  "birki-karton": "/images/birki-karton/g3.jpg",
+                  kraft: "/images/kraft/g3.jpg",
+                  merchi: "/images/merchi/g5.jpg",
+                }[item.slug]
+              }
+            />
+          ))}
         </div>
         <div className="choice-banner">
           <div className="choice-icon">

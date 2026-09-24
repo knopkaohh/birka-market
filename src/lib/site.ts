@@ -784,51 +784,51 @@ export const processSteps = [
 ];
 
 export const portfolio = [
-  { image: "/images/work-1.jpg", label: "Картон • навесные бирки", href: "/birki-karton" },
-  { image: "/images/work-2.jpg", label: "ПВХ • патчи", href: "/rubber" },
-  { image: "/images/work-4.jpg", label: "ZIP Lock • упаковка", href: "/zip-pack" },
-  { image: "/images/work-5.jpg", label: "Крафт • пакеты", href: "/kraft" },
+  { image: "/images/birki-karton/g1.jpg", label: "Картон • навесные бирки", href: "/birki-karton" },
+  { image: "/images/rubber/g5.jpg", label: "ПВХ • патчи", href: "/rubber" },
+  { image: "/images/zip-pack/g2.jpg", label: "ZIP Lock • упаковка", href: "/zip-pack" },
+  { image: "/images/kraft/g6.jpg", label: "Крафт • пакеты", href: "/kraft" },
 ];
 
 export const cases = [
   {
     slug: "birki-karton",
-    image: "/images/work-1.jpg",
+    image: "/images/birki-karton/g2.jpg",
     tag: "Картон",
     title: "Навесные бирки с QR",
     text: "Фигурные ярлыки для внешней маркировки: логотип, QR и контакты на одном носителе.",
   },
   {
     slug: "rubber",
-    image: "/images/work-2.jpg",
+    image: "/images/rubber/g7.jpg",
     tag: "ПВХ-патчи",
     title: "Объёмные патчи на одежду",
     text: "Рельефные ПВХ-нашивки с логотипом. Для курток, рюкзаков и коллекций, где нужен объём.",
   },
   {
     slug: "banner",
-    image: "/images/work-3.jpg",
+    image: "/images/banner/g2.jpg",
     tag: "Баннеры",
     title: "Тканевый баннер на улицу",
     text: "Печать на ткани под конструкцию: акции, входные группы и сезонные коммуникации.",
   },
   {
     slug: "zip-pack",
-    image: "/images/work-4.jpg",
+    image: "/images/zip-pack/g4.jpg",
     tag: "ZIP Lock",
     title: "Пакеты с бегунком под бренд",
     text: "ZIP Lock с одноцветной печатью. Тираж от 500 штук, считаем по размеру и плотности.",
   },
   {
     slug: "kraft",
-    image: "/images/work-5.jpg",
+    image: "/images/kraft/g7.jpg",
     tag: "Крафт",
     title: "Крафтовые пакеты для выдачи",
     text: "Плотные пакеты с кручёными ручками под магазин, шоурум и доставку заказа.",
   },
   {
     slug: "elastic",
-    image: "/images/work-6.jpg",
+    image: "/images/elastic/g5.jpg",
     tag: "Жаккардовая резинка",
     title: "Тканая лента с надписью",
     text: "Резинка и жаккардовая тесьма с логотипом для пояса, манжеты и внутренней отделки.",

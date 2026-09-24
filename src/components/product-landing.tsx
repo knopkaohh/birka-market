@@ -7,6 +7,7 @@ import { LeadForm } from "@/components/lead-form";
 import { MaterialDetails } from "@/components/material-details";
 import type { LandingContent, QuotePrefill } from "@/lib/landings/types";
 import { quoteComment, quoteHref, quoteQuantity } from "@/lib/landings/types";
+import { photoKey } from "@/lib/photo-id";
 import { landingJsonLd } from "@/lib/seo";
 import { company, getCategory, getProduct } from "@/lib/site";
 
@@ -42,6 +43,20 @@ export function ProductLanding({
   const selectedVariant = variant ?? content.variants[0]?.id;
   const formKey = [selectedVariant, quote?.qty, quote?.size, quote?.spec, quote?.price].filter(Boolean).join("-");
   const prefillComment = quote ? quoteComment(quote) : "";
+  const usedPhotos = new Set<string>();
+  for (const src of content.hero) usedPhotos.add(photoKey(src));
+  const variantHasPhoto = content.variants.map((item) => {
+    const key = photoKey(item.image);
+    if (usedPhotos.has(key)) return false;
+    usedPhotos.add(key);
+    return true;
+  });
+  const gallery = content.gallery.filter((item) => {
+    const key = photoKey(item.src);
+    if (usedPhotos.has(key)) return false;
+    usedPhotos.add(key);
+    return true;
+  });
 
   return (
     <>
@@ -106,16 +121,18 @@ export function ProductLanding({
           <p>{content.variantIntro}</p>
         </div>
         <div className="jq-variants">
-          {content.variants.map((item) => (
+          {content.variants.map((item, index) => (
             <Link
               href={item.href ?? `${path}?variant=${item.id}#calc`}
               prefetch={false}
               className={`jq-variant is-${item.tone}`}
               key={item.id}
             >
-              <div className="jq-variant-photo">
-                <Image src={item.image} alt={item.name} fill sizes="280px" />
-              </div>
+              {variantHasPhoto[index] && (
+                <div className="jq-variant-photo">
+                  <Image src={item.image} alt={item.name} fill sizes="280px" />
+                </div>
+              )}
               <span className="jq-variant-fold">{item.fold}</span>
               <h3>{item.name}</h3>
               <p>{item.text}</p>
@@ -128,20 +145,22 @@ export function ProductLanding({
         </div>
       </section>
 
-      <section className="jq-section" id="works">
-        <div className="jq-heading">
-          <span className="section-number">02 / РАБОТЫ</span>
-          <h2>{content.galleryTitle}</h2>
-          <p>{content.galleryIntro}</p>
-        </div>
-        <div className="jq-gallery">
-          {content.gallery.map((item) => (
-            <figure key={item.src}>
-              <Image src={item.src} alt={item.alt} fill sizes="(max-width: 700px) 50vw, 25vw" />
-            </figure>
-          ))}
-        </div>
-      </section>
+      {gallery.length > 0 && (
+        <section className="jq-section" id="works">
+          <div className="jq-heading">
+            <span className="section-number">02 / РАБОТЫ</span>
+            <h2>{content.galleryTitle}</h2>
+            <p>{content.galleryIntro}</p>
+          </div>
+          <div className="jq-gallery">
+            {gallery.map((item) => (
+              <figure key={item.src}>
+                <Image src={item.src} alt={item.alt} fill sizes="(max-width: 700px) 50vw, 25vw" />
+              </figure>
+            ))}
+          </div>
+        </section>
+      )}
 
       <section className="jq-section" id="orientir">
         <div className="jq-heading">
@@ -223,7 +242,7 @@ export function ProductLanding({
         />
       </section>
 
-      <MaterialDetails content={content} />
+      <MaterialDetails content={content} usedPhotos={usedPhotos} />
 
       <section className="jq-final">
         <div>

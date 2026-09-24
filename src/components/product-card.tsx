@@ -3,12 +3,20 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import type { Product } from "@/lib/site";
 
-export function ProductCard({ product, index }: { product: Product; index?: number }) {
+export function ProductCard({
+  product,
+  index,
+  image,
+}: {
+  product: Product;
+  index?: number;
+  image?: string;
+}) {
   return (
     <article className="product-card">
       <Link href={`/${product.slug}`} className="product-image">
         <Image
-          src={product.image}
+          src={image ?? product.image}
           alt={product.name}
           fill
           sizes="(max-width: 700px) 90vw, (max-width: 1100px) 45vw, 30vw"

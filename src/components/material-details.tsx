@@ -3,10 +3,24 @@ import { Check } from "lucide-react";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { ProductCard } from "@/components/product-card";
 import type { LandingContent } from "@/lib/landings/types";
+import { photoKey } from "@/lib/photo-id";
 import { getProduct } from "@/lib/site";
 
-export function MaterialDetails({ content }: { content: LandingContent }) {
+export function MaterialDetails({
+  content,
+  usedPhotos,
+}: {
+  content: LandingContent;
+  usedPhotos?: Set<string>;
+}) {
   const related = content.complement.map((slug) => getProduct(slug)).filter(Boolean);
+  const seen = usedPhotos ?? new Set<string>();
+  const onProduct = content.onProduct.filter((item) => {
+    const key = photoKey(item.image);
+    if (seen.has(key)) return false;
+    seen.add(key);
+    return true;
+  });
 
   return (
     <section className="jq-section jq-more" id="details">
@@ -75,8 +89,9 @@ export function MaterialDetails({ content }: { content: LandingContent }) {
           </AccordionTrigger>
           <AccordionContent className="jq-more-panel">
             <p className="jq-more-lead">{content.onProductIntro}</p>
+            {onProduct.length > 0 && (
             <div className="jq-onproduct">
-              {content.onProduct.map((item) => (
+              {onProduct.map((item) => (
                 <figure key={item.title}>
                   <div>
                     <Image src={item.image} alt={item.title} fill sizes="(max-width: 700px) 90vw, 30vw" />
@@ -88,6 +103,7 @@ export function MaterialDetails({ content }: { content: LandingContent }) {
                 </figure>
               ))}
             </div>
+            )}
           </AccordionContent>
         </AccordionItem>
 
@@ -156,7 +172,17 @@ export function MaterialDetails({ content }: { content: LandingContent }) {
           <AccordionContent className="jq-more-panel">
             <p className="jq-more-lead">{content.complementIntro}</p>
             <div className="product-grid">
-              {related.map((item, index) => item && <ProductCard key={item.slug} product={item} index={index} />)}
+              {related.map((item, index) => {
+                if (!item) return null;
+                let image = item.image;
+                if (seen.has(photoKey(image))) {
+                  const alt = `/images/${item.slug}/g5.jpg`;
+                  image = seen.has(photoKey(alt)) ? image : alt;
+                }
+                if (seen.has(photoKey(image)) && image === item.image) return null;
+                seen.add(photoKey(image));
+                return <ProductCard key={item.slug} product={item} index={index} image={image} />;
+              })}
             </div>
           </AccordionContent>
         </AccordionItem>

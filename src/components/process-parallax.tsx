@@ -7,9 +7,9 @@ import { ArrowDown, ArrowRight, CircleCheck, ChevronRight, PackageCheck } from "
 import { processSteps } from "@/lib/site";
 
 const scenes = [
-  { image: "/images/work-1.jpg", caption: "Заявки и образцы" },
-  { image: "/images/product-jacquard.jpg", caption: "Подбор материала" },
-  { image: "/images/work-2.jpg", caption: "Макет для печати" },
+  { image: "/images/satin/g1.jpg", caption: "Заявки и образцы" },
+  { image: "/images/silikon/g6.jpg", caption: "Подбор материала" },
+  { image: "/images/neylon/g4.jpg", caption: "Макет для печати" },
   { image: "/images/process.jpg", caption: "Контроль тиража" },
 ] as const;
 
