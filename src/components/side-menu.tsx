@@ -54,7 +54,7 @@ export function SideMenu({ open, onClose }: SideMenuProps) {
               type="search"
               value={query}
               onChange={(event) => setQuery(event.target.value)}
-              placeholder="Сатин, ZIP, лендинг…"
+              placeholder="Сатин, ZIP, визитки…"
               autoComplete="off"
             />
           </label>

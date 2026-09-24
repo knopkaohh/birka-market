@@ -15,8 +15,6 @@ import {
   printingLanding,
   stickerLanding,
 } from "./poligrafiya";
-import { corporateLanding, lendingLanding, shopLanding, sitesHubLanding } from "./sayty";
-
 export type { LandingContent } from "./types";
 
 export const landings: Record<string, LandingContent> = {
@@ -52,10 +50,6 @@ export const landings: Record<string, LandingContent> = {
   magazine: magazineLanding,
   flags: flagsLanding,
   banner: bannerLanding,
-  "razrabotka-saytov": sitesHubLanding,
-  lending: lendingLanding,
-  "internet-magazin": shopLanding,
-  "korporativnyy-sayt": corporateLanding,
 };
 
 export function getLanding(slug: string) {
