@@ -199,7 +199,7 @@ export const businesscardLanding: LandingContent = {
       name: "Двусторонние",
       fold: "Лицо и данные",
       text: "Логотип и характер с одной стороны, контакты — с другой. Классика продаж.",
-      image: g("businesscard", 2),
+      image: g("businesscard", 8),
       tone: "sand",
     },
     {
@@ -221,16 +221,13 @@ export const businesscardLanding: LandingContent = {
   ],
   galleryTitle: "Визитки, которые мы печатаем",
   galleryIntro: "Плотность, две стороны, ламинация — карточки, которые не стыдно достать за столом.",
-  gallery: gallery("businesscard", [
-    "Визитки с логотипом",
-    "Двусторонние визитки",
-    "Ламинированные визитки",
-    "Плотные визитки",
-    "Визитки для шоурума",
-    "Печать визиток",
-    "Фирменные карточки",
-    "Тираж визиток",
-  ]),
+  gallery: [
+    { src: p("businesscard"), alt: "Розовые визитки LAMIX" },
+    { src: g("businesscard", 1), alt: "Визитки MORE MORE" },
+    { src: g("businesscard", 8), alt: "Белые визитки с золотыми линиями" },
+    { src: g("businesscard", 3), alt: "Визитки с золотым тиснением" },
+    { src: g("businesscard", 4), alt: "Визитка цветочной студии" },
+  ],
   quotesTitle: "Примеры расчёта визиток",
   quotesIntro: "Ориентиры. Плотность и ламинация меняют сумму сильнее «ещё одной плашки».",
   quotes: [
@@ -282,7 +279,7 @@ export const businesscardLanding: LandingContent = {
   onProductTitle: "Где визитка должна сработать",
   onProductIntro: "Не в макете — в кармане, на стойке и в стопке чужих карточек.",
   onProduct: [
-    { title: "В руке", text: "Плотность считывается сразу.", image: g("businesscard", 2) },
+    { title: "В руке", text: "Плотность считывается сразу.", image: g("businesscard", 8) },
     { title: "На стойке", text: "Стопка не «пухнет» от тонкой бумаги.", image: g("businesscard", 4) },
     { title: "С пакетом", text: "Один цвет бренда.", image: g("businesscard", 6) },
   ],
