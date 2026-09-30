@@ -74,19 +74,25 @@ export default function Home() {
         </div>
         <div className="hero-visual" aria-label="Примеры изготовленных бирок">
           <div className="hero-bg" aria-hidden="true">
+            <div className="hero-orbit">
+              <span className="hero-orbit-dot" />
+            </div>
             <div className="hero-yellow-shape" />
             <div className="hero-sand-shape" />
+            <span className="hero-chip hero-chip-a" />
+            <span className="hero-chip hero-chip-b" />
+            <span className="hero-chip hero-chip-c" />
           </div>
           <div className="floating-note note-one" data-parallax="0.22" data-parallax-base="rotate(-3deg)">
             <Sparkles size={16} />
             Реальные работы
           </div>
-          <div className="photo-card photo-main" data-parallax="0.06" data-parallax-base="rotate(2deg)">
+          <div className="photo-card photo-main">
             <Image
               src="/images/jacquard/hero-board.jpg"
               alt="Набор вшивных бирок Capri, GAZZE, Haytak и других брендов"
               fill
-              sizes="(max-width: 900px) 86vw, 42vw"
+              unoptimized
               priority
             />
           </div>
