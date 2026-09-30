@@ -81,10 +81,9 @@ export default function Home() {
             <div className="hero-sand-shape" />
             <span className="hero-chip hero-chip-a" />
             <span className="hero-chip hero-chip-b" />
-            <span className="hero-chip hero-chip-c" />
           </div>
-          <div className="floating-note note-one" data-parallax="0.22" data-parallax-base="rotate(-3deg)">
-            <Sparkles size={16} />
+          <div className="floating-note note-one">
+            <Sparkles size={20} />
             Реальные работы
           </div>
           <div className="photo-card photo-main">
@@ -99,7 +98,7 @@ export default function Home() {
           <div className="photo-card photo-small" data-parallax="0.18" data-parallax-base="rotate(-7deg)">
             <Image src="/images/jacquard/hero-pile.jpg" alt="Россыпь жаккардовых бирок GAZZE, ASKAROVA и OVNOVA" fill sizes="240px" />
           </div>
-          <div className="quality-stamp" data-parallax="0.1" data-parallax-base="rotate(7deg)">
+          <div className="quality-stamp">
             <span>с 2017</span>
             <small>
               заботимся

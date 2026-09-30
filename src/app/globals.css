@@ -632,7 +632,6 @@ body.quick-calc-open.quick-calc-in > *:not(.quick-calc-overlay):not(.thanks-over
 }
 .hero-chip-a { top: 18%; left: 8%; background: var(--ink); animation: heroChip 7s ease-in-out infinite; }
 .hero-chip-b { top: 62%; left: 4%; width: 54px; height: 54px; background: var(--paper); animation: heroChip 9s ease-in-out infinite reverse; }
-.hero-chip-c { right: 8%; top: 8%; width: 92px; background: #2f3c32; animation: heroChip 8s ease-in-out 1.2s infinite; }
 @keyframes heroSpin { to { transform: rotate(360deg); } }
 @keyframes heroSheen {
   0% { transform: translate3d(-18%, 0, 0); }
@@ -666,17 +665,25 @@ body.quick-calc-open.quick-calc-in > *:not(.quick-calc-overlay):not(.thanks-over
   right: 3%; bottom: 7%; transform: rotate(-7deg); border: 7px solid #f8f5ed;
 }
 .floating-note {
-  position: absolute; z-index: 3; top: 7%; left: 6%; display: flex; gap: 8px; align-items: center;
-  padding: 10px 14px; border-radius: 30px; background: var(--paper); font-size: 10px; font-weight: 800;
-  transform: rotate(-3deg);
+  position: absolute; z-index: 3; top: 6%; left: 4%; display: flex; gap: 10px; align-items: center;
+  padding: 14px 18px; border-radius: 40px; background: var(--paper); font-size: 14px; font-weight: 800;
+  animation: heroFloatNote 7s ease-in-out infinite;
 }
 .quality-stamp {
-  position: absolute; z-index: 3; left: 5%; bottom: 8%; width: 120px; height: 120px;
+  position: absolute; z-index: 3; left: 4%; bottom: 6%; width: 168px; height: 168px;
   display: grid; place-content: center; text-align: center; color: var(--paper); background: var(--ink); border-radius: 50%;
-  transform: rotate(7deg);
+  animation: heroFloatStamp 8.5s ease-in-out infinite;
 }
-.quality-stamp span { font-family: var(--font-cormorant), Georgia, serif; color: var(--yellow); font-size: 32px; font-weight: 700; line-height: 1; }
-.quality-stamp small { margin-top: 6px; font-size: 9px; line-height: 1.3; text-transform: uppercase; letter-spacing: .09em; }
+.quality-stamp span { font-family: var(--font-cormorant), Georgia, serif; color: var(--yellow); font-size: 44px; font-weight: 700; line-height: 1; }
+.quality-stamp small { margin-top: 8px; font-size: 12px; line-height: 1.25; text-transform: uppercase; letter-spacing: .08em; }
+@keyframes heroFloatNote {
+  0%, 100% { transform: translate3d(0, 0, 0) rotate(-4deg); }
+  50% { transform: translate3d(14px, -18px, 0) rotate(3deg); }
+}
+@keyframes heroFloatStamp {
+  0%, 100% { transform: translate3d(0, 0, 0) rotate(8deg); }
+  50% { transform: translate3d(-16px, -20px, 0) rotate(-6deg); }
+}
 .scroll-cue { position: absolute; right: 4%; top: 3%; display: flex; align-items: center; gap: 9px; color: rgba(34,35,34,.6); font-size: 9px; font-weight: 800; text-transform: uppercase; letter-spacing: .1em; text-decoration: none; transform: rotate(90deg) translateX(100%); transform-origin: right top; }
 
 .marquee { overflow: hidden; color: var(--yellow); background: var(--ink); }
@@ -862,6 +869,8 @@ body.quick-calc-open.quick-calc-in > *:not(.quick-calc-overlay):not(.thanks-over
   .hero-sand-shape,
   .hero-orbit,
   .hero-chip,
+  .floating-note,
+  .quality-stamp,
   .hero-bg::after { animation: none; }
 }
 
@@ -991,8 +1000,10 @@ footer .logo svg { height: 56px; }
   .hero-visual { min-height: 500px; }
   .photo-main { width: 82%; left: 4%; top: 8%; }
   .photo-small { width: 34%; right: 3%; bottom: 5%; }
-  .quality-stamp { left: 4%; bottom: 4%; width: 94px; height: 94px; }
-  .quality-stamp span { font-size: 26px; }
+  .floating-note { font-size: 12px; padding: 12px 14px; }
+  .quality-stamp { left: 4%; bottom: 4%; width: 124px; height: 124px; }
+  .quality-stamp span { font-size: 32px; }
+  .quality-stamp small { font-size: 10px; }
   .section { width: calc(100% - 36px); padding: 85px 0; }
   .section-heading { display: block; margin-bottom: 38px; }
   .section-heading h2, .process-content h2, .calculator-intro h2, .calculator-intro h1, .faq-title h2 { font-size: 46px; }
