@@ -80,15 +80,15 @@ export default function Home() {
           </div>
           <div className="photo-card photo-main" data-parallax="0.06" data-parallax-base="rotate(3deg)">
             <Image
-              src="/images/jacquard/burst.jpg"
-              alt="Цветные тканые бирки THE BURST"
+              src="/images/jacquard/hero-pile.jpg"
+              alt="Россыпь жаккардовых бирок GAZZE, ASKAROVA и OVNOVA"
               fill
               sizes="(max-width: 900px) 80vw, 35vw"
               priority
             />
           </div>
           <div className="photo-card photo-small" data-parallax="0.18" data-parallax-base="rotate(-7deg)">
-            <Image src="/images/jacquard/baby-bless.jpg" alt="Розовые жаккардовые бирки BABY BLESS" fill sizes="220px" />
+            <Image src="/images/jacquard/hero-board.jpg" alt="Набор вшивных бирок Capri, GAZZE, Haytak и других брендов" fill sizes="220px" />
           </div>
           <div className="quality-stamp" data-parallax="0.1" data-parallax-base="rotate(7deg)">
             <span>с 2017</span>

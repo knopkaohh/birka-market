@@ -233,6 +233,8 @@ export const photoId: Record<string, string> = {
   "/images/jacquard/burst.jpg": "9ce6f02094",
   "/images/jacquard/cupid.jpg": "c830819449",
   "/images/jacquard/gazprom.jpg": "e2e26684d3",
+  "/images/jacquard/hero-board.jpg": "973eac2cf2",
+  "/images/jacquard/hero-pile.jpg": "2af1b65df7",
   "/images/jacquard/haytak.jpg": "e4618b19cb",
   "/images/jacquard/insomny.jpg": "a9de024749",
   "/images/jacquard/lume.jpg": "a51bc35764",
