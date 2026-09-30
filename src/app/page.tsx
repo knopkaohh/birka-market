@@ -73,22 +73,25 @@ export default function Home() {
           </div>
         </div>
         <div className="hero-visual" aria-label="Примеры изготовленных бирок">
-          <div className="hero-yellow-shape" data-parallax="0.14" />
+          <div className="hero-bg" aria-hidden="true">
+            <div className="hero-yellow-shape" />
+            <div className="hero-sand-shape" />
+          </div>
           <div className="floating-note note-one" data-parallax="0.22" data-parallax-base="rotate(-3deg)">
             <Sparkles size={16} />
             Реальные работы
           </div>
-          <div className="photo-card photo-main" data-parallax="0.06" data-parallax-base="rotate(3deg)">
+          <div className="photo-card photo-main" data-parallax="0.06" data-parallax-base="rotate(2deg)">
             <Image
-              src="/images/jacquard/hero-pile.jpg"
-              alt="Россыпь жаккардовых бирок GAZZE, ASKAROVA и OVNOVA"
+              src="/images/jacquard/hero-board.jpg"
+              alt="Набор вшивных бирок Capri, GAZZE, Haytak и других брендов"
               fill
-              sizes="(max-width: 900px) 80vw, 35vw"
+              sizes="(max-width: 900px) 86vw, 42vw"
               priority
             />
           </div>
           <div className="photo-card photo-small" data-parallax="0.18" data-parallax-base="rotate(-7deg)">
-            <Image src="/images/jacquard/hero-board.jpg" alt="Набор вшивных бирок Capri, GAZZE, Haytak и других брендов" fill sizes="220px" />
+            <Image src="/images/jacquard/hero-pile.jpg" alt="Россыпь жаккардовых бирок GAZZE, ASKAROVA и OVNOVA" fill sizes="240px" />
           </div>
           <div className="quality-stamp" data-parallax="0.1" data-parallax-base="rotate(7deg)">
             <span>с 2017</span>

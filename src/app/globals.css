@@ -598,16 +598,37 @@ body.quick-calc-open.quick-calc-in > *:not(.quick-calc-overlay):not(.thanks-over
 .hero-proof span { color: var(--muted-ink); font-size: 11px; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; }
 
 .hero-visual { position: relative; min-height: 620px; background: #ded9ce; overflow: hidden; }
+.hero-bg { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
 [data-parallax] { will-change: transform; }
 .hero-yellow-shape {
   position: absolute; width: 78%; aspect-ratio: 1; right: -18%; top: -8%;
   border-radius: 50%; background: var(--yellow); filter: saturate(.9);
+  animation: heroBlobA 16s ease-in-out infinite alternate;
 }
-.photo-card { position: absolute; overflow: hidden; background: #ccc; box-shadow: 0 22px 50px rgba(34,35,34,.18); }
+.hero-sand-shape {
+  position: absolute; width: 52%; aspect-ratio: 1; left: -16%; bottom: -22%;
+  border-radius: 50%; background: #c8bfae;
+  animation: heroBlobB 22s ease-in-out infinite alternate;
+}
+@keyframes heroBlobA {
+  from { transform: translate3d(0, 0, 0) scale(1); }
+  to { transform: translate3d(-8%, 12%, 0) scale(1.14); }
+}
+@keyframes heroBlobB {
+  from { transform: translate3d(0, 0, 0) scale(1); }
+  to { transform: translate3d(14%, -10%, 0) scale(1.18); }
+}
+.photo-card { position: absolute; z-index: 1; overflow: hidden; background: #ccc; box-shadow: 0 22px 50px rgba(34,35,34,.18); }
 .photo-card img { object-fit: cover; transition: transform 1s cubic-bezier(.2,.8,.2,1); }
 .photo-card:hover img { transform: scale(1.04); }
-.photo-main { width: 55%; height: 68%; left: 19%; top: 11%; transform: rotate(3deg); border: 9px solid #f8f5ed; }
-.photo-small { width: 28%; height: 36%; right: 2%; bottom: 9%; transform: rotate(-7deg); border: 7px solid #f8f5ed; }
+.photo-main {
+  width: 72%; height: auto; aspect-ratio: 1280 / 1032;
+  left: 5%; top: 15%; transform: rotate(2deg); border: 9px solid #f8f5ed;
+}
+.photo-small {
+  width: 27%; height: auto; aspect-ratio: 3 / 4;
+  right: 3%; bottom: 7%; transform: rotate(-7deg); border: 7px solid #f8f5ed;
+}
 .floating-note {
   position: absolute; z-index: 3; top: 7%; left: 6%; display: flex; gap: 8px; align-items: center;
   padding: 10px 14px; border-radius: 30px; background: var(--paper); font-size: 10px; font-weight: 800;
@@ -801,6 +822,7 @@ body.quick-calc-open.quick-calc-in > *:not(.quick-calc-overlay):not(.thanks-over
 
 @media (prefers-reduced-motion: reduce) {
   .process-hint svg { animation: none; }
+  .hero-yellow-shape, .hero-sand-shape { animation: none; }
 }
 
 .calculator-section { display: grid; grid-template-columns: .82fr 1.18fr; gap: 7vw; padding: 120px var(--page-gutter); color: var(--paper); background: #2a2b2a; }
@@ -927,8 +949,8 @@ footer .logo svg { height: 56px; }
   .hero-proof strong { font-size: 18px; }
   .hero-proof span { max-width: 96px; font-size: 11px; }
   .hero-visual { min-height: 500px; }
-  .photo-main { width: 69%; height: 68%; left: 10%; top: 10%; }
-  .photo-small { width: 36%; height: 33%; right: 2%; bottom: 5%; }
+  .photo-main { width: 82%; left: 4%; top: 8%; }
+  .photo-small { width: 34%; right: 3%; bottom: 5%; }
   .quality-stamp { left: 4%; bottom: 4%; width: 94px; height: 94px; }
   .quality-stamp span { font-size: 26px; }
   .section { width: calc(100% - 36px); padding: 85px 0; }
