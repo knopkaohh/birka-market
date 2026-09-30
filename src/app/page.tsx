@@ -95,8 +95,21 @@ export default function Home() {
               priority
             />
           </div>
-          <div className="photo-card photo-small" data-parallax="0.18" data-parallax-base="rotate(-7deg)">
-            <Image src="/images/jacquard/hero-pile.jpg" alt="Россыпь жаккардовых бирок GAZZE, ASKAROVA и OVNOVA" fill sizes="240px" />
+          <div className="photo-card photo-small">
+            <Image
+              src="/images/satin/teddy.jpg"
+              alt="Чёрные и белые сатиновые бирки TEDDY'S treasures"
+              fill
+              unoptimized
+            />
+          </div>
+          <div className="photo-card photo-small-b">
+            <Image
+              src="/images/satin/annilook.jpg"
+              alt="Сатиновые ленты ANNILOOK, alo yoga и VIADISSI"
+              fill
+              unoptimized
+            />
           </div>
           <div className="quality-stamp">
             <span>с 2017</span>

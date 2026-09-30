@@ -661,9 +661,17 @@ body.quick-calc-open.quick-calc-in > *:not(.quick-calc-overlay):not(.thanks-over
 .photo-main img,
 .photo-main:hover img { transform: none; transition: none; }
 .photo-small {
-  width: 27%; height: auto; aspect-ratio: 3 / 4;
-  right: 3%; bottom: 7%; transform: rotate(-7deg); border: 7px solid #f8f5ed;
+  z-index: 3; width: 24%; height: auto; aspect-ratio: 3 / 4;
+  right: 2%; bottom: 6%; transform: rotate(-7deg); border: 7px solid #f8f5ed;
 }
+.photo-small-b {
+  z-index: 2; width: 34%; height: auto; aspect-ratio: 1280 / 960;
+  right: 16%; top: 8%; transform: rotate(6deg); border: 7px solid #f8f5ed;
+}
+.photo-small img,
+.photo-small:hover img,
+.photo-small-b img,
+.photo-small-b:hover img { transform: none; transition: none; }
 .floating-note {
   position: absolute; z-index: 3; top: 6%; left: 4%; display: flex; gap: 10px; align-items: center;
   padding: 14px 18px; border-radius: 40px; background: var(--paper); font-size: 14px; font-weight: 800;
@@ -999,7 +1007,8 @@ footer .logo svg { height: 56px; }
   .hero-proof span { max-width: 96px; font-size: 11px; }
   .hero-visual { min-height: 500px; }
   .photo-main { width: 82%; left: 4%; top: 8%; }
-  .photo-small { width: 34%; right: 3%; bottom: 5%; }
+  .photo-small { width: 30%; right: 2%; bottom: 4%; }
+  .photo-small-b { width: 44%; right: 8%; top: 5%; bottom: auto; }
   .floating-note { font-size: 12px; padding: 12px 14px; }
   .quality-stamp { left: 4%; bottom: 4%; width: 124px; height: 124px; }
   .quality-stamp span { font-size: 32px; }
