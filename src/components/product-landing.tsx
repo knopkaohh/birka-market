@@ -44,6 +44,12 @@ export function ProductLanding({
   const formKey = [selectedVariant, quote?.qty, quote?.size, quote?.spec, quote?.price].filter(Boolean).join("-");
   const prefillComment = quote ? quoteComment(quote) : "";
   const usedPhotos = new Set<string>(content.hero.map((src) => photoKey(src)));
+  if (content.slug === "satin") {
+    usedPhotos.delete(photoKey("/images/satin/teddy.jpg"));
+    usedPhotos.delete(photoKey("/images/satin/annilook.jpg"));
+    usedPhotos.add(photoKey("/images/satin/g2.jpg"));
+    usedPhotos.add(photoKey("/images/satin/g3.jpg"));
+  }
   const gallery = [...content.gallery, ...content.variants.map((item) => ({ src: item.image, alt: item.name })), ...content.onProduct.map((item) => ({ src: item.image, alt: item.title }))].filter((item) => {
     const key = photoKey(item.src);
     if (usedPhotos.has(key)) return false;
@@ -95,15 +101,15 @@ export function ProductLanding({
             ))}
           </div>
         </div>
-        <div className="jq-hero-visual">
+        <div className={`jq-hero-visual${content.slug === "satin" ? " is-satin" : ""}`}>
           <div className="jq-hero-main">
             <Image src={content.hero[0]} alt={content.heroAlts[0]} fill sizes="(max-width: 900px) 100vw, 50vw" priority />
           </div>
           <div className="jq-hero-small">
-            <Image src={content.hero[1]} alt={content.heroAlts[1]} fill sizes="280px" />
+            <Image src={content.hero[1]} alt={content.heroAlts[1]} fill sizes="280px" unoptimized={content.slug === "satin"} />
           </div>
           <div className="jq-hero-mid">
-            <Image src={content.hero[2]} alt={content.heroAlts[2]} fill sizes="240px" />
+            <Image src={content.hero[2]} alt={content.heroAlts[2]} fill sizes="240px" unoptimized={content.slug === "satin"} />
           </div>
         </div>
       </section>

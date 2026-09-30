@@ -73,24 +73,32 @@ export default function Home() {
           </div>
         </div>
         <div className="hero-visual" aria-label="Примеры изготовленных бирок">
-          <div className="hero-yellow-shape" data-parallax="0.14" />
-          <div className="floating-note note-one" data-parallax="0.22" data-parallax-base="rotate(-3deg)">
-            <Sparkles size={16} />
+          <div className="hero-bg" aria-hidden="true">
+            <div className="hero-orbit">
+              <span className="hero-orbit-dot" />
+            </div>
+            <div className="hero-yellow-shape" />
+            <div className="hero-sand-shape" />
+            <span className="hero-chip hero-chip-a" />
+            <span className="hero-chip hero-chip-b" />
+          </div>
+          <div className="floating-note note-one">
+            <Sparkles size={20} />
             Реальные работы
           </div>
-          <div className="photo-card photo-main" data-parallax="0.06" data-parallax-base="rotate(3deg)">
+          <div className="photo-card photo-main">
             <Image
-              src="/images/jacquard/g2.jpg"
-              alt="Жаккардовые бирки, изготовленные Бирка Маркет"
+              src="/images/jacquard/hero-board.jpg"
+              alt="Набор вшивных бирок Capri, GAZZE, Haytak и других брендов"
               fill
-              sizes="(max-width: 900px) 80vw, 35vw"
+              unoptimized
               priority
             />
           </div>
           <div className="photo-card photo-small" data-parallax="0.18" data-parallax-base="rotate(-7deg)">
-            <Image src="/images/cotton/g10.jpg" alt="Хлопковая бирка в руках" fill sizes="220px" />
+            <Image src="/images/jacquard/hero-pile.jpg" alt="Россыпь жаккардовых бирок GAZZE, ASKAROVA и OVNOVA" fill sizes="240px" />
           </div>
-          <div className="quality-stamp" data-parallax="0.1" data-parallax-base="rotate(7deg)">
+          <div className="quality-stamp">
             <span>с 2017</span>
             <small>
               заботимся
@@ -143,7 +151,7 @@ export default function Home() {
               index={index}
               image={
                 {
-                  jacquard: "/images/jacquard/g5.jpg",
+                  jacquard: "/images/jacquard/aliyation.jpg",
                   "birki-karton": "/images/birki-karton/g3.jpg",
                   kraft: "/images/kraft/g3.jpg",
                   merchi: "/images/merchi/g5.jpg",
