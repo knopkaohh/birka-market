@@ -80,15 +80,15 @@ export default function Home() {
           </div>
           <div className="photo-card photo-main" data-parallax="0.06" data-parallax-base="rotate(3deg)">
             <Image
-              src="/images/jacquard/g2.jpg"
-              alt="Жаккардовые бирки, изготовленные Бирка Маркет"
+              src="/images/jacquard/burst.jpg"
+              alt="Цветные тканые бирки THE BURST"
               fill
               sizes="(max-width: 900px) 80vw, 35vw"
               priority
             />
           </div>
           <div className="photo-card photo-small" data-parallax="0.18" data-parallax-base="rotate(-7deg)">
-            <Image src="/images/cotton/g10.jpg" alt="Хлопковая бирка в руках" fill sizes="220px" />
+            <Image src="/images/jacquard/baby-bless.jpg" alt="Розовые жаккардовые бирки BABY BLESS" fill sizes="220px" />
           </div>
           <div className="quality-stamp" data-parallax="0.1" data-parallax-base="rotate(7deg)">
             <span>с 2017</span>
@@ -143,7 +143,7 @@ export default function Home() {
               index={index}
               image={
                 {
-                  jacquard: "/images/jacquard/g5.jpg",
+                  jacquard: "/images/jacquard/aliyation.jpg",
                   "birki-karton": "/images/birki-karton/g3.jpg",
                   kraft: "/images/kraft/g3.jpg",
                   merchi: "/images/merchi/g5.jpg",
