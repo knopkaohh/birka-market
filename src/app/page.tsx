@@ -38,21 +38,19 @@ export default function Home() {
   return (
     <>
       <section className="hero">
-        <div className="hero-stage" aria-hidden="true">
-          <div className="hero-ring" />
-          <div className="hero-yellow-shape" />
-        </div>
         <div className="hero-copy">
           <div className="eyebrow">
             <span />
-            Москва · доставляем по России
+            С {company.since} года · ни один бренд не подвели
           </div>
           <h1>
             <span className="hero-line"><span>Бирки,</span></span>
             <span className="hero-line"><span>упаковка</span></span>
-            <span className="hero-line"><span>и мерч <em>на заказ</em></span></span>
+            <span className="hero-line"><span>и мерч <em>на тираж</em></span></span>
           </h1>
-          <p className="hero-lead">{company.slogan} Макет бесплатно, тираж от 100 штук.</p>
+          <p className="hero-lead">
+            {company.slogan} Чем больше тираж, тем выгоднее цена. Давайте сотрудничать — доведём заказ до отгрузки.
+          </p>
           <div className="hero-actions">
             <Link className="primary-cta" href="/raschet">
               Рассчитать заказ
@@ -71,17 +69,50 @@ export default function Home() {
           <div className="hero-proof">
             <div>
               <strong>с {company.since}</strong>
-              <span>на рынке</span>
+              <span>ведём до отгрузки</span>
             </div>
             <div>
               <strong>{company.brands}</strong>
-              <span>брендов</span>
+              <span>брендов с нами</span>
             </div>
             <div>
-              <strong>0 ₽</strong>
-              <span>макет для печати</span>
+              <strong>0</strong>
+              <span>подведённых брендов</span>
             </div>
           </div>
+        </div>
+        <div className="hero-board">
+          <figure className="hero-shot hero-shot-main">
+            <Image
+              src="/images/jacquard/burst.jpg"
+              alt="Цветные тканые бирки с реального тиража"
+              fill
+              unoptimized
+              priority
+              sizes="(max-width: 900px) 70vw, 32vw"
+            />
+            <figcaption>Бирки</figcaption>
+          </figure>
+          <figure className="hero-shot">
+            <Image
+              src="/images/kraft/g6.jpg"
+              alt="Крафтовые пакеты с ручками"
+              fill
+              unoptimized
+              sizes="(max-width: 900px) 40vw, 18vw"
+            />
+            <figcaption>Упаковка</figcaption>
+          </figure>
+          <figure className="hero-shot">
+            <Image
+              src="/images/merchi/g8.jpg"
+              alt="Мерч с нанесением для бренда"
+              fill
+              unoptimized
+              sizes="(max-width: 900px) 40vw, 18vw"
+            />
+            <figcaption>Мерч</figcaption>
+          </figure>
         </div>
       </section>
 
@@ -203,7 +234,7 @@ export default function Home() {
         </div>
         <div className="advantages">
           {[
-            ["01", "Свой дизайнер", "Бесплатно адаптирует логотип и подготовит макет для печати."],
+            ["01", "Доводим до конца", "С 2017 года ни один бренд не остался без готового тиража. Чем больше объём, тем выгоднее цена."],
             ["02", "Менеджер + технолог", "Проверят параметры, материал и способ обработки до запуска."],
             ["03", "Контроль качества", "Сверяем размер, цвет, читаемость и края с согласованным макетом."],
             ["04", "Всё в одном месте", "Бирки, упаковка, фурнитура, мерч и полиграфия у одного партнёра."],

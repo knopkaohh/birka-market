@@ -9,7 +9,7 @@ import { processSteps } from "@/lib/site";
 const scenes = [
   { image: "/images/satin/g1.jpg", caption: "Заявки и образцы" },
   { image: "/images/silikon/g6.jpg", caption: "Подбор материала" },
-  { image: "/images/neylon/g4.jpg", caption: "Макет для печати" },
+  { image: "/images/neylon/g4.jpg", caption: "Согласование файла" },
   { image: "/images/process.jpg", caption: "Контроль тиража" },
 ] as const;
 
