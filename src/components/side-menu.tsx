@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useMemo, useState } from "react";
 import { ArrowRight, ChevronRight, Search } from "lucide-react";
-import { Logo } from "@/components/logo";
+import { TagLogo } from "@/components/logo";
 import { categories, matchesProduct, navLinks, products, productsByCategory } from "@/lib/site";
 
 function SectionIcon({ slug }: { slug: string }) {
@@ -136,7 +136,9 @@ export function SideMenu({ open, onClose }: SideMenuProps) {
       >
         <div className="side-menu-inner">
           <div className="side-menu-logo">
-            <Logo />
+            <Link href="/" className="side-tag" aria-label="Бирка Маркет — на главную" prefetch={false} onClick={onClose}>
+              <TagLogo />
+            </Link>
           </div>
           <label className="search-line search-line-dark side-search">
             <Search size={15} strokeWidth={1.8} aria-hidden="true" />

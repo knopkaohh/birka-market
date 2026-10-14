@@ -50,6 +50,56 @@ export function LogoMark({ className }: { className?: string }) {
   );
 }
 
+export function TagLogo({ className }: { className?: string }) {
+  return (
+    <svg
+      className={className}
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 96 124"
+      aria-hidden="true"
+      focusable="false"
+    >
+      <path
+        fill="#edc147"
+        stroke="#171717"
+        strokeWidth="3.4"
+        strokeLinejoin="round"
+        d="M14 5.5h68a8 8 0 0 1 8 8v96a8 8 0 0 1-8 8H14a8 8 0 0 1-8-8v-96a8 8 0 0 1 8-8z"
+      />
+      <circle cx="28" cy="22" r="7" fill="#171717" />
+      <circle cx="28" cy="22" r="3.1" fill="#f4f1e9" />
+      <text
+        x="50"
+        y="66"
+        textAnchor="middle"
+        fill="#171717"
+        fontFamily="var(--font-manrope), Arial, sans-serif"
+        fontSize="15"
+        fontWeight="800"
+        letterSpacing="-0.04em"
+        textLength="58"
+        lengthAdjust="spacingAndGlyphs"
+      >
+        БИРКА
+      </text>
+      <text
+        x="50"
+        y="86"
+        textAnchor="middle"
+        fill="#171717"
+        fontFamily="var(--font-manrope), Arial, sans-serif"
+        fontSize="15"
+        fontWeight="800"
+        letterSpacing="-0.04em"
+        textLength="58"
+        lengthAdjust="spacingAndGlyphs"
+      >
+        МАРКЕТ
+      </text>
+    </svg>
+  );
+}
+
 export function Logo() {
   return (
     <Link className="logo" href="/" aria-label="Бирка Маркет — на главную">
