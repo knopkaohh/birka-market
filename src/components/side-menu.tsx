@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import { useMemo, useState } from "react";
 import { ArrowRight, ChevronRight, Search } from "lucide-react";
 import { LogoMark, TagLogo } from "@/components/logo";
-import { catalogMenu, matchesProduct, navLinks, products } from "@/lib/site";
+import { categories, matchesProduct, navLinks, products, productsByCategory } from "@/lib/site";
 
 function SectionIcon({ slug }: { slug: string }) {
   const props = {
@@ -19,7 +19,7 @@ function SectionIcon({ slug }: { slug: string }) {
     strokeLinejoin: "round" as const,
     "aria-hidden": true,
   };
-  if (slug === "vshivnye") {
+  if (slug === "vshivnye-birki") {
     return (
       <svg {...props}>
         <path d="M4 8.5h16v8H4z" />
@@ -28,7 +28,7 @@ function SectionIcon({ slug }: { slug: string }) {
       </svg>
     );
   }
-  if (slug === "navesnye") {
+  if (slug === "navesnye-birki") {
     return (
       <svg {...props}>
         <path d="M7 4h7.2L19 8.8V20H7z" />
@@ -37,35 +37,11 @@ function SectionIcon({ slug }: { slug: string }) {
       </svg>
     );
   }
-  if (slug === "pakety") {
+  if (slug === "upakovka") {
     return (
       <svg {...props}>
         <path d="M6.5 9h11l-.8 11h-9.4z" />
         <path d="M9 9V7.2a3 3 0 0 1 6 0V9" />
-      </svg>
-    );
-  }
-  if (slug === "upakovka") {
-    return (
-      <svg {...props}>
-        <path d="M4 8h16v11H4z" />
-        <path d="M4 12h16M12 8v11" />
-      </svg>
-    );
-  }
-  if (slug === "patchi") {
-    return (
-      <svg {...props}>
-        <rect x="4" y="5" width="16" height="14" rx="4" />
-        <path d="M12 9.2l1.1 2.2 2.4.3-1.8 1.7.4 2.4L12 14.6 9.9 15.8l.4-2.4-1.8-1.7 2.4-.3z" />
-      </svg>
-    );
-  }
-  if (slug === "wide") {
-    return (
-      <svg {...props}>
-        <path d="M5 20V5h8l2 3h4v12z" />
-        <path d="M5 9h14" />
       </svg>
     );
   }
@@ -86,7 +62,7 @@ function SectionIcon({ slug }: { slug: string }) {
       </svg>
     );
   }
-  if (slug === "corporate" || slug === "merch") {
+  if (slug === "merch") {
     return (
       <svg {...props}>
         <path d="M8 6.5 4.5 8.2 6 12l2-1.2V19h8v-8.2l2 1.2 1.5-3.8L16 6.5a4 4 0 0 1-8 0z" />
@@ -109,9 +85,9 @@ type SideMenuProps = {
 
 export function SideMenu({ open, onClose }: SideMenuProps) {
   const pathname = usePathname();
-  const currentSlug = catalogMenu.find((section) => {
-    if (pathname === section.href) return true;
-    return section.items.some((item) => pathname === item.href);
+  const currentSlug = categories.find((category) => {
+    if (pathname === `/katalog/${category.slug}`) return true;
+    return productsByCategory(category.slug).some((item) => pathname === `/${item.slug}`);
   })?.slug;
   const [opened, setOpened] = useState<string | null>(null);
   const [flyTop, setFlyTop] = useState(96);
@@ -204,9 +180,9 @@ export function SideMenu({ open, onClose }: SideMenuProps) {
             </ul>
           ) : (
             <ul className="side-menu-list">
-              {catalogMenu.map((category) => {
-                const items = category.items;
-                const href = category.href;
+              {categories.map((category) => {
+                const items = productsByCategory(category.slug);
+                const href = `/katalog/${category.slug}`;
                 const isOpen = opened === category.slug;
                 const isCurrent = currentSlug === category.slug;
                 const panelId = `side-cat-${category.slug}`;
@@ -256,22 +232,19 @@ export function SideMenu({ open, onClose }: SideMenuProps) {
                         <ArrowRight size={16} />
                       </Link>
                       <ul className="side-submenu-panel">
-                        {items.map((item, index) => {
-                          const product = products.find((entry) => `/${entry.slug}` === item.href);
-                          return (
-                            <li key={item.label} style={{ ["--i" as string]: index }}>
-                              <Link
-                                href={item.href}
-                                className={`side-submenu-link ${pathname === item.href ? "is-current" : ""}`}
-                                prefetch={false}
-                                onClick={onClose}
-                              >
-                                <span>{item.label}</span>
-                                {product ? <small>от {product.minQty.toLocaleString("ru-RU")}</small> : null}
-                              </Link>
-                            </li>
-                          );
-                        })}
+                        {items.map((item, index) => (
+                          <li key={item.slug} style={{ ["--i" as string]: index }}>
+                            <Link
+                              href={`/${item.slug}`}
+                              className={`side-submenu-link ${pathname === `/${item.slug}` ? "is-current" : ""}`}
+                              prefetch={false}
+                              onClick={onClose}
+                            >
+                              <span>{item.shortName}</span>
+                              <small>от {item.minQty.toLocaleString("ru-RU")}</small>
+                            </Link>
+                          </li>
+                        ))}
                       </ul>
                     </div>
                   </li>
