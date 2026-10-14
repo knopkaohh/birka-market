@@ -1,3 +1,5 @@
+import fs from "node:fs";
+import path from "node:path";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -7,7 +9,6 @@ import {
 } from "lucide-react";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { CalculatorBlock } from "@/components/calculator-block";
-import { CategoryTile } from "@/components/category-tile";
 import { Marquee } from "@/components/marquee";
 import { CasesSection } from "@/components/cases-section";
 import { ProcessParallax } from "@/components/process-parallax";
@@ -24,6 +25,7 @@ import {
 
 export default function Home() {
   const featured = featuredSlugs.map((slug) => getProduct(slug)).filter(Boolean);
+  const showreel = fs.existsSync(path.join(process.cwd(), "public/video/showreel.mp4"));
 
   return (
     <>
@@ -76,20 +78,50 @@ export default function Home() {
 
       <Marquee />
 
-      <section className="section" id="categories">
-        <div className="section-heading">
-          <div>
-            <span className="section-number">01 / КАТАЛОГ</span>
-            <h2>
-              Всё для маркировки, упаковки
-              <br />и полиграфии
-            </h2>
-          </div>
-          <p>Семь направлений — от вшивной бирки до полиграфии. Выберите задачу, остальное уточним вместе.</p>
+      <section className="film" aria-label="Кадр с реальными тиражами">
+        {showreel ? (
+          <video className="film-media" autoPlay muted loop playsInline poster="/images/jacquard/hero-board.jpg">
+            <source src="/video/showreel.mp4" type="video/mp4" />
+          </video>
+        ) : (
+          <Image
+            className="film-media"
+            src="/images/jacquard/hero-board.jpg"
+            alt="Набор вшивных бирок с реальных тиражей"
+            fill
+            unoptimized
+            sizes="100vw"
+          />
+        )}
+        <div className="film-shade" />
+        <div className="film-caption">
+          <span>Кадр 02</span>
+          <h2>
+            Реальные
+            <br />
+            тиражи
+          </h2>
+          <p>Без мокапов. То, что уходит в пошив.</p>
         </div>
-        <div className="category-grid">
+      </section>
+
+      <section className="reel" id="categories">
+        <div className="reel-head">
+          <span>03 / материалы</span>
+          <h2>
+            Семь направлений.
+            <br />
+            <em>Один цех.</em>
+          </h2>
+        </div>
+        <div className="reel-list">
           {categories.map((item, index) => (
-            <CategoryTile key={item.slug} category={item} index={index} />
+            <Link key={item.slug} href={`/katalog/${item.slug}`} className="reel-row">
+              <span>{String(index + 1).padStart(2, "0")}</span>
+              <strong>{item.name}</strong>
+              <em>{item.intro}</em>
+              <ArrowRight />
+            </Link>
           ))}
         </div>
       </section>
@@ -97,7 +129,7 @@ export default function Home() {
       <section className="section products-section">
         <div className="section-heading">
           <div>
-            <span className="section-number">02 / ЧАСТО ЗАКАЗЫВАЮТ</span>
+            <span className="section-number">04 / ЧАСТО ЗАКАЗЫВАЮТ</span>
             <h2>
               Продукция,
               <br />с которой начинают
@@ -139,7 +171,7 @@ export default function Home() {
 
       <section className="dark-section">
         <div className="dark-intro">
-          <span className="section-number light">03 / ПОЧЕМУ МЫ</span>
+          <span className="section-number light">05 / ПОЧЕМУ МЫ</span>
           <p className="display-quote">
             Не просто печатаем бирки. <em>Вникаем в задачу</em> и отвечаем за результат — от первого файла до последней детали тиража.
           </p>
@@ -163,7 +195,7 @@ export default function Home() {
       <section className="section works-section" id="works">
         <div className="section-heading compact">
           <div>
-            <span className="section-number">04 / НАШИ РАБОТЫ</span>
+            <span className="section-number">06 / НАШИ РАБОТЫ</span>
             <h2>
               Сделано для брендов,
               <br />
@@ -185,7 +217,7 @@ export default function Home() {
         </div>
       </section>
 
-      <CasesSection />
+      <CasesSection eyebrow="07 / КЕЙСЫ" />
 
       <ProcessParallax />
 
@@ -193,7 +225,7 @@ export default function Home() {
 
       <section className="section faq-section">
         <div className="faq-title">
-          <span className="section-number">06 / ВОПРОСЫ</span>
+          <span className="section-number">09 / ВОПРОСЫ</span>
           <h2>
             Коротко
             <br />о главном
@@ -216,7 +248,7 @@ export default function Home() {
         </Accordion>
       </section>
 
-      <YandexMap />
+      <YandexMap eyebrow="10 / КАК НАС НАЙТИ" />
     </>
   );
 }

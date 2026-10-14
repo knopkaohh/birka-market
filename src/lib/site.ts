@@ -90,25 +90,25 @@ export const categories = [
     slug: "vshivnye-birki",
     name: "Вшивные бирки",
     intro: "Жаккард, сатин, силикон, хлопок, нейлон и светоотражающие материалы. Тираж от 100 штук, макет бесплатно.",
-    image: "/images/products/jacquard.jpg",
+    image: "/images/jacquard/aliyation.jpg",
   },
   {
     slug: "navesnye-birki",
     name: "Навесные бирки",
     intro: "Картон, калька и промышленный пластик для внешней маркировки одежды, подарков и коммуникаций.",
-    image: "/images/products/birki-karton.jpg",
+    image: "/images/birki-karton/g3.jpg",
   },
   {
     slug: "upakovka",
     name: "Упаковка",
     intro: "ZIP Lock, крафт, бумажные и ПВД-пакеты, картонные коробки — комплект, который работает на бренд.",
-    image: "/images/products/kraft.jpg",
+    image: "/images/kraft/g3.jpg",
   },
   {
     slug: "furnitura",
     name: "Фурнитура",
     intro: "Биркодержатели, пуллеры, джибитсы и жаккардовая резинка для завершения изделия.",
-    image: "/images/products/pull.jpg",
+    image: "/images/pull/g2.jpg",
   },
   {
     slug: "nanesenie",
@@ -120,13 +120,13 @@ export const categories = [
     slug: "merch",
     name: "Мерч",
     intro: "Корпоративный мерч и стикерпаки под ключ: макет, производство, упаковка.",
-    image: "/images/products/merchi.jpg",
+    image: "/images/merchi/g5.jpg",
   },
   {
     slug: "poligrafiya",
     name: "Полиграфия",
     intro: "Визитки, наклейки, флаеры, буклеты, журналы, флаги и баннеры для бизнеса.",
-    image: "/images/products/printing.jpg",
+    image: "/images/printing/g1.jpg",
   },
 ] as const;
 

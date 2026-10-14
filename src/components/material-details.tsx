@@ -4,6 +4,7 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 import { ProductCard } from "@/components/product-card";
 import type { LandingContent } from "@/lib/landings/types";
 import { photoKey } from "@/lib/photo-id";
+import { weakPhoto } from "@/lib/weak-photo";
 import { getProduct } from "@/lib/site";
 
 export function MaterialDetails({
@@ -16,6 +17,7 @@ export function MaterialDetails({
   const related = content.complement.map((slug) => getProduct(slug)).filter(Boolean);
   const seen = usedPhotos ?? new Set<string>();
   const onProduct = content.onProduct.filter((item) => {
+    if (weakPhoto.has(item.image)) return false;
     const key = photoKey(item.image);
     if (seen.has(key)) return false;
     seen.add(key);

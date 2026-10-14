@@ -8,6 +8,7 @@ import { MaterialDetails } from "@/components/material-details";
 import type { LandingContent, QuotePrefill } from "@/lib/landings/types";
 import { quoteComment, quoteHref, quoteQuantity } from "@/lib/landings/types";
 import { photoKey } from "@/lib/photo-id";
+import { weakPhoto } from "@/lib/weak-photo";
 import { landingJsonLd } from "@/lib/seo";
 import { company, getCategory, getProduct } from "@/lib/site";
 
@@ -43,20 +44,22 @@ export function ProductLanding({
   const selectedVariant = variant ?? content.variants[0]?.id;
   const formKey = [selectedVariant, quote?.qty, quote?.size, quote?.spec, quote?.price].filter(Boolean).join("-");
   const prefillComment = quote ? quoteComment(quote) : "";
-  const usedPhotos = new Set<string>(content.hero.map((src) => photoKey(src)));
-  if (content.slug === "satin") {
-    usedPhotos.delete(photoKey("/images/satin/teddy.jpg"));
-    usedPhotos.delete(photoKey("/images/satin/annilook.jpg"));
+  const satin = content.slug === "satin";
+  const mainIndex = Math.max(0, content.hero.findIndex((src) => !weakPhoto.has(src)));
+  const shownHero = satin ? content.hero : [content.hero[mainIndex]];
+  const usedPhotos = new Set<string>(shownHero.map((src) => photoKey(src)));
+  if (satin) {
     usedPhotos.add(photoKey("/images/satin/g2.jpg"));
     usedPhotos.add(photoKey("/images/satin/g3.jpg"));
   }
   const gallery = [...content.gallery, ...content.variants.map((item) => ({ src: item.image, alt: item.name })), ...content.onProduct.map((item) => ({ src: item.image, alt: item.title }))].filter((item) => {
+    if (weakPhoto.has(item.src)) return false;
     const key = photoKey(item.src);
     if (usedPhotos.has(key)) return false;
     usedPhotos.add(key);
     return true;
   });
-  const variantHasPhoto = content.variants.map((item) => !usedPhotos.has(photoKey(item.image)));
+  const variantHasPhoto = content.variants.map((item) => !weakPhoto.has(item.image) && !usedPhotos.has(photoKey(item.image)));
 
   return (
     <>
@@ -101,16 +104,20 @@ export function ProductLanding({
             ))}
           </div>
         </div>
-        <div className={`jq-hero-visual${content.slug === "satin" ? " is-satin" : ""}`}>
+        <div className={`jq-hero-visual${satin ? " is-satin" : " is-single"}`}>
           <div className="jq-hero-main">
-            <Image src={content.hero[0]} alt={content.heroAlts[0]} fill sizes="(max-width: 900px) 100vw, 50vw" priority />
+            <Image src={shownHero[0]} alt={content.heroAlts[satin ? 0 : mainIndex]} fill sizes="(max-width: 900px) 100vw, 50vw" priority unoptimized />
           </div>
-          <div className="jq-hero-small">
-            <Image src={content.hero[1]} alt={content.heroAlts[1]} fill sizes="280px" unoptimized={content.slug === "satin"} />
-          </div>
-          <div className="jq-hero-mid">
-            <Image src={content.hero[2]} alt={content.heroAlts[2]} fill sizes="240px" unoptimized={content.slug === "satin"} />
-          </div>
+          {satin && (
+            <>
+              <div className="jq-hero-small">
+                <Image src={content.hero[1]} alt={content.heroAlts[1]} fill sizes="280px" unoptimized />
+              </div>
+              <div className="jq-hero-mid">
+                <Image src={content.hero[2]} alt={content.heroAlts[2]} fill sizes="240px" unoptimized />
+              </div>
+            </>
+          )}
         </div>
       </section>
 

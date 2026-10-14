@@ -125,7 +125,7 @@ export function ProcessParallax() {
           </div>
         </div>
         <div className="process-content">
-          <span className="section-number">05 / КАК МЫ РАБОТАЕМ</span>
+          <span className="section-number">08 / КАК МЫ РАБОТАЕМ</span>
           <h2>
             Понятный путь
             <br />
@@ -172,7 +172,7 @@ export function ProcessParallax() {
 
           <div className="process-parallax-copy">
             <div className="process-parallax-top">
-              <span className="section-number light">05 / КАК МЫ РАБОТАЕМ</span>
+              <span className="section-number light">08 / КАК МЫ РАБОТАЕМ</span>
               <p className="process-hint">
                 Скролльте вниз, чтобы увидеть этап
                 <ArrowDown size={14} />

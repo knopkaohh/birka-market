@@ -264,7 +264,6 @@ export const satinLanding: LandingContent = {
     { src: "/images/satin/svm.jpg", alt: "Сатиновая лента SVM 54" },
     { src: "/images/satin/bonomiana.jpg", alt: "Набор сатиновых бирок HIDEM, Bonomiana, VIADISSI" },
     { src: "/images/satin/tebe-idet.jpg", alt: "Сатиновая лента «Тебе идёт быть собой»" },
-    { src: "/images/satin/haspikl-2.jpg", alt: "Сатиновые составники HASPIKL и лента MOWELOVE" },
     { src: "/images/satin/teddy.jpg", alt: "Чёрные и белые сатиновые бирки TEDDY'S treasures" },
     { src: "/images/satin/potok.jpg", alt: "Чёрные сатиновые бирки ПОТОК и РАДА МАМА ЧАДА" },
     { src: "/images/satin/rada.jpg", alt: "Сатиновые бирки РАДА МАМА ЧАДА" },
