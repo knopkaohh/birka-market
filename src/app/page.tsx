@@ -23,6 +23,14 @@ import {
   portfolio,
 } from "@/lib/site";
 
+const filmShots = [
+  { src: "/images/jacquard/hero-board.jpg", alt: "Набор вшивных бирок с реальных тиражей", title: "Бирки" },
+  { src: "/images/jacquard/burst.jpg", alt: "Цветные тканые бирки THE BURST", title: "Жаккард" },
+  { src: "/images/satin/annilook.jpg", alt: "Сатиновые ленты ANNILOOK", title: "Сатин" },
+  { src: "/images/kraft/g6.jpg", alt: "Крафтовые пакеты с ручками", title: "Упаковка" },
+  { src: "/images/printing/g1.jpg", alt: "Тираж листовок и флаеров", title: "Полиграфия" },
+];
+
 export default function Home() {
   const featured = featuredSlugs.map((slug) => getProduct(slug)).filter(Boolean);
   const showreel = fs.existsSync(path.join(process.cwd(), "public/video/showreel.mp4"));
@@ -84,14 +92,24 @@ export default function Home() {
             <source src="/video/showreel.mp4" type="video/mp4" />
           </video>
         ) : (
-          <Image
-            className="film-media"
-            src="/images/jacquard/hero-board.jpg"
-            alt="Набор вшивных бирок с реальных тиражей"
-            fill
-            unoptimized
-            sizes="100vw"
-          />
+          <>
+            <div className="film-roll">
+              {filmShots.map((shot) => (
+                <div className="film-shot" key={shot.src}>
+                  <Image className="film-media" src={shot.src} alt={shot.alt} fill unoptimized sizes="100vw" />
+                </div>
+              ))}
+            </div>
+            <div className="film-scenes" aria-hidden="true">
+              {filmShots.map((shot, index) => (
+                <span key={shot.src}>
+                  <small>{String(index + 1).padStart(2, "0")} / {String(filmShots.length).padStart(2, "0")}</small>
+                  {shot.title}
+                </span>
+              ))}
+            </div>
+            <div className="film-meter" aria-hidden="true"><i /></div>
+          </>
         )}
         <div className="film-shade" />
         <div className="film-caption">

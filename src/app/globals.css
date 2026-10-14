@@ -648,6 +648,49 @@ body.quick-calc-open.quick-calc-in > *:not(.quick-calc-overlay):not(.thanks-over
 .film { position: relative; height: min(92vh, 860px); min-height: 560px; overflow: hidden; background: #141514; }
 .film-media { object-fit: cover; }
 .film video.film-media { position: absolute; inset: 0; width: 100%; height: 100%; }
+.film-roll { position: absolute; inset: 0; }
+.film-shot { position: absolute; inset: 0; opacity: 0; animation: filmShot 30s infinite both; }
+.film-shot:first-child { opacity: 1; animation-name: filmShotFirst; }
+.film-shot img { animation: filmDriftA 30s infinite both; }
+.film-shot:nth-child(even) img { animation-name: filmDriftB; }
+.film-shot:nth-child(2), .film-shot:nth-child(2) img { animation-delay: 6s; }
+.film-shot:nth-child(3), .film-shot:nth-child(3) img { animation-delay: 12s; }
+.film-shot:nth-child(4), .film-shot:nth-child(4) img { animation-delay: 18s; }
+.film-shot:nth-child(5), .film-shot:nth-child(5) img { animation-delay: 24s; }
+.film-scenes { position: absolute; right: 28px; top: 28px; z-index: 2; text-align: right; }
+.film-scenes span {
+  position: absolute; right: 0; top: 0; opacity: 0; color: var(--ink); background: var(--yellow);
+  padding: 12px 16px 14px; font-size: clamp(28px, 2.6vw, 40px); font-weight: 680; letter-spacing: -.04em; line-height: .9;
+  animation: filmShot 30s infinite both;
+}
+.film-scenes span:first-child { opacity: 1; animation-name: filmShotFirst; }
+.film-scenes span:nth-child(2) { animation-delay: 6s; }
+.film-scenes span:nth-child(3) { animation-delay: 12s; }
+.film-scenes span:nth-child(4) { animation-delay: 18s; }
+.film-scenes span:nth-child(5) { animation-delay: 24s; }
+.film-scenes small { display: block; margin-bottom: 6px; color: #6a5316; font-size: 11px; font-weight: 800; letter-spacing: .16em; }
+.film-meter { position: absolute; left: 0; right: 0; bottom: 0; z-index: 2; height: 3px; background: rgba(244,241,233,.18); }
+.film-meter i { display: block; height: 100%; width: 0; background: var(--yellow); animation: filmMeter 30s linear infinite; }
+@keyframes filmShot {
+  0% { opacity: 0; }
+  3% { opacity: 1; }
+  17% { opacity: 1; }
+  22%, 100% { opacity: 0; }
+}
+@keyframes filmShotFirst {
+  0%, 17% { opacity: 1; }
+  22%, 97% { opacity: 0; }
+  100% { opacity: 1; }
+}
+@keyframes filmDriftA {
+  0% { transform: scale(1.12); }
+  22%, 100% { transform: scale(1.02) translate3d(-1.5%, -1%, 0); }
+}
+@keyframes filmDriftB {
+  0% { transform: scale(1.12); }
+  22%, 100% { transform: scale(1.02) translate3d(1.5%, 1%, 0); }
+}
+@keyframes filmMeter { to { width: 100%; } }
 .film-shade { position: absolute; inset: 0; background: linear-gradient(90deg, rgba(20,21,20,.86) 0%, rgba(20,21,20,.62) 34%, rgba(20,21,20,.16) 68%, rgba(20,21,20,.28) 100%); }
 .film-caption { position: absolute; left: var(--page-gutter); bottom: 8%; z-index: 1; max-width: 720px; color: var(--paper); }
 .film-caption span { display: block; margin-bottom: 16px; font-size: 11px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; color: var(--yellow); }
@@ -858,8 +901,16 @@ body.quick-calc-open.quick-calc-in > *:not(.quick-calc-overlay):not(.thanks-over
   .hero-lead,
   .hero-actions,
   .hero-proof div,
-  .eyebrow { animation: none; }
+  .eyebrow,
+  .film-shot,
+  .film-shot img,
+  .film-scenes span,
+  .film-meter i { animation: none; }
   .hero h1 em::after { transform: scaleX(1); }
+  .film-shot, .film-scenes span { opacity: 0; }
+  .film-shot:first-child, .film-scenes span:first-child { opacity: 1; }
+  .film-shot img { transform: none; }
+  .film-meter { display: none; }
 }
 
 .calculator-section { display: grid; grid-template-columns: .82fr 1.18fr; gap: 7vw; padding: 120px var(--page-gutter); color: var(--paper); background: #2a2b2a; }
@@ -991,6 +1042,8 @@ footer .logo svg { height: 56px; }
   .film-shade { background: linear-gradient(180deg, rgba(20,21,20,.15) 20%, rgba(20,21,20,.78) 100%); }
   .film-caption { left: 18px; right: 18px; bottom: 22px; }
   .film-caption h2 { font-size: 58px; }
+  .film-scenes { top: 14px; right: 14px; }
+  .film-scenes span { padding: 8px 10px 10px; font-size: 22px; }
   .reel { width: calc(100% - 36px); padding: 72px 0 20px; }
   .reel-head { display: block; }
   .reel-head h2 { margin-top: 12px; font-size: 46px; }
