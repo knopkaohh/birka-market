@@ -7,6 +7,77 @@ import { ArrowRight, ChevronRight, Search } from "lucide-react";
 import { Logo } from "@/components/logo";
 import { categories, matchesProduct, navLinks, products, productsByCategory } from "@/lib/site";
 
+function SectionIcon({ slug }: { slug: string }) {
+  const props = {
+    viewBox: "0 0 24 24",
+    width: 18,
+    height: 18,
+    fill: "none",
+    stroke: "currentColor",
+    strokeWidth: 1.6,
+    strokeLinecap: "round" as const,
+    strokeLinejoin: "round" as const,
+    "aria-hidden": true,
+  };
+  if (slug === "vshivnye-birki") {
+    return (
+      <svg {...props}>
+        <path d="M4 8.5h16v8H4z" />
+        <path d="M7 8.5v8M17 8.5v8" strokeDasharray="1.4 1.8" />
+        <path d="M9.5 12.5h5" />
+      </svg>
+    );
+  }
+  if (slug === "navesnye-birki") {
+    return (
+      <svg {...props}>
+        <path d="M7 4h7.2L19 8.8V20H7z" />
+        <circle cx="10.2" cy="8" r="1.1" />
+        <path d="M10.2 4.2V2.5" />
+      </svg>
+    );
+  }
+  if (slug === "upakovka") {
+    return (
+      <svg {...props}>
+        <path d="M6.5 9h11l-.8 11h-9.4z" />
+        <path d="M9 9V7.2a3 3 0 0 1 6 0V9" />
+      </svg>
+    );
+  }
+  if (slug === "furnitura") {
+    return (
+      <svg {...props}>
+        <rect x="8" y="7" width="8" height="12" rx="2" />
+        <path d="M12 7V4.5" />
+        <circle cx="12" cy="3.2" r="1.3" />
+      </svg>
+    );
+  }
+  if (slug === "nanesenie") {
+    return (
+      <svg {...props}>
+        <rect x="4" y="5" width="16" height="14" rx="3" />
+        <path d="M12 9.2l1.1 2.2 2.4.3-1.8 1.7.4 2.4L12 14.6 9.9 15.8l.4-2.4-1.8-1.7 2.4-.3z" />
+      </svg>
+    );
+  }
+  if (slug === "merch") {
+    return (
+      <svg {...props}>
+        <path d="M8 6.5 4.5 8.2 6 12l2-1.2V19h8v-8.2l2 1.2 1.5-3.8L16 6.5a4 4 0 0 1-8 0z" />
+      </svg>
+    );
+  }
+  return (
+    <svg {...props}>
+      <path d="M6 5h12v11H6z" />
+      <path d="M8 19h12V8" />
+      <path d="M9 10h6M9 13h4" />
+    </svg>
+  );
+}
+
 type SideMenuProps = {
   open: boolean;
   onClose: () => void;
@@ -31,10 +102,10 @@ export function SideMenu({ open, onClose }: SideMenuProps) {
     if (row) {
       const top = row.getBoundingClientRect().top;
       const count = productsByCategory(slug).length;
-      const estimated = 96 + count * 48;
-      const spaceBelow = window.innerHeight - top - 16;
-      const next = spaceBelow < Math.min(estimated, 320) ? Math.max(88, top + 44 - Math.min(estimated, 460)) : Math.max(88, top - 12);
-      setFlyTop(Math.min(next, Math.max(88, window.innerHeight - 220)));
+      const estimated = 54 + count * 38;
+      const aligned = top - 6;
+      const maxTop = window.innerHeight - estimated - 12;
+      setFlyTop(Math.max(12, Math.min(aligned, maxTop)));
     }
     setOpened(slug);
   };
@@ -126,7 +197,10 @@ export function SideMenu({ open, onClose }: SideMenuProps) {
                   >
                     <div className={`side-menu-row ${isOpen || isCurrent ? "is-active" : ""}`}>
                       <Link href={href} className="side-menu-link" prefetch={false} onClick={onClose}>
-                        {category.name}
+                        <span className="side-menu-mark">
+                          <SectionIcon slug={category.slug} />
+                        </span>
+                        <span>{category.name}</span>
                       </Link>
                       <button
                         type="button"
@@ -149,12 +223,15 @@ export function SideMenu({ open, onClose }: SideMenuProps) {
                         Все разделы
                       </button>
                       <Link href={href} className="side-flyout-title" prefetch={false} onClick={onClose}>
-                        {category.name}
-                        <ArrowRight size={18} />
+                        <span className="side-menu-mark">
+                          <SectionIcon slug={category.slug} />
+                        </span>
+                        <span>{category.name}</span>
+                        <ArrowRight size={16} />
                       </Link>
                       <ul className="side-submenu-panel">
-                        {items.map((item) => (
-                          <li key={item.slug}>
+                        {items.map((item, index) => (
+                          <li key={item.slug} style={{ ["--i" as string]: index }}>
                             <Link
                               href={`/${item.slug}`}
                               className={`side-submenu-link ${pathname === `/${item.slug}` ? "is-current" : ""}`}
