@@ -4,7 +4,6 @@ import {
   ArrowDownRight,
   ArrowRight,
   MessageCircle,
-  Sparkles,
 } from "lucide-react";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { CalculatorBlock } from "@/components/calculator-block";
@@ -29,15 +28,22 @@ export default function Home() {
   return (
     <>
       <section className="hero">
+        <div className="hero-stage" aria-hidden="true">
+          <div className="hero-orbit">
+            <span className="hero-orbit-dot" />
+          </div>
+          <div className="hero-yellow-shape" />
+          <div className="hero-sand-shape" />
+          <span className="hero-ghost">бирки</span>
+        </div>
         <div className="hero-copy">
           <div className="eyebrow">
             <span />
             Производим в Москве • Доставляем по России
           </div>
           <h1>
-            Бирки, упаковка
-            <br />
-            и мерч <em>на заказ</em>
+            <span className="hero-line"><span>Бирки, упаковка</span></span>
+            <span className="hero-line"><span>и мерч <em>на заказ</em></span></span>
           </h1>
           <p className="hero-lead">
             {company.slogan} Производим в Москве: от бесплатного макета до готового тиража.
@@ -72,44 +78,10 @@ export default function Home() {
             </div>
           </div>
         </div>
-        <div className="hero-visual" aria-label="Примеры изготовленных бирок">
-          <div className="hero-bg" aria-hidden="true">
-            <div className="hero-orbit">
-              <span className="hero-orbit-dot" />
-            </div>
-            <div className="hero-yellow-shape" />
-            <div className="hero-sand-shape" />
-            <span className="hero-chip hero-chip-a" />
-            <span className="hero-chip hero-chip-b" />
-          </div>
-          <div className="floating-note note-one">
-            <Sparkles size={20} />
-            Реальные работы
-          </div>
-          <div className="photo-card photo-main">
-            <Image
-              src="/images/jacquard/hero-board.jpg"
-              alt="Набор вшивных бирок Capri, GAZZE, Haytak и других брендов"
-              fill
-              unoptimized
-              priority
-            />
-          </div>
-          <div className="photo-card photo-small" data-parallax="0.18" data-parallax-base="rotate(-7deg)">
-            <Image src="/images/jacquard/hero-pile.jpg" alt="Россыпь жаккардовых бирок GAZZE, ASKAROVA и OVNOVA" fill sizes="240px" />
-          </div>
-          <div className="quality-stamp">
-            <span>с 2017</span>
-            <small>
-              заботимся
-              <br />о брендах
-            </small>
-          </div>
-          <a className="scroll-cue" href="#categories">
-            <span>Листайте</span>
-            <ArrowDownRight />
-          </a>
-        </div>
+        <a className="scroll-cue" href="#categories">
+          <span>Листайте</span>
+          <ArrowDownRight />
+        </a>
       </section>
 
       <Marquee />
