@@ -1,5 +1,5 @@
 import type { LandingContent } from "./types";
-import { g, gallery, p } from "./types";
+import { g, gallery } from "./types";
 
 export const merchLanding: LandingContent = {
   slug: "merchi",
@@ -15,8 +15,8 @@ export const merchLanding: LandingContent = {
     { value: "КП", label: "после состава комплекта" },
     { value: "цикл", label: "макет → тираж → упаковка" },
   ],
-  hero: [g("merchi", 5), g("merchi", 6), g("merchi", 7)],
-  heroAlts: ["Корпоративный мерч", "Футболки с логотипом", "Худи для бизнеса"],
+  hero: [g("merchi", 5), g("merchi", 8), g("merchi", 7)],
+  heroAlts: ["Корпоративный мерч", "Футболка и худи Пермский медицинский", "Худи для бизнеса"],
   variantLabel: "КОМПЛЕКТ",
   variantTitle: "Какой мерч собираете",
   variantIntro: "Футболка, худи, набор или событие — от этого зависит нанесение и упаковка.",
@@ -56,16 +56,13 @@ export const merchLanding: LandingContent = {
   ],
   galleryTitle: "Мерч, который мы собираем",
   galleryIntro: "Одежда, нанесение и упаковка — комплекты для команд и запусков, не случайный принт.",
-  gallery: gallery("merchi", [
-    "Корпоративные футболки",
-    "Худи с логотипом",
-    "Мерч для команды",
-    "Наборы корпоративного мерча",
-    "Печать на одежде для бизнеса",
-    "Упакованный мерч",
-    "Фирменные худи",
-    "Тираж мерча",
-  ]),
+  gallery: [
+    { src: g("merchi", 1), alt: "Худи POCATOM" },
+    { src: g("merchi", 3), alt: "Худи и футболки на вешалке" },
+    { src: g("merchi", 4), alt: "Худи и мешок Skolkovo" },
+    { src: g("merchi", 7), alt: "Чёрное худи с вшивной биркой" },
+    { src: g("merchi", 8), alt: "Футболка и худи Пермский медицинский" },
+  ],
   quotesTitle: "Примеры ориентиров по мерчу",
   quotesIntro: "Это не прайс: состав ткани, нанесение и упаковка меняют сумму. Точную цифру дадим в КП после комплекта.",
   quoteUnit: "за изделие",
@@ -120,7 +117,7 @@ export const merchLanding: LandingContent = {
   onProduct: [
     { title: "На человеке", text: "Посадка и нанесение в кадре.", image: g("merchi", 2) },
     { title: "На столе", text: "Набор к выдаче, не россыпь.", image: g("merchi", 4) },
-    { title: "В пакете", text: "Доезжает и открывается как продукт.", image: g("merchi", 6) },
+    { title: "В пакете", text: "Доезжает и открывается как продукт.", image: g("merchi", 8) },
   ],
   steps: [
     ["Заявка", "Напишите, кому, сколько и к какой дате. Можно без готового макета."],
