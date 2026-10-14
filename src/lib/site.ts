@@ -130,6 +130,121 @@ export const categories = [
   },
 ] as const;
 
+export const catalogMenu = [
+  {
+    slug: "vshivnye",
+    name: "Вшивные бирки",
+    href: "/katalog/vshivnye-birki",
+    items: [
+      { label: "Жаккардовые бирки", href: "/jacquard" },
+      { label: "Сатиновые бирки", href: "/satin" },
+      { label: "Силиконовые бирки", href: "/silikon" },
+      { label: "Хлопковые бирки", href: "/cotton" },
+      { label: "Нейлоновые бирки", href: "/neylon" },
+      { label: "Светоотражающие бирки", href: "/reflective" },
+    ],
+  },
+  {
+    slug: "navesnye",
+    name: "Навесные бирки",
+    href: "/katalog/navesnye-birki",
+    items: [
+      { label: "Картонные навесные бирки", href: "/birki-karton" },
+      { label: "Ярлыки из кальки", href: "/tracing" },
+      { label: "Пластиковые навесные бирки", href: "/plastic" },
+    ],
+  },
+  {
+    slug: "pakety",
+    name: "Пакеты",
+    href: "/katalog/upakovka",
+    items: [
+      { label: "ZIP-Lock пакеты", href: "/zip-pack" },
+      { label: "Пакеты с вырубной ручкой", href: "/ldpebag" },
+      { label: "Крафт пакеты", href: "/kraft" },
+      { label: "Бумажные пакеты", href: "/paper" },
+    ],
+  },
+  {
+    slug: "upakovka",
+    name: "Упаковка",
+    href: "/katalog/upakovka",
+    items: [
+      { label: "Картонные коробки", href: "/cardboardbox" },
+      { label: "Пакеты с бегунком", href: "/zip-pack" },
+      { label: "Пакеты с вырубной ручкой", href: "/ldpebag" },
+      { label: "Крафт пакеты", href: "/kraft" },
+      { label: "Бумажные пакеты", href: "/paper" },
+    ],
+  },
+  {
+    slug: "patchi",
+    name: "Патчи",
+    href: "/rubber",
+    items: [
+      { label: "ПВХ патчи", href: "/rubber" },
+      { label: "Шевроны", href: "/merchi" },
+      { label: "Металлические шевроны", href: "/merchi" },
+      { label: "Кожаные шевроны", href: "/merchi" },
+    ],
+  },
+  {
+    slug: "poligrafiya",
+    name: "Полиграфия",
+    href: "/katalog/poligrafiya",
+    items: [
+      { label: "Визитки", href: "/businesscard" },
+      { label: "Наклейки и стикеры", href: "/sticker" },
+      { label: "Флаеры и листовки", href: "/leaflet" },
+      { label: "Буклеты", href: "/booklet" },
+      { label: "Журналы", href: "/magazine" },
+    ],
+  },
+  {
+    slug: "nanesenie",
+    name: "Нанесение на одежду",
+    href: "/katalog/nanesenie",
+    items: [
+      { label: "DTF печать", href: "/directtofilm" },
+      { label: "Шелкография", href: "/embroideryprint" },
+      { label: "Флекстран и 3D печать", href: "/flextran" },
+      { label: "Вышивка", href: "/embroideryprint" },
+    ],
+  },
+  {
+    slug: "wide",
+    name: "Широкоформатная печать",
+    href: "/katalog/poligrafiya",
+    items: [
+      { label: "Печать флагов", href: "/flags" },
+      { label: "Печать баннеров", href: "/banner" },
+    ],
+  },
+  {
+    slug: "corporate",
+    name: "Корпоративная продукция",
+    href: "/katalog/merch",
+    items: [
+      { label: "Производство одежды под ключ", href: "/merchi" },
+      { label: "Печать флагов", href: "/flags" },
+      { label: "Печать баннеров", href: "/banner" },
+      { label: "Стикерпаки", href: "/stickerpack" },
+    ],
+  },
+  {
+    slug: "furnitura",
+    name: "Фурнитура",
+    href: "/katalog/furnitura",
+    items: [
+      { label: "Джибитсы", href: "/jibbitz" },
+      { label: "Пуллеры", href: "/pull" },
+      { label: "Биркодержатели", href: "/fasteners" },
+      { label: "Жаккардовая резинка", href: "/elastic" },
+      { label: "Жаккардовая стропа", href: "/elastic" },
+    ],
+  },
+] as const;
+
 export const products: Product[] = [
   {
     slug: "jacquard",

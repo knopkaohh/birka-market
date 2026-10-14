@@ -24,7 +24,7 @@ export function Loader() {
 
   return (
     <div className="loader" aria-hidden="true">
-      <TagLogo className="loader-tag" />
+      <TagLogo className="loader-tag" named />
       <div className="loader-wordmark">
         <LogoMark className="loader-logo loader-logo-ghost" />
         <div className="loader-logo-fill">

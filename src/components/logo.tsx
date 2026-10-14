@@ -51,7 +51,7 @@ export function LogoMark({ className }: { className?: string }) {
   );
 }
 
-export function TagLogo({ className }: { className?: string }) {
+export function TagLogo({ className, named = false }: { className?: string; named?: boolean }) {
   const hole = useId().replace(/:/g, "");
   return (
     <svg
@@ -74,34 +74,38 @@ export function TagLogo({ className }: { className?: string }) {
         d="M14 5.5h68a8 8 0 0 1 8 8v96a8 8 0 0 1-8 8H14a8 8 0 0 1-8-8v-96a8 8 0 0 1 8-8z"
       />
       <circle cx="28" cy="22" r="6.2" fill="none" stroke="#171717" strokeWidth="2.6" />
-      <text
-        x="50"
-        y="66"
-        textAnchor="middle"
-        fill="#171717"
-        fontFamily="var(--font-manrope), Arial, sans-serif"
-        fontSize="15"
-        fontWeight="800"
-        letterSpacing="-0.04em"
-        textLength="58"
-        lengthAdjust="spacingAndGlyphs"
-      >
-        БИРКА
-      </text>
-      <text
-        x="50"
-        y="86"
-        textAnchor="middle"
-        fill="#171717"
-        fontFamily="var(--font-manrope), Arial, sans-serif"
-        fontSize="15"
-        fontWeight="800"
-        letterSpacing="-0.04em"
-        textLength="58"
-        lengthAdjust="spacingAndGlyphs"
-      >
-        МАРКЕТ
-      </text>
+      {named ? (
+        <>
+          <text
+            x="50"
+            y="66"
+            textAnchor="middle"
+            fill="#171717"
+            fontFamily="var(--font-manrope), Arial, sans-serif"
+            fontSize="15"
+            fontWeight="800"
+            letterSpacing="-0.04em"
+            textLength="58"
+            lengthAdjust="spacingAndGlyphs"
+          >
+            БИРКА
+          </text>
+          <text
+            x="50"
+            y="86"
+            textAnchor="middle"
+            fill="#171717"
+            fontFamily="var(--font-manrope), Arial, sans-serif"
+            fontSize="15"
+            fontWeight="800"
+            letterSpacing="-0.04em"
+            textLength="58"
+            lengthAdjust="spacingAndGlyphs"
+          >
+            МАРКЕТ
+          </text>
+        </>
+      ) : null}
     </svg>
   );
 }
