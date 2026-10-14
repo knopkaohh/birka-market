@@ -1,3 +1,4 @@
+import { useId } from "react";
 import Link from "next/link";
 
 export function LogoMark({ className }: { className?: string }) {
@@ -46,6 +47,65 @@ export function LogoMark({ className }: { className?: string }) {
         fill="currentColor"
         d="M 230.54,58.01 V 68.52 H 242.61 V 112.62 H 250.16 V 68.52 H 259.22 V 58.01 H 230.54 Z"
       />
+    </svg>
+  );
+}
+
+export function TagLogo({ className, named = false }: { className?: string; named?: boolean }) {
+  const hole = useId().replace(/:/g, "");
+  return (
+    <svg
+      className={className}
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 96 124"
+      aria-hidden="true"
+      focusable="false"
+    >
+      <mask id={hole}>
+        <rect width="96" height="124" fill="#fff" />
+        <circle cx="28" cy="22" r="4.2" fill="#000" />
+      </mask>
+      <path
+        fill="#edc147"
+        stroke="#171717"
+        strokeWidth="3.4"
+        strokeLinejoin="round"
+        mask={`url(#${hole})`}
+        d="M14 5.5h68a8 8 0 0 1 8 8v96a8 8 0 0 1-8 8H14a8 8 0 0 1-8-8v-96a8 8 0 0 1 8-8z"
+      />
+      <circle cx="28" cy="22" r="6.2" fill="none" stroke="#171717" strokeWidth="2.6" />
+      {named ? (
+        <>
+          <text
+            x="50"
+            y="66"
+            textAnchor="middle"
+            fill="#171717"
+            fontFamily="var(--font-manrope), Arial, sans-serif"
+            fontSize="15"
+            fontWeight="800"
+            letterSpacing="-0.04em"
+            textLength="58"
+            lengthAdjust="spacingAndGlyphs"
+          >
+            БИРКА
+          </text>
+          <text
+            x="50"
+            y="86"
+            textAnchor="middle"
+            fill="#171717"
+            fontFamily="var(--font-manrope), Arial, sans-serif"
+            fontSize="15"
+            fontWeight="800"
+            letterSpacing="-0.04em"
+            textLength="58"
+            lengthAdjust="spacingAndGlyphs"
+          >
+            МАРКЕТ
+          </text>
+        </>
+      ) : null}
     </svg>
   );
 }

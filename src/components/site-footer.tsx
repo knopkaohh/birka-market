@@ -46,7 +46,7 @@ export function SiteFooter() {
         </div>
         <div>
           <span>КАТАЛОГ</span>
-          {categories.slice(0, 4).map((item) => (
+          {categories.map((item) => (
             <Link key={item.slug} href={`/katalog/${item.slug}`}>
               {item.name}
             </Link>

@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { LogoMark } from "@/components/logo";
+import { LogoMark, TagLogo } from "@/components/logo";
 import { company } from "@/lib/site";
 
 let introPlayed = false;
@@ -24,6 +24,7 @@ export function Loader() {
 
   return (
     <div className="loader" aria-hidden="true">
+      <TagLogo className="loader-tag" named />
       <div className="loader-wordmark">
         <LogoMark className="loader-logo loader-logo-ghost" />
         <div className="loader-logo-fill">
@@ -31,6 +32,7 @@ export function Loader() {
         </div>
       </div>
       <p>{company.slogan}</p>
+      <span className="loader-meter" aria-hidden="true"><i /></span>
     </div>
   );
 }
