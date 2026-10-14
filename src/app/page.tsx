@@ -58,10 +58,15 @@ export default function Home() {
               Рассчитать заказ
               <ArrowRight size={19} />
             </Link>
-            <Link className="text-link" href="/katalog">
-              Смотреть каталог
-              <ArrowDownRight size={18} />
+            <Link className="hero-secondary" href="/katalog">
+              Открыть каталог
+              <ArrowRight size={18} />
             </Link>
+            <a className="hero-phone" href={company.phoneHref}>{company.phone}</a>
+            <a className="scroll-cue" href="#categories">
+              Направления
+              <ArrowDownRight size={16} />
+            </a>
           </div>
           <div className="hero-proof">
             <div>
@@ -78,67 +83,32 @@ export default function Home() {
             </div>
           </div>
         </div>
-        <a className="scroll-cue" href="#categories">
-          <span>Листайте</span>
-          <ArrowDownRight />
-        </a>
       </section>
 
       <Marquee />
 
-      <section className="film" aria-label="Кадр с реальными тиражами">
-        {showreel ? (
-          <video className="film-media" autoPlay muted loop playsInline poster="/images/jacquard/hero-board.jpg">
-            <source src="/video/showreel.mp4" type="video/mp4" />
-          </video>
-        ) : (
-          <>
-            <div className="film-roll">
-              {filmShots.map((shot) => (
-                <div className="film-shot" key={shot.src}>
-                  <Image className="film-media" src={shot.src} alt={shot.alt} fill unoptimized sizes="100vw" />
-                </div>
-              ))}
-            </div>
-            <div className="film-scenes" aria-hidden="true">
-              {filmShots.map((shot, index) => (
-                <span key={shot.src}>
-                  <small>{String(index + 1).padStart(2, "0")} / {String(filmShots.length).padStart(2, "0")}</small>
-                  {shot.title}
-                </span>
-              ))}
-            </div>
-            <div className="film-meter" aria-hidden="true"><i /></div>
-          </>
-        )}
-        <div className="film-shade" />
-        <div className="film-caption">
-          <span>Кадр 02</span>
-          <h2>
-            Реальные
-            <br />
-            тиражи
-          </h2>
-          <p>Без мокапов. То, что уходит в пошив.</p>
-        </div>
-      </section>
-
-      <section className="reel" id="categories">
-        <div className="reel-head">
-          <span>03 / материалы</span>
+      <section className="pick" id="categories">
+        <div className="pick-head">
+          <span className="section-number">01 / С ЧЕГО НАЧАТЬ</span>
           <h2>
             Семь направлений.
             <br />
-            <em>Один цех.</em>
+            <em>Один клик.</em>
           </h2>
         </div>
-        <div className="reel-list">
-          {categories.map((item, index) => (
-            <Link key={item.slug} href={`/katalog/${item.slug}`} className="reel-row">
-              <span>{String(index + 1).padStart(2, "0")}</span>
-              <strong>{item.name}</strong>
-              <em>{item.intro}</em>
-              <ArrowRight />
+        <div className="pick-grid">
+          {categories.map((item) => (
+            <Link key={item.slug} href={`/katalog/${item.slug}`} className="pick-card">
+              <div className="pick-photo">
+                <Image src={item.image} alt="" fill sizes="(max-width: 760px) 50vw, 25vw" />
+              </div>
+              <div className="pick-copy">
+                <strong>{item.name}</strong>
+                <span>
+                  Смотреть
+                  <ArrowRight size={16} />
+                </span>
+              </div>
             </Link>
           ))}
         </div>
@@ -147,7 +117,7 @@ export default function Home() {
       <section className="section products-section">
         <div className="section-heading">
           <div>
-            <span className="section-number">04 / ЧАСТО ЗАКАЗЫВАЮТ</span>
+            <span className="section-number">02 / ЧАСТО ЗАКАЗЫВАЮТ</span>
             <h2>
               Продукция,
               <br />с которой начинают
@@ -187,9 +157,46 @@ export default function Home() {
         </div>
       </section>
 
+      <section className="film" aria-label="Кадр с реальными тиражами">
+        {showreel ? (
+          <video className="film-media" autoPlay muted loop playsInline poster="/images/jacquard/hero-board.jpg">
+            <source src="/video/showreel.mp4" type="video/mp4" />
+          </video>
+        ) : (
+          <>
+            <div className="film-roll">
+              {filmShots.map((shot) => (
+                <div className="film-shot" key={shot.src}>
+                  <Image className="film-media" src={shot.src} alt={shot.alt} fill unoptimized sizes="100vw" />
+                </div>
+              ))}
+            </div>
+            <div className="film-scenes" aria-hidden="true">
+              {filmShots.map((shot, index) => (
+                <span key={shot.src}>
+                  <small>{String(index + 1).padStart(2, "0")} / {String(filmShots.length).padStart(2, "0")}</small>
+                  {shot.title}
+                </span>
+              ))}
+            </div>
+            <div className="film-meter" aria-hidden="true"><i /></div>
+          </>
+        )}
+        <div className="film-shade" />
+        <div className="film-caption">
+          <span>Без мокапов</span>
+          <h2>
+            Реальные
+            <br />
+            тиражи
+          </h2>
+          <p>То, что уходит в пошив.</p>
+        </div>
+      </section>
+
       <section className="dark-section">
         <div className="dark-intro">
-          <span className="section-number light">05 / ПОЧЕМУ МЫ</span>
+          <span className="section-number light">03 / ПОЧЕМУ МЫ</span>
           <p className="display-quote">
             Не просто печатаем бирки. <em>Вникаем в задачу</em> и отвечаем за результат — от первого файла до последней детали тиража.
           </p>
@@ -213,7 +220,7 @@ export default function Home() {
       <section className="section works-section" id="works">
         <div className="section-heading compact">
           <div>
-            <span className="section-number">06 / НАШИ РАБОТЫ</span>
+            <span className="section-number">04 / НАШИ РАБОТЫ</span>
             <h2>
               Сделано для брендов,
               <br />
@@ -235,7 +242,7 @@ export default function Home() {
         </div>
       </section>
 
-      <CasesSection eyebrow="07 / КЕЙСЫ" />
+      <CasesSection eyebrow="05 / КЕЙСЫ" />
 
       <ProcessParallax />
 
@@ -243,7 +250,7 @@ export default function Home() {
 
       <section className="section faq-section">
         <div className="faq-title">
-          <span className="section-number">09 / ВОПРОСЫ</span>
+          <span className="section-number">07 / ВОПРОСЫ</span>
           <h2>
             Коротко
             <br />о главном
@@ -266,7 +273,7 @@ export default function Home() {
         </Accordion>
       </section>
 
-      <YandexMap eyebrow="10 / КАК НАС НАЙТИ" />
+      <YandexMap eyebrow="08 / КАК НАС НАЙТИ" />
     </>
   );
 }

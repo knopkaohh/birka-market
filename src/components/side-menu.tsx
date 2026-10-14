@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useMemo, useState } from "react";
-import { ChevronDown, Search } from "lucide-react";
+import { ArrowRight, ChevronRight, Search } from "lucide-react";
 import { Logo } from "@/components/logo";
 import { categories, matchesProduct, navLinks, products, productsByCategory } from "@/lib/site";
 
@@ -18,7 +18,8 @@ export function SideMenu({ open, onClose }: SideMenuProps) {
     if (pathname === `/katalog/${category.slug}`) return true;
     return productsByCategory(category.slug).some((item) => pathname === `/${item.slug}`);
   })?.slug;
-  const [opened, setOpened] = useState<string | null>(currentSlug ?? null);
+  const [opened, setOpened] = useState<string | null>(null);
+  const [flyTop, setFlyTop] = useState(96);
   const [query, setQuery] = useState("");
   const matches = useMemo(
     () => products.filter((item) => matchesProduct(item, query)),
@@ -26,8 +27,24 @@ export function SideMenu({ open, onClose }: SideMenuProps) {
   );
   const searching = query.trim().length > 0;
 
-  const toggle = (slug: string) => {
-    setOpened((value) => (value === slug ? null : slug));
+  const place = (slug: string, row: Element | null) => {
+    if (row) {
+      const top = row.getBoundingClientRect().top;
+      const count = productsByCategory(slug).length;
+      const estimated = 96 + count * 48;
+      const spaceBelow = window.innerHeight - top - 16;
+      const next = spaceBelow < Math.min(estimated, 320) ? Math.max(88, top + 44 - Math.min(estimated, 460)) : Math.max(88, top - 12);
+      setFlyTop(Math.min(next, Math.max(88, window.innerHeight - 220)));
+    }
+    setOpened(slug);
+  };
+
+  const toggle = (slug: string, row: Element | null) => {
+    if (opened === slug) {
+      setOpened(null);
+      return;
+    }
+    place(slug, row);
   };
 
   return (
@@ -42,6 +59,9 @@ export function SideMenu({ open, onClose }: SideMenuProps) {
         id="side-menu"
         className={`side-menu ${open ? "is-open" : ""}`}
         aria-label="Каталог продукции"
+        onMouseLeave={() => {
+          if (window.matchMedia("(hover: hover) and (pointer: fine)").matches) setOpened(null);
+        }}
       >
         <div className="side-menu-inner">
           <div className="side-menu-logo">
@@ -95,7 +115,15 @@ export function SideMenu({ open, onClose }: SideMenuProps) {
                 const panelId = `side-cat-${category.slug}`;
 
                 return (
-                  <li key={category.slug} className="side-menu-item">
+                  <li
+                    key={category.slug}
+                    className="side-menu-item"
+                    onMouseEnter={(event) => {
+                      if (window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
+                        place(category.slug, event.currentTarget.querySelector(".side-menu-row"));
+                      }
+                    }}
+                  >
                     <div className={`side-menu-row ${isOpen || isCurrent ? "is-active" : ""}`}>
                       <Link href={href} className="side-menu-link" prefetch={false} onClick={onClose}>
                         {category.name}
@@ -103,15 +131,27 @@ export function SideMenu({ open, onClose }: SideMenuProps) {
                       <button
                         type="button"
                         className={`side-menu-arrow ${isOpen ? "is-open" : ""}`}
-                        aria-label={isOpen ? `Свернуть ${category.name}` : `Показать материалы: ${category.name}`}
+                        aria-label={isOpen ? `Скрыть ${category.name}` : `Открыть материалы: ${category.name}`}
                         aria-expanded={isOpen}
                         aria-controls={panelId}
-                        onClick={() => toggle(category.slug)}
+                        onClick={(event) => toggle(category.slug, event.currentTarget.closest(".side-menu-row"))}
                       >
-                        <ChevronDown size={18} strokeWidth={2.4} />
+                        <ChevronRight size={18} strokeWidth={2.4} />
                       </button>
                     </div>
-                    <div className={`side-submenu ${isOpen ? "is-open" : ""}`} id={panelId}>
+                    <div
+                      className={`side-submenu ${isOpen ? "is-open" : ""}`}
+                      id={panelId}
+                      style={{ ["--fly-top" as string]: `${flyTop}px` }}
+                    >
+                      <button type="button" className="side-flyout-back" onClick={() => setOpened(null)}>
+                        <ChevronRight size={16} />
+                        Все разделы
+                      </button>
+                      <Link href={href} className="side-flyout-title" prefetch={false} onClick={onClose}>
+                        {category.name}
+                        <ArrowRight size={18} />
+                      </Link>
                       <ul className="side-submenu-panel">
                         {items.map((item) => (
                           <li key={item.slug}>
@@ -121,7 +161,8 @@ export function SideMenu({ open, onClose }: SideMenuProps) {
                               prefetch={false}
                               onClick={onClose}
                             >
-                              {item.name}
+                              <span>{item.shortName}</span>
+                              <small>от {item.minQty.toLocaleString("ru-RU")}</small>
                             </Link>
                           </li>
                         ))}
