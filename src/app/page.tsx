@@ -29,26 +29,20 @@ export default function Home() {
     <>
       <section className="hero">
         <div className="hero-stage" aria-hidden="true">
-          <div className="hero-orbit">
-            <span className="hero-orbit-dot" />
-          </div>
+          <div className="hero-ring" />
           <div className="hero-yellow-shape" />
-          <div className="hero-sand-shape" />
-          <span className="hero-ghost">бирки</span>
         </div>
         <div className="hero-copy">
           <div className="eyebrow">
             <span />
-            Производим в Москве • Доставляем по России
+            Москва · доставляем по России
           </div>
           <h1>
-            <span className="hero-line"><span>Бирки, упаковка</span></span>
+            <span className="hero-line"><span>Бирки,</span></span>
+            <span className="hero-line"><span>упаковка</span></span>
             <span className="hero-line"><span>и мерч <em>на заказ</em></span></span>
           </h1>
-          <p className="hero-lead">
-            {company.slogan} Производим в Москве: от бесплатного макета до готового тиража.
-            Поможем выбрать материал и рассчитаем заказ.
-          </p>
+          <p className="hero-lead">{company.slogan} Макет бесплатно, тираж от 100 штук.</p>
           <div className="hero-actions">
             <Link className="primary-cta" href="/raschet">
               Рассчитать заказ
@@ -56,10 +50,6 @@ export default function Home() {
             </Link>
             <Link className="text-link" href="/katalog">
               Смотреть каталог
-              <ArrowDownRight size={18} />
-            </Link>
-            <Link className="text-link" href="/kak-vybrat">
-              Как выбрать бирки
               <ArrowDownRight size={18} />
             </Link>
           </div>
