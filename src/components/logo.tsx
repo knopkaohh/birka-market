@@ -1,3 +1,4 @@
+import { useId } from "react";
 import Link from "next/link";
 
 export function LogoMark({ className }: { className?: string }) {
@@ -51,6 +52,7 @@ export function LogoMark({ className }: { className?: string }) {
 }
 
 export function TagLogo({ className }: { className?: string }) {
+  const hole = useId().replace(/:/g, "");
   return (
     <svg
       className={className}
@@ -59,15 +61,19 @@ export function TagLogo({ className }: { className?: string }) {
       aria-hidden="true"
       focusable="false"
     >
+      <mask id={hole}>
+        <rect width="96" height="124" fill="#fff" />
+        <circle cx="28" cy="22" r="4.2" fill="#000" />
+      </mask>
       <path
         fill="#edc147"
         stroke="#171717"
         strokeWidth="3.4"
         strokeLinejoin="round"
+        mask={`url(#${hole})`}
         d="M14 5.5h68a8 8 0 0 1 8 8v96a8 8 0 0 1-8 8H14a8 8 0 0 1-8-8v-96a8 8 0 0 1 8-8z"
       />
-      <circle cx="28" cy="22" r="7" fill="#171717" />
-      <circle cx="28" cy="22" r="3.1" fill="#f4f1e9" />
+      <circle cx="28" cy="22" r="6.2" fill="none" stroke="#171717" strokeWidth="2.6" />
       <text
         x="50"
         y="66"
