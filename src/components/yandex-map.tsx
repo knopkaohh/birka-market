@@ -3,15 +3,16 @@ import { company } from "@/lib/site";
 type YandexMapProps = {
   height?: number;
   compact?: boolean;
+  eyebrow?: string;
 };
 
-export function YandexMap({ height = 600, compact = false }: YandexMapProps) {
+export function YandexMap({ height = 600, compact = false, eyebrow = "07 / КАК НАС НАЙТИ" }: YandexMapProps) {
   return (
     <section className={`map-section ${compact ? "is-compact" : ""}`} aria-label="Офис на карте">
       {!compact && (
         <div className="map-heading">
           <div>
-            <span className="section-number light">07 / КАК НАС НАЙТИ</span>
+            <span className="section-number light">{eyebrow}</span>
             <h2>
               Офис и склад
               <br />

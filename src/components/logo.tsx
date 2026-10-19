@@ -1,3 +1,4 @@
+import { useId } from "react";
 import Link from "next/link";
 
 export function LogoMark({ className }: { className?: string }) {
@@ -46,6 +47,33 @@ export function LogoMark({ className }: { className?: string }) {
         fill="currentColor"
         d="M 230.54,58.01 V 68.52 H 242.61 V 112.62 H 250.16 V 68.52 H 259.22 V 58.01 H 230.54 Z"
       />
+    </svg>
+  );
+}
+
+export function TagLogo({ className }: { className?: string }) {
+  const hole = useId().replace(/:/g, "");
+  return (
+    <svg
+      className={className}
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 96 130"
+      aria-hidden="true"
+      focusable="false"
+    >
+      <mask id={hole}>
+        <rect width="96" height="130" fill="#fff" />
+        <circle cx="48" cy="64" r="7" fill="#000" />
+      </mask>
+      <path
+        fill="#edc147"
+        stroke="#171717"
+        strokeWidth="3.2"
+        strokeLinejoin="round"
+        mask={`url(#${hole})`}
+        d="M18 8h60a10 10 0 0 1 10 10v62L48 122 8 80V18A10 10 0 0 1 18 8z"
+      />
+      <circle cx="48" cy="64" r="9.2" fill="none" stroke="#171717" strokeWidth="2.5" />
     </svg>
   );
 }

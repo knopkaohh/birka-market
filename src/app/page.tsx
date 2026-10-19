@@ -1,14 +1,14 @@
+import fs from "node:fs";
+import path from "node:path";
 import Image from "next/image";
 import Link from "next/link";
 import {
   ArrowDownRight,
   ArrowRight,
   MessageCircle,
-  Sparkles,
 } from "lucide-react";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { CalculatorBlock } from "@/components/calculator-block";
-import { CategoryTile } from "@/components/category-tile";
 import { Marquee } from "@/components/marquee";
 import { CasesSection } from "@/components/cases-section";
 import { ProcessParallax } from "@/components/process-parallax";
@@ -23,8 +23,17 @@ import {
   portfolio,
 } from "@/lib/site";
 
+const filmShots = [
+  { src: "/images/jacquard/hero-board.jpg", alt: "Набор вшивных бирок с реальных тиражей", title: "Бирки" },
+  { src: "/images/jacquard/burst.jpg", alt: "Цветные тканые бирки THE BURST", title: "Жаккард" },
+  { src: "/images/satin/annilook.jpg", alt: "Сатиновые ленты ANNILOOK", title: "Сатин" },
+  { src: "/images/kraft/g6.jpg", alt: "Крафтовые пакеты с ручками", title: "Упаковка" },
+  { src: "/images/printing/g1.jpg", alt: "Тираж листовок и флаеров", title: "Полиграфия" },
+];
+
 export default function Home() {
   const featured = featuredSlugs.map((slug) => getProduct(slug)).filter(Boolean);
+  const showreel = fs.existsSync(path.join(process.cwd(), "public/video/showreel.mp4"));
 
   return (
     <>
@@ -32,94 +41,75 @@ export default function Home() {
         <div className="hero-copy">
           <div className="eyebrow">
             <span />
-            Производим в Москве • Доставляем по России
+            С {company.since} года · ни один бренд не подвели
           </div>
           <h1>
-            Бирки, упаковка
-            <br />
-            и мерч <em>на заказ</em>
+            <span className="hero-line"><span>Бирки, упаковка</span></span>
+            <span className="hero-line"><span>и мерч <em>на тираж</em></span></span>
           </h1>
+          <p className="hero-slogan">
+            Ваш бренд — <em>наша забота</em>
+          </p>
           <p className="hero-lead">
-            {company.slogan} Производим в Москве: от бесплатного макета до готового тиража.
-            Поможем выбрать материал и рассчитаем заказ.
+            Чем больше тираж, тем выгоднее цена. Давайте сотрудничать — доведём заказ до отгрузки.
           </p>
           <div className="hero-actions">
             <Link className="primary-cta" href="/raschet">
               Рассчитать заказ
               <ArrowRight size={19} />
             </Link>
-            <Link className="text-link" href="/katalog">
-              Смотреть каталог
-              <ArrowDownRight size={18} />
+            <Link className="hero-secondary" href="/katalog">
+              Открыть каталог
+              <ArrowRight size={18} />
             </Link>
-            <Link className="text-link" href="/kak-vybrat">
-              Как выбрать бирки
-              <ArrowDownRight size={18} />
-            </Link>
+            <a className="hero-phone" href={company.phoneHref}>{company.phone}</a>
+            <a className="scroll-cue" href="#categories">
+              Направления
+              <ArrowDownRight size={16} />
+            </a>
           </div>
           <div className="hero-proof">
             <div>
               <strong>с {company.since}</strong>
-              <span>на рынке</span>
+              <span>ведём до отгрузки</span>
             </div>
             <div>
               <strong>{company.brands}</strong>
-              <span>брендов</span>
+              <span>брендов с нами</span>
             </div>
             <div>
-              <strong>0 ₽</strong>
-              <span>макет для печати</span>
+              <strong>0</strong>
+              <span>подведённых брендов</span>
             </div>
           </div>
-        </div>
-        <div className="hero-visual" aria-label="Примеры изготовленных бирок">
-          <div className="hero-yellow-shape" data-parallax="0.14" />
-          <div className="floating-note note-one" data-parallax="0.22" data-parallax-base="rotate(-3deg)">
-            <Sparkles size={16} />
-            Реальные работы
-          </div>
-          <div className="photo-card photo-main" data-parallax="0.06" data-parallax-base="rotate(3deg)">
-            <Image
-              src="/images/jacquard/g2.jpg"
-              alt="Жаккардовые бирки, изготовленные Бирка Маркет"
-              fill
-              sizes="(max-width: 900px) 80vw, 35vw"
-              priority
-            />
-          </div>
-          <div className="photo-card photo-small" data-parallax="0.18" data-parallax-base="rotate(-7deg)">
-            <Image src="/images/cotton/g10.jpg" alt="Хлопковая бирка в руках" fill sizes="220px" />
-          </div>
-          <div className="quality-stamp" data-parallax="0.1" data-parallax-base="rotate(7deg)">
-            <span>с 2017</span>
-            <small>
-              заботимся
-              <br />о брендах
-            </small>
-          </div>
-          <a className="scroll-cue" href="#categories">
-            <span>Листайте</span>
-            <ArrowDownRight />
-          </a>
         </div>
       </section>
 
       <Marquee />
 
-      <section className="section" id="categories">
-        <div className="section-heading">
-          <div>
-            <span className="section-number">01 / КАТАЛОГ</span>
-            <h2>
-              Всё для маркировки, упаковки
-              <br />и полиграфии
-            </h2>
-          </div>
-          <p>Семь направлений — от вшивной бирки до полиграфии. Выберите задачу, остальное уточним вместе.</p>
+      <section className="pick" id="categories">
+        <div className="pick-head">
+          <span className="section-number">01 / С ЧЕГО НАЧАТЬ</span>
+          <h2>
+            Семь направлений.
+            <br />
+            <em>Один клик.</em>
+          </h2>
         </div>
-        <div className="category-grid">
-          {categories.map((item, index) => (
-            <CategoryTile key={item.slug} category={item} index={index} />
+        <div className="pick-grid">
+          {categories.map((item) => (
+            <Link key={item.slug} href={`/katalog/${item.slug}`} className="pick-card">
+              <div className="pick-photo">
+                <Image src={item.image} alt="" fill sizes="(max-width: 760px) 50vw, 25vw" />
+              </div>
+              <div className="pick-copy">
+                <strong>{item.name}</strong>
+                <span>
+                  Смотреть
+                  <ArrowRight size={16} />
+                </span>
+              </div>
+            </Link>
           ))}
         </div>
       </section>
@@ -143,7 +133,7 @@ export default function Home() {
               index={index}
               image={
                 {
-                  jacquard: "/images/jacquard/g5.jpg",
+                  jacquard: "/images/jacquard/aliyation.jpg",
                   "birki-karton": "/images/birki-karton/g3.jpg",
                   kraft: "/images/kraft/g3.jpg",
                   merchi: "/images/merchi/g5.jpg",
@@ -167,6 +157,43 @@ export default function Home() {
         </div>
       </section>
 
+      <section className="film" aria-label="Кадр с реальными тиражами">
+        {showreel ? (
+          <video className="film-media" autoPlay muted loop playsInline poster="/images/jacquard/hero-board.jpg">
+            <source src="/video/showreel.mp4" type="video/mp4" />
+          </video>
+        ) : (
+          <>
+            <div className="film-roll">
+              {filmShots.map((shot) => (
+                <div className="film-shot" key={shot.src}>
+                  <Image className="film-media" src={shot.src} alt={shot.alt} fill unoptimized sizes="100vw" />
+                </div>
+              ))}
+            </div>
+            <div className="film-scenes" aria-hidden="true">
+              {filmShots.map((shot, index) => (
+                <span key={shot.src}>
+                  <small>{String(index + 1).padStart(2, "0")} / {String(filmShots.length).padStart(2, "0")}</small>
+                  {shot.title}
+                </span>
+              ))}
+            </div>
+            <div className="film-meter" aria-hidden="true"><i /></div>
+          </>
+        )}
+        <div className="film-shade" />
+        <div className="film-caption">
+          <span>Без мокапов</span>
+          <h2>
+            Реальные
+            <br />
+            тиражи
+          </h2>
+          <p>То, что уходит в пошив.</p>
+        </div>
+      </section>
+
       <section className="dark-section">
         <div className="dark-intro">
           <span className="section-number light">03 / ПОЧЕМУ МЫ</span>
@@ -176,7 +203,7 @@ export default function Home() {
         </div>
         <div className="advantages">
           {[
-            ["01", "Свой дизайнер", "Бесплатно адаптирует логотип и подготовит макет для печати."],
+            ["01", "Доводим до конца", "С 2017 года ни один бренд не остался без готового тиража. Чем больше объём, тем выгоднее цена."],
             ["02", "Менеджер + технолог", "Проверят параметры, материал и способ обработки до запуска."],
             ["03", "Контроль качества", "Сверяем размер, цвет, читаемость и края с согласованным макетом."],
             ["04", "Всё в одном месте", "Бирки, упаковка, фурнитура, мерч и полиграфия у одного партнёра."],
@@ -215,7 +242,7 @@ export default function Home() {
         </div>
       </section>
 
-      <CasesSection />
+      <CasesSection eyebrow="05 / КЕЙСЫ" />
 
       <ProcessParallax />
 
@@ -223,7 +250,7 @@ export default function Home() {
 
       <section className="section faq-section">
         <div className="faq-title">
-          <span className="section-number">06 / ВОПРОСЫ</span>
+          <span className="section-number">07 / ВОПРОСЫ</span>
           <h2>
             Коротко
             <br />о главном
@@ -246,7 +273,7 @@ export default function Home() {
         </Accordion>
       </section>
 
-      <YandexMap />
+      <YandexMap eyebrow="08 / КАК НАС НАЙТИ" />
     </>
   );
 }

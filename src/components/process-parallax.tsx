@@ -9,7 +9,7 @@ import { processSteps } from "@/lib/site";
 const scenes = [
   { image: "/images/satin/g1.jpg", caption: "Заявки и образцы" },
   { image: "/images/silikon/g6.jpg", caption: "Подбор материала" },
-  { image: "/images/neylon/g4.jpg", caption: "Макет для печати" },
+  { image: "/images/neylon/g4.jpg", caption: "Согласование файла" },
   { image: "/images/process.jpg", caption: "Контроль тиража" },
 ] as const;
 
@@ -125,7 +125,7 @@ export function ProcessParallax() {
           </div>
         </div>
         <div className="process-content">
-          <span className="section-number">05 / КАК МЫ РАБОТАЕМ</span>
+          <span className="section-number">06 / КАК МЫ РАБОТАЕМ</span>
           <h2>
             Понятный путь
             <br />
@@ -172,7 +172,7 @@ export function ProcessParallax() {
 
           <div className="process-parallax-copy">
             <div className="process-parallax-top">
-              <span className="section-number light">05 / КАК МЫ РАБОТАЕМ</span>
+              <span className="section-number light">06 / КАК МЫ РАБОТАЕМ</span>
               <p className="process-hint">
                 Скролльте вниз, чтобы увидеть этап
                 <ArrowDown size={14} />
