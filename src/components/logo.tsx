@@ -51,61 +51,29 @@ export function LogoMark({ className }: { className?: string }) {
   );
 }
 
-export function TagLogo({ className, named = false }: { className?: string; named?: boolean }) {
+export function TagLogo({ className }: { className?: string }) {
   const hole = useId().replace(/:/g, "");
   return (
     <svg
       className={className}
       xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 96 124"
+      viewBox="0 0 96 130"
       aria-hidden="true"
       focusable="false"
     >
       <mask id={hole}>
-        <rect width="96" height="124" fill="#fff" />
-        <circle cx="28" cy="22" r="4.2" fill="#000" />
+        <rect width="96" height="130" fill="#fff" />
+        <circle cx="48" cy="64" r="7" fill="#000" />
       </mask>
       <path
         fill="#edc147"
         stroke="#171717"
-        strokeWidth="3.4"
+        strokeWidth="3.2"
         strokeLinejoin="round"
         mask={`url(#${hole})`}
-        d="M14 5.5h68a8 8 0 0 1 8 8v96a8 8 0 0 1-8 8H14a8 8 0 0 1-8-8v-96a8 8 0 0 1 8-8z"
+        d="M18 8h60a10 10 0 0 1 10 10v62L48 122 8 80V18A10 10 0 0 1 18 8z"
       />
-      <circle cx="28" cy="22" r="6.2" fill="none" stroke="#171717" strokeWidth="2.6" />
-      {named ? (
-        <>
-          <text
-            x="50"
-            y="66"
-            textAnchor="middle"
-            fill="#171717"
-            fontFamily="var(--font-manrope), Arial, sans-serif"
-            fontSize="15"
-            fontWeight="800"
-            letterSpacing="-0.04em"
-            textLength="58"
-            lengthAdjust="spacingAndGlyphs"
-          >
-            БИРКА
-          </text>
-          <text
-            x="50"
-            y="86"
-            textAnchor="middle"
-            fill="#171717"
-            fontFamily="var(--font-manrope), Arial, sans-serif"
-            fontSize="15"
-            fontWeight="800"
-            letterSpacing="-0.04em"
-            textLength="58"
-            lengthAdjust="spacingAndGlyphs"
-          >
-            МАРКЕТ
-          </text>
-        </>
-      ) : null}
+      <circle cx="48" cy="64" r="9.2" fill="none" stroke="#171717" strokeWidth="2.5" />
     </svg>
   );
 }

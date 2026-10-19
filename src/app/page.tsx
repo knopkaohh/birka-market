@@ -44,12 +44,14 @@ export default function Home() {
             С {company.since} года · ни один бренд не подвели
           </div>
           <h1>
-            <span className="hero-line"><span>Бирки,</span></span>
-            <span className="hero-line"><span>упаковка</span></span>
+            <span className="hero-line"><span>Бирки, упаковка</span></span>
             <span className="hero-line"><span>и мерч <em>на тираж</em></span></span>
           </h1>
+          <p className="hero-slogan">
+            Ваш бренд — <em>наша забота</em>
+          </p>
           <p className="hero-lead">
-            {company.slogan} Чем больше тираж, тем выгоднее цена. Давайте сотрудничать — доведём заказ до отгрузки.
+            Чем больше тираж, тем выгоднее цена. Давайте сотрудничать — доведём заказ до отгрузки.
           </p>
           <div className="hero-actions">
             <Link className="primary-cta" href="/raschet">
@@ -80,39 +82,6 @@ export default function Home() {
               <span>подведённых брендов</span>
             </div>
           </div>
-        </div>
-        <div className="hero-board">
-          <figure className="hero-shot hero-shot-main">
-            <Image
-              src="/images/jacquard/burst.jpg"
-              alt="Цветные тканые бирки с реального тиража"
-              fill
-              unoptimized
-              priority
-              sizes="(max-width: 900px) 70vw, 32vw"
-            />
-            <figcaption>Бирки</figcaption>
-          </figure>
-          <figure className="hero-shot">
-            <Image
-              src="/images/kraft/g6.jpg"
-              alt="Крафтовые пакеты с ручками"
-              fill
-              unoptimized
-              sizes="(max-width: 900px) 40vw, 18vw"
-            />
-            <figcaption>Упаковка</figcaption>
-          </figure>
-          <figure className="hero-shot">
-            <Image
-              src="/images/merchi/g8.jpg"
-              alt="Мерч с нанесением для бренда"
-              fill
-              unoptimized
-              sizes="(max-width: 900px) 40vw, 18vw"
-            />
-            <figcaption>Мерч</figcaption>
-          </figure>
         </div>
       </section>
 
