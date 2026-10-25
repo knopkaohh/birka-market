@@ -1,12 +1,16 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowDownRight, ArrowRight } from "lucide-react";
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { CalculatorBlock } from "@/components/calculator-block";
+import { ProductCard } from "@/components/product-card";
 import { YandexMap } from "@/components/yandex-map";
-import { categories, company, faqItems } from "@/lib/site";
+import { importedPhotos } from "@/lib/imported-photos";
+import { formatNewsDate, newsPosts } from "@/lib/news";
+import { company, products } from "@/lib/site";
 
 export default function Home() {
+  const latestNews = newsPosts.slice(0, 3);
+
   return (
     <>
       <section className="hero hero-atmosphere">
@@ -26,27 +30,24 @@ export default function Home() {
             Производим в Москве • Доставляем по России
           </div>
           <h1 className="type-display">
-            Бирки, упаковка
+            Производство бирок,
             <br />
-            и мерч <em>на заказ</em>
+            пакетов, упаковки,
+            <br />
+            мерча и <em>полиграфии</em>
           </h1>
           <p className="hero-lead type-body">
-            Ваш бренд, наша забота. Производим в Москве: от бесплатного макета до готового тиража.
-            Поможем выбрать материал и рассчитаем заказ.
+            Быстрый расчёт и консультация по материалам. Оставьте заявку или позвоните — поможем выбрать и посчитаем тираж.
           </p>
           <div className="hero-actions">
             <Link className="primary-cta" href="/raschet">
               Рассчитать заказ
               <ArrowRight size={19} />
             </Link>
-            <Link className="text-link" href="/katalog">
-              Смотреть каталог
+            <a className="text-link" href={company.phoneHref}>
+              {company.phone}
               <ArrowDownRight size={18} />
-            </Link>
-            <Link className="text-link" href="/kak-vybrat">
-              Как выбрать?
-              <ArrowDownRight size={18} />
-            </Link>
+            </a>
           </div>
           <div className="hero-proof">
             <div>
@@ -65,77 +66,77 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="section" id="categories">
+      <section className="section home-welcome">
+        <div>
+          <span className="section-number">КОМАНДА</span>
+          <h2 className="type-title">
+            Вас приветствует
+            <br />
+            команда <em>Бирка Маркет</em>
+          </h2>
+        </div>
+        <div className="home-welcome-copy">
+          <p>
+            К нам обращаются те, кому важны ответственность и скорость решений. Больше восьми лет партнёры приходят, чтобы бренд выглядел собранно с каждой стороны: от размера и состава до вкладыша и упаковки.
+          </p>
+          <p className="home-goal">Ваш бренд — наша забота. Наша цель — быть партнёром, с которым бренд становится заметнее.</p>
+        </div>
+      </section>
+
+      <section className="section" id="products">
         <div className="section-heading">
           <div>
-            <span className="section-number">01 / КАТАЛОГ</span>
+            <span className="section-number">ПРОДУКЦИЯ</span>
             <h2 className="type-title">
-              Всё для маркировки, упаковки
-              <br />и полиграфии
+              Разные формы, материалы
+              <br />и способы печати
             </h2>
           </div>
-          <p className="type-body">Семь направлений. Выберите задачу, остальное уточним вместе.</p>
+          <p className="type-body">Выберите изделие и откройте фото работ. Остальное уточним вместе.</p>
         </div>
-        <div className="category-list">
-          {categories.map((item, index) => (
-            <Link className="category-text" href={`/katalog/${item.slug}`} key={item.slug}>
-              <span>{String(index + 1).padStart(2, "0")}</span>
-              <h3>{item.name}</h3>
-              <p>{item.intro}</p>
+        <div className="product-grid">
+          {products.map((item) => (
+            <ProductCard
+              key={item.slug}
+              product={item}
+              image={importedPhotos[item.slug]?.[0]?.src ?? item.image}
+            />
+          ))}
+        </div>
+      </section>
+
+      <section className="section home-news">
+        <div className="section-heading">
+          <div>
+            <span className="section-number">НОВОСТИ</span>
+            <h2 className="type-title">Что происходит сейчас</h2>
+          </div>
+          <Link className="text-link" href="/novosti">
+            Все новости
+            <ArrowDownRight size={18} />
+          </Link>
+        </div>
+        <div className="news-grid">
+          {latestNews.map((post) => (
+            <Link key={post.slug} href={`/novosti/${post.slug}`} className="news-card">
+              <span className="news-card-photo">
+                <Image src={post.cover} alt={post.title} fill sizes="(max-width: 760px) 100vw, 33vw" />
+              </span>
+              <span className="news-card-copy">
+                <time dateTime={post.date}>{formatNewsDate(post.date)}</time>
+                <h2>{post.title}</h2>
+                <p>{post.excerpt}</p>
+                <em>
+                  Читать
+                  <ArrowDownRight size={16} />
+                </em>
+              </span>
             </Link>
           ))}
         </div>
       </section>
 
-      <section className="dark-section">
-        <div className="dark-intro">
-          <span className="section-number light">02 / ПОЧЕМУ МЫ</span>
-          <p className="display-quote type-title">
-            Не просто печатаем бирки. <em>Вникаем в задачу</em> и отвечаем за результат — от первого файла до последней детали тиража.
-          </p>
-        </div>
-        <div className="advantages">
-          {[
-            ["01", "Свой дизайнер", "Бесплатно адаптирует логотип и подготовит макет для печати."],
-            ["02", "Менеджер + технолог", "Проверят параметры, материал и способ обработки до запуска."],
-            ["03", "Контроль качества", "Сверяем размер, цвет, читаемость и края с согласованным макетом."],
-            ["04", "Всё в одном месте", "Бирки, упаковка, фурнитура, мерч и полиграфия у одного партнёра."],
-          ].map(([num, title, text]) => (
-            <div className="advantage" key={num}>
-              <span>{num}</span>
-              <h3>{title}</h3>
-              <p>{text}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
       <CalculatorBlock />
-
-      <section className="section faq-section">
-        <div className="faq-title">
-          <span className="section-number">03 / ВОПРОСЫ</span>
-          <h2 className="type-title">
-            Коротко
-            <br />о главном
-          </h2>
-          <p className="type-body">
-            Не нашли ответ? Напишите в <Link href="/kontakty">контакты</Link> — разберём задачу лично.
-          </p>
-        </div>
-        <Accordion className="faq-list">
-          {faqItems.map((item, index) => (
-            <AccordionItem value={`item-${index}`} key={item.q} className="faq-item">
-              <AccordionTrigger className="faq-trigger">
-                <span>0{index + 1}</span>
-                {item.q}
-              </AccordionTrigger>
-              <AccordionContent className="faq-content">{item.a}</AccordionContent>
-            </AccordionItem>
-          ))}
-        </Accordion>
-      </section>
-
       <YandexMap />
     </>
   );

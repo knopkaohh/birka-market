@@ -7,7 +7,9 @@ import { MaterialDetails } from "@/components/material-details";
 import { PhotoFrame } from "@/components/photo-frame";
 import type { LandingContent, QuotePrefill } from "@/lib/landings/types";
 import { quoteComment, quoteHref, quoteQuantity } from "@/lib/landings/types";
-import { firstUniquePhoto, takeUniquePhoto } from "@/lib/photos";
+import { importedPhotos } from "@/lib/imported-photos";
+import { photoKey } from "@/lib/photo-id";
+import { firstUniquePhoto, takeUniquePhoto, usablePhoto } from "@/lib/photos";
 import { landingJsonLd } from "@/lib/seo";
 import { company, getCategory, getProduct } from "@/lib/site";
 
@@ -43,13 +45,16 @@ export function ProductLanding({
   const selectedVariant = variant ?? content.variants[0]?.id;
   const formKey = [selectedVariant, quote?.qty, quote?.size, quote?.spec, quote?.price].filter(Boolean).join("-");
   const prefillComment = quote ? quoteComment(quote) : "";
+  const live = (importedPhotos[content.slug] ?? []).filter((item) => usablePhoto(item.src));
   const usedPhotos = new Set<string>();
-  const heroPhoto = takeUniquePhoto(content.hero[0], usedPhotos);
+  const heroPhoto = live[0]?.src ?? takeUniquePhoto(content.hero[0], usedPhotos);
+  if (live[0]) usedPhotos.add(photoKey(live[0].src));
   const variantPhoto = firstUniquePhoto(
     content.variants.map((item) => ({ src: item.image, alt: item.name })),
     usedPhotos,
   );
-  const galleryPhoto = firstUniquePhoto(content.gallery, usedPhotos);
+  const galleryItems = live.slice(1);
+  const galleryPhoto = galleryItems.length > 0 ? null : firstUniquePhoto(content.gallery, usedPhotos);
 
   return (
     <>
@@ -149,16 +154,33 @@ export function ProductLanding({
           <h2>{content.galleryTitle}</h2>
           <p>{content.galleryIntro}</p>
         </div>
-        <div className="section-photo">
-          <PhotoFrame
-            src={galleryPhoto?.src}
-            alt={galleryPhoto?.alt ?? content.galleryTitle}
-            width={1400}
-            height={1000}
-            sizes="(max-width: 900px) 100vw, 900px"
-            cover
-          />
-        </div>
+        {galleryItems.length > 0 ? (
+          <div className="jq-gallery">
+            {galleryItems.map((item, index) => (
+              <figure key={item.src}>
+                <PhotoFrame
+                  src={item.src}
+                  alt={`${product.shortName}: фото ${index + 1}`}
+                  width={item.width}
+                  height={item.height}
+                  sizes="(max-width: 900px) 100vw, 33vw"
+                  cover
+                />
+              </figure>
+            ))}
+          </div>
+        ) : (
+          <div className="section-photo">
+            <PhotoFrame
+              src={galleryPhoto?.src}
+              alt={galleryPhoto?.alt ?? content.galleryTitle}
+              width={1400}
+              height={1000}
+              sizes="(max-width: 900px) 100vw, 900px"
+              cover
+            />
+          </div>
+        )}
       </section>
 
       <section className="jq-section" id="orientir">

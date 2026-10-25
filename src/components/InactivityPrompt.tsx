@@ -113,10 +113,12 @@ export function InactivityPrompt() {
         >
           <motion.div
             className="idle-card"
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, y: 16, rotate: -2 }}
+            animate={{ opacity: 1, y: 0, rotate: -1.6 }}
             transition={{ duration: 0.45 }}
           >
+            <span className="idle-string" aria-hidden="true" />
+            <span className="idle-hole" aria-hidden="true" />
             <button type="button" className="idle-close" aria-label="Закрыть подсказку" onClick={close}>
               <X size={18} />
             </button>
