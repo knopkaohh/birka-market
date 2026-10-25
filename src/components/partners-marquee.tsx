@@ -14,7 +14,9 @@ export function PartnersMarquee() {
   const loop = [...partners, ...partners];
   return (
     <section className="partners" aria-label="Наши партнёры">
-      <p>Наши партнёры</p>
+      <p>
+        Наши <em>партнёры</em>
+      </p>
       <div className="partner-marquee">
         <div className="partner-track">
           {loop.map((item, index) => (
