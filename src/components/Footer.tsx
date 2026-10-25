@@ -1,9 +1,11 @@
 import Link from "next/link";
-import { ArrowDownRight } from "lucide-react";
+import { ArrowDownRight, Mail, MessageCircle, Send } from "lucide-react";
 import { BackToTop } from "@/components/back-to-top";
+import { FooterCallback } from "@/components/footer-callback";
 import { Logo } from "@/components/logo";
-import { categories, company, navLinks } from "@/lib/site";
+import { company } from "@/lib/site";
 
+/** Четыре колонки под слоганом: связь, адрес, график и компания. */
 export function Footer() {
   return (
     <footer>
@@ -23,51 +25,58 @@ export function Footer() {
       </div>
       <div className="footer-grid">
         <div>
-          <span>СВЯЗАТЬСЯ</span>
-          <a href={company.phoneHref}>{company.phone}</a>
-          <a href={`mailto:${company.email}`}>{company.email}</a>
-          <a href={company.telegram} target="_blank" rel="noreferrer">
-            Telegram
+          <span>Связь с нами</span>
+          <a className="footer-phone" href={company.phoneHref}>
+            {company.phone}
           </a>
-          <a href={company.whatsapp} target="_blank" rel="noreferrer">
-            WhatsApp
+          <div className="footer-messengers">
+            <a href={company.telegram} target="_blank" rel="noreferrer" aria-label="Telegram">
+              <Send size={16} />
+            </a>
+            <a href={company.whatsapp} target="_blank" rel="noreferrer" aria-label="WhatsApp">
+              <MessageCircle size={16} />
+            </a>
+            <a href={company.max} target="_blank" rel="noreferrer" aria-label="Макс">
+              <MessageCircle size={16} />
+            </a>
+          </div>
+          <a href={`mailto:${company.email}`}>
+            <Mail size={14} aria-hidden="true" />
+            {company.email}
           </a>
-          <a href={company.max} target="_blank" rel="noreferrer">
-            Макс
-          </a>
+          <FooterCallback />
         </div>
         <div>
-          <span>АДРЕС</span>
+          <span className="footer-heading-muted">Приезжайте в наш офис</span>
+          <p>г. Москва, Строительный проезд, дом 2 стр. 1, этаж 1, офис № 1.</p>
+          <strong>Выдача заказов и самовывоз со склада</strong>
           <p>
-            {company.address}
-            <br />
-            {company.hours}
-            <br />
-            {company.hoursNote}
+            Выдача готовой продукции осуществляется на территории нашего складского комплекса. Для вашего удобства мы
+            открыты в течение всего рабочего дня.
           </p>
         </div>
         <div>
-          <span>КАТАЛОГ</span>
-          {categories.slice(0, 4).map((item) => (
-            <Link key={item.slug} href={`/katalog/${item.slug}`}>
-              {item.name}
-            </Link>
-          ))}
+          <span className="footer-heading-amber">График работы офиса</span>
+          <p className="hours-main">
+            <i className="gold-dot" aria-hidden="true" />
+            Понедельник – Пятница с 10:00 до 18:00
+          </p>
+          <p>Суббота и воскресенье: по согласованию с менеджером.</p>
+          <p>В праздничные дни график может отличаться — пожалуйста, звоните для уточнения.</p>
         </div>
         <div>
-          <span>КОМПАНИЯ</span>
-          {navLinks
-            .filter((item) => item.href !== "/katalog")
-            .map((item) => (
-              <Link key={item.href} href={item.href}>
-                {item.label}
-              </Link>
-            ))}
-          <Link href="/privacy">Конфиденциальность</Link>
+          <span>Компания</span>
+          <Link href="/o-kompanii">О нас</Link>
+          <Link href="/dokumenty">Документы</Link>
+          <Link href="/faq">FAQ</Link>
+          <Link href="/privacy">Политика конфиденциальности</Link>
+          <p>© {new Date().getFullYear()} Бирка Маркет</p>
         </div>
       </div>
       <div className="footer-bottom">
-        <span>© {new Date().getFullYear()} БИРКА МАРКЕТ · {company.legal} · ИНН {company.inn} · ОГРНИП {company.ogrnip}</span>
+        <span>
+          {company.legal} · ИНН {company.inn} · ОГРНИП {company.ogrnip}
+        </span>
         <span>Бирки • упаковка • фурнитура • мерч</span>
         <BackToTop />
       </div>

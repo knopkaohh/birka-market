@@ -3,6 +3,7 @@ import { Cormorant_Garamond, Manrope } from "next/font/google";
 import { MobileBar } from "@/components/mobile-bar";
 import { SiteChrome } from "@/components/site-chrome";
 import { Footer } from "@/components/Footer";
+import { PartnersMarquee } from "@/components/partners-marquee";
 import { UiFallbackScript } from "@/components/ui-fallback-script";
 import { YandexMetrika } from "@/components/yandex-metrika";
 import { company } from "@/lib/site";
@@ -69,6 +70,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           <main id="top" tabIndex={-1}>
             {children}
           </main>
+          <PartnersMarquee />
           <Footer />
           <MobileBar />
         </SiteChrome>

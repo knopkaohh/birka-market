@@ -57,9 +57,6 @@ export const importedPhotos: Record<string, LivePhoto[]> = {
     { src: "/images/neylon/live-05.jpg", width: 1600, height: 1200 },
     { src: "/images/neylon/live-06.jpg", width: 960, height: 1280 },
     { src: "/images/neylon/live-07.jpg", width: 1260, height: 1680 },
-    { src: "/images/neylon/live-08.jpg", width: 960, height: 1280 },
-    { src: "/images/neylon/live-09.jpg", width: 960, height: 1280 },
-    { src: "/images/neylon/live-10.jpg", width: 960, height: 1280 },
   ],
   "reflective": [
     { src: "/images/reflective/live-01.jpg", width: 1440, height: 1920 },
@@ -102,10 +99,6 @@ export const importedPhotos: Record<string, LivePhoto[]> = {
     { src: "/images/plastic/live-04.jpg", width: 1600, height: 1600 },
     { src: "/images/plastic/live-05.jpg", width: 1440, height: 1920 },
     { src: "/images/plastic/live-06.jpg", width: 1024, height: 1024 },
-    { src: "/images/plastic/live-07.jpg", width: 960, height: 1280 },
-    { src: "/images/plastic/live-08.jpg", width: 960, height: 1280 },
-    { src: "/images/plastic/live-09.jpg", width: 960, height: 1280 },
-    { src: "/images/plastic/live-10.jpg", width: 960, height: 1280 },
   ],
   "zip-pack": [
     { src: "/images/zip-pack/live-01.jpg", width: 1600, height: 1764 },
@@ -261,7 +254,6 @@ export const importedPhotos: Record<string, LivePhoto[]> = {
     { src: "/images/merchi/live-07.jpg", width: 1200, height: 980 },
     { src: "/images/merchi/live-08.jpg", width: 1600, height: 900 },
     { src: "/images/merchi/live-09.jpg", width: 1600, height: 1296 },
-    { src: "/images/merchi/live-10.jpg", width: 960, height: 1280 },
   ],
   "stickerpack": [
     { src: "/images/stickerpack/live-01.jpg", width: 960, height: 1280 },
@@ -347,9 +339,6 @@ export const importedPhotos: Record<string, LivePhoto[]> = {
     { src: "/images/flags/live-05.jpg", width: 736, height: 1104 },
     { src: "/images/flags/live-06.jpg", width: 736, height: 1104 },
     { src: "/images/flags/live-07.jpg", width: 736, height: 920 },
-    { src: "/images/flags/live-08.jpg", width: 960, height: 1280 },
-    { src: "/images/flags/live-09.jpg", width: 960, height: 1280 },
-    { src: "/images/flags/live-10.jpg", width: 960, height: 1280 },
   ],
   "banner": [
     { src: "/images/banner/live-01.jpg", width: 1600, height: 1118 },

@@ -41,6 +41,7 @@ const nextConfig: NextConfig = {
       { source: "/landing-page", destination: "/katalog", permanent: true },
       { source: "/guide", destination: "/kak-vybrat", permanent: true },
       { source: "/podbor", destination: "/kak-vybrat", permanent: true },
+      { source: "/printing", destination: "/katalog/poligrafiya", permanent: true },
     ];
   },
 };

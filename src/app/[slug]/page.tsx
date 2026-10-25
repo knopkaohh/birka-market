@@ -37,7 +37,7 @@ export default async function ProductPage({
   const { slug } = await params;
   const { variant, qty, size, spec, time, price } = await searchParams;
   const landing = getLanding(slug);
-  if (!landing) notFound();
+  if (!landing || !getProduct(slug)) notFound();
   return (
     <ProductLanding
       content={landing}
