@@ -2,7 +2,7 @@
 
 import { FormEvent, useEffect, useMemo, useState } from "react";
 import Link from "next/link";
-import { ArrowRight, Check, FileUp } from "lucide-react";
+import { ArrowRight, Check, ChevronDown, ChevronRight, FileUp } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -37,6 +37,83 @@ type LeadFormProps = {
   variants?: LeadVariantOption[];
   detailFields?: LeadDetailFields;
 };
+
+function MaterialPicker({
+  value,
+  onChange,
+}: {
+  value: string;
+  onChange: (slug: string) => void;
+}) {
+  const current = products.find((item) => item.slug === value);
+  const [open, setOpen] = useState(false);
+  const [opened, setOpened] = useState<string | null>(current?.category ?? null);
+
+  return (
+    <div className={`material-picker ${open ? "is-open" : ""}`}>
+      <span className="material-picker-label">Что нужно изготовить?</span>
+      <button
+        type="button"
+        className="material-picker-toggle"
+        aria-expanded={open}
+        onClick={() => setOpen((item) => !item)}
+      >
+        <span>{current?.shortName ?? "Нужна помощь с выбором"}</span>
+        <ChevronDown size={16} className={open ? "is-turned" : ""} aria-hidden="true" />
+      </button>
+      {open ? (
+        <div className="material-picker-list">
+          <button
+            type="button"
+            className={current ? undefined : "is-current"}
+            onClick={() => {
+              onChange("unknown");
+              setOpen(false);
+            }}
+          >
+            Нужна помощь с выбором
+          </button>
+          {categories.map((category) => {
+            const items = productsByCategory(category.slug);
+            const isOpen = opened === category.slug;
+            return (
+              <div key={category.slug}>
+                <button
+                  type="button"
+                  className="material-picker-cat"
+                  aria-expanded={isOpen}
+                  onClick={() => setOpened((item) => (item === category.slug ? null : category.slug))}
+                >
+                  <span>{category.name}</span>
+                  <ChevronRight size={15} className={isOpen ? "is-turned" : ""} aria-hidden="true" />
+                </button>
+                {isOpen ? (
+                  <ul>
+                    {items.map((item) => (
+                      <li key={item.slug}>
+                        <button
+                          type="button"
+                          className={value === item.slug ? "is-current" : undefined}
+                          onClick={() => {
+                            onChange(item.slug);
+                            setOpen(false);
+                          }}
+                        >
+                          {item.shortName}
+                        </button>
+                      </li>
+                    ))}
+                  </ul>
+                ) : null}
+              </div>
+            );
+          })}
+        </div>
+      ) : null}
+      <input type="hidden" name="product" value={value} />
+    </div>
+  );
+}
 
 const defaultJacquardVariants: LeadVariantOption[] = [
   { id: "standard", name: "Стандарт" },
@@ -159,9 +236,9 @@ export function LeadForm({
         lightMode={false}
         aria-hidden="true"
       />
+      <MaterialPicker value={product} onChange={setProduct} />
       {details ? (
         <>
-          <input type="hidden" name="product" value={defaultProduct} />
           <div className="field">
             <label htmlFor="variant">{fields.variantLabel}</label>
             <select id="variant" name="variant" defaultValue={selectedVariant}>
@@ -181,28 +258,7 @@ export function LeadForm({
             <Input id="colors" name="colors" placeholder={fields.extraPlaceholder} defaultValue={defaultExtra} />
           </div>
         </>
-      ) : (
-        <div className="field full">
-          <label htmlFor="product">Что нужно изготовить?</label>
-          <select
-            id="product"
-            name="product"
-            value={product}
-            onChange={(event) => setProduct(event.target.value)}
-          >
-            <option value="unknown">Нужна помощь с выбором</option>
-            {categories.map((category) => (
-              <optgroup key={category.slug} label={category.name}>
-                {productsByCategory(category.slug).map((item) => (
-                  <option key={item.slug} value={item.slug}>
-                    {item.name}
-                  </option>
-                ))}
-              </optgroup>
-            ))}
-          </select>
-        </div>
-      )}
+      ) : null}
       <div className="field">
         <label htmlFor="quantity">{fields.quantityLabel ?? "Тираж, шт."}</label>
         <Input
