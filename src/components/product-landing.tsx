@@ -4,6 +4,7 @@ import { Breadcrumbs } from "@/components/breadcrumbs";
 import { CalcResponder } from "@/components/calc-responder";
 import { LeadForm } from "@/components/lead-form";
 import { MaterialDetails } from "@/components/material-details";
+import DriftWall from "@/components/fx/DriftWall";
 import { MaterialPhotos } from "@/components/material-photos";
 import { PhotoFrame } from "@/components/photo-frame";
 import type { LandingContent, QuotePrefill } from "@/lib/landings/types";
@@ -109,15 +110,46 @@ export function ProductLanding({
           </div>
         </div>
         <div className="jq-hero-visual">
-          <PhotoFrame
-            src={heroPhoto}
-            alt={content.heroAlts[0]}
-            width={1400}
-            height={1600}
-            sizes="(max-width: 900px) 100vw, 50vw"
-            priority
-            cover
-          />
+          {galleryPhotos.length ? (
+            <DriftWall
+              className="jq-hero-wall"
+              ariaLabel={`Фото работ: ${product.shortName}`}
+              items={galleryPhotos.map((item) => ({
+                image: item.src,
+                title: item.alt || product.shortName,
+              }))}
+              columns={3}
+              tileWidth={216}
+              tileHeight={200}
+              gap={28}
+              tilt={-1}
+              turn={-1}
+              perspective={1200}
+              depth={120}
+              speed={60}
+              direction="up"
+              variance={0.45}
+              parallax={0.6}
+              lift={64}
+              fade={0.6}
+              dim={0.55}
+              overlayColor="#eab308"
+              radius={17}
+              roll={0}
+              pauseOnHover={false}
+              grayscale={false}
+            />
+          ) : (
+            <PhotoFrame
+              src={heroPhoto}
+              alt={content.heroAlts[0]}
+              width={1400}
+              height={1600}
+              sizes="(max-width: 900px) 100vw, 50vw"
+              priority
+              cover
+            />
+          )}
         </div>
       </section>
 
