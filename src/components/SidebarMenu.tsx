@@ -107,10 +107,7 @@ export function SidebarMenu({ open, onClose }: SidebarMenuProps) {
       })),
     [],
   );
-  const openIndex = Math.max(
-    0,
-    categories.findIndex((category) => category.slug === currentSlug),
-  );
+  const openIndex = categories.findIndex((category) => category.slug === currentSlug);
   const activeSlug = products.some((item) => pathname === `/${item.slug}`) ? pathname.slice(1) : "";
   const matches = useMemo(() => products.filter((item) => matchesProduct(item, query)), [query]);
 
@@ -205,7 +202,7 @@ export function SidebarMenu({ open, onClose }: SidebarMenuProps) {
               <BranchedMenu
                 className="side-branch"
                 items={branchItems}
-                defaultOpen={[openIndex]}
+                defaultOpen={openIndex >= 0 ? [openIndex] : []}
                 defaultActive={activeSlug}
                 onSelect={(value) => {
                   router.push(`/${value}`);

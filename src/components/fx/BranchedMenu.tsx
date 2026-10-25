@@ -44,7 +44,7 @@ const toSet = (open: number | number[]) => new Set(Array.isArray(open) ? open : 
 
 const BranchedMenu: React.FC<BranchedMenuProps> = ({
   items = [],
-  defaultOpen = 0,
+  defaultOpen = [],
   defaultActive = '',
   onSelect,
   onToggle,
