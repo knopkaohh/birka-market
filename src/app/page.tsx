@@ -5,7 +5,6 @@ import { CalculatorBlock } from "@/components/calculator-block";
 import { HomeHero } from "@/components/home-hero";
 import { MaterialGrid } from "@/components/material-grid";
 import { PartnersMarquee } from "@/components/partners-marquee";
-import { YandexMap } from "@/components/yandex-map";
 import { formatNewsDate, newsPosts } from "@/lib/news";
 
 /** Главная: спокойный первый экран, затем сетка материалов и новости. */
@@ -58,7 +57,6 @@ export default function Home() {
       </section>
 
       <CalculatorBlock />
-      <YandexMap />
     </>
   );
 }

@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { ArrowDownRight, Mail, MessageCircle, Send } from "lucide-react";
 import { BackToTop } from "@/components/back-to-top";
-import { FooterCallback } from "@/components/footer-callback";
 import { Logo } from "@/components/logo";
 import { company } from "@/lib/site";
 
@@ -43,7 +42,6 @@ export function Footer() {
             <Mail size={14} aria-hidden="true" />
             {company.email}
           </a>
-          <FooterCallback />
         </div>
         <div>
           <span className="footer-heading-muted">Приезжайте в наш офис</span>

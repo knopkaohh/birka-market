@@ -472,7 +472,8 @@ button { cursor: pointer; }
   }
   .site-header,
   main,
-  footer {
+  footer,
+  .home-map {
     width: calc(100% - var(--side));
     margin-left: var(--side);
   }
