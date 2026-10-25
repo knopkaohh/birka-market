@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Menu, Phone, X } from "lucide-react";
+import { ArrowDownRight, Menu, Phone, X } from "lucide-react";
 import { HeaderMessengers } from "@/components/messengers";
 import { company, navLinks, products } from "@/lib/site";
 
@@ -34,21 +34,22 @@ export function SiteHeader({
               key={item.href}
               href={item.href}
               prefetch={false}
-              className={[item.href === "/katalog" ? "is-products" : "", isActive(item.href) ? "is-active" : ""].filter(Boolean).join(" ") || undefined}
+              className={isActive(item.href) ? "is-active" : undefined}
             >
               {item.label}
             </Link>
           ))}
         </nav>
+        <Link className="header-calc" href="/raschet" prefetch={false}>
+          <ArrowDownRight size={18} aria-hidden="true" />
+          Рассчитать заказ
+        </Link>
         <div className="header-actions">
           <a className="phone-link" href={company.phoneHref}>
             <Phone size={15} />
             {company.phone}
           </a>
           <HeaderMessengers />
-          <Link className="header-calc" href="/raschet" prefetch={false}>
-            Рассчитать заказ
-          </Link>
           <button
             type="button"
             className={`menu-toggle ${menuOpen ? "is-open" : ""}`}
