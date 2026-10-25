@@ -118,20 +118,20 @@ export function SidebarMenu({ open, onClose }: SidebarMenuProps) {
           className="side-menu-flux"
           style={{ position: "absolute", inset: 0, zIndex: 0, pointerEvents: "none" }}
           colors={["#ffffff", "#ffffff", "#ffffff"]}
-          glow={2}
-          rimWidth={0.2}
-          lineWidth={1}
+          glow={0.95}
+          rimWidth={0.14}
+          lineWidth={0.8}
           flowDirection="down"
           mouseInteraction
           clickSwirl
           speed={0.5}
-          scale={1.6}
+          scale={1.2}
           turbulence={1}
           fluidity={0.1}
-          sharpness={2.5}
+          sharpness={1.7}
           shimmer={1.5}
           mouseStrength={1}
-          mouseRadius={0.35}
+          mouseRadius={0.28}
           intro
           lightMode={false}
           aria-hidden="true"
