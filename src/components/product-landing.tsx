@@ -132,8 +132,9 @@ export function ProductLanding({
               parallax={0.6}
               lift={64}
               fade={0.6}
-              dim={0.55}
-              overlayColor="#eab308"
+              dim={1}
+              overlayColor="#fffdf8"
+              overlayOpacity={0.08}
               radius={17}
               roll={0}
               pauseOnHover={false}

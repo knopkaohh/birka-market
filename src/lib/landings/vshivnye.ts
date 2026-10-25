@@ -13,7 +13,7 @@ export const jacquardLanding: LandingContent = {
   proof: [
     { value: "от 100", label: "штук в тираже" },
     { value: "4–6", label: "рабочих дней" },
-    { value: "0 ₽", label: "макет для печати" },
+    { value: "до печати", label: "согласуем макет" },
   ],
   hero: ["/images/jacquard/g2.jpg", "/images/jacquard/g5.jpg", "/images/jacquard/g11.jpg"],
   heroAlts: ["Жаккардовые бирки с тканым логотипом", "Синие жаккардовые бирки", "Плотная жаккардовая лента"],
@@ -152,7 +152,7 @@ export const jacquardLanding: LandingContent = {
   ],
   terms: [
     { value: "4–6", label: "рабочих дней после макета" },
-    { value: "0 ₽", label: "макет для печати" },
+    { value: "до печати", label: "согласуем макет" },
     { value: "от 100", label: "штук минимальный тираж" },
     { value: "Москва", label: "производство и контроль" },
   ],
@@ -555,7 +555,7 @@ export const cottonLanding: LandingContent = {
   proof: [
     { value: "от 1 000", label: "штук в тираже" },
     { value: "6–8", label: "рабочих дней" },
-    { value: "0 ₽", label: "макет для печати" },
+    { value: "до печати", label: "согласуем макет" },
   ],
   hero: [g("cotton", 7), g("cotton", 10), g("cotton", 11)],
   heroAlts: ["Хлопковые бирки с логотипом", "Хлопковая бирка в руках", "Хлопковые бирки на ленте"],
@@ -676,7 +676,7 @@ export const cottonLanding: LandingContent = {
   ],
   terms: [
     { value: "6–8", label: "рабочих дней после макета" },
-    { value: "0 ₽", label: "макет для печати" },
+    { value: "до печати", label: "согласуем макет" },
     { value: "от 1 000", label: "штук минимальный тираж" },
     { value: "Москва", label: "производство и контроль" },
   ],
@@ -895,7 +895,7 @@ export const reflectiveLanding: LandingContent = {
   proof: [
     { value: "от 100", label: "штук в тираже" },
     { value: "4–6", label: "рабочих дней" },
-    { value: "0 ₽", label: "макет для печати" },
+    { value: "до печати", label: "согласуем макет" },
   ],
   hero: [g("reflective", 5), g("reflective", 6), g("reflective", 7)],
   heroAlts: ["Бирка «Край путешествий»", "Светоотражающие бирки fika", "Светоотражающие бирки rosa и unicorn"],
@@ -1013,7 +1013,7 @@ export const reflectiveLanding: LandingContent = {
   ],
   terms: [
     { value: "4–6", label: "рабочих дней после макета" },
-    { value: "0 ₽", label: "макет для печати" },
+    { value: "до печати", label: "согласуем макет" },
     { value: "от 100", label: "штук минимальный тираж" },
     { value: "Москва", label: "производство и контроль" },
   ],

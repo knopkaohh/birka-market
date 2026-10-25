@@ -13,7 +13,7 @@ export const kartonLanding: LandingContent = {
   proof: [
     { value: "от 1 000", label: "штук в тираже" },
     { value: "2–4", label: "рабочих дня" },
-    { value: "0 ₽", label: "макет для печати" },
+    { value: "до печати", label: "согласуем макет" },
   ],
   hero: [g("birki-karton", 3), g("birki-karton", 1), g("birki-karton", 2)],
   heroAlts: ["Картонные бирки на белом мехе", "Навесные картонные бирки на шнурке", "Чёрная картонная бирка СВОЯ КУЛЬТУРА"],
@@ -128,7 +128,7 @@ export const kartonLanding: LandingContent = {
   ],
   terms: [
     { value: "2–4", label: "рабочих дня после макета" },
-    { value: "0 ₽", label: "макет для печати" },
+    { value: "до печати", label: "согласуем макет" },
     { value: "от 1 000", label: "штук минимальный тираж" },
     { value: "Москва", label: "производство и контроль" },
   ],
@@ -177,7 +177,7 @@ export const tracingLanding: LandingContent = {
   proof: [
     { value: "от 500", label: "штук в тираже" },
     { value: "4–6", label: "рабочих дней" },
-    { value: "0 ₽", label: "макет для печати" },
+    { value: "до печати", label: "согласуем макет" },
   ],
   hero: [g("tracing", 5), g("tracing", 6), g("tracing", 7)],
   heroAlts: ["Бирки из кальки", "Полупрозрачные навесные ярлыки", "Калька с печатью логотипа"],
@@ -294,7 +294,7 @@ export const tracingLanding: LandingContent = {
   ],
   terms: [
     { value: "4–6", label: "рабочих дней после макета" },
-    { value: "0 ₽", label: "макет для печати" },
+    { value: "до печати", label: "согласуем макет" },
     { value: "от 500", label: "штук минимальный тираж" },
     { value: "Москва", label: "производство и контроль" },
   ],
@@ -343,7 +343,7 @@ export const plasticLanding: LandingContent = {
   proof: [
     { value: "от 100", label: "штук в тираже" },
     { value: "5–7", label: "рабочих дней" },
-    { value: "0 ₽", label: "макет для печати" },
+    { value: "до печати", label: "согласуем макет" },
   ],
   hero: [g("plastic", 5), g("plastic", 6), g("plastic", 8)],
   heroAlts: ["Белая пластиковая бирка с отверстием", "Белые пластиковые бирки", "Жёлтые пластиковые бирки на хомутах"],
@@ -460,7 +460,7 @@ export const plasticLanding: LandingContent = {
   ],
   terms: [
     { value: "5–7", label: "рабочих дней после макета" },
-    { value: "0 ₽", label: "макет для печати" },
+    { value: "до печати", label: "согласуем макет" },
     { value: "от 100", label: "штук минимальный тираж" },
     { value: "Москва", label: "производство и контроль" },
   ],

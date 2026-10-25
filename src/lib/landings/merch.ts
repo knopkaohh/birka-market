@@ -130,7 +130,7 @@ export const merchLanding: LandingContent = {
   ],
   terms: [
     { value: "КП", label: "после состава комплекта" },
-    { value: "0 ₽", label: "макет для печати" },
+    { value: "до печати", label: "согласуем макет" },
     { value: "от 30", label: "изделий минимальный тираж" },
     { value: "Москва", label: "производство и сборка" },
   ],
@@ -179,7 +179,7 @@ export const stickerpackLanding: LandingContent = {
   proof: [
     { value: "от 50", label: "наборов" },
     { value: "5–8", label: "рабочих дней" },
-    { value: "0 ₽", label: "макет для печати" },
+    { value: "до печати", label: "согласуем макет" },
   ],
   hero: [g("stickerpack", 5), g("stickerpack", 6), g("stickerpack", 7)],
   heroAlts: ["Стикерпаки", "Наборы стикеров", "Вырубные стикеры"],
@@ -296,7 +296,7 @@ export const stickerpackLanding: LandingContent = {
   ],
   terms: [
     { value: "5–8", label: "рабочих дней после макета" },
-    { value: "0 ₽", label: "макет для печати" },
+    { value: "до печати", label: "согласуем макет" },
     { value: "от 50", label: "наборов минимальный тираж" },
     { value: "Москва", label: "производство и контроль" },
   ],

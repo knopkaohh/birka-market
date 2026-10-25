@@ -13,7 +13,7 @@ export const rubberLanding: LandingContent = {
   proof: [
     { value: "от 100", label: "штук в тираже" },
     { value: "10–14", label: "рабочих дней" },
-    { value: "0 ₽", label: "макет для печати" },
+    { value: "до печати", label: "согласуем макет" },
   ],
   hero: [g("rubber", 5), g("rubber", 7), g("rubber", 8)],
   heroAlts: ["Патчи Majirel и ракеты", "Объёмные 3D-патчи", "Круглые ПВХ-патчи"],
@@ -128,7 +128,7 @@ export const rubberLanding: LandingContent = {
   ],
   terms: [
     { value: "10–14", label: "рабочих дней после макета" },
-    { value: "0 ₽", label: "макет для печати" },
+    { value: "до печати", label: "согласуем макет" },
     { value: "от 100", label: "штук минимальный тираж" },
     { value: "Москва", label: "производство и контроль" },
   ],
@@ -177,7 +177,7 @@ export const flextranLanding: LandingContent = {
   proof: [
     { value: "от 50", label: "штук в тираже" },
     { value: "7–10", label: "рабочих дней" },
-    { value: "0 ₽", label: "макет для печати" },
+    { value: "до печати", label: "согласуем макет" },
   ],
   hero: [p("flextran"), g("flextran", 1), g("flextran", 3)],
   heroAlts: ["FlexTran на одежде", "Объёмное нанесение", "3D-логотип на текстиле"],
@@ -293,7 +293,7 @@ export const flextranLanding: LandingContent = {
   ],
   terms: [
     { value: "7–10", label: "рабочих дней после макета" },
-    { value: "0 ₽", label: "макет для печати" },
+    { value: "до печати", label: "согласуем макет" },
     { value: "от 50", label: "штук минимальный тираж" },
     { value: "Москва", label: "производство и контроль" },
   ],
@@ -342,7 +342,7 @@ export const dtfLanding: LandingContent = {
   proof: [
     { value: "от 10", label: "штук в тираже" },
     { value: "3–6", label: "рабочих дней" },
-    { value: "0 ₽", label: "макет для печати" },
+    { value: "до печати", label: "согласуем макет" },
   ],
   hero: [p("directtofilm"), g("directtofilm", 1), g("directtofilm", 3)],
   heroAlts: ["DTF-печать на одежде", "Полноцветный термоперенос", "Печать на футболках"],
@@ -458,7 +458,7 @@ export const dtfLanding: LandingContent = {
   ],
   terms: [
     { value: "3–6", label: "рабочих дней после макета" },
-    { value: "0 ₽", label: "адаптация макета" },
+    { value: "до печати", label: "правим макет" },
     { value: "от 10", label: "штук минимальный тираж" },
     { value: "Москва", label: "производство и контроль" },
   ],

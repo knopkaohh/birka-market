@@ -30,6 +30,7 @@ export interface DriftWallProps {
   dim?: number;
   grayscale?: boolean;
   overlayColor?: string;
+  overlayOpacity?: number;
   className?: string;
   style?: CSSProperties;
   ariaLabel?: string;
@@ -81,6 +82,7 @@ const DriftWall = ({
   dim = 0.55,
   grayscale = false,
   overlayColor = '#060010',
+  overlayOpacity = 0.42,
   className = '',
   style,
   ariaLabel = 'Стена фотографий'
@@ -264,6 +266,7 @@ const DriftWall = ({
         '--dw-dim': dim,
         '--dw-gray': grayscale ? 1 : 0,
         '--dw-overlay': overlayColor,
+        '--dw-veil': overlayOpacity,
         '--dw-edge': `${Math.max(0, (1 - fade) * 100)}%`,
         perspective: `${perspective}px`,
         perspectiveOrigin: '50% 50%',
@@ -273,7 +276,7 @@ const DriftWall = ({
         maskComposite: 'intersect',
         ...style
       }) as CSSProperties,
-    [tileWidth, tileHeight, gap, radius, lift, dim, grayscale, overlayColor, fade, perspective, maskStyle, style]
+    [tileWidth, tileHeight, gap, radius, lift, dim, grayscale, overlayColor, overlayOpacity, fade, perspective, maskStyle, style]
   );
 
   const tileClass = cx(
@@ -296,7 +299,7 @@ const DriftWall = ({
     'group-[.is-active]/tile:[filter:grayscale(0)_saturate(1.05)] group-focus-visible/tile:[filter:grayscale(0)_saturate(1.05)]'
   );
   const overlayClass = cx(
-    'pointer-events-none absolute inset-0 bg-[var(--dw-overlay)] opacity-[0.42]',
+    'pointer-events-none absolute inset-0 bg-[var(--dw-overlay)] opacity-[var(--dw-veil)]',
     'transition-opacity duration-[420ms] ease-[cubic-bezier(0.22,1,0.36,1)]',
     'group-[.is-active]/tile:opacity-0 group-focus-visible/tile:opacity-0'
   );

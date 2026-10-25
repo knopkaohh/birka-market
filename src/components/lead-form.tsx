@@ -10,6 +10,7 @@ import { formatRuPhone, isCompleteRuPhone } from "@/lib/phone";
 import { MAX_FILE_BYTES } from "@/lib/lead";
 import { categories, products, productsByCategory } from "@/lib/site";
 import { ThanksOverlay } from "@/components/thanks-overlay";
+import FluxLines from "@/components/fx/FluxLines";
 
 export type LeadVariantOption = { id: string; name: string };
 
@@ -135,6 +136,29 @@ export function LeadForm({
   return (
     <>
     <form className="calc-form" onSubmit={submit}>
+      <FluxLines
+        className="calc-form-flux"
+        colors={["#ffffff", "#ffffff", "#ffffff"]}
+        glow={0.95}
+        rimWidth={0.14}
+        lineWidth={0.8}
+        flowDirection="down"
+        mouseInteraction
+        clickSwirl
+        speed={0.5}
+        scale={1.2}
+        turbulence={1}
+        fluidity={0.1}
+        sharpness={1.7}
+        shimmer={1.5}
+        mouseStrength={0.22}
+        mouseRadius={0.1}
+        swirlStrength={0.18}
+        swirlRadius={0.07}
+        intro
+        lightMode={false}
+        aria-hidden="true"
+      />
       {details ? (
         <>
           <input type="hidden" name="product" value={defaultProduct} />

@@ -178,7 +178,7 @@ export const elasticLanding: LandingContent = {
   proof: [
     { value: "от 100", label: "в запуске" },
     { value: "8–12", label: "рабочих дней" },
-    { value: "0 ₽", label: "макет для печати" },
+    { value: "до печати", label: "согласуем макет" },
   ],
   hero: [p("elastic"), g("elastic", 1), g("elastic", 3)],
   heroAlts: ["Жаккардовая резинка", "Тканая стропа с логотипом", "Резинка для одежды"],
@@ -295,7 +295,7 @@ export const elasticLanding: LandingContent = {
   ],
   terms: [
     { value: "8–12", label: "рабочих дней после макета" },
-    { value: "0 ₽", label: "макет для печати" },
+    { value: "до печати", label: "согласуем макет" },
     { value: "от 100", label: "запуск" },
     { value: "Москва", label: "производство и контроль" },
   ],
@@ -344,7 +344,7 @@ export const pullLanding: LandingContent = {
   proof: [
     { value: "от 100", label: "штук в тираже" },
     { value: "7–10", label: "рабочих дней" },
-    { value: "0 ₽", label: "макет для печати" },
+    { value: "до печати", label: "согласуем макет" },
   ],
   hero: [g("pull", 7), g("pull", 8), g("pull", 9)],
   heroAlts: ["Кожаные пуллеры с тиснением", "Чёрные шнуровые пуллеры", "Пуллеры Связной и Газпром"],
@@ -462,7 +462,7 @@ export const pullLanding: LandingContent = {
   ],
   terms: [
     { value: "7–10", label: "рабочих дней после макета" },
-    { value: "0 ₽", label: "макет для печати" },
+    { value: "до печати", label: "согласуем макет" },
     { value: "от 100", label: "штук минимальный тираж" },
     { value: "Москва", label: "производство и контроль" },
   ],
@@ -511,7 +511,7 @@ export const jibbitzLanding: LandingContent = {
   proof: [
     { value: "от 100", label: "штук в тираже" },
     { value: "10–15", label: "рабочих дней" },
-    { value: "0 ₽", label: "макет для печати" },
+    { value: "до печати", label: "согласуем макет" },
   ],
   hero: [p("jibbitz"), g("jibbitz", 1), g("jibbitz", 3)],
   heroAlts: ["Джибитсы с логотипом", "Фигурки для Crocs", "Мерч для обуви"],
@@ -627,7 +627,7 @@ export const jibbitzLanding: LandingContent = {
   ],
   terms: [
     { value: "10–15", label: "рабочих дней после макета" },
-    { value: "0 ₽", label: "макет для печати" },
+    { value: "до печати", label: "согласуем макет" },
     { value: "от 100", label: "штук минимальный тираж" },
     { value: "Москва", label: "производство и контроль" },
   ],
