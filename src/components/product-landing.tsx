@@ -4,6 +4,7 @@ import { Breadcrumbs } from "@/components/breadcrumbs";
 import { CalcResponder } from "@/components/calc-responder";
 import { LeadForm } from "@/components/lead-form";
 import { MaterialDetails } from "@/components/material-details";
+import { MaterialPhotos } from "@/components/material-photos";
 import { PhotoFrame } from "@/components/photo-frame";
 import type { LandingContent, QuotePrefill } from "@/lib/landings/types";
 import { quoteComment, quoteHref, quoteQuantity } from "@/lib/landings/types";
@@ -53,8 +54,20 @@ export function ProductLanding({
     content.variants.map((item) => ({ src: item.image, alt: item.name })),
     usedPhotos,
   );
-  const galleryItems = live.slice(1);
-  const galleryPhoto = galleryItems.length > 0 ? null : firstUniquePhoto(content.gallery, usedPhotos);
+  const galleryPhotos = live.length
+    ? live.map((item, index) => ({
+        src: item.src,
+        alt: `${product.shortName}: фото ${index + 1}`,
+        title: product.shortName,
+      }))
+    : content.gallery
+        .filter((item) => usablePhoto(item.src))
+        .map((item) => ({
+          src: item.src,
+          alt: item.alt,
+          title: product.shortName,
+          subtitle: item.alt,
+        }));
 
   return (
     <>
@@ -154,33 +167,7 @@ export function ProductLanding({
           <h2>{content.galleryTitle}</h2>
           <p>{content.galleryIntro}</p>
         </div>
-        {galleryItems.length > 0 ? (
-          <div className="jq-gallery">
-            {galleryItems.map((item, index) => (
-              <figure key={item.src}>
-                <PhotoFrame
-                  src={item.src}
-                  alt={`${product.shortName}: фото ${index + 1}`}
-                  width={item.width}
-                  height={item.height}
-                  sizes="(max-width: 900px) 100vw, 33vw"
-                  cover
-                />
-              </figure>
-            ))}
-          </div>
-        ) : (
-          <div className="section-photo">
-            <PhotoFrame
-              src={galleryPhoto?.src}
-              alt={galleryPhoto?.alt ?? content.galleryTitle}
-              width={1400}
-              height={1000}
-              sizes="(max-width: 900px) 100vw, 900px"
-              cover
-            />
-          </div>
-        )}
+        <MaterialPhotos items={galleryPhotos} />
       </section>
 
       <section className="jq-section" id="orientir">
