@@ -1,46 +1,37 @@
 import Image from "next/image";
 import Link from "next/link";
-import {
-  ArrowDownRight,
-  ArrowRight,
-  MessageCircle,
-  Sparkles,
-} from "lucide-react";
+import { ArrowDownRight, ArrowRight } from "lucide-react";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { CalculatorBlock } from "@/components/calculator-block";
-import { CategoryTile } from "@/components/category-tile";
-import { Marquee } from "@/components/marquee";
-import { CasesSection } from "@/components/cases-section";
-import { ProcessParallax } from "@/components/process-parallax";
-import { ProductCard } from "@/components/product-card";
 import { YandexMap } from "@/components/yandex-map";
-import {
-  categories,
-  company,
-  faqItems,
-  featuredSlugs,
-  getProduct,
-  portfolio,
-} from "@/lib/site";
+import { categories, company, faqItems } from "@/lib/site";
 
 export default function Home() {
-  const featured = featuredSlugs.map((slug) => getProduct(slug)).filter(Boolean);
-
   return (
     <>
-      <section className="hero">
+      <section className="hero hero-atmosphere">
+        <Image
+          src="/images/company/cover.jpg"
+          alt="Производственный склад Бирка Маркет: ленты и готовые бирки"
+          width={1280}
+          height={960}
+          priority
+          sizes="100vw"
+          className="hero-bg"
+        />
+        <div className="hero-scrim" />
         <div className="hero-copy">
           <div className="eyebrow">
             <span />
             Производим в Москве • Доставляем по России
           </div>
-          <h1>
+          <h1 className="type-display">
             Бирки, упаковка
             <br />
             и мерч <em>на заказ</em>
           </h1>
-          <p className="hero-lead">
-            {company.slogan} Производим в Москве: от бесплатного макета до готового тиража.
+          <p className="hero-lead type-body">
+            Ваш бренд, наша забота. Производим в Москве: от бесплатного макета до готового тиража.
             Поможем выбрать материал и рассчитаем заказ.
           </p>
           <div className="hero-actions">
@@ -53,7 +44,7 @@ export default function Home() {
               <ArrowDownRight size={18} />
             </Link>
             <Link className="text-link" href="/kak-vybrat">
-              Как выбрать бирки
+              Как выбрать?
               <ArrowDownRight size={18} />
             </Link>
           </div>
@@ -72,105 +63,34 @@ export default function Home() {
             </div>
           </div>
         </div>
-        <div className="hero-visual" aria-label="Примеры изготовленных бирок">
-          <div className="hero-yellow-shape" data-parallax="0.14" />
-          <div className="floating-note note-one" data-parallax="0.22" data-parallax-base="rotate(-3deg)">
-            <Sparkles size={16} />
-            Реальные работы
-          </div>
-          <div className="photo-card photo-main" data-parallax="0.06" data-parallax-base="rotate(3deg)">
-            <Image
-              src="/images/jacquard/g2.jpg"
-              alt="Жаккардовые бирки, изготовленные Бирка Маркет"
-              fill
-              sizes="(max-width: 900px) 80vw, 35vw"
-              priority
-            />
-          </div>
-          <div className="photo-card photo-small" data-parallax="0.18" data-parallax-base="rotate(-7deg)">
-            <Image src="/images/cotton/g10.jpg" alt="Хлопковая бирка в руках" fill sizes="220px" />
-          </div>
-          <div className="quality-stamp" data-parallax="0.1" data-parallax-base="rotate(7deg)">
-            <span>с 2017</span>
-            <small>
-              заботимся
-              <br />о брендах
-            </small>
-          </div>
-          <a className="scroll-cue" href="#categories">
-            <span>Листайте</span>
-            <ArrowDownRight />
-          </a>
-        </div>
       </section>
-
-      <Marquee />
 
       <section className="section" id="categories">
         <div className="section-heading">
           <div>
             <span className="section-number">01 / КАТАЛОГ</span>
-            <h2>
+            <h2 className="type-title">
               Всё для маркировки, упаковки
               <br />и полиграфии
             </h2>
           </div>
-          <p>Семь направлений — от вшивной бирки до полиграфии. Выберите задачу, остальное уточним вместе.</p>
+          <p className="type-body">Семь направлений. Выберите задачу, остальное уточним вместе.</p>
         </div>
-        <div className="category-grid">
+        <div className="category-list">
           {categories.map((item, index) => (
-            <CategoryTile key={item.slug} category={item} index={index} />
+            <Link className="category-text" href={`/katalog/${item.slug}`} key={item.slug}>
+              <span>{String(index + 1).padStart(2, "0")}</span>
+              <h3>{item.name}</h3>
+              <p>{item.intro}</p>
+            </Link>
           ))}
-        </div>
-      </section>
-
-      <section className="section products-section">
-        <div className="section-heading">
-          <div>
-            <span className="section-number">02 / ЧАСТО ЗАКАЗЫВАЮТ</span>
-            <h2>
-              Продукция,
-              <br />с которой начинают
-            </h2>
-          </div>
-          <p>Восемь позиций, которые чаще всего открывают сотрудничество. Полный перечень — в каталоге.</p>
-        </div>
-        <div className="product-grid">
-          {featured.map((item, index) => item && (
-            <ProductCard
-              key={item.slug}
-              product={item}
-              index={index}
-              image={
-                {
-                  jacquard: "/images/jacquard/g5.jpg",
-                  "birki-karton": "/images/birki-karton/g3.jpg",
-                  kraft: "/images/kraft/g3.jpg",
-                  merchi: "/images/merchi/g5.jpg",
-                }[item.slug]
-              }
-            />
-          ))}
-        </div>
-        <div className="choice-banner">
-          <div className="choice-icon">
-            <MessageCircle />
-          </div>
-          <div>
-            <span>НЕ ЗНАЕТЕ, ЧТО ПОДОЙДЁТ?</span>
-            <h3>Опишите изделие — подберём материал за вас</h3>
-          </div>
-          <Link href="/raschet">
-            Рассчитать заказ
-            <ArrowRight />
-          </Link>
         </div>
       </section>
 
       <section className="dark-section">
         <div className="dark-intro">
-          <span className="section-number light">03 / ПОЧЕМУ МЫ</span>
-          <p className="display-quote">
+          <span className="section-number light">02 / ПОЧЕМУ МЫ</span>
+          <p className="display-quote type-title">
             Не просто печатаем бирки. <em>Вникаем в задачу</em> и отвечаем за результат — от первого файла до последней детали тиража.
           </p>
         </div>
@@ -190,47 +110,17 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="section works-section" id="works">
-        <div className="section-heading compact">
-          <div>
-            <span className="section-number">04 / НАШИ РАБОТЫ</span>
-            <h2>
-              Сделано для брендов,
-              <br />
-              которые ценят детали
-            </h2>
-          </div>
-          <p>Показываем продукт крупно — без мокапов и декоративных обещаний.</p>
-        </div>
-        <div className="works-grid">
-          {portfolio.map((item, index) => (
-            <Link href={item.href} className={`work-card work-${index + 1}`} key={item.image}>
-              <Image src={item.image} alt={`Пример работы Бирка Маркет: ${item.label}`} fill sizes="(max-width: 700px) 90vw, 45vw" />
-              <span>
-                <span>{item.label}</span>
-                <ArrowDownRight />
-              </span>
-            </Link>
-          ))}
-        </div>
-      </section>
-
-      <CasesSection />
-
-      <ProcessParallax />
-
       <CalculatorBlock />
 
       <section className="section faq-section">
         <div className="faq-title">
-          <span className="section-number">06 / ВОПРОСЫ</span>
-          <h2>
+          <span className="section-number">03 / ВОПРОСЫ</span>
+          <h2 className="type-title">
             Коротко
             <br />о главном
           </h2>
-          <p>
-            Не нашли ответ? Напишите в{" "}
-            <Link href="/kontakty">контакты</Link> — разберём задачу лично.
+          <p className="type-body">
+            Не нашли ответ? Напишите в <Link href="/kontakty">контакты</Link> — разберём задачу лично.
           </p>
         </div>
         <Accordion className="faq-list">

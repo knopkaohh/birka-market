@@ -13,8 +13,9 @@ export async function POST(request: Request) {
   const product = getProduct(productSlug);
   const minQty = product?.minQty ?? 1;
   const quick = String(form.get("quick") ?? "") === "1";
+  const phoneOnly = String(form.get("phoneOnly") ?? "") === "1";
 
-  const check = validateLeadInput({ phone, quantity, minQty, name, quick });
+  const check = validateLeadInput({ phone, quantity, minQty, name, quick, phoneOnly });
   if (!check.ok) {
     return NextResponse.json({ ok: false, message: check.message }, { status: 400 });
   }
@@ -35,8 +36,8 @@ export async function POST(request: Request) {
   const lead: LeadRecord = {
     createdAt: new Date().toISOString(),
     product: productSlug,
-    productName: product?.name ?? "Нужна помощь с выбором",
-    quantity: quick ? 0 : quantity,
+    productName: phoneOnly ? "Консультация по выбору" : product?.name ?? "Нужна помощь с выбором",
+    quantity: phoneOnly || quick ? 0 : quantity,
     name,
     phone,
     contact: String(form.get("contact") ?? "phone"),

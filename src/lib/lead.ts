@@ -1,3 +1,5 @@
+import { isCompleteRuPhone } from "@/lib/phone";
+
 export const LEAD_GOAL = "LEAD";
 export const MAX_FILE_BYTES = 15 * 1024 * 1024;
 
@@ -28,15 +30,23 @@ export function validateLeadInput({
   minQty,
   name,
   quick = false,
+  phoneOnly = false,
 }: {
   phone: string;
   quantity: number;
   minQty: number;
   name: string;
   quick?: boolean;
+  phoneOnly?: boolean;
 }): LeadValidation {
   if (name.length > 120) {
     return { ok: false, message: "Имя слишком длинное." };
+  }
+  if (phoneOnly) {
+    if (!isCompleteRuPhone(phone)) {
+      return { ok: false, message: "Укажите номер телефона." };
+    }
+    return { ok: true };
   }
   if (quick) {
     if (!name || !phone) {

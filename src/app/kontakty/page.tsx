@@ -59,7 +59,7 @@ export default function ContactsPage() {
             <h2>Офис и склад</h2>
             <p>{company.address}</p>
             <p>
-              {company.hours}. Выдача готовой продукции: {company.pickupHours}.
+              {company.hours}. Выдача готовой продукции: {company.pickupHours}. {company.hoursNote}
             </p>
           </article>
           <article>

@@ -1,9 +1,10 @@
-import Image from "next/image";
 import { Check } from "lucide-react";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import { PhotoFrame } from "@/components/photo-frame";
 import { ProductCard } from "@/components/product-card";
 import type { LandingContent } from "@/lib/landings/types";
 import { photoKey } from "@/lib/photo-id";
+import { firstUniquePhoto } from "@/lib/photos";
 import { getProduct } from "@/lib/site";
 
 export function MaterialDetails({
@@ -15,12 +16,10 @@ export function MaterialDetails({
 }) {
   const related = content.complement.map((slug) => getProduct(slug)).filter(Boolean);
   const seen = usedPhotos ?? new Set<string>();
-  const onProduct = content.onProduct.filter((item) => {
-    const key = photoKey(item.image);
-    if (seen.has(key)) return false;
-    seen.add(key);
-    return true;
-  });
+  const onProductPhoto = firstUniquePhoto(
+    content.onProduct.map((item) => ({ src: item.image, alt: item.title })),
+    seen,
+  );
 
   return (
     <section className="jq-section jq-more" id="details">
@@ -89,21 +88,24 @@ export function MaterialDetails({
           </AccordionTrigger>
           <AccordionContent className="jq-more-panel">
             <p className="jq-more-lead">{content.onProductIntro}</p>
-            {onProduct.length > 0 && (
-            <div className="jq-onproduct">
-              {onProduct.map((item) => (
-                <figure key={item.title}>
-                  <div>
-                    <Image src={item.image} alt={item.title} fill sizes="(max-width: 700px) 90vw, 30vw" />
-                  </div>
-                  <figcaption>
-                    <h3>{item.title}</h3>
-                    <p>{item.text}</p>
-                  </figcaption>
-                </figure>
+            <div className="section-photo">
+              <PhotoFrame
+                src={onProductPhoto?.src}
+                alt={onProductPhoto?.alt ?? content.onProductTitle}
+                width={1200}
+                height={900}
+                sizes="(max-width: 700px) 90vw, 720px"
+                cover
+              />
+            </div>
+            <div className="jq-fit">
+              {content.onProduct.map((item) => (
+                <article key={item.title}>
+                  <h3>{item.title}</h3>
+                  <p>{item.text}</p>
+                </article>
               ))}
             </div>
-            )}
           </AccordionContent>
         </AccordionItem>
 

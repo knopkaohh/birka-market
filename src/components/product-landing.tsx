@@ -1,13 +1,13 @@
-import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, Check } from "lucide-react";
 import { Breadcrumbs } from "@/components/breadcrumbs";
 import { CalcResponder } from "@/components/calc-responder";
 import { LeadForm } from "@/components/lead-form";
 import { MaterialDetails } from "@/components/material-details";
+import { PhotoFrame } from "@/components/photo-frame";
 import type { LandingContent, QuotePrefill } from "@/lib/landings/types";
 import { quoteComment, quoteHref, quoteQuantity } from "@/lib/landings/types";
-import { photoKey } from "@/lib/photo-id";
+import { firstUniquePhoto, takeUniquePhoto } from "@/lib/photos";
 import { landingJsonLd } from "@/lib/seo";
 import { company, getCategory, getProduct } from "@/lib/site";
 
@@ -43,14 +43,13 @@ export function ProductLanding({
   const selectedVariant = variant ?? content.variants[0]?.id;
   const formKey = [selectedVariant, quote?.qty, quote?.size, quote?.spec, quote?.price].filter(Boolean).join("-");
   const prefillComment = quote ? quoteComment(quote) : "";
-  const usedPhotos = new Set<string>(content.hero.map((src) => photoKey(src)));
-  const gallery = [...content.gallery, ...content.variants.map((item) => ({ src: item.image, alt: item.name })), ...content.onProduct.map((item) => ({ src: item.image, alt: item.title }))].filter((item) => {
-    const key = photoKey(item.src);
-    if (usedPhotos.has(key)) return false;
-    usedPhotos.add(key);
-    return true;
-  });
-  const variantHasPhoto = content.variants.map((item) => !usedPhotos.has(photoKey(item.image)));
+  const usedPhotos = new Set<string>();
+  const heroPhoto = takeUniquePhoto(content.hero[0], usedPhotos);
+  const variantPhoto = firstUniquePhoto(
+    content.variants.map((item) => ({ src: item.image, alt: item.name })),
+    usedPhotos,
+  );
+  const galleryPhoto = firstUniquePhoto(content.gallery, usedPhotos);
 
   return (
     <>
@@ -96,15 +95,15 @@ export function ProductLanding({
           </div>
         </div>
         <div className="jq-hero-visual">
-          <div className="jq-hero-main">
-            <Image src={content.hero[0]} alt={content.heroAlts[0]} fill sizes="(max-width: 900px) 100vw, 50vw" priority />
-          </div>
-          <div className="jq-hero-small">
-            <Image src={content.hero[1]} alt={content.heroAlts[1]} fill sizes="280px" />
-          </div>
-          <div className="jq-hero-mid">
-            <Image src={content.hero[2]} alt={content.heroAlts[2]} fill sizes="240px" />
-          </div>
+          <PhotoFrame
+            src={heroPhoto}
+            alt={content.heroAlts[0]}
+            width={1400}
+            height={1600}
+            sizes="(max-width: 900px) 100vw, 50vw"
+            priority
+            cover
+          />
         </div>
       </section>
 
@@ -114,19 +113,24 @@ export function ProductLanding({
           <h2>{content.variantTitle}</h2>
           <p>{content.variantIntro}</p>
         </div>
+        <div className="section-photo">
+          <PhotoFrame
+            src={variantPhoto?.src}
+            alt={variantPhoto?.alt ?? content.variantTitle}
+            width={1200}
+            height={900}
+            sizes="(max-width: 900px) 100vw, 720px"
+            cover
+          />
+        </div>
         <div className="jq-variants">
-          {content.variants.map((item, index) => (
+          {content.variants.map((item) => (
             <Link
               href={item.href ?? `${path}?variant=${item.id}#calc`}
               prefetch={false}
               className={`jq-variant is-${item.tone}`}
               key={item.id}
             >
-              {variantHasPhoto[index] && (
-                <div className="jq-variant-photo">
-                  <Image src={item.image} alt={item.name} fill sizes="280px" />
-                </div>
-              )}
               <span className="jq-variant-fold">{item.fold}</span>
               <h3>{item.name}</h3>
               <p>{item.text}</p>
@@ -139,22 +143,23 @@ export function ProductLanding({
         </div>
       </section>
 
-      {gallery.length > 0 && (
-        <section className="jq-section" id="works">
-          <div className="jq-heading">
-            <span className="section-number">02 / РАБОТЫ</span>
-            <h2>{content.galleryTitle}</h2>
-            <p>{content.galleryIntro}</p>
-          </div>
-          <div className={`jq-gallery is-${gallery.length}`}>
-            {gallery.map((item) => (
-              <figure key={item.src}>
-                <Image src={item.src} alt={item.alt} fill sizes="(max-width: 700px) 50vw, 25vw" />
-              </figure>
-            ))}
-          </div>
-        </section>
-      )}
+      <section className="jq-section" id="works">
+        <div className="jq-heading">
+          <span className="section-number">02 / РАБОТЫ</span>
+          <h2>{content.galleryTitle}</h2>
+          <p>{content.galleryIntro}</p>
+        </div>
+        <div className="section-photo">
+          <PhotoFrame
+            src={galleryPhoto?.src}
+            alt={galleryPhoto?.alt ?? content.galleryTitle}
+            width={1400}
+            height={1000}
+            sizes="(max-width: 900px) 100vw, 900px"
+            cover
+          />
+        </div>
+      </section>
 
       <section className="jq-section" id="orientir">
         <div className="jq-heading">
