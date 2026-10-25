@@ -300,7 +300,6 @@ button { cursor: pointer; }
   flex-direction: column;
   color: #d5d2ca;
   background: #1f201f;
-  border-right: 2px solid #fcd34d;
   box-shadow: 10px 0 28px rgba(136, 19, 55, .2);
 }
 .side-menu-inner {
