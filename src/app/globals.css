@@ -2428,6 +2428,10 @@ footer .logo svg { height: 56px; }
 }
 .side-subcats { margin: 0 16px 8px; padding: 0; overflow: hidden; list-style: none; }
 .side-subcat {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
   width: 100%;
   padding: 8px 8px 8px 28px;
   border: 0;
@@ -2438,7 +2442,14 @@ footer .logo svg { height: 56px; }
   text-align: left;
   cursor: pointer;
 }
-.side-subcat:hover { color: #fcd34d; }
+.side-subcat svg {
+  color: #fbbf24;
+  flex: none;
+  transition: transform .3s ease;
+}
+.side-subcat .is-turned { transform: rotate(90deg); }
+.side-subcat:hover,
+.side-subcat.is-open { color: #fcd34d; }
 .side-subcats ul { margin: 0; padding: 0 0 6px; overflow: hidden; list-style: none; }
 .side-subcats a {
   display: block;

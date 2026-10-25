@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { FormEvent, useMemo, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { ChevronDown, CircleHelp, Search } from "lucide-react";
+import { ChevronDown, ChevronRight, CircleHelp, Search } from "lucide-react";
 import { Logo } from "@/components/logo";
 import { categories, matchesProduct, products, productsByCategory } from "@/lib/site";
 
@@ -36,7 +36,7 @@ export function SidebarMenu({ open, onClose }: SidebarMenuProps) {
     if (pathname === `/katalog/${category.slug}`) return true;
     return productsByCategory(category.slug).some((item) => pathname === `/${item.slug}`);
   })?.slug;
-  const [productsOpen, setProductsOpen] = useState(Boolean(currentSlug) || pathname.startsWith("/katalog"));
+  const [productsOpen, setProductsOpen] = useState(true);
   const [opened, setOpened] = useState<string | null>(currentSlug ?? null);
   const [searchOpen, setSearchOpen] = useState(false);
   const [query, setQuery] = useState("");
@@ -140,11 +140,12 @@ export function SidebarMenu({ open, onClose }: SidebarMenuProps) {
                       <li key={category.slug}>
                         <button
                           type="button"
-                          className="side-subcat"
+                          className={`side-subcat ${isOpen ? "is-open" : ""}`}
                           aria-expanded={isOpen}
                           onClick={() => setOpened((value) => (value === category.slug ? null : category.slug))}
                         >
-                          {category.name}
+                          <span>{category.name}</span>
+                          <ChevronRight size={14} className={isOpen ? "is-turned" : ""} aria-hidden="true" />
                         </button>
                         <AnimatePresence initial={false}>
                           {isOpen ? (
