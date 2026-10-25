@@ -36,6 +36,16 @@ export function HomeHero() {
           Своё производство
         </Link>
       </div>
+      <motion.h2
+        className="home-hero-slogan"
+        initial={{ opacity: 0, y: 18 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ ...rise, delay: 0.22 }}
+      >
+        Ваш бренд -
+        <br />
+        наша <em>забота!</em>
+      </motion.h2>
     </section>
   );
 }

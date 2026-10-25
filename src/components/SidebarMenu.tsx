@@ -6,7 +6,7 @@ import { FormEvent, useMemo, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { ChevronDown, CircleHelp, Search } from "lucide-react";
 import { Logo } from "@/components/logo";
-import { categories, company, matchesProduct, products, productsByCategory } from "@/lib/site";
+import { categories, matchesProduct, products, productsByCategory } from "@/lib/site";
 
 type SidebarMenuProps = {
   open: boolean;
@@ -62,7 +62,6 @@ export function SidebarMenu({ open, onClose }: SidebarMenuProps) {
         <div className="side-menu-inner">
           <div className="side-menu-logo">
             <Logo />
-            <p className="side-slogan">{company.slogan}</p>
           </div>
 
           <button
