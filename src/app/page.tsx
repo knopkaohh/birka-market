@@ -28,7 +28,11 @@ export default function Home() {
         </p>
       </section>
       <MaterialGrid />
-      <CalculatorBlock title="Расчёт" titleAccent="заказа" />
+      <CalculatorBlock
+        title={"Расчёт\nзаказа"}
+        surface="material"
+        bullets={["Быстрый расчёт", "Своё производство", "Макет до печати"]}
+      />
       <PartnersMarquee />
 
       <section className="section home-news">
