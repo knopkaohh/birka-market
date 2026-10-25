@@ -8,7 +8,7 @@ import { PartnersMarquee } from "@/components/partners-marquee";
 import { YandexMap } from "@/components/yandex-map";
 import { formatNewsDate, newsPosts } from "@/lib/news";
 
-/** Главная: видео, команда, партнёры, материалы, расчёт, новости и офис. */
+/** Главная: видео, команда, материалы, расчёт, партнёры, новости и офис. */
 export default function Home() {
   const latestNews = newsPosts.slice(0, 3);
 
@@ -27,9 +27,9 @@ export default function Home() {
           вкладышами и упаковкой.
         </p>
       </section>
-      <PartnersMarquee />
       <MaterialGrid />
       <CalculatorBlock title="Расчёт" titleAccent="заказа" />
+      <PartnersMarquee />
 
       <section className="section home-news">
         <div className="section-heading">
