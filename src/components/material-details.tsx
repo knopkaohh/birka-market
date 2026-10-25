@@ -1,4 +1,5 @@
 import { Check } from "lucide-react";
+import { GoldEnd } from "@/components/gold-end";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { PhotoFrame } from "@/components/photo-frame";
 import { ProductCard } from "@/components/product-card";
@@ -25,7 +26,9 @@ export function MaterialDetails({
     <section className="jq-section jq-more" id="details">
       <div className="jq-heading">
         <span className="section-number">05 / ПОДРОБНЕЕ</span>
-        <h2>{content.detailsTitle ?? "Подробнее о материале"}</h2>
+        <h2>
+          <GoldEnd text={content.detailsTitle ?? "Подробнее о материале"} />
+        </h2>
         <p>{content.detailsIntro ?? "Техника, условия и ответы — по желанию, после расчёта."}</p>
       </div>
       <Accordion className="jq-more-list" multiple defaultValue={[]}>

@@ -45,17 +45,23 @@ export default function GuidePage() {
         <div className="guide-kit">
           <article id="brend">
             <span>01</span>
-            <h2>Брендовая бирка</h2>
+            <h2>
+              Брендовая <em>бирка</em>
+            </h2>
             <p>Кто вы. Живёт на горловине или флаге. Чаще жаккард, иногда сатин или силикон.</p>
           </article>
           <article id="sostav">
             <span>02</span>
-            <h2>Состав и уход</h2>
+            <h2>
+              Состав и <em>уход</em>
+            </h2>
             <p>Что внутри и как стирать. Почти всегда сатин или нейлон, один цвет, боковой шов.</p>
           </article>
           <article id="naves">
             <span>03</span>
-            <h2>Навес, если нужен</h2>
+            <h2>
+              Навес, если <em>нужен</em>
+            </h2>
             <p>Картон или калька снаружи. Не заменяет вшив: это первое впечатление в зале.</p>
           </article>
         </div>
@@ -65,7 +71,9 @@ export default function GuidePage() {
         <section className="guide-section" aria-labelledby="guide-materials-title">
           <div className="jq-heading">
             <span className="section-number">МАТЕРИАЛЫ</span>
-            <h2 id="guide-materials-title">Какой материал выбрать и зачем</h2>
+            <h2 id="guide-materials-title">
+              Какой материал выбрать <em>и зачем</em>
+            </h2>
             <p>
               Преимущество каждого материала — не «красивое слово», а задача. Если задача не совпадает, бирка будет
               либо колоться, либо выглядеть дешевле изделия.
@@ -103,7 +111,9 @@ export default function GuidePage() {
         <section className="guide-section" aria-labelledby="guide-folds-title">
           <div className="jq-heading">
             <span className="section-number">ВИД И ПОДГИБКА</span>
-            <h2 id="guide-folds-title">Какой сгиб поставить в изделие</h2>
+            <h2 id="guide-folds-title">
+              Какой сгиб поставить <em>в изделие</em>
+            </h2>
             <p>
               Подгибка — это не украшение, а то, как бирку возьмёт швея. Ошиблись со сгибом — бирка торчит, натирает
               или закрывает размер.
@@ -127,7 +137,9 @@ export default function GuidePage() {
         <section className="guide-section guide-two" aria-labelledby="guide-colors-title">
           <div>
             <span className="section-number">ЦВЕТА</span>
-            <h2 id="guide-colors-title">Сколько цветов закладывать</h2>
+            <h2 id="guide-colors-title">
+              Сколько цветов <em>закладывать</em>
+            </h2>
             <div className="guide-notes">
               {colorRules.map((item) => (
                 <article key={item.title}>
@@ -139,7 +151,9 @@ export default function GuidePage() {
           </div>
           <div>
             <span className="section-number">ТИРАЖ</span>
-            <h2 id="guide-qty-title">Сколько штук заказывать</h2>
+            <h2 id="guide-qty-title">
+              Сколько штук <em>заказывать</em>
+            </h2>
             <div className="guide-notes">
               {qtyRules.map((item) => (
                 <article key={item.title}>

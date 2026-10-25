@@ -39,7 +39,9 @@ export default function Home() {
         <div className="section-heading">
           <div>
             <span className="section-number">НОВОСТИ</span>
-            <h2 className="type-title">Что происходит сейчас</h2>
+            <h2 className="type-title">
+              Что происходит <em>сейчас</em>
+            </h2>
           </div>
           <Link className="text-link" href="/novosti">
             Все новости

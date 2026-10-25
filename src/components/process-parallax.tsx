@@ -129,7 +129,7 @@ export function ProcessParallax() {
           <h2>
             Понятный путь
             <br />
-            от идеи до тиража
+            от идеи <em>до тиража</em>
           </h2>
           <div className="steps">
             {processSteps.map(([title, text], stepIndex) => (

@@ -15,7 +15,7 @@ export function YandexMap({ height = 600, compact = false }: YandexMapProps) {
             <h2>
               Офис и склад
               <br />
-              в Москве
+              <em>в Москве</em>
             </h2>
           </div>
           <div className="map-meta">

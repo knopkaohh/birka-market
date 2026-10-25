@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
+import { GoldEnd } from "@/components/gold-end";
 import { Breadcrumbs } from "@/components/breadcrumbs";
 import { CalculatorBlock } from "@/components/calculator-block";
 import { MaterialDetails } from "@/components/material-details";
@@ -156,7 +157,9 @@ export function ProductLanding({
       <section className="jq-section" id="variants">
         <div className="jq-heading">
           <span className="section-number">01 / {content.variantLabel}</span>
-          <h2>{content.variantTitle}</h2>
+          <h2>
+            <GoldEnd text={content.variantTitle} />
+          </h2>
           <p>{content.variantIntro}</p>
         </div>
         <div className="jq-variants">
@@ -182,7 +185,9 @@ export function ProductLanding({
       <section className="jq-section" id="works">
         <div className="jq-heading">
           <span className="section-number">02 / РАБОТЫ</span>
-          <h2>{content.galleryTitle}</h2>
+          <h2>
+            <GoldEnd text={content.galleryTitle} />
+          </h2>
           <p>{content.galleryIntro}</p>
         </div>
         <MaterialPhotos items={galleryPhotos} />
@@ -191,7 +196,9 @@ export function ProductLanding({
       <section className="jq-section" id="orientir">
         <div className="jq-heading">
           <span className="section-number">03 / ОРИЕНТИР</span>
-          <h2>{content.quotesTitle}</h2>
+          <h2>
+            <GoldEnd text={content.quotesTitle} />
+          </h2>
           <p>{content.quotesIntro}</p>
         </div>
         <table className="jq-tech-table">

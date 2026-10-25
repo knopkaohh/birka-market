@@ -24,7 +24,9 @@ function CatalogBrowserInner() {
       <div className="catalog-toolbar">
         <div>
           <span className="section-number">ВСЕ ПОЗИЦИИ</span>
-          <h2>Полный перечень продукции</h2>
+          <h2>
+            Полный перечень <em>продукции</em>
+          </h2>
         </div>
         <label className="search-line catalog-search">
           <Search size={16} strokeWidth={1.8} aria-hidden="true" />

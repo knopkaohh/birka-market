@@ -56,18 +56,24 @@ export default function ContactsPage() {
         </div>
         <div className="content-grid">
           <article>
-            <h2>Офис и склад</h2>
+            <h2>
+              Офис и <em>склад</em>
+            </h2>
             <p>{company.address}</p>
             <p>
               {company.hours}. Выдача готовой продукции: {company.pickupHours}. {company.hoursNote}
             </p>
           </article>
           <article>
-            <h2>Как добраться</h2>
+            <h2>
+              Как <em>добраться</em>
+            </h2>
             <p>{company.howToGet}</p>
           </article>
           <article>
-            <h2>На карте</h2>
+            <h2>
+              На <em>карте</em>
+            </h2>
             <p>{company.map.description}. Строительный проезд, 2с1 — офис в первом подъезде со стороны двора.</p>
             <a href={company.map.route} target="_blank" rel="noreferrer">
               Открыть Яндекс Карты

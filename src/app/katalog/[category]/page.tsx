@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Breadcrumbs } from "@/components/breadcrumbs";
+import { GoldEnd } from "@/components/gold-end";
 import { CalculatorBlock } from "@/components/calculator-block";
 import { ProductCard } from "@/components/product-card";
 import { categories, getCategory, productsByCategory } from "@/lib/site";
@@ -33,7 +34,9 @@ export default async function CategoryPage({ params }: { params: Promise<Params>
         <div className="inner-hero">
           <Breadcrumbs items={[{ href: "/katalog", label: "Каталог" }, { label: item.name }]} />
           <span className="section-number">КАТЕГОРИЯ</span>
-          <h1>{item.name}</h1>
+          <h1>
+            <GoldEnd text={item.name} />
+          </h1>
           <p>{item.intro}</p>
         </div>
         <div className="product-grid">
