@@ -2782,7 +2782,7 @@ footer .logo svg { height: 56px; }
   color: #111;
   font-family: var(--font-manrope), Arial, sans-serif;
   font-weight: 590;
-  font-size: clamp(52px, 6.6vw, 96px);
+  font-size: clamp(44px, 5vw, 72px);
   line-height: .9;
   letter-spacing: -.05em;
 }
@@ -2793,12 +2793,12 @@ footer .logo svg { height: 56px; }
   font-size: 20px;
   line-height: 1.4;
 }
-.materials-carousel { height: 380px; }
+.materials-carousel { height: 300px; }
 @media (max-width: 760px) {
-  .materials-heading h2 { font-size: 42px; }
+  .materials-heading h2 { font-size: 40px; }
   .home-intro h2 { font-size: 34px; }
   .home-intro h2 span { white-space: normal; }
-  .materials-carousel { height: 300px; }
+  .materials-carousel { height: 220px; }
 }
 .materials-current {
   display: flex;

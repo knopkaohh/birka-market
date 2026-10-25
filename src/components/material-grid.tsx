@@ -35,12 +35,11 @@ export function MaterialGrid() {
           items={items}
           preset="cylinder"
           intro="rise"
-          cardWidth={520}
+          cardWidth={320}
           aspectRatio={1}
           speed={7}
           captions={false}
-          gap={28}
-          fitSpan={14}
+          gap={68}
           pin="top"
           tilt={-5}
           curve={0.53}
