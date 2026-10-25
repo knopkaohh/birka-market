@@ -11,15 +11,11 @@ import { products } from "@/lib/site";
 export function MaterialGrid() {
   return (
     <section className="section materials-section" id="materials">
-      <div className="section-heading">
-        <div>
-          <span className="section-number">МАТЕРИАЛЫ</span>
-          <h2 className="type-title">
-            Все позиции
-            <br />в одной сетке
-          </h2>
-        </div>
-        <p className="type-body">Выберите материал. Дальше подскажем тираж, срок и способ печати.</p>
+      <div className="materials-heading">
+        <h2>
+          Наши <em>материалы</em>
+        </h2>
+        <p>Выберите материал. Дальше подскажем тираж, срок и способ печати.</p>
       </div>
       <div className="material-grid">
         {products.map((product, index) => {

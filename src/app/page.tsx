@@ -5,9 +5,10 @@ import { CalculatorBlock } from "@/components/calculator-block";
 import { HomeHero } from "@/components/home-hero";
 import { MaterialGrid } from "@/components/material-grid";
 import { PartnersMarquee } from "@/components/partners-marquee";
+import { YandexMap } from "@/components/yandex-map";
 import { formatNewsDate, newsPosts } from "@/lib/news";
 
-/** Главная: спокойный первый экран, затем сетка материалов и новости. */
+/** Главная: видео, команда, партнёры, материалы, расчёт, новости и офис. */
 export default function Home() {
   const latestNews = newsPosts.slice(0, 3);
 
@@ -28,6 +29,7 @@ export default function Home() {
       </section>
       <PartnersMarquee />
       <MaterialGrid />
+      <CalculatorBlock title="Расчёт" titleAccent="заказа" />
 
       <section className="section home-news">
         <div className="section-heading">
@@ -59,8 +61,7 @@ export default function Home() {
           ))}
         </div>
       </section>
-
-      <CalculatorBlock />
+      <YandexMap />
     </>
   );
 }

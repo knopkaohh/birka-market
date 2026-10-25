@@ -1,23 +1,12 @@
 import Link from "next/link";
-import { ArrowDownRight, Mail, MessageCircle, Send } from "lucide-react";
+import { Mail, MessageCircle, Send } from "lucide-react";
 import { BackToTop } from "@/components/back-to-top";
-import { Logo } from "@/components/logo";
 import { company } from "@/lib/site";
 
-/** Четыре колонки под слоганом: связь, адрес, график и компания. */
+/** Последний блок: связь, адрес, график и компания. */
 export function Footer() {
   return (
     <footer>
-      <div className="footer-top">
-        <Logo />
-        <p className="footer-copy">© {new Date().getFullYear()} Бирка Маркет</p>
-        <Link className="footer-circle" href="/raschet">
-          Рассчитать
-          <br />
-          заказ
-          <ArrowDownRight />
-        </Link>
-      </div>
       <div className="footer-grid">
         <div>
           <span className="footer-heading-muted">Связь с нами</span>
