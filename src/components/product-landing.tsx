@@ -10,7 +10,7 @@ import type { LandingContent, QuotePrefill } from "@/lib/landings/types";
 import { quoteComment, quoteHref, quoteQuantity } from "@/lib/landings/types";
 import { importedPhotos } from "@/lib/imported-photos";
 import { photoKey } from "@/lib/photo-id";
-import { firstUniquePhoto, takeUniquePhoto, usablePhoto } from "@/lib/photos";
+import { takeUniquePhoto, usablePhoto } from "@/lib/photos";
 import { landingJsonLd } from "@/lib/seo";
 import { company, getCategory, getProduct } from "@/lib/site";
 
@@ -50,10 +50,6 @@ export function ProductLanding({
   const usedPhotos = new Set<string>();
   const heroPhoto = live[0]?.src ?? takeUniquePhoto(content.hero[0], usedPhotos);
   if (live[0]) usedPhotos.add(photoKey(live[0].src));
-  const variantPhoto = firstUniquePhoto(
-    content.variants.map((item) => ({ src: item.image, alt: item.name })),
-    usedPhotos,
-  );
   const galleryPhotos = live.length
     ? live.map((item, index) => ({
         src: item.src,
@@ -130,16 +126,6 @@ export function ProductLanding({
           <span className="section-number">01 / {content.variantLabel}</span>
           <h2>{content.variantTitle}</h2>
           <p>{content.variantIntro}</p>
-        </div>
-        <div className="section-photo">
-          <PhotoFrame
-            src={variantPhoto?.src}
-            alt={variantPhoto?.alt ?? content.variantTitle}
-            width={1200}
-            height={900}
-            sizes="(max-width: 900px) 100vw, 720px"
-            cover
-          />
         </div>
         <div className="jq-variants">
           {content.variants.map((item) => (
