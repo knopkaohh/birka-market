@@ -41,7 +41,7 @@ export function QuickCalc() {
 
   const slug = pathname.replace(/^\//, "").split("/")[0] ?? "";
   const product = getProduct(slug);
-  const hiddenPage = pathname === "/raschet" || pathname === "/spasibo";
+  const hiddenPage = pathname === "/" || pathname === "/raschet" || pathname === "/spasibo";
 
   const close = () => {
     setShown(false);

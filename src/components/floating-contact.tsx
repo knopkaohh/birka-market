@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
 import { Mail, MessageCircle, Phone, Send, X } from "lucide-react";
 import { openQuickCalc } from "@/components/quick-calc";
@@ -8,6 +9,8 @@ import { company } from "@/lib/site";
 
 /** Круглая кнопка связи справа внизу и короткая панель контактов. */
 export function FloatingContact() {
+  const pathname = usePathname();
+  const onHome = pathname === "/";
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
@@ -23,7 +26,7 @@ export function FloatingContact() {
     <>
       <button
         type="button"
-        className="float-contact"
+        className={onHome ? "float-contact is-home" : "float-contact"}
         aria-expanded={open}
         aria-label={open ? "Закрыть связь" : "Связаться"}
         onClick={() => setOpen((value) => !value)}
@@ -46,7 +49,7 @@ export function FloatingContact() {
       <AnimatePresence>
         {open ? (
           <motion.aside
-            className="float-panel"
+            className={onHome ? "float-panel is-home" : "float-panel"}
             role="dialog"
             aria-label="Связаться с Бирка Маркет"
             initial={{ opacity: 0, y: 16 }}

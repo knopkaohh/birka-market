@@ -4,6 +4,7 @@ import { ArrowDownRight } from "lucide-react";
 import { CalculatorBlock } from "@/components/calculator-block";
 import { HomeHero } from "@/components/home-hero";
 import { MaterialGrid } from "@/components/material-grid";
+import { PartnersMarquee } from "@/components/partners-marquee";
 import { YandexMap } from "@/components/yandex-map";
 import { formatNewsDate, newsPosts } from "@/lib/news";
 
@@ -14,6 +15,15 @@ export default function Home() {
   return (
     <>
       <HomeHero />
+      <section className="section home-intro">
+        <h2>Вас приветствует команда Бирка Маркет!</h2>
+        <p>
+          К нам обращаются те, кому важна ответственность и скорость принятия решений! Уже более 8 лет наши партнеры
+          обращаются за тем, чтобы их бренд выглядел безупречно с каждой стороны, начиная от размера и состава, заканчивая
+          вкладышами и упаковкой.
+        </p>
+      </section>
+      <PartnersMarquee />
       <MaterialGrid />
 
       <section className="section home-news">

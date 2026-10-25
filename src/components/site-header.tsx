@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { ArrowDownRight, Menu, Phone, X } from "lucide-react";
+import { Menu, Phone, X } from "lucide-react";
 import { HeaderMessengers } from "@/components/messengers";
 import { company, navLinks, products } from "@/lib/site";
 
@@ -46,9 +46,8 @@ export function SiteHeader({
             {company.phone}
           </a>
           <HeaderMessengers />
-          <Link className="header-cta" href="/raschet" prefetch={false}>
+          <Link className="header-calc" href="/raschet" prefetch={false}>
             Рассчитать заказ
-            <ArrowDownRight size={17} />
           </Link>
           <button
             type="button"
