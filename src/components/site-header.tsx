@@ -40,29 +40,31 @@ export function SiteHeader({
             </Link>
           ))}
         </nav>
-        <Link className="header-calc" href="/raschet" prefetch={false}>
-          <ArrowDownRight size={18} aria-hidden="true" />
-          Рассчитать заказ
-        </Link>
         <div className="header-actions">
-          <a className="phone-link" href={company.phoneHref}>
-            <Phone size={15} />
-            {company.phone}
-          </a>
-          <HeaderMessengers />
-          <button
-            type="button"
-            className={`menu-toggle ${menuOpen ? "is-open" : ""}`}
-            aria-label={menuOpen ? "Закрыть меню" : "Открыть меню каталога"}
-            aria-expanded={menuOpen}
-            aria-controls="side-menu"
-            onClick={(event) => {
-              event.stopPropagation();
-              onToggleMenu();
-            }}
-          >
-            {menuOpen ? <X size={22} /> : <Menu size={22} />}
-          </button>
+          <div className="header-contacts">
+            <a className="phone-link" href={company.phoneHref}>
+              <Phone size={15} />
+              {company.phone}
+            </a>
+            <HeaderMessengers />
+            <button
+              type="button"
+              className={`menu-toggle ${menuOpen ? "is-open" : ""}`}
+              aria-label={menuOpen ? "Закрыть меню" : "Открыть меню каталога"}
+              aria-expanded={menuOpen}
+              aria-controls="side-menu"
+              onClick={(event) => {
+                event.stopPropagation();
+                onToggleMenu();
+              }}
+            >
+              {menuOpen ? <X size={22} /> : <Menu size={22} />}
+            </button>
+          </div>
+          <Link className="header-calc" href="/raschet" prefetch={false}>
+            <ArrowDownRight size={18} aria-hidden="true" />
+            Рассчитать заказ
+          </Link>
         </div>
       </div>
     </header>
