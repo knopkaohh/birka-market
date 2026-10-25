@@ -267,10 +267,18 @@ button { cursor: pointer; }
   border: 1px solid #d7d3c8;
   border-radius: 4px;
 }
+.header-messengers .header-msg {
+  width: 32px;
+  height: 32px;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+}
 .header-msg.is-wa { color: #128c7e; }
 .header-msg.is-tg { color: #2aabee; }
 .header-msg.is-max { color: #1c1c1c; }
 .header-msg:hover { background: #ece7db; }
+.header-messengers .header-msg:hover { background: transparent; opacity: .72; }
 .header-cta, .primary-cta {
   display: inline-flex; align-items: center; justify-content: center; gap: 14px;
   min-height: 48px; padding: 0 20px; color: var(--ink);
@@ -2232,7 +2240,7 @@ footer .logo svg { height: 56px; }
   align-items: center;
   justify-content: center;
   gap: 28px;
-  padding: 64px var(--page-gutter);
+  padding: 64px var(--page-gutter) 120px;
   overflow: hidden;
   text-align: center;
   color: #d1d5db;
@@ -2283,29 +2291,37 @@ footer .logo svg { height: 56px; }
   line-height: 1.35;
   color: #e7e5e4;
 }
-.home-hero-actions { display: flex; flex-wrap: nowrap; justify-content: center; align-self: center; gap: 10px; }
-.hero-btn { white-space: nowrap; }
-.hero-btn {
-  display: inline-flex;
+.home-hero-actions {
+  position: absolute;
+  z-index: 2;
+  left: 0;
+  right: 0;
+  bottom: 36px;
+  display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: center;
-  gap: 8px;
-  min-height: 52px;
-  padding: 0 16px;
-  border: 1px solid #fcd34d;
-  font-weight: 750;
-  font-size: 14px;
-  transition: background .3s, box-shadow .3s;
+  gap: 10px 22px;
 }
-.hero-btn-fill {
-  color: #1c1917;
-  background: linear-gradient(180deg, #f59e0b, #fcd34d);
+.hero-text {
+  border: 0;
+  background: transparent;
+  color: var(--paper);
+  font-family: var(--font-manrope), Arial, sans-serif;
+  font-weight: 590;
+  font-size: clamp(18px, 1.7vw, 26px);
+  letter-spacing: -.04em;
+  line-height: 1.15;
+  padding: 4px 0;
+  cursor: pointer;
 }
-.hero-btn-fill:hover { box-shadow: 0 0 18px rgba(252, 211, 77, .45), 0 12px 22px rgba(136, 19, 55, .22); }
-.hero-btn-ghost { color: #d1d5db; background: transparent; }
-.hero-btn-ghost:hover {
-  background: rgba(245, 158, 11, .12);
-  box-shadow: 0 12px 22px rgba(136, 19, 55, .22);
+.hero-text:hover { color: var(--yellow); }
+.hero-text-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--yellow);
+  flex: none;
 }
 
 .material-grid {
@@ -2638,8 +2654,8 @@ footer .logo svg { height: 56px; }
 .float-contact {
   position: fixed;
   z-index: 120;
-  right: 24px;
-  bottom: 24px;
+  right: 54px;
+  bottom: 160px;
   display: grid;
   place-items: center;
   width: 58px;
@@ -2667,7 +2683,7 @@ footer .logo svg { height: 56px; }
   position: fixed;
   z-index: 520;
   right: 16px;
-  bottom: 96px;
+  bottom: 232px;
   display: flex;
   flex-direction: column;
   width: min(280px, calc(100vw - 32px));
@@ -2706,21 +2722,21 @@ footer .logo svg { height: 56px; }
   font-weight: 800;
   background: linear-gradient(180deg, #f59e0b, #fcd34d);
 }
-.partner-card:focus-within, .hero-btn:focus-visible, .side-main-link:focus-visible, .float-contact:focus-visible {
+.partner-card:focus-within, .hero-text:focus-visible, .side-main-link:focus-visible, .float-contact:focus-visible {
   outline: 1px solid #fcd34d;
   outline-offset: 2px;
 }
 
 @media (max-width: 1100px) {
   .home-hero { gap: 24px; }
-  .home-hero-actions { justify-content: center; flex-wrap: wrap; }
 }
 @media (max-width: 760px) {
-  .home-hero { min-height: auto; align-items: stretch; padding: 48px 18px 36px; }
+  .home-hero { min-height: calc(100svh - 92px); align-items: center; padding: 40px 18px 168px; }
   .home-hero h1 { font-size: clamp(36px, 11vw, 52px); }
   .home-hero p { font-size: 18px; }
-  .home-hero-actions { flex-direction: column; align-items: stretch; width: 100%; }
-  .hero-btn { width: 100%; }
+  .home-hero-actions { left: 12px; right: 80px; bottom: 88px; flex-direction: column; gap: 8px; }
+  .hero-text { font-size: 18px; }
+  .hero-text-dot { display: none; }
   .material-grid, .footer-grid { grid-template-columns: 1fr; }
   .partner-marquee { display: none; }
   .partner-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }

@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import { Factory, Timer } from "lucide-react";
 import { motion } from "framer-motion";
 import { openQuickCalc } from "@/components/quick-calc";
 
@@ -35,24 +34,25 @@ export function HomeHero() {
           Макет бесплатно. Посчитаем тираж и подскажем материал.
         </motion.p>
       </div>
-      <motion.div
+      <motion.nav
         className="home-hero-actions"
+        aria-label="Действия"
         initial={{ opacity: 0, y: 18 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ ...rise, delay: 0.2 }}
       >
-        <button type="button" className="hero-btn hero-btn-fill" onClick={() => openQuickCalc()}>
-          <Timer size={18} aria-hidden="true" />
+        <button type="button" className="hero-text" onClick={() => openQuickCalc()}>
           Быстрый расчёт
         </button>
-        <Link className="hero-btn hero-btn-ghost" href="/raschet">
+        <span className="hero-text-dot" aria-hidden="true" />
+        <Link className="hero-text" href="/raschet">
           Скидки от тиража
         </Link>
-        <Link className="hero-btn hero-btn-fill" href="/o-kompanii">
-          <Factory size={18} aria-hidden="true" />
+        <span className="hero-text-dot" aria-hidden="true" />
+        <Link className="hero-text" href="/o-kompanii">
           Своё производство
         </Link>
-      </motion.div>
+      </motion.nav>
     </section>
   );
 }
