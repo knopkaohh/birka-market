@@ -30,16 +30,17 @@ export function MaterialGrid() {
         </h2>
         <p>Листайте кольцо и откройте материал.</p>
       </div>
-      <div className="materials-carousel" style={{ width: "100%", height: 560, position: "relative" }}>
+      <div className="materials-carousel" style={{ width: "100%", position: "relative" }}>
         <CircularCarousel
           items={items}
           preset="cylinder"
           intro="rise"
-          cardWidth={320}
+          cardWidth={520}
           aspectRatio={1}
           speed={7}
           captions={false}
-          gap={68}
+          gap={28}
+          fitSpan={14}
           tilt={-5}
           curve={0.53}
           perspective={3020}

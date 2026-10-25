@@ -38,6 +38,8 @@ export interface CircularCarouselProps {
   fadeColor?: string;
   innerShade?: number;
   cornerRadius?: number;
+  /** Degrees of the ring used to size the photos. A smaller span keeps the front cards large. */
+  fitSpan?: number;
   captions?: boolean;
   onChange?: (index: number) => void;
   onItemClick?: (item: CircularCarouselItem, index: number) => void;
@@ -127,6 +129,7 @@ interface Settings {
   parallax: number;
   stretch: number;
   depthFade: number;
+  fitSpan: number;
   captions: boolean;
   reduced: boolean;
 }
@@ -227,7 +230,7 @@ const PRESETS: Record<CircularCarouselPreset, Layout> = {
     spread: 1,
     inward: false,
     billboard: false,
-    backfaces: true,
+    backfaces: false,
     window: 0
   },
   orbit: {
@@ -355,6 +358,7 @@ const CircularCarousel = ({
   fadeColor = '#000000',
   innerShade = 0.6,
   cornerRadius = 12,
+  fitSpan = 0,
   captions = false,
   onChange,
   onItemClick,
@@ -464,6 +468,7 @@ const CircularCarousel = ({
     parallax: reduced ? 0 : clamp(parallax, 0, 1),
     stretch: reduced ? 0 : clamp(stretch, 0, 1),
     depthFade: clamp(depthFade, 0, 1),
+    fitSpan: Math.max(0, fitSpan),
     captions,
     reduced
   };
@@ -582,7 +587,7 @@ const CircularCarousel = ({
           [-s.cardW / 2, s.cardH / 2],
           [s.cardW / 2, s.cardH / 2]
         ];
-        const limit = s.layout.window ? s.layout.window * s.step : 180;
+        const limit = s.layout.window ? s.layout.window * s.step : s.fitSpan > 0 ? s.fitSpan : 180;
         for (let a = -limit; a <= limit; a += limit / 24) {
           for (const [cx, cy] of corners) {
             let p: Vec3;
@@ -840,7 +845,7 @@ const CircularCarousel = ({
   useLayoutEffect(() => {
     measureRef.current();
     wakeRef.current();
-  }, [radius, cardW, cardH, tiltValue, perspective, preset, captions, count]);
+  }, [radius, cardW, cardH, tiltValue, perspective, preset, captions, count, fitSpan]);
 
   useEffect(() => {
     wakeRef.current();

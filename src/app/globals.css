@@ -2791,7 +2791,10 @@ footer .logo svg { height: 56px; }
   font-size: 18px;
   line-height: 1.5;
 }
-.materials-carousel { height: 560px; }
+.materials-carousel { height: 680px; }
+@media (max-width: 760px) {
+  .materials-carousel { height: 460px; }
+}
 .materials-current {
   display: flex;
   flex-direction: column;
