@@ -24,7 +24,19 @@ export function SiteHeader({
   return (
     <header className="site-header">
       <div className="header-inner">
-        <Link className="header-slogan" href="/" aria-label="Бирка Маркет — на главную">
+        <Link
+          className="header-slogan"
+          href="/"
+          aria-label="Бирка Маркет — наверх"
+          onClick={(event) => {
+            if (pathname !== "/") return;
+            event.preventDefault();
+            const top = document.querySelector<HTMLElement>("#top");
+            const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+            top?.focus({ preventScroll: true });
+            window.scrollTo({ top: 0, behavior: reduce ? "auto" : "smooth" });
+          }}
+        >
           Ваш бренд -<br />
           наша <em>забота!</em>
         </Link>
