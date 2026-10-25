@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowDownRight } from "lucide-react";
 import { Breadcrumbs } from "@/components/breadcrumbs";
+import { CalculatorBlock } from "@/components/calculator-block";
 import { CatalogBrowser } from "@/components/catalog-browser";
 
 export const metadata: Metadata = {
@@ -12,6 +13,7 @@ export const metadata: Metadata = {
 
 export default function CatalogPage() {
   return (
+    <>
     <div className="inner-page">
       <div className="inner-hero">
         <Breadcrumbs items={[{ label: "Каталог" }]} />
@@ -34,5 +36,7 @@ export default function CatalogPage() {
       </div>
       <CatalogBrowser />
     </div>
+    <CalculatorBlock title={"Расчёт\nзаказа"} />
+    </>
   );
 }

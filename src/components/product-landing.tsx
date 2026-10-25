@@ -1,8 +1,7 @@
 import Link from "next/link";
-import { ArrowRight, Check } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { Breadcrumbs } from "@/components/breadcrumbs";
-import { CalcResponder } from "@/components/calc-responder";
-import { LeadForm } from "@/components/lead-form";
+import { CalculatorBlock } from "@/components/calculator-block";
 import { MaterialDetails } from "@/components/material-details";
 import DriftWall from "@/components/fx/DriftWall";
 import { MaterialPhotos } from "@/components/material-photos";
@@ -13,7 +12,7 @@ import { importedPhotos } from "@/lib/imported-photos";
 import { photoKey } from "@/lib/photo-id";
 import { takeUniquePhoto, usablePhoto } from "@/lib/photos";
 import { landingJsonLd } from "@/lib/seo";
-import { company, getCategory, getProduct } from "@/lib/site";
+import { getCategory, getProduct } from "@/lib/site";
 
 function specRows(
   specs: { title: string; text: string }[],
@@ -231,43 +230,13 @@ export function ProductLanding({
         </div>
       </section>
 
-      <section className="jq-calc" id="calc">
-        <div className="jq-calc-intro">
-          <span className="section-number">04 / РАСЧЁТ</span>
-          <h2>
-            {content.calcTitle.split("\n").map((line) => (
-              <span key={line}>
-                {line}
-                <br />
-              </span>
-            ))}
-          </h2>
-          <p>
-            {content.calcIntro} Менеджер свяжется в течение {company.replyIn} в рабочее время {company.hours}.
-          </p>
-          <CalcResponder light />
-          <ul>
-            {content.calcBullets.map((item) => (
-              <li key={item}>
-                <Check size={16} /> {item}
-              </li>
-            ))}
-          </ul>
-        </div>
-        <LeadForm
-          key={formKey || "default"}
-          defaultProduct={content.slug}
-          details
-          defaultVariant={selectedVariant}
-          defaultQuantity={quote?.qty ? quoteQuantity(quote.qty) : content.form.quantityPlaceholder}
-          defaultSize={quote?.size}
-          defaultExtra={quote?.spec}
-          defaultComment={prefillComment}
-          variants={content.variants.map((item) => ({ id: item.id, name: item.name }))}
-          detailFields={content.form}
-          compact
-        />
-      </section>
+      <CalculatorBlock
+        key={formKey || "default"}
+        defaultProduct={content.slug}
+        defaultComment={prefillComment}
+        defaultQuantity={quote?.qty ? quoteQuantity(quote.qty) : undefined}
+        title={"Расчёт\nзаказа"}
+      />
 
       <MaterialDetails content={content} usedPhotos={usedPhotos} />
 

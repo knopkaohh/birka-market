@@ -9,11 +9,13 @@ export function CalculatorBlock({
   titleAccent,
   lead = "Можно не знать точных параметров. Оставьте телефон — менеджер свяжется в течение 10 минут, уточнит задачу и подготовит расчёт.",
   heading = "h2",
-  surface = "dark",
-  bullets,
+  surface = "material",
+  bullets = ["Быстрый расчёт", "Своё производство", "Макет до печати"],
+  defaultQuantity,
 }: {
   defaultProduct?: string;
   defaultComment?: string;
+  defaultQuantity?: string;
   title?: string;
   titleAccent?: string;
   lead?: string;
@@ -53,6 +55,7 @@ export function CalculatorBlock({
         key={`${defaultProduct ?? "unknown"}-${defaultComment ?? ""}`}
         defaultProduct={defaultProduct}
         defaultComment={defaultComment}
+        defaultQuantity={defaultQuantity}
       />
     </section>
   );
