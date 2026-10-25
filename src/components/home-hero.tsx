@@ -7,7 +7,7 @@ import { openQuickCalc } from "@/components/quick-calc";
 
 const rise = { duration: 0.9, ease: [0.22, 1, 0.36, 1] as const };
 
-/** Первый экран: спокойный текст слева и три кнопки справа. */
+/** Первый экран: заголовок по центру видео, в том же крупном наборе, что был у слогана. */
 export function HomeHero() {
   return (
     <section className="home-hero">
@@ -35,7 +35,12 @@ export function HomeHero() {
           Макет бесплатно. Посчитаем тираж и подскажем материал.
         </motion.p>
       </div>
-      <div className="home-hero-actions">
+      <motion.div
+        className="home-hero-actions"
+        initial={{ opacity: 0, y: 18 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ ...rise, delay: 0.2 }}
+      >
         <button type="button" className="hero-btn hero-btn-fill" onClick={() => openQuickCalc()}>
           <Timer size={18} aria-hidden="true" />
           Быстрый расчёт
@@ -47,17 +52,7 @@ export function HomeHero() {
           <Factory size={18} aria-hidden="true" />
           Своё производство
         </Link>
-      </div>
-      <motion.h2
-        className="home-hero-slogan"
-        initial={{ opacity: 0, y: 18 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ ...rise, delay: 0.22 }}
-      >
-        Ваш бренд -
-        <br />
-        наша <em>забота!</em>
-      </motion.h2>
+      </motion.div>
     </section>
   );
 }

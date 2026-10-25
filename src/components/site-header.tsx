@@ -3,7 +3,6 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ArrowDownRight, Menu, Phone, X } from "lucide-react";
-import { Logo } from "@/components/logo";
 import { HeaderMessengers } from "@/components/messengers";
 import { company, navLinks, products } from "@/lib/site";
 
@@ -25,7 +24,10 @@ export function SiteHeader({
   return (
     <header className="site-header">
       <div className="header-inner">
-        <Logo />
+        <Link className="header-slogan" href="/" aria-label="Бирка Маркет — на главную">
+          Ваш бренд -<br />
+          наша <em>забота!</em>
+        </Link>
         <nav className="desktop-nav" aria-label="Основная навигация">
           {navLinks.map((item) => (
             <Link
