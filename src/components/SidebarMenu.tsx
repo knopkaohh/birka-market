@@ -5,6 +5,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { FormEvent, useMemo, useState, type ReactNode } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { ChevronDown, ChevronRight, Search } from "lucide-react";
+import FluxLines from "@/components/fx/FluxLines";
 import { Logo } from "@/components/logo";
 import { categories, matchesProduct, products, productsByCategory } from "@/lib/site";
 
@@ -113,6 +114,28 @@ export function SidebarMenu({ open, onClose }: SidebarMenuProps) {
         onClick={onClose}
       />
       <aside id="side-menu" className={`side-menu ${open ? "is-open" : ""}`} aria-label="Каталог продукции">
+        <FluxLines
+          className="side-menu-flux"
+          style={{ position: "absolute", inset: 0, zIndex: 0, pointerEvents: "none" }}
+          colors={["#ffffff", "#ffffff", "#ffffff"]}
+          glow={2}
+          rimWidth={0.2}
+          lineWidth={1}
+          flowDirection="down"
+          mouseInteraction
+          clickSwirl
+          speed={0.5}
+          scale={1.6}
+          turbulence={1}
+          fluidity={0.1}
+          sharpness={2.5}
+          shimmer={1.5}
+          mouseStrength={1}
+          mouseRadius={0.35}
+          intro
+          lightMode={false}
+          aria-hidden="true"
+        />
         <div className="side-menu-inner">
           <div className="side-menu-logo">
             <Logo />

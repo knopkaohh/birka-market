@@ -360,7 +360,15 @@ button { cursor: pointer; }
   background: #1f201f;
   box-shadow: 10px 0 28px rgba(136, 19, 55, .2);
 }
+.side-menu-flux {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
 .side-menu-inner {
+  position: relative;
+  z-index: 1;
   flex: 1;
   padding: 28px 0 40px;
   overflow-y: auto;
@@ -2728,6 +2736,29 @@ footer .logo svg { height: 56px; }
   font-size: 18px;
   line-height: 1.5;
 }
+.materials-carousel { height: 560px; }
+.materials-current {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  max-width: 36em;
+  margin: 8px auto 0;
+  text-align: center;
+}
+.materials-current strong {
+  color: #111;
+  font-weight: 590;
+  font-size: clamp(22px, 2vw, 32px);
+  letter-spacing: -.05em;
+}
+.materials-current em {
+  color: #374151;
+  font-style: normal;
+  font-size: 16px;
+  line-height: 1.45;
+}
+.materials-current:hover strong { color: #8e721f; }
 .partners { padding: 28px 0 8px; overflow: hidden; background: transparent; }
 .partners > p {
   width: min(100% - 80px, 1380px);
@@ -2773,6 +2804,7 @@ footer .logo svg { height: 56px; }
 
 @media (max-width: 1100px) {
   .material-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .materials-carousel { height: 420px; }
   .tag-mark { width: 13px; height: 16px; }
 }
 .float-contact {
