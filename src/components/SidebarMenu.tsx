@@ -2,9 +2,9 @@
 
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { FormEvent, useMemo, useState } from "react";
+import { FormEvent, useMemo, useState, type ReactNode } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { ChevronDown, ChevronRight, CircleHelp, Search } from "lucide-react";
+import { ChevronDown, ChevronRight, Search } from "lucide-react";
 import { Logo } from "@/components/logo";
 import { categories, matchesProduct, products, productsByCategory } from "@/lib/site";
 
@@ -13,17 +13,72 @@ type SidebarMenuProps = {
   onClose: () => void;
 };
 
-/** Тонкая золотая бирка у пункта «Продукция». */
-function TagMark() {
+/** Тонкие значки разделов в одном начертании. */
+function MenuIcon({ slug }: { slug: string }) {
+  const paths: Record<string, ReactNode> = {
+    produkciya: (
+      <>
+        <path d="M8 4.5h6.2L17.5 8v11.2a1.3 1.3 0 0 1-1.3 1.3H8a1.3 1.3 0 0 1-1.3-1.3V5.8A1.3 1.3 0 0 1 8 4.5Z" />
+        <circle cx="11.2" cy="8.2" r=".8" fill="currentColor" stroke="none" />
+      </>
+    ),
+    "vshivnye-birki": (
+      <>
+        <path d="M8 4.2h7.2L18.2 7.6V19a1.3 1.3 0 0 1-1.3 1.3H8A1.3 1.3 0 0 1 6.7 19V5.5A1.3 1.3 0 0 1 8 4.2Z" />
+        <path d="M9.2 9.2h5.2M9.2 12h5.2M9.2 14.8h3.4" />
+        <path d="M6.7 8.2H5M6.7 12H5M6.7 15.8H5" />
+      </>
+    ),
+    "navesnye-birki": (
+      <>
+        <path d="M12 3.2v2.4" />
+        <circle cx="12" cy="3" r=".7" fill="currentColor" stroke="none" />
+        <path d="M8.2 6.2h7.6l1.3 2.4V19a1.3 1.3 0 0 1-1.3 1.3H8.2A1.3 1.3 0 0 1 6.9 19V8.6l1.3-2.4Z" />
+        <circle cx="12" cy="12.4" r="1.15" />
+      </>
+    ),
+    upakovka: (
+      <>
+        <path d="M7.2 8.4h9.6l-.8 10.4a1.2 1.2 0 0 1-1.2 1.1H9.2a1.2 1.2 0 0 1-1.2-1.1L7.2 8.4Z" />
+        <path d="M9.4 8.4V7a2.6 2.6 0 0 1 5.2 0v1.4" />
+      </>
+    ),
+    furnitura: (
+      <>
+        <path d="M8.2 5.2h7.6" />
+        <path d="M12 5.2v2.8" />
+        <rect x="9.3" y="8" width="5.4" height="6.6" rx="1.2" />
+        <path d="M12 14.6v3.1" />
+        <path d="M9 17.8h6" />
+      </>
+    ),
+    nanesenie: (
+      <>
+        <path d="M12 3.8 18.6 6.6v5c0 3.3-2.5 6-6.6 7.4-4.1-1.4-6.6-4.1-6.6-7.4v-5L12 3.8Z" />
+        <path d="M9.2 11.4 11 13.2l3.6-3.8" />
+      </>
+    ),
+    merch: (
+      <path d="M9.1 5.4c.5 1.2 1.6 1.9 2.9 1.9s2.4-.7 2.9-1.9l2.8 1.4-1.5 3h-1.2V19H9V9.8H7.8l-1.5-3 2.8-1.4Z" />
+    ),
+    poligrafiya: (
+      <>
+        <path d="M7.2 4.4h7.4L17.8 8v10.6a1.2 1.2 0 0 1-1.2 1.2H7.2A1.2 1.2 0 0 1 6 18.6V5.6a1.2 1.2 0 0 1 1.2-1.2Z" />
+        <path d="M14.4 4.6V8h3.2" />
+        <path d="M8.6 11.2h5.6M8.6 14h5.6M8.6 16.6h3.6" />
+      </>
+    ),
+    "kak-vybrat": (
+      <>
+        <circle cx="12" cy="12" r="7.1" />
+        <path d="M9.7 9.7a2.3 2.3 0 1 1 3.2 2.1c-.6.4-1 1-1 1.6" />
+        <path d="M12 16.6h.01" />
+      </>
+    ),
+  };
   return (
-    <svg className="tag-mark" viewBox="0 0 28 36" aria-hidden="true">
-      <path
-        d="M7 2.5h12.2L24.5 8.2V31a2.5 2.5 0 0 1-2.5 2.5H7A2.5 2.5 0 0 1 4.5 31V5A2.5 2.5 0 0 1 7 2.5Z"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.6"
-      />
-      <circle cx="14" cy="9" r="1.6" fill="currentColor" />
+    <svg className="side-icon" viewBox="0 0 24 24" aria-hidden="true">
+      {paths[slug]}
     </svg>
   );
 }
@@ -64,18 +119,17 @@ export function SidebarMenu({ open, onClose }: SidebarMenuProps) {
           </div>
 
           <form className="side-search-panel" onSubmit={submitSearch}>
-            <Search size={16} aria-hidden="true" />
             <input
               id="side-search"
               type="search"
               value={query}
               onChange={(event) => setQuery(event.target.value)}
-              placeholder="Сатин, ZIP, визитки…"
-              aria-label="Поиск по каталогу"
+              placeholder="Поиск по сайту…"
+              aria-label="Поиск по сайту"
               autoComplete="off"
             />
             <button type="submit" className="side-search-go" aria-label="Найти">
-              <Search size={16} />
+              <Search size={15} />
             </button>
           </form>
           {query.trim() ? (
@@ -101,7 +155,7 @@ export function SidebarMenu({ open, onClose }: SidebarMenuProps) {
               aria-expanded={productsOpen}
               onClick={() => setProductsOpen((value) => !value)}
             >
-              <TagMark />
+              <MenuIcon slug="produkciya" />
               <span>Продукция</span>
               <ChevronDown size={16} className={productsOpen ? "is-turned" : ""} aria-hidden="true" />
             </button>
@@ -125,8 +179,9 @@ export function SidebarMenu({ open, onClose }: SidebarMenuProps) {
                           aria-expanded={isOpen}
                           onClick={() => setOpened((value) => (value === category.slug ? null : category.slug))}
                         >
+                          <MenuIcon slug={category.slug} />
                           <span>{category.name}</span>
-                          <ChevronRight size={14} className={isOpen ? "is-turned" : ""} aria-hidden="true" />
+                          <ChevronRight size={15} className={isOpen ? "is-turned" : ""} aria-hidden="true" />
                         </button>
                         <AnimatePresence initial={false}>
                           {isOpen ? (
@@ -169,7 +224,7 @@ export function SidebarMenu({ open, onClose }: SidebarMenuProps) {
               prefetch={false}
               onClick={onClose}
             >
-              <CircleHelp size={18} aria-hidden="true" />
+              <MenuIcon slug="kak-vybrat" />
               <span>Как выбрать?</span>
             </Link>
           </div>
