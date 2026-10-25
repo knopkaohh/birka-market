@@ -3,8 +3,8 @@
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { FormEvent, useMemo, useState, type ReactNode } from "react";
-import { AnimatePresence, motion } from "framer-motion";
-import { ChevronDown, ChevronRight, Search } from "lucide-react";
+import { ChevronDown, Search } from "lucide-react";
+import BranchedMenu from "@/components/fx/BranchedMenu";
 import FluxLines from "@/components/fx/FluxLines";
 import { Logo } from "@/components/logo";
 import { categories, matchesProduct, products, productsByCategory } from "@/lib/site";
@@ -93,8 +93,25 @@ export function SidebarMenu({ open, onClose }: SidebarMenuProps) {
     return productsByCategory(category.slug).some((item) => pathname === `/${item.slug}`);
   })?.slug;
   const [productsOpen, setProductsOpen] = useState(true);
-  const [opened, setOpened] = useState<string | null>(currentSlug ?? null);
   const [query, setQuery] = useState("");
+  const branchItems = useMemo(
+    () =>
+      categories.map((category) => ({
+        label: category.name,
+        value: category.slug,
+        icon: <MenuIcon slug={category.slug} />,
+        children: productsByCategory(category.slug).map((item) => ({
+          value: item.slug,
+          label: item.shortName,
+        })),
+      })),
+    [],
+  );
+  const openIndex = Math.max(
+    0,
+    categories.findIndex((category) => category.slug === currentSlug),
+  );
+  const activeSlug = products.some((item) => pathname === `/${item.slug}`) ? pathname.slice(1) : "";
   const matches = useMemo(() => products.filter((item) => matchesProduct(item, query)), [query]);
 
   const submitSearch = (event: FormEvent) => {
@@ -184,64 +201,30 @@ export function SidebarMenu({ open, onClose }: SidebarMenuProps) {
               <span>Продукция</span>
               <ChevronDown size={16} className={productsOpen ? "is-turned" : ""} aria-hidden="true" />
             </button>
-            <AnimatePresence initial={false}>
-              {productsOpen ? (
-                <motion.ul
-                  className="side-subcats"
-                  initial={{ height: 0, opacity: 0 }}
-                  animate={{ height: "auto", opacity: 1 }}
-                  exit={{ height: 0, opacity: 0 }}
-                  transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-                >
-                  {categories.map((category) => {
-                    const items = productsByCategory(category.slug);
-                    const isOpen = opened === category.slug;
-                    return (
-                      <li key={category.slug}>
-                        <button
-                          type="button"
-                          className={`side-subcat ${isOpen ? "is-open" : ""}`}
-                          aria-expanded={isOpen}
-                          onClick={() => setOpened((value) => (value === category.slug ? null : category.slug))}
-                        >
-                          <MenuIcon slug={category.slug} />
-                          <span>{category.name}</span>
-                          <ChevronRight size={15} className={isOpen ? "is-turned" : ""} aria-hidden="true" />
-                        </button>
-                        <AnimatePresence initial={false}>
-                          {isOpen ? (
-                            <motion.ul
-                              initial={{ height: 0, opacity: 0 }}
-                              animate={{ height: "auto", opacity: 1 }}
-                              exit={{ height: 0, opacity: 0 }}
-                              transition={{ duration: 0.3 }}
-                            >
-                              {items.map((item, index) => (
-                                <motion.li
-                                  key={item.slug}
-                                  initial={{ opacity: 0, y: -6 }}
-                                  animate={{ opacity: 1, y: 0 }}
-                                  transition={{ delay: index * 0.05, duration: 0.25 }}
-                                >
-                                  <Link
-                                    href={`/${item.slug}`}
-                                    className={pathname === `/${item.slug}` ? "is-current" : undefined}
-                                    prefetch={false}
-                                    onClick={onClose}
-                                  >
-                                    {item.shortName}
-                                  </Link>
-                                </motion.li>
-                              ))}
-                            </motion.ul>
-                          ) : null}
-                        </AnimatePresence>
-                      </li>
-                    );
-                  })}
-                </motion.ul>
-              ) : null}
-            </AnimatePresence>
+            {productsOpen ? (
+              <BranchedMenu
+                className="side-branch"
+                items={branchItems}
+                defaultOpen={[openIndex]}
+                defaultActive={activeSlug}
+                onSelect={(value) => {
+                  router.push(`/${value}`);
+                  onClose();
+                }}
+                color="#f5f5f5"
+                accentColor="#f5f5f5"
+                lineColor="#3f3f46"
+                width={240}
+                rowHeight={36}
+                indent={40}
+                trunk={14}
+                radius={10}
+                lineWidth={1.5}
+                fontSize={14}
+                drawDuration={400}
+                foldDuration={300}
+              />
+            ) : null}
 
             <Link
               href="/kak-vybrat"

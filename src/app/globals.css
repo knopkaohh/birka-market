@@ -2515,6 +2515,8 @@ footer .logo svg { height: 56px; }
 }
 .side-search-go:hover { color: var(--yellow); }
 .side-main { display: flex; flex-direction: column; margin-top: 6px; }
+.side-branch { margin: 0 8px 8px 6px; }
+.side-branch button { font-weight: 590; letter-spacing: -.04em; }
 .side-main-link {
   display: flex;
   align-items: center;
