@@ -43,17 +43,17 @@ export default function GuidePage() {
         </div>
 
         <div className="guide-kit">
-          <article>
+          <article id="brend">
             <span>01</span>
             <h2>Брендовая бирка</h2>
             <p>Кто вы. Живёт на горловине или флаге. Чаще жаккард, иногда сатин или силикон.</p>
           </article>
-          <article>
+          <article id="sostav">
             <span>02</span>
             <h2>Состав и уход</h2>
             <p>Что внутри и как стирать. Почти всегда сатин или нейлон, один цвет, боковой шов.</p>
           </article>
-          <article>
+          <article id="naves">
             <span>03</span>
             <h2>Навес, если нужен</h2>
             <p>Картон или калька снаружи. Не заменяет вшив: это первое впечатление в зале.</p>
@@ -139,7 +139,7 @@ export default function GuidePage() {
           </div>
           <div>
             <span className="section-number">ТИРАЖ</span>
-            <h2>Сколько штук заказывать</h2>
+            <h2 id="guide-qty-title">Сколько штук заказывать</h2>
             <div className="guide-notes">
               {qtyRules.map((item) => (
                 <article key={item.title}>

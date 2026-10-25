@@ -1,14 +1,9 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { ArrowDownRight, Menu, Phone, X } from "lucide-react";
-import { Logo } from "@/components/logo";
-import { HeaderMessengers } from "@/components/messengers";
-import { company, navLinks, products } from "@/lib/site";
+import { Search } from "lucide-react";
 
-const productPaths = new Set(products.map((item) => `/${item.slug}`));
-
+/** Шапка на всю ширину: название слева, слоган по центру, лупа справа. */
 export function SiteHeader({
   menuOpen,
   onToggleMenu,
@@ -16,50 +11,34 @@ export function SiteHeader({
   menuOpen: boolean;
   onToggleMenu: () => void;
 }) {
-  const pathname = usePathname();
-  const isActive = (href: string) => {
-    if (href === "/katalog") return pathname.startsWith("/katalog") || productPaths.has(pathname);
-    return pathname.startsWith(href);
+  const focusSearch = () => {
+    const field = document.getElementById("side-search");
+    const narrow = window.matchMedia("(max-width: 1150px)").matches;
+    if (narrow && !menuOpen) onToggleMenu();
+    window.setTimeout(() => field?.focus(), narrow ? 280 : 0);
   };
 
   return (
     <header className="site-header">
       <div className="header-inner">
-        <Logo />
-        <nav className="desktop-nav" aria-label="Основная навигация">
-          {navLinks.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              prefetch={false}
-              className={[item.href === "/katalog" ? "is-products" : "", isActive(item.href) ? "is-active" : ""].filter(Boolean).join(" ") || undefined}
-            >
-              {item.label}
-            </Link>
-          ))}
-        </nav>
-        <div className="header-actions">
-          <a className="phone-link" href={company.phoneHref}>
-            <Phone size={15} />
-            {company.phone}
-          </a>
-          <HeaderMessengers />
-          <Link className="header-cta" href="/raschet" prefetch={false}>
-            Рассчитать заказ
-            <ArrowDownRight size={17} />
-          </Link>
+        <Link className="header-brand" href="/" prefetch={false}>
+          Бирка Маркет
+        </Link>
+        <p className="header-slogan">
+          <span>Ваш бренд</span>
+          <i className="header-slogan-dot" aria-hidden="true" />
+          <span>
+            наша <em>забота</em>
+          </span>
+        </p>
+        <div className="header-tools">
           <button
             type="button"
-            className={`menu-toggle ${menuOpen ? "is-open" : ""}`}
-            aria-label={menuOpen ? "Закрыть меню" : "Открыть меню каталога"}
-            aria-expanded={menuOpen}
-            aria-controls="side-menu"
-            onClick={(event) => {
-              event.stopPropagation();
-              onToggleMenu();
-            }}
+            className="header-search"
+            aria-label={menuOpen ? "К поиску в меню" : "Открыть поиск"}
+            onClick={focusSearch}
           >
-            {menuOpen ? <X size={22} /> : <Menu size={22} />}
+            <Search size={20} strokeWidth={1.8} />
           </button>
         </div>
       </div>

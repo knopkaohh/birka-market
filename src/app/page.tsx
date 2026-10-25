@@ -7,7 +7,7 @@ import { MaterialGrid } from "@/components/material-grid";
 import { YandexMap } from "@/components/yandex-map";
 import { formatNewsDate, newsPosts } from "@/lib/news";
 
-/** Главная: спокойный первый экран, затем сетка материалов и новости. */
+/** Главная: фото и кнопки, затем сетка материалов одной высоты и новости. */
 export default function Home() {
   const latestNews = newsPosts.slice(0, 3);
 

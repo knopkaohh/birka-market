@@ -11,11 +11,7 @@ export function Footer() {
     <footer>
       <div className="footer-top">
         <Logo />
-        <h2>
-          Ваш бренд -
-          <br />
-          наша <em>забота!</em>
-        </h2>
+        <p className="footer-copy">© {new Date().getFullYear()} Бирка Маркет</p>
         <Link className="footer-circle" href="/raschet">
           Рассчитать
           <br />
