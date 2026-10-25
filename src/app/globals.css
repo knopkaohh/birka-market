@@ -1458,14 +1458,37 @@ footer .logo svg { height: 56px; }
   grid-template-columns: 148px 1fr;
   gap: 18px;
   padding: 16px;
+  overflow: hidden;
   background: #eae5db;
+  border-radius: 22px;
+  box-shadow: 0 0 0 1px rgba(237, 193, 71, .45), 0 10px 24px rgba(142, 114, 31, .08);
+  transition: transform .35s ease, box-shadow .35s ease;
 }
-.guide-material-photo { position: relative; min-height: 148px; background: #d7d3c9; }
-.guide-material-photo img { object-fit: cover; }
+.guide-materials article:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 0 0 2px #edc147, 0 18px 40px rgba(142, 114, 31, .28), 0 0 32px rgba(237, 193, 71, .55);
+}
+.guide-material-photo { position: relative; min-height: 148px; overflow: hidden; border-radius: 14px; background: #d7d3c9; }
+.guide-material-photo::after {
+  content: "";
+  position: absolute;
+  left: 8%;
+  right: 8%;
+  bottom: 0;
+  height: 34%;
+  background: radial-gradient(ellipse at center, rgba(237, 193, 71, .72), transparent 72%);
+  opacity: .45;
+  pointer-events: none;
+  transition: opacity .35s ease;
+}
+.guide-materials article:hover .guide-material-photo::after { opacity: 1; }
+.guide-material-photo img { object-fit: cover; filter: saturate(1) brightness(1.04); transition: transform .65s ease, filter .4s; }
+.guide-materials article:hover .guide-material-photo img { transform: scale(1.06); filter: saturate(1.12) brightness(1.08); }
 .guide-materials h3 { margin: 0 0 8px; font-size: 24px; letter-spacing: -.03em; }
 .guide-materials h3 a { border-bottom: 1px solid transparent; }
+.guide-materials article:hover h3 a { color: #8e721f; }
 .guide-materials h3 a:hover { border-bottom-color: currentColor; }
-.guide-advantage { margin: 0 0 10px; font-size: 15px; line-height: 1.45; }
+.guide-materials .guide-advantage { margin: 0 0 10px; color: #8e721f; font-size: 15px; line-height: 1.45; }
 .guide-materials p { margin: 0 0 8px; color: var(--muted-ink); font-size: 13px; line-height: 1.5; }
 .guide-materials ul {
   display: flex;
@@ -1777,6 +1800,7 @@ footer .logo svg { height: 56px; }
   .inner-hero h1 { font-size: 42px; }
   .news-grid, .news-pager, .guide-kit, .guide-options, .guide-steps, .guide-materials, .guide-folds, .guide-two { grid-template-columns: 1fr; }
   .guide-materials article { grid-template-columns: 1fr; }
+  .guide-material-photo { min-height: 220px; aspect-ratio: 1.35; }
   .guide-banner { flex-direction: column; align-items: flex-start; }
   .news-pager a:last-child { align-items: flex-start; text-align: left; }
   .news-cover { aspect-ratio: 1; }
