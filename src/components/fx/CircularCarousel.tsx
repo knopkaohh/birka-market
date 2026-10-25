@@ -40,6 +40,8 @@ export interface CircularCarouselProps {
   cornerRadius?: number;
   /** Degrees of the ring used to size the photos. A smaller span keeps the front cards large. */
   fitSpan?: number;
+  /** Pins the photos to the top of the frame so the block can stay short. */
+  pin?: "center" | "top";
   captions?: boolean;
   onChange?: (index: number) => void;
   onItemClick?: (item: CircularCarouselItem, index: number) => void;
@@ -130,6 +132,7 @@ interface Settings {
   stretch: number;
   depthFade: number;
   fitSpan: number;
+  pin: "center" | "top";
   captions: boolean;
   reduced: boolean;
 }
@@ -359,6 +362,7 @@ const CircularCarousel = ({
   innerShade = 0.6,
   cornerRadius = 12,
   fitSpan = 0,
+  pin = "center",
   captions = false,
   onChange,
   onItemClick,
@@ -469,6 +473,7 @@ const CircularCarousel = ({
     stretch: reduced ? 0 : clamp(stretch, 0, 1),
     depthFade: clamp(depthFade, 0, 1),
     fitSpan: Math.max(0, fitSpan),
+    pin,
     captions,
     reduced
   };
@@ -613,7 +618,9 @@ const CircularCarousel = ({
       const spanY = Math.max(maxY - minY, 1);
       const fit = Math.min(1, width / spanX, height / spanY);
       state.fit = fit;
-      state.shift = -((minY + maxY) / 2) * fit - room / 2;
+      state.shift = s.pin === "top"
+        ? 4 - rect.height / 2 - minY * fit
+        : -((minY + maxY) / 2) * fit - room / 2;
       state.drop = s.axis === 'x' ? (rect.width / fit) * 0.55 + s.cardW : (rect.height / fit) * 0.55 + s.cardH;
       stage.style.perspective = `${P}px`;
       stage.style.transform = `translate3d(0, ${state.shift}px, 0) scale(${fit})`;
@@ -845,7 +852,7 @@ const CircularCarousel = ({
   useLayoutEffect(() => {
     measureRef.current();
     wakeRef.current();
-  }, [radius, cardW, cardH, tiltValue, perspective, preset, captions, count, fitSpan]);
+  }, [radius, cardW, cardH, tiltValue, perspective, preset, captions, count, fitSpan, pin]);
 
   useEffect(() => {
     wakeRef.current();

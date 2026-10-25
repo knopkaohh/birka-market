@@ -41,6 +41,7 @@ export function MaterialGrid() {
           captions={false}
           gap={28}
           fitSpan={14}
+          pin="top"
           tilt={-5}
           curve={0.53}
           perspective={3020}

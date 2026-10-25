@@ -2748,23 +2748,24 @@ footer .logo svg { height: 56px; }
 }
 .footer-callback span, .footer-callback-note { color: #fcd34d; font-size: 13px; }
 
-.home-intro { padding-top: clamp(40px, 5vw, 72px); padding-bottom: 12px; text-align: center; }
+.home-intro { padding-top: clamp(40px, 5vw, 72px); padding-bottom: 8px; text-align: center; }
 .home-intro h2 {
-  margin: 0 auto 18px;
-  max-width: 16em;
+  margin: 0 auto 22px;
+  max-width: none;
   color: #111;
   font-family: var(--font-manrope), Arial, sans-serif;
   font-weight: 590;
-  font-size: clamp(34px, 4.2vw, 60px);
-  line-height: .9;
-  letter-spacing: -.07em;
+  font-size: clamp(42px, 5vw, 72px);
+  line-height: .94;
+  letter-spacing: -.04em;
 }
+.home-intro h2 span { white-space: nowrap; }
 .home-intro p {
   margin: 0 auto;
-  max-width: 46em;
+  max-width: 68em;
   color: #374151;
-  font-size: clamp(16px, 1.25vw, 20px);
-  line-height: 1.55;
+  font-size: clamp(18px, 1.55vw, 24px);
+  line-height: 1.5;
 }
 .home-intro h2 em,
 .partners > p em,
@@ -2774,26 +2775,30 @@ footer .logo svg { height: 56px; }
   font-weight: 500;
   color: var(--yellow);
 }
-.materials-heading { margin-bottom: 40px; text-align: center; }
+.materials-section { padding-top: 36px; padding-bottom: 20px; }
+.materials-heading { margin-bottom: 10px; text-align: center; }
 .materials-heading h2 {
   margin: 0;
   color: #111;
   font-family: var(--font-manrope), Arial, sans-serif;
   font-weight: 590;
-  font-size: clamp(36px, 4.4vw, 64px);
+  font-size: clamp(52px, 6.6vw, 96px);
   line-height: .9;
-  letter-spacing: -.07em;
+  letter-spacing: -.05em;
 }
 .materials-heading p {
-  max-width: 36em;
-  margin: 16px auto 0;
+  max-width: 40em;
+  margin: 8px auto 0;
   color: #374151;
-  font-size: 18px;
-  line-height: 1.5;
+  font-size: 20px;
+  line-height: 1.4;
 }
-.materials-carousel { height: 680px; }
+.materials-carousel { height: 380px; }
 @media (max-width: 760px) {
-  .materials-carousel { height: 460px; }
+  .materials-heading h2 { font-size: 42px; }
+  .home-intro h2 { font-size: 34px; }
+  .home-intro h2 span { white-space: normal; }
+  .materials-carousel { height: 300px; }
 }
 .materials-current {
   display: flex;

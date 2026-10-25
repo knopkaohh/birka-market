@@ -17,7 +17,7 @@ export default function Home() {
       <HomeHero />
       <section className="section home-intro">
         <h2>
-          Вас приветствует команда
+          <span>Вас приветствует команда</span>
           <br />
           <em>Бирка Маркет!</em>
         </h2>
