@@ -22,10 +22,8 @@ export function PartnersMarquee() {
         <div className="partner-track">
           {loop.map((item, index) => (
             <article className="partner-card" key={`${item.name}-${index}`}>
-              {/* Логотипы со старого сайта: svg и png, без оптимизации next/image для векторных марок. */}
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src={item.src} alt={item.name} />
-              <span>{item.name}</span>
             </article>
           ))}
         </div>
@@ -35,7 +33,6 @@ export function PartnersMarquee() {
           <article className="partner-card" key={item.name}>
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src={item.src} alt={item.name} />
-            <span>{item.name}</span>
           </article>
         ))}
       </div>

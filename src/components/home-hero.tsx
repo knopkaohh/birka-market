@@ -1,34 +1,41 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
+import { Factory, Timer } from "lucide-react";
 import { motion } from "framer-motion";
+import { openQuickCalc } from "@/components/quick-calc";
 
-/** Первый экран: три элемента по центру и спокойный выезд заголовка. */
+const rise = { duration: 0.9, ease: [0.22, 1, 0.36, 1] as const };
+
+/** Первый экран: спокойный текст слева и три кнопки справа. */
 export function HomeHero() {
   return (
     <section className="home-hero">
-      <Image
-        src="/images/company/cover.jpg"
-        alt=""
-        fill
-        priority
-        sizes="100vw"
-        className="home-hero-bg"
-      />
-      <div className="home-hero-scrim" />
-      <motion.div
-        className="home-hero-copy"
-        initial={{ opacity: 0, x: -40, y: 22 }}
-        animate={{ opacity: 1, x: 0, y: 0 }}
-        transition={{ duration: 1.05, ease: [0.22, 1, 0.36, 1] }}
-      >
-        <h1>Производство бирок, пакетов, упаковки, мерча и полиграфии</h1>
-        <p>Макет бесплатно — посчитаем тираж и подскажем материал.</p>
-        <Link className="hero-cta" href="/raschet">
-          Рассчитать заказ
+      <div className="home-hero-copy">
+        <motion.h1 initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={rise}>
+          Производство бирок, пакетов, упаковки, мерча и полиграфии
+        </motion.h1>
+        <motion.p
+          initial={{ opacity: 0, y: 18 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ ...rise, delay: 0.12 }}
+        >
+          Макет бесплатно. Посчитаем тираж и подскажем материал.
+        </motion.p>
+      </div>
+      <div className="home-hero-actions">
+        <button type="button" className="hero-btn hero-btn-fill" onClick={() => openQuickCalc()}>
+          <Timer size={18} aria-hidden="true" />
+          Быстрый расчёт
+        </button>
+        <Link className="hero-btn hero-btn-ghost" href="/raschet">
+          Скидки от тиража
         </Link>
-      </motion.div>
+        <Link className="hero-btn hero-btn-fill" href="/o-kompanii">
+          <Factory size={18} aria-hidden="true" />
+          Своё производство
+        </Link>
+      </div>
     </section>
   );
 }

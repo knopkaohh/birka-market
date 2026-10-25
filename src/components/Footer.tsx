@@ -25,19 +25,22 @@ export function Footer() {
       </div>
       <div className="footer-grid">
         <div>
-          <span>Связь с нами</span>
+          <span className="footer-heading-muted">Связь с нами</span>
           <a className="footer-phone" href={company.phoneHref}>
             {company.phone}
           </a>
           <div className="footer-messengers">
-            <a href={company.telegram} target="_blank" rel="noreferrer" aria-label="Telegram">
-              <Send size={16} />
+            <a href={company.whatsapp} target="_blank" rel="noreferrer">
+              <span className="messenger-bubble" aria-hidden="true">
+                <MessageCircle size={16} />
+              </span>
+              <small>WhatsApp</small>
             </a>
-            <a href={company.whatsapp} target="_blank" rel="noreferrer" aria-label="WhatsApp">
-              <MessageCircle size={16} />
-            </a>
-            <a href={company.max} target="_blank" rel="noreferrer" aria-label="Макс">
-              <MessageCircle size={16} />
+            <a href={company.telegram} target="_blank" rel="noreferrer">
+              <span className="messenger-bubble" aria-hidden="true">
+                <Send size={16} />
+              </span>
+              <small>Telegram</small>
             </a>
           </div>
           <a href={`mailto:${company.email}`}>

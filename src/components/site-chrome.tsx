@@ -2,6 +2,7 @@
 
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
+import { FloatingContact } from "@/components/floating-contact";
 import { InactivityPrompt } from "@/components/InactivityPrompt";
 import { Loader } from "@/components/loader";
 import { SidebarMenu } from "@/components/SidebarMenu";
@@ -47,6 +48,7 @@ export function SiteChrome({ children }: { children: React.ReactNode }) {
       {children}
       <QuickCalc />
       <ScrollFX />
+      <FloatingContact />
       <InactivityPrompt />
     </>
   );
