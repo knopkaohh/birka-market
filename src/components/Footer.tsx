@@ -1,27 +1,29 @@
 import Link from "next/link";
+import { ArrowDownRight } from "lucide-react";
 import { BackToTop } from "@/components/back-to-top";
 import { Logo } from "@/components/logo";
-import { categories, company } from "@/lib/site";
-
-const companyLinks = [
-  { href: "/o-kompanii", label: "О нас" },
-  { href: "/dokumenty", label: "Документы" },
-  { href: "/faq", label: "FAQ" },
-  { href: "/privacy", label: "Политика конфиденциальности" },
-] as const;
+import { categories, company, navLinks } from "@/lib/site";
 
 export function Footer() {
-  const year = new Date().getFullYear();
-
   return (
     <footer>
-      <div className="footer-brand">
+      <div className="footer-top">
         <Logo />
-        <p className="footer-slogan">Ваш бренд, наша забота</p>
+        <h2>
+          Ваш бренд -
+          <br />
+          наша <em>забота!</em>
+        </h2>
+        <Link className="footer-circle" href="/raschet">
+          Рассчитать
+          <br />
+          заказ
+          <ArrowDownRight />
+        </Link>
       </div>
       <div className="footer-grid">
         <div>
-          <span>Связаться</span>
+          <span>СВЯЗАТЬСЯ</span>
           <a href={company.phoneHref}>{company.phone}</a>
           <a href={`mailto:${company.email}`}>{company.email}</a>
           <a href={company.telegram} target="_blank" rel="noreferrer">
@@ -35,38 +37,37 @@ export function Footer() {
           </a>
         </div>
         <div>
-          <span>Адрес</span>
-          <p>{company.address}</p>
-          <p className="footer-hours">
-            <i className="hours-dot" aria-hidden="true" />
+          <span>АДРЕС</span>
+          <p>
+            {company.address}
+            <br />
             {company.hours}
+            <br />
+            {company.hoursNote}
           </p>
-          <p className="footer-hours-note">{company.hoursNote}</p>
         </div>
         <div>
-          <span>Каталог</span>
-          {categories.map((item) => (
+          <span>КАТАЛОГ</span>
+          {categories.slice(0, 4).map((item) => (
             <Link key={item.slug} href={`/katalog/${item.slug}`}>
               {item.name}
             </Link>
           ))}
         </div>
         <div>
-          <span>Компания</span>
-          {companyLinks.map((item) => (
-            <Link key={item.href} href={item.href}>
-              {item.label}
-            </Link>
-          ))}
-          <p className="footer-copy">
-            © {year} {company.name}
-          </p>
+          <span>КОМПАНИЯ</span>
+          {navLinks
+            .filter((item) => item.href !== "/katalog")
+            .map((item) => (
+              <Link key={item.href} href={item.href}>
+                {item.label}
+              </Link>
+            ))}
+          <Link href="/privacy">Конфиденциальность</Link>
         </div>
       </div>
       <div className="footer-bottom">
-        <span>
-          {company.legal} · ИНН {company.inn} · ОГРНИП {company.ogrnip}
-        </span>
+        <span>© {new Date().getFullYear()} БИРКА МАРКЕТ · {company.legal} · ИНН {company.inn} · ОГРНИП {company.ogrnip}</span>
         <span>Бирки • упаковка • фурнитура • мерч</span>
         <BackToTop />
       </div>

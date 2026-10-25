@@ -32,7 +32,7 @@ export function SiteHeader({
               key={item.href}
               href={item.href}
               prefetch={false}
-              className={isActive(item.href) ? "is-active" : undefined}
+              className={[item.href === "/katalog" ? "is-products" : "", isActive(item.href) ? "is-active" : ""].filter(Boolean).join(" ") || undefined}
             >
               {item.label}
             </Link>

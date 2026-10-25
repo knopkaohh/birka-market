@@ -230,6 +230,7 @@ button { cursor: pointer; }
 .logo svg { display: block; width: auto; height: 40px; }
 .desktop-nav { display: flex; align-items: center; flex-wrap: wrap; gap: 10px clamp(14px, 1.6vw, 26px); }
 .desktop-nav a { position: relative; padding-bottom: 4px; border-bottom: 1px solid #fcd34d; font-size: 14px; font-weight: 750; letter-spacing: .01em; }
+.desktop-nav a.is-products { font-size: 18px; }
 .desktop-nav a::after { display: none; }
 .desktop-nav a.is-active { color: #8e721f; }
 .desktop-nav a::after { content: ""; position: absolute; left: 0; right: 100%; bottom: -6px; height: 1px; background: var(--ink); transition: right .25s; }
@@ -2035,53 +2036,6 @@ footer .logo svg { height: 56px; }
 .jq-section { padding: clamp(72px, 8vw, 112px) 0; }
 .jq-variant { padding: 24px; }
 
-footer { padding: clamp(56px, 7vw, 88px) var(--page-gutter) 24px; background: #1c1b1a; }
-.footer-brand {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 72px;
-  margin-bottom: 28px;
-}
-.footer-brand .logo { position: absolute; left: 0; }
-.footer-slogan {
-  margin: 0;
-  color: #fbbf24;
-  font-size: 14px;
-  font-weight: 650;
-  letter-spacing: .04em;
-  text-align: center;
-}
-.footer-grid {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 16px;
-  padding: 0;
-  border: 0;
-}
-.footer-grid > div {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 4px;
-  padding: 22px 18px 16px;
-  background: #e07a3d;
-  border: 1px solid #e8c56b;
-  box-shadow: 0 16px 32px rgba(110, 22, 40, .16);
-}
-.footer-grid span { margin: 0 0 8px; color: #4a2a16; font-size: 11px; letter-spacing: .14em; text-transform: uppercase; }
-.footer-grid a,
-.footer-grid p { margin: 0; color: #2a2118; font-size: 15px; line-height: 1.45; }
-.footer-grid a {
-  display: flex;
-  align-items: center;
-  width: 100%;
-  min-height: 48px;
-  padding: 8px 2px;
-}
-.footer-grid a:hover { color: #fff8ea; }
-.footer-hours { display: flex; align-items: center; gap: 8px; font-weight: 750; }
 .hours-dot {
   display: inline-block;
   flex: 0 0 auto;
@@ -2091,11 +2045,22 @@ footer { padding: clamp(56px, 7vw, 88px) var(--page-gutter) 24px; background: #1
   background: #f2c555;
   box-shadow: 0 0 0 4px rgba(242, 197, 85, .28);
 }
-.footer-hours-note,
-.footer-copy { font-size: 13px !important; line-height: 1.5; }
 .map-meta .hours-dot { margin-right: 8px; }
 
-.side-products-toggle,
+.side-products-link {
+  display: flex;
+  align-items: center;
+  margin: 4px 24px 8px;
+  padding: 8px 0 12px;
+  border-bottom: 1px solid #fcd34d;
+  color: #f7f4ec;
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -.03em;
+}
+.side-products-link.is-current,
+.side-products-link:hover { color: var(--yellow); }
+
 .side-help-link,
 .side-menu-link,
 .side-submenu-link,
@@ -2103,7 +2068,6 @@ footer { padding: clamp(56px, 7vw, 88px) var(--page-gutter) 24px; background: #1
 .side-catalog-link {
   min-height: 48px;
 }
-.side-products-toggle,
 .side-help-link {
   display: flex;
   align-items: center;
@@ -2119,9 +2083,6 @@ footer { padding: clamp(56px, 7vw, 88px) var(--page-gutter) 24px; background: #1
   font-weight: 750;
   text-align: left;
 }
-.side-products-toggle { justify-content: space-between; }
-.side-products-toggle svg { transition: transform .2s; }
-.side-products-toggle svg.is-open { transform: rotate(180deg); }
 .side-menu-item,
 .side-submenu-link,
 .side-menu-pages a { border-bottom: 1px solid #fcd34d; }
@@ -2193,7 +2154,6 @@ footer { padding: clamp(56px, 7vw, 88px) var(--page-gutter) 24px; background: #1
 }
 
 @media (max-width: 1100px) {
-  .footer-grid { grid-template-columns: 1fr 1fr; }
   .hero.hero-atmosphere { display: flex; }
 }
 @media (max-width: 760px) {
@@ -2201,11 +2161,5 @@ footer { padding: clamp(56px, 7vw, 88px) var(--page-gutter) 24px; background: #1
   .hero-atmosphere .hero-copy { padding: 36px 18px 32px; }
   .hero-atmosphere h1.type-display { margin: 18px 0 16px; font-size: clamp(34px, 10vw, 46px); line-height: 1.02; }
   .hero-scrim { background: linear-gradient(180deg, rgba(24, 18, 14, .78), rgba(24, 18, 14, .55)); }
-  .category-list,
-  .footer-grid { grid-template-columns: 1fr; }
-  .footer-brand { display: block; min-height: 0; }
-  .footer-brand .logo { position: static; }
-  .footer-slogan { margin-top: 18px; }
-  .footer-grid a { min-height: 52px; padding: 14px 4px; }
-  footer { padding-bottom: 96px; }
+  .category-list { grid-template-columns: 1fr; }
 }

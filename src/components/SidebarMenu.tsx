@@ -18,7 +18,6 @@ export function SidebarMenu({ open, onClose }: SidebarMenuProps) {
     if (pathname === `/katalog/${category.slug}`) return true;
     return productsByCategory(category.slug).some((item) => pathname === `/${item.slug}`);
   })?.slug;
-  const [productsOpen, setProductsOpen] = useState(true);
   const [opened, setOpened] = useState<string | null>(currentSlug ?? null);
   const [query, setQuery] = useState("");
   const matches = useMemo(
@@ -56,28 +55,26 @@ export function SidebarMenu({ open, onClose }: SidebarMenuProps) {
               autoComplete="off"
             />
           </label>
+          <Link
+            href="/katalog"
+            className={`side-products-link ${pathname === "/katalog" || pathname.startsWith("/katalog") ? "is-current" : ""}`}
+            prefetch={false}
+            onClick={onClose}
+          >
+            Продукция
+          </Link>
           <div className="side-products">
-            <button
-              type="button"
-              className="side-products-toggle"
-              aria-expanded={productsOpen}
-              onClick={() => setProductsOpen((value) => !value)}
-            >
-              Продукция
-              <ChevronDown size={18} className={productsOpen ? "is-open" : ""} />
-            </button>
-            {productsOpen ? (
+            {searching ? (
               <>
                 <Link
-                  href={searching ? `/katalog?q=${encodeURIComponent(query.trim())}` : "/katalog"}
-                  className={`side-catalog-link ${pathname === "/katalog" ? "is-current" : ""}`}
+                  href={`/katalog?q=${encodeURIComponent(query.trim())}`}
+                  className="side-catalog-link"
                   prefetch={false}
                   onClick={onClose}
                 >
-                  {searching ? `Все результаты (${matches.length})` : "Вся продукция"}
+                  {`Все результаты (${matches.length})`}
                 </Link>
-                {searching ? (
-                  <ul className="side-search-results">
+                <ul className="side-search-results">
                     {matches.length ? (
                       matches.map((item) => (
                         <li key={item.slug}>
@@ -94,7 +91,8 @@ export function SidebarMenu({ open, onClose }: SidebarMenuProps) {
                     ) : (
                       <li className="side-search-empty">Ничего не нашли. Попробуйте «жаккард» или «пакет».</li>
                     )}
-                  </ul>
+                    </ul>
+                </>
                 ) : (
                   <ul className="side-menu-list">
                     {categories.map((category) => {
@@ -142,8 +140,6 @@ export function SidebarMenu({ open, onClose }: SidebarMenuProps) {
                     })}
                   </ul>
                 )}
-              </>
-            ) : null}
           </div>
           <Link href="/kak-vybrat" className="side-help-link" prefetch={false} onClick={onClose}>
             <CircleHelp size={16} aria-hidden="true" />
