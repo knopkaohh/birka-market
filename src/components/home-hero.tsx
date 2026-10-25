@@ -11,6 +11,18 @@ const rise = { duration: 0.9, ease: [0.22, 1, 0.36, 1] as const };
 export function HomeHero() {
   return (
     <section className="home-hero">
+      <video
+        className="home-hero-media"
+        autoPlay
+        muted
+        loop
+        playsInline
+        poster="/images/hero-poster.jpg"
+        aria-hidden="true"
+      >
+        <source src="/video/hero.mp4" type="video/mp4" />
+      </video>
+      <div className="home-hero-scrim" aria-hidden="true" />
       <div className="home-hero-copy">
         <motion.h1 initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={rise}>
           Производство бирок, пакетов, упаковки, мерча и полиграфии

@@ -38,7 +38,6 @@ export function SidebarMenu({ open, onClose }: SidebarMenuProps) {
   })?.slug;
   const [productsOpen, setProductsOpen] = useState(true);
   const [opened, setOpened] = useState<string | null>(currentSlug ?? null);
-  const [searchOpen, setSearchOpen] = useState(false);
   const [query, setQuery] = useState("");
   const matches = useMemo(() => products.filter((item) => matchesProduct(item, query)), [query]);
 
@@ -64,40 +63,22 @@ export function SidebarMenu({ open, onClose }: SidebarMenuProps) {
             <Logo />
           </div>
 
-          <button
-            type="button"
-            className="side-search-toggle"
-            aria-expanded={searchOpen}
-            aria-label={searchOpen ? "Скрыть поиск" : "Открыть поиск"}
-            onClick={() => setSearchOpen((value) => !value)}
-          >
-            <Search size={20} strokeWidth={1.8} />
-          </button>
-          <AnimatePresence initial={false}>
-            {searchOpen ? (
-              <motion.form
-                className="side-search-panel"
-                onSubmit={submitSearch}
-                initial={{ opacity: 0, height: 0 }}
-                animate={{ opacity: 1, height: "auto" }}
-                exit={{ opacity: 0, height: 0 }}
-                transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-              >
-                <input
-                  type="search"
-                  value={query}
-                  onChange={(event) => setQuery(event.target.value)}
-                  placeholder="Сатин, ZIP, визитки…"
-                  aria-label="Поиск по каталогу"
-                  autoComplete="off"
-                />
-                <button type="submit" className="side-search-go" aria-label="Найти">
-                  <Search size={18} />
-                </button>
-              </motion.form>
-            ) : null}
-          </AnimatePresence>
-          {searchOpen && query.trim() ? (
+          <form className="side-search-panel" onSubmit={submitSearch}>
+            <Search size={16} aria-hidden="true" />
+            <input
+              id="side-search"
+              type="search"
+              value={query}
+              onChange={(event) => setQuery(event.target.value)}
+              placeholder="Сатин, ZIP, визитки…"
+              aria-label="Поиск по каталогу"
+              autoComplete="off"
+            />
+            <button type="submit" className="side-search-go" aria-label="Найти">
+              <Search size={16} />
+            </button>
+          </form>
+          {query.trim() ? (
             <ul className="side-search-results">
               {matches.length ? (
                 matches.map((item) => (
