@@ -884,7 +884,7 @@ const FlexCarousel = ({
       }
       if (!pointer.dragging) {
         const spinning = introState.running && introState.kind === 'spin';
-        const stiffness = spinning ? 9 : mode === 'wheel' ? 80 : 55;
+        const stiffness = spinning ? 9 : mode === 'wheel' ? 80 : mode === 'drift' ? 6 : 55;
         const damping = 2 * Math.sqrt(stiffness);
         const steps = Math.ceil(dt / (1 / 240));
         const h = dt / steps;
@@ -938,6 +938,7 @@ const FlexCarousel = ({
       ) {
         autoplayAt = now;
         step(m, 1);
+        mode = 'drift';
       }
       if (s.autoplay && !reducedMotion) animating = true;
 

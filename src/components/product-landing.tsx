@@ -126,12 +126,12 @@ export function ProductLanding({
               turn={-1}
               perspective={1200}
               depth={120}
-              speed={60}
+              speed={16}
               direction="up"
-              variance={0.45}
+              variance={0.15}
               parallax={0.6}
               lift={64}
-              fade={0.6}
+              fade={0}
               dim={1}
               overlayColor="#fffdf8"
               overlayOpacity={0.08}

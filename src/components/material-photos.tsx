@@ -9,7 +9,7 @@ export type MaterialPhoto = {
   subtitle?: string;
 };
 
-/** Ряд фото материала: жидкое стекло по краям, карточка открывается по клику. */
+/** Ряд фото работ: края резкие, лента сама едет медленно. */
 export function MaterialPhotos({ items }: { items: MaterialPhoto[] }) {
   if (!items.length) return null;
   return (
@@ -20,24 +20,24 @@ export function MaterialPhotos({ items }: { items: MaterialPhoto[] }) {
         intro="rise"
         cardHeight={0.53}
         gap={40}
-        squeeze={0.2}
+        squeeze={0}
         focusOnClick
         captions
         fit="natural"
         radius={0}
-        lensWidth={0.74}
-        lensHeight={1.01}
-        tilt={62}
+        lensWidth={1}
+        lensHeight={1}
+        tilt={0}
         roundness={1}
-        bend={0.34}
-        reach={0.38}
-        curl="twist"
-        dispersion={0.45}
+        bend={0}
+        reach={0}
+        curl="rise"
+        dispersion={0}
         liquid={0}
         followCursor={false}
-        autoplay={false}
-        interval={4}
-        captureWheel
+        autoplay
+        interval={8}
+        captureWheel={false}
       />
     </div>
   );

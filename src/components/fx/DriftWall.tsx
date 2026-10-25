@@ -155,7 +155,7 @@ const DriftWall = ({
       const plane = planeRef.current;
       if (!plane) return;
       plane.style.transform =
-        `translate(-50%, -50%) scale(1.18) ` +
+        `translate(-50%, -50%) scale(1.02) ` +
         `rotateX(${tilt + py}deg) rotateY(${turn + px}deg) rotateZ(${roll}deg) ` +
         `translateZ(${-depth}px)`;
     },
@@ -251,9 +251,11 @@ const DriftWall = ({
     release();
   }, [release]);
 
-  const maskStyle =
-    'radial-gradient(ellipse 78% 82% at 50% 46%, #000 var(--dw-edge), transparent 100%), ' +
-    'linear-gradient(to top, #000 var(--dw-edge), transparent 100%)';
+  const masked = fade > 0;
+  const maskStyle = masked
+    ? 'radial-gradient(ellipse 78% 82% at 50% 46%, #000 var(--dw-edge), transparent 100%), ' +
+      'linear-gradient(to top, #000 var(--dw-edge), transparent 100%)'
+    : 'none';
 
   const cssVars = useMemo<CSSProperties>(
     () =>
@@ -272,8 +274,12 @@ const DriftWall = ({
         perspectiveOrigin: '50% 50%',
         WebkitMaskImage: maskStyle,
         maskImage: maskStyle,
-        WebkitMaskComposite: 'source-in',
-        maskComposite: 'intersect',
+        ...(masked
+          ? {
+              WebkitMaskComposite: 'source-in' as const,
+              maskComposite: 'intersect' as const
+            }
+          : {}),
         ...style
       }) as CSSProperties,
     [tileWidth, tileHeight, gap, radius, lift, dim, grayscale, overlayColor, overlayOpacity, fade, perspective, maskStyle, style]
