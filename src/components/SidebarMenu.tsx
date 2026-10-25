@@ -130,8 +130,10 @@ export function SidebarMenu({ open, onClose }: SidebarMenuProps) {
           fluidity={0.1}
           sharpness={1.7}
           shimmer={1.5}
-          mouseStrength={1}
-          mouseRadius={0.28}
+          mouseStrength={0.22}
+          mouseRadius={0.1}
+          swirlStrength={0.18}
+          swirlRadius={0.07}
           intro
           lightMode={false}
           aria-hidden="true"

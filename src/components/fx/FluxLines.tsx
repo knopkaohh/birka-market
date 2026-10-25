@@ -22,6 +22,8 @@ export interface FluxLinesProps extends HTMLAttributes<HTMLDivElement> {
   mouseRadius?: number;
   mouseDampening?: number;
   clickSwirl?: boolean;
+  swirlStrength?: number;
+  swirlRadius?: number;
   intro?: boolean;
   lightMode?: boolean;
   transparent?: boolean;
@@ -49,6 +51,8 @@ type Settings = {
   mouseRadius: number;
   mouseDampening: number;
   clickSwirl: boolean;
+  swirlStrength: number;
+  swirlRadius: number;
   intro: boolean;
   lightMode: boolean;
   transparent: boolean;
@@ -257,6 +261,8 @@ const FluxLines = ({
   mouseRadius = 0.35,
   mouseDampening = 0.15,
   clickSwirl = true,
+  swirlStrength = 1,
+  swirlRadius = 0.22,
   intro = true,
   lightMode = false,
   transparent = true,
@@ -289,6 +295,8 @@ const FluxLines = ({
     mouseRadius: Math.max(0.01, mouseRadius),
     mouseDampening: Math.max(0, mouseDampening),
     clickSwirl,
+    swirlStrength: Math.max(0, swirlStrength),
+    swirlRadius: Math.max(0.01, swirlRadius),
     intro,
     lightMode,
     transparent,
@@ -379,8 +387,8 @@ const FluxLines = ({
       gl.uniform1i(u.uColorCount, s.colors.length);
       gl.uniform4f(u.uMagnet, magnet.x, magnet.y, magnet.active * s.mouseStrength, s.mouseRadius);
       const age = swirl.age;
-      const twist = 1.9 * Math.min(1, age / 0.23) * Math.exp(-Math.max(0, age - 0.23) * 1.1);
-      gl.uniform4f(u.uSwirl, swirl.x, swirl.y, canvas.height * 0.22 * (1 + age * 0.5), age < 6 ? twist : 0);
+      const twist = 1.9 * s.swirlStrength * Math.min(1, age / 0.23) * Math.exp(-Math.max(0, age - 0.23) * 1.1);
+      gl.uniform4f(u.uSwirl, swirl.x, swirl.y, canvas.height * s.swirlRadius * (1 + age * 0.5), age < 6 ? twist : 0);
       gl.uniform1f(u.uReveal, intro * intro * (3 - 2 * intro));
       gl.uniform1f(u.uLight, s.lightMode ? 1 : 0);
       gl.uniform1f(u.uOpaque, s.transparent ? 0 : 1);
