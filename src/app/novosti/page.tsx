@@ -33,6 +33,7 @@ export default function NewsPage() {
             <br />
             <em>на производстве и в отрасли</em>
           </h1>
+          <p>Акции, выставки и заметки с производства: что делаем и куда ездим.</p>
         </div>
         <div className="news-grid">
           {newsPosts.map((post) => (

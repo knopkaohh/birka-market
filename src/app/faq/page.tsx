@@ -17,13 +17,13 @@ export default function FaqPage() {
       <div className="inner-page">
         <div className="inner-hero">
           <Breadcrumbs items={[{ label: "FAQ" }]} />
-          <span className="section-number">FAQ</span>
+          <span className="section-number">ВОПРОСЫ</span>
           <h1>
             Вопросы,
             <br />
             <em>которые задают чаще всего</em>
           </h1>
-          <p>Если ответа нет, оставьте заявку — менеджер и технолог разберут вашу задачу по материалу и тиражу.</p>
+          <p>Не нашли ответ — оставьте заявку. Менеджер и технолог разберут задачу: материал, сгиб и тираж.</p>
         </div>
         <Accordion className="faq-list">
           {faqItems.map((item, index) => (

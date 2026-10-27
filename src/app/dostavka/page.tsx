@@ -15,13 +15,13 @@ export default function DeliveryPage() {
       <div className="inner-page">
         <div className="inner-hero">
           <Breadcrumbs items={[{ label: "Доставка" }]} />
-          <span className="section-number">ЛОГИСТИКА</span>
+          <span className="section-number">ДОСТАВКА</span>
           <h1>
             Доставка по Москве,
             <br />
             <em>России и СНГ</em>
           </h1>
-          <p>Отправляем готовый тираж курьером, транспортными компаниями или отдаём на самовывоз со склада.</p>
+          <p>Готовый тираж отправляем курьером и транспортными компаниями или выдаём на складе в Москве.</p>
         </div>
         <div className="content-grid gold-cards">
           <article>
