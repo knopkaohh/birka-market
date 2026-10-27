@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { notFound } from "next/navigation";
 import { Breadcrumbs } from "@/components/breadcrumbs";
 import { GoldEnd } from "@/components/gold-end";
@@ -31,13 +32,18 @@ export default async function CategoryPage({ params }: { params: Promise<Params>
   return (
     <>
       <div className="inner-page">
-        <div className="inner-hero">
-          <Breadcrumbs items={[{ href: "/katalog", label: "Каталог" }, { label: item.name }]} />
-          <span className="section-number">КАТЕГОРИЯ</span>
-          <h1>
-            <GoldEnd text={item.name} />
-          </h1>
-          <p>{item.intro}</p>
+        <div className="catalog-section-head catalog-page-head">
+          <div>
+            <Breadcrumbs items={[{ href: "/katalog", label: "Каталог" }, { label: item.name }]} />
+            <span className="section-number">КАТЕГОРИЯ</span>
+            <h1>
+              <GoldEnd text={item.name} />
+            </h1>
+            <p>{item.intro}</p>
+          </div>
+          <div className="catalog-section-photo">
+            <Image src={item.image} alt={item.name} fill sizes="(max-width: 760px) 100vw, 420px" priority />
+          </div>
         </div>
         <div className="product-grid">
           {list.map((product, index) => (
