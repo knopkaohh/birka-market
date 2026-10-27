@@ -18,25 +18,25 @@ export function MaterialPhotos({ items }: { items: MaterialPhoto[] }) {
         items={items}
         preset="liquid"
         intro="rise"
-        cardHeight={0.53}
-        gap={40}
-        squeeze={0.2}
+        cardHeight={0.58}
+        gap={28}
+        squeeze={0.16}
         focusOnClick
         captions
         fit="natural"
         radius={0}
-        lensWidth={0.74}
-        lensHeight={1.01}
-        tilt={62}
+        lensWidth={0.86}
+        lensHeight={1.04}
+        tilt={48}
         roundness={1}
-        bend={0.34}
-        reach={0.38}
+        bend={0.16}
+        reach={0.2}
         curl="twist"
-        dispersion={0.3}
+        dispersion={0.04}
         liquid={0}
         followCursor={false}
         autoplay
-        interval={5}
+        interval={7}
         captureWheel
       />
     </div>

@@ -212,12 +212,12 @@ export function SidebarMenu({ open, onClose }: SidebarMenuProps) {
                 accentColor="#f5f5f5"
                 lineColor="#3f3f46"
                 width={240}
-                rowHeight={36}
+                rowHeight={40}
                 indent={40}
                 trunk={14}
                 radius={10}
                 lineWidth={1.5}
-                fontSize={14}
+                fontSize={16}
                 drawDuration={400}
                 foldDuration={300}
               />

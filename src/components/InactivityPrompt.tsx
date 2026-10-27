@@ -2,85 +2,94 @@
 
 import { FormEvent, useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
+import { usePathname } from "next/navigation";
 import { X } from "lucide-react";
 import { formatRuPhone, isCompleteRuPhone } from "@/lib/phone";
 
-const IDLE_MS = 180000;
+const IDLE_MS = 45_000;
 
 let sharedAudio: AudioContext | null = null;
 
-/** Создаёт контекст в момент жеста, чтобы браузер разрешил звук позже. */
-function armAudio() {
+function audioContext() {
   const Ctx =
     window.AudioContext ||
     (window as unknown as { webkitAudioContext?: typeof AudioContext }).webkitAudioContext;
-  if (!Ctx) return;
+  if (!Ctx) return null;
   if (!sharedAudio) sharedAudio = new Ctx();
-  void sharedAudio.resume();
+  return sharedAudio;
 }
 
-/** Короткий мягкий щелчок ~0.24 с. Играет только после жеста пользователя. */
-function playSoftTick() {
-  const ctx = sharedAudio;
-  if (!ctx || ctx.state === "suspended") return false;
-  const osc = ctx.createOscillator();
-  const gain = ctx.createGain();
-  const filter = ctx.createBiquadFilter();
-  filter.type = "lowpass";
-  filter.frequency.value = 1200;
-  osc.type = "sine";
-  osc.frequency.setValueAtTime(640, ctx.currentTime);
-  osc.frequency.exponentialRampToValueAtTime(240, ctx.currentTime + 0.2);
-  gain.gain.setValueAtTime(0.0001, ctx.currentTime);
-  gain.gain.exponentialRampToValueAtTime(0.04, ctx.currentTime + 0.02);
-  gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + 0.24);
-  osc.connect(filter);
-  filter.connect(gain);
-  gain.connect(ctx.destination);
-  osc.start();
-  osc.stop(ctx.currentTime + 0.26);
+/** Запоминает жест, чтобы браузер разрешил звук в момент появления бирки. */
+function armAudio() {
+  const ctx = audioContext();
+  if (ctx && ctx.state === "suspended") void ctx.resume();
+}
+
+/** Короткий мягкий перезвон. Только когда бирка выезжает, не на клики. */
+function playChime() {
+  const ctx = audioContext();
+  if (!ctx || ctx.state !== "running") return false;
+  const now = ctx.currentTime;
+  [523.25, 783.99].forEach((freq, index) => {
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    const filter = ctx.createBiquadFilter();
+    filter.type = "lowpass";
+    filter.frequency.value = 1800;
+    osc.type = "sine";
+    osc.frequency.value = freq;
+    const start = now + index * 0.11;
+    gain.gain.setValueAtTime(0.0001, start);
+    gain.gain.exponentialRampToValueAtTime(0.06, start + 0.03);
+    gain.gain.exponentialRampToValueAtTime(0.0001, start + 0.42);
+    osc.connect(filter);
+    filter.connect(gain);
+    gain.connect(ctx.destination);
+    osc.start(start);
+    osc.stop(start + 0.44);
+  });
   return true;
 }
 
 export function InactivityPrompt() {
+  const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const [phone, setPhone] = useState("");
   const [error, setError] = useState("");
   const [status, setStatus] = useState<"idle" | "sending" | "done">("idle");
   const [formActive, setFormActive] = useState(false);
   const touchY = useRef(0);
-  const interacted = useRef(false);
+  const shownOn = useRef(new Set<string>());
   const played = useRef(false);
 
   useEffect(() => {
-    if (open) return;
-    let timer = window.setTimeout(() => setOpen(true), IDLE_MS);
-    const reset = () => {
-      window.clearTimeout(timer);
-      timer = window.setTimeout(() => setOpen(true), IDLE_MS);
-    };
-    const mark = () => {
-      interacted.current = true;
-      armAudio();
-    };
-    const events = ["mousemove", "keydown", "scroll", "click", "touchstart"] as const;
-    window.addEventListener("pointerdown", mark, { passive: true });
-    window.addEventListener("keydown", mark);
-    for (const name of events) window.addEventListener(name, reset, { passive: true });
+    const arm = () => armAudio();
+    window.addEventListener("pointerdown", arm, { passive: true });
+    window.addEventListener("keydown", arm);
     return () => {
-      window.clearTimeout(timer);
-      window.removeEventListener("pointerdown", mark);
-      window.removeEventListener("keydown", mark);
-      for (const name of events) window.removeEventListener(name, reset);
+      window.removeEventListener("pointerdown", arm);
+      window.removeEventListener("keydown", arm);
     };
-  }, [open]);
+  }, []);
 
   useEffect(() => {
-    if (!open || played.current || !interacted.current) return;
+    setOpen(false);
+    setFormActive(false);
+    if (shownOn.current.has(pathname)) return;
+    const timer = window.setTimeout(() => {
+      shownOn.current.add(pathname);
+      played.current = false;
+      setOpen(true);
+    }, IDLE_MS);
+    return () => window.clearTimeout(timer);
+  }, [pathname]);
+
+  useEffect(() => {
+    if (!open || played.current) return;
     try {
-      if (playSoftTick()) played.current = true;
+      if (playChime()) played.current = true;
     } catch {
-      /* Браузер может запретить звук, если жеста ещё не было. */
+      /* Звук возможен после первого жеста на странице. */
     }
   }, [open]);
 
@@ -124,7 +133,7 @@ export function InactivityPrompt() {
     body.set("phone", phone);
     body.set("phoneOnly", "1");
     body.set("product", "callback");
-    body.set("comment", "Экран-подсказка: нужна консультация по выбору");
+    body.set("comment", "Бирка-подсказка: клиент зовёт менеджера");
     body.set("page", window.location.pathname);
     try {
       const response = await fetch("/api/lead", { method: "POST", body });
@@ -166,24 +175,26 @@ export function InactivityPrompt() {
           }}
         >
           <motion.div
-            className="idle-card"
-            initial={{ opacity: 0, y: 12 }}
+            className="idle-hanger"
+            initial={{ opacity: 0, y: -36 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.45 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ type: "spring", stiffness: 260, damping: 22 }}
           >
             <span className="idle-string" aria-hidden="true" />
+            <div className="idle-card">
             <span className="idle-hole" aria-hidden="true" />
             <button type="button" className="idle-close" aria-label="Закрыть подсказку" onClick={close}>
               <X size={18} />
             </button>
             {status === "done" ? (
               <p id="idle-title" className="idle-thanks">
-                Спасибо, перезвоним в рабочее время
+                Менеджер перезвонит в рабочее время
               </p>
             ) : (
               <>
                 <p id="idle-title">
-                  Не уверены, какой материал подойдёт? Мы поможем подобрать — оставьте номер, и наш технолог всё расскажет.
+                  Какую бирку возьмёт ваша вещь? Менеджер назовёт материал, сгиб и тираж — оставьте номер.
                 </p>
                 <form onSubmit={submit}>
                   <label>
@@ -203,11 +214,12 @@ export function InactivityPrompt() {
                   </label>
                   {error ? <span className="idle-error">{error}</span> : null}
                   <button type="submit" className="idle-submit" disabled={status === "sending"}>
-                    {status === "sending" ? "Отправляем…" : "Отправить"}
+                    {status === "sending" ? "Отправляем…" : "Позвать менеджера"}
                   </button>
                 </form>
               </>
             )}
+            </div>
           </motion.div>
         </motion.div>
       ) : null}

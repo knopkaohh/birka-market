@@ -119,9 +119,9 @@ export function ProductLanding({
                 title: item.alt || product.shortName,
               }))}
               columns={3}
-              tileWidth={216}
-              tileHeight={200}
-              gap={28}
+              tileWidth={300}
+              tileHeight={276}
+              gap={18}
               tilt={-1}
               turn={-1}
               perspective={1200}
@@ -131,10 +131,10 @@ export function ProductLanding({
               variance={0.45}
               parallax={0.6}
               lift={64}
-              fade={0.42}
+              fade={0.06}
               dim={1}
               overlayColor="#fffdf8"
-              overlayOpacity={0.08}
+              overlayOpacity={0}
               radius={17}
               roll={0}
               pauseOnHover={false}

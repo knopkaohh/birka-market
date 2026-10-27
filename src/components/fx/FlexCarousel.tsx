@@ -928,11 +928,11 @@ const FlexCarousel = ({
         introState.done &&
         focus.target === 0 &&
         focus.t < 0.01 &&
-        !pointer.over &&
         !pointer.down &&
         !hasFocus &&
         (mode === 'spring' || mode === 'drift') &&
-        Math.abs(goal - pos) < 1 &&
+        Math.abs(goal - pos) < 8 &&
+        Math.abs(vel) < 80 &&
         now - interactedAt > 3000 &&
         now - autoplayAt > s.interval * 1000
       ) {
