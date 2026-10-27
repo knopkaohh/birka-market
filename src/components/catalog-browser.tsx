@@ -76,6 +76,13 @@ function CatalogBrowserInner() {
                   <GoldEnd text={group.item.name} />
                 </h2>
                 <p>{group.item.intro}</p>
+                <div className="catalog-material-row">
+                  {group.products.map((product) => (
+                    <Link key={product.slug} href={`/${product.slug}`}>
+                      {product.shortName}
+                    </Link>
+                  ))}
+                </div>
                 <Link className="catalog-section-more" href={`/katalog/${group.item.slug}`}>
                   Открыть раздел
                   <ArrowRight size={16} />

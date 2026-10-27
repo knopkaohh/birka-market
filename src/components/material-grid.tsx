@@ -28,7 +28,7 @@ export function MaterialGrid() {
         <h2>
           Наши <em>материалы</em>
         </h2>
-        <p>Листайте кольцо и откройте материал.</p>
+        <p>Проведите по кольцу и откройте материал.</p>
       </div>
       <div className="materials-carousel" style={{ width: "100%", position: "relative" }}>
         <CircularCarousel
