@@ -11,6 +11,17 @@ export type NewsPost = {
 
 export const newsPosts: NewsPost[] = [
   {
+    slug: "blagotvoritelnost-lohmtyy-angel",
+    uid: "7hj3ht96f1",
+    title: "🐾 Благотворительность — это маленькие шаги, которые делают мир добрее",
+    date: "2026-10-27",
+    excerpt:
+      "Мы поддержали приют «Лохматый ангел» команды «Экология человека» в Красногорске: привезли корм, лакомства и всё нужное для собак и енотов.",
+    cover: "/images/news/blagotvoritelnost.jpg",
+    html: "<p>Благотворительность — это маленькие шаги, которые делают мир добрее.</p>\n<p>Мы поддержали приют «Лохматый ангел» команды «Экология человека» (<a href=\"https://ecozoo.ru\" rel=\"noreferrer\" target=\"_blank\">ecozoo.ru</a>) в Красногорске: привезли корм, лакомства и всё самое нужное для собак и енотов.</p>\n<p>Рады, что смогли внести свой вклад — пусть тепла и заботы в мире становится чуточку больше. ❤️</p>",
+    sourcePath: "/blog/7hj3ht96f1-blagotvoritelnost-eto-malenkie-shagi-ko",
+  },
+  {
     slug: "posetili-kreml",
     uid: "76mrjpgcm1",
     title: "На днях всей командой посетили Кремль!",

@@ -189,6 +189,7 @@ export const photoId: Record<string, string> = {
   "/images/merchi/g7.jpg": "ae344fdff8",
   "/images/merchi/g8.jpg": "f5fac6f776",
   "/images/news/23-fevralya.jpg": "ac2a9f86ce",
+  "/images/news/blagotvoritelnost.jpg": "108c10e8f8",
   "/images/news/aktsiya-sentyabrya.jpg": "5935389c26",
   "/images/news/angelina-nikolau-i-ivan-birkus.jpg": "26b3a00a01",
   "/images/news/birki-2026-tsifrovaya-prozrachnost.jpg": "69ba1a6558",
