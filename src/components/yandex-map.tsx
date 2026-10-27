@@ -40,21 +40,23 @@ export function YandexMap({ height = 600, compact = false }: YandexMapProps) {
           loading="lazy"
           allowFullScreen
         />
+        <div className="map-award">
+          <iframe
+            title="Хорошее место — Бирка Маркет в Яндекс Справочнике"
+            src={company.map.sprav}
+            width="150"
+            height="50"
+            loading="lazy"
+          />
+        </div>
       </div>
-      <div className="map-badge">
-        <iframe
-          title="Рейтинг Бирка Маркет в Яндекс Справочнике"
-          src={company.map.sprav}
-          width="150"
-          height="50"
-          loading="lazy"
-        />
-        {compact && (
+      {compact && (
+        <div className="map-route">
           <a href={company.map.route} target="_blank" rel="noreferrer">
             Проложить маршрут
           </a>
-        )}
-      </div>
+        </div>
+      )}
     </section>
   );
 }

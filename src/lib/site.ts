@@ -7,7 +7,7 @@ export const company = {
   telegram: "https://t.me/birka_market_ru",
   whatsapp: "https://wa.me/79163549287",
   max: "https://max.ru/",
-  vk: "https://vk.com/birka_market",
+  vk: "https://vk.ru/birka_market",
   address: "Москва, Строительный проезд, дом 2, стр. 1, офис № 1",
   hours: "Пн–Пт, 10:00–18:00",
   hoursNote:
