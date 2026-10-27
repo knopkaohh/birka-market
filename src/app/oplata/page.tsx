@@ -22,7 +22,7 @@ export default function PaymentPage() {
           </h1>
           <p>Работаем с юридическими и физическими лицами. Счёт готовит менеджер после согласования параметров.</p>
         </div>
-        <div className="content-grid">
+        <div className="content-grid gold-cards">
           <article>
             <h2>
               Расчётный <em>счёт</em>

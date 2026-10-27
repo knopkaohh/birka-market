@@ -931,7 +931,7 @@ const FlexCarousel = ({
         !pointer.over &&
         !pointer.down &&
         !hasFocus &&
-        mode === 'spring' &&
+        (mode === 'spring' || mode === 'drift') &&
         Math.abs(goal - pos) < 1 &&
         now - interactedAt > 3000 &&
         now - autoplayAt > s.interval * 1000

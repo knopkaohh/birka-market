@@ -29,15 +29,15 @@ export default function FaqPage() {
           {faqItems.map((item, index) => (
             <AccordionItem value={`item-${index}`} key={item.q} className="faq-item">
               <AccordionTrigger className="faq-trigger">
-                <span>0{index + 1}</span>
-                {item.q}
+                <span className="faq-index">{String(index + 1).padStart(2, "0")}</span>
+                <span className="faq-q">{item.q}</span>
               </AccordionTrigger>
               <AccordionContent className="faq-content">
                 {item.q.includes("материал и сгиб") ? (
                   <>
-                    Откройте страницу <Link href="/kak-vybrat">Как выбрать</Link>: три вопроса подскажут материал,
-                    подгибку, цвета и тираж. Если останетесь в сомнении — оставьте телефон, менеджер соберёт комплект за
-                    10 минут.
+                    Начните со страницы <Link href="/kak-vybrat">Как выбрать</Link>: три вопроса собирают брендовую
+                    бирку, составник и, если нужен, навес. Если знак спорный, технолог скажет до печати, жаккард это,
+                    сатин или силикон. Сомневаетесь — оставьте телефон, комплект разберём за 10 минут.
                   </>
                 ) : (
                   item.a
