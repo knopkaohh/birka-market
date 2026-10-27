@@ -9,7 +9,7 @@ export function Footer() {
     <footer>
       <div className="footer-grid">
         <div>
-          <span className="footer-heading-muted">Связь с нами</span>
+          <span className="footer-heading-amber">Связь с нами</span>
           <a className="footer-phone" href={company.phoneHref}>
             {company.phone}
           </a>
@@ -33,7 +33,7 @@ export function Footer() {
           </a>
         </div>
         <div>
-          <span className="footer-heading-muted">Приезжайте в наш офис</span>
+          <span className="footer-heading-amber">Приезжайте в наш офис</span>
           <p>г. Москва, Строительный проезд, дом 2 стр. 1, этаж 1, офис № 1.</p>
           <strong>Выдача заказов и самовывоз со склада</strong>
           <p>
@@ -51,7 +51,7 @@ export function Footer() {
           <p>В праздничные дни график может отличаться — пожалуйста, звоните для уточнения.</p>
         </div>
         <div>
-          <span>Компания</span>
+          <span className="footer-heading-amber">Компания</span>
           <Link href="/o-kompanii">О нас</Link>
           <Link href="/dokumenty">Документы</Link>
           <Link href="/faq">FAQ</Link>
