@@ -2473,7 +2473,7 @@ footer .logo svg { height: 56px; }
     inset 0 0 0 5px rgba(28, 25, 23, .55),
     0 0 0 2px #edc147;
 }
-.idle-card p { position: relative; z-index: 1; margin: 0 0 22px; color: #fffdf8; font-size: 26px; line-height: 1.35; font-weight: 650; letter-spacing: -.03em; }
+.idle-card p { position: relative; z-index: 1; margin: 0 0 22px; color: #fffdf8; font-size: 22px; line-height: 1.4; font-weight: 650; letter-spacing: -.02em; }
 .idle-close {
   position: absolute;
   top: 10px;
@@ -3285,7 +3285,7 @@ footer .logo svg { height: 56px; }
   .product-card { max-width: 100%; }
   .material-photos { height: 340px; }
   .idle-card { width: min(100% - 20px, 520px); padding: 52px 20px 26px; }
-  .idle-card p { font-size: 22px; }
+  .idle-card p { font-size: 18px; }
   #variants.jq-section { padding-bottom: 8px; }
   #works.jq-section { padding-top: 12px; padding-bottom: 8px; }
   #orientir.jq-section { padding-top: 12px; }

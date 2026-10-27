@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation";
 import { X } from "lucide-react";
 import { formatRuPhone, isCompleteRuPhone } from "@/lib/phone";
 
-const IDLE_MS = 45_000;
+const IDLE_MS = 50_000;
 
 let sharedAudio: AudioContext | null = null;
 
@@ -76,12 +76,46 @@ export function InactivityPrompt() {
     setOpen(false);
     setFormActive(false);
     if (shownOn.current.has(pathname)) return;
-    const timer = window.setTimeout(() => {
-      shownOn.current.add(pathname);
-      played.current = false;
-      setOpen(true);
-    }, IDLE_MS);
-    return () => window.clearTimeout(timer);
+
+    let timer = 0;
+    const schedule = () => {
+      window.clearTimeout(timer);
+      timer = window.setTimeout(() => {
+        shownOn.current.add(pathname);
+        played.current = false;
+        setOpen(true);
+      }, IDLE_MS);
+    };
+    schedule();
+
+    let lastMove = 0;
+    const bump = () => {
+      if (shownOn.current.has(pathname)) return;
+      schedule();
+    };
+    const onMove = () => {
+      const now = Date.now();
+      if (now - lastMove < 700) return;
+      lastMove = now;
+      bump();
+    };
+
+    const opts = { passive: true, capture: true } as const;
+    window.addEventListener("pointerdown", bump, opts);
+    window.addEventListener("keydown", bump);
+    window.addEventListener("wheel", bump, opts);
+    window.addEventListener("scroll", bump, opts);
+    window.addEventListener("touchmove", bump, opts);
+    window.addEventListener("mousemove", onMove, opts);
+    return () => {
+      window.clearTimeout(timer);
+      window.removeEventListener("pointerdown", bump, opts);
+      window.removeEventListener("keydown", bump);
+      window.removeEventListener("wheel", bump, opts);
+      window.removeEventListener("scroll", bump, opts);
+      window.removeEventListener("touchmove", bump, opts);
+      window.removeEventListener("mousemove", onMove, opts);
+    };
   }, [pathname]);
 
   useEffect(() => {
@@ -133,7 +167,7 @@ export function InactivityPrompt() {
     body.set("phone", phone);
     body.set("phoneOnly", "1");
     body.set("product", "callback");
-    body.set("comment", "Бирка-подсказка: клиент зовёт менеджера");
+    body.set("comment", "Подсказка: клиент просит менеджера подобрать материал и перезвонить");
     body.set("page", window.location.pathname);
     try {
       const response = await fetch("/api/lead", { method: "POST", body });
@@ -194,7 +228,7 @@ export function InactivityPrompt() {
             ) : (
               <>
                 <p id="idle-title">
-                  Какую бирку возьмёт ваша вещь? Менеджер назовёт материал, сгиб и тираж — оставьте номер.
+                  Не знаете, какой материал вам подойдёт? Наш менеджер всё расскажет, подскажет и подберёт. Хотите, чтобы с вами связались — оставьте номер телефона.
                 </p>
                 <form onSubmit={submit}>
                   <label>
@@ -214,7 +248,7 @@ export function InactivityPrompt() {
                   </label>
                   {error ? <span className="idle-error">{error}</span> : null}
                   <button type="submit" className="idle-submit" disabled={status === "sending"}>
-                    {status === "sending" ? "Отправляем…" : "Позвать менеджера"}
+                    {status === "sending" ? "Отправляем…" : "Оставить номер"}
                   </button>
                 </form>
               </>
