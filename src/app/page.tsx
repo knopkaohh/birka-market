@@ -15,7 +15,7 @@ export default function Home() {
   return (
     <>
       <HomeHero />
-      <section className="section home-intro">
+      <section id="posle-hero" className="section home-intro">
         <h2>
           <span>Вас приветствует команда</span>
           <br />

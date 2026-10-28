@@ -1,13 +1,37 @@
 "use client";
 
 import Link from "next/link";
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { openQuickCalc } from "@/components/quick-calc";
+import { ArrowRight, BadgePercent, ChevronDown, Gem, Play, ShieldCheck, Truck, X } from "lucide-react";
 
 const rise = { duration: 0.9, ease: [0.22, 1, 0.36, 1] as const };
 
-/** Первый экран: заголовок по центру видео, в том же крупном наборе, что был у слогана. */
+const points = [
+  { icon: Gem, label: "Собственное производство" },
+  { icon: BadgePercent, label: "Скидки от тиража" },
+  { icon: ShieldCheck, label: "Контроль качества" },
+  { icon: Truck, label: "Быстрый расчёт и доставка" },
+];
+
+/** Первый экран: текущее видео на всю область, текст как на макете. */
 export function HomeHero() {
+  const [videoOpen, setVideoOpen] = useState(false);
+
+  useEffect(() => {
+    if (!videoOpen) return;
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setVideoOpen(false);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [videoOpen]);
+
+  const scrollNext = () => {
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    document.getElementById("posle-hero")?.scrollIntoView({ behavior: reduce ? "auto" : "smooth" });
+  };
+
   return (
     <section className="home-hero">
       <video
@@ -22,28 +46,58 @@ export function HomeHero() {
         <source src="/video/hero.mp4" type="video/mp4" />
       </video>
       <div className="home-hero-scrim" aria-hidden="true" />
-      <div className="home-hero-copy">
-        <motion.h1 initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={rise}>
-          Производство бирок, пакетов, упаковки, мерча и полиграфии
-        </motion.h1>
-        <motion.nav
-          className="home-hero-actions"
-          aria-label="Действия"
-          initial={{ opacity: 0, y: 18 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ ...rise, delay: 0.12 }}
-        >
-          <button type="button" className="hero-btn" onClick={() => openQuickCalc()}>
-            Быстрый расчёт
-          </button>
+      <motion.div
+        className="home-hero-copy"
+        initial={{ opacity: 0, y: 18 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={rise}
+      >
+        <p className="home-hero-kicker">Производство изделий с вашим дизайном</p>
+        <h1>
+          <span>Производство</span>
+          бирок, пакетов, упаковки, мерча и полиграфии
+        </h1>
+        <p>Качественная продукция, современные технологии и полный цикл производства в Москве</p>
+        <nav className="home-hero-actions" aria-label="Действия">
           <Link className="hero-btn" href="/raschet">
-            Скидки от тиража
+            Рассчитать заказ
+            <ArrowRight size={18} aria-hidden="true" />
           </Link>
-          <Link className="hero-btn" href="/o-kompanii">
-            Своё производство
+          <Link className="hero-btn is-ghost" href="/katalog">
+            Смотреть каталог
+            <ArrowRight size={18} aria-hidden="true" />
           </Link>
-        </motion.nav>
-      </div>
+        </nav>
+        <ul className="home-hero-points">
+          {points.map((item) => (
+            <li key={item.label}>
+              <item.icon size={22} strokeWidth={1.75} aria-hidden="true" />
+              <span>{item.label}</span>
+            </li>
+          ))}
+        </ul>
+      </motion.div>
+      <button type="button" className="home-hero-watch" onClick={() => setVideoOpen(true)}>
+        <span className="home-hero-play" aria-hidden="true">
+          <Play size={18} fill="currentColor" />
+        </span>
+        Смотреть видео
+      </button>
+      <button type="button" className="home-hero-scroll" onClick={scrollNext}>
+        Листайте вниз
+        <ChevronDown size={16} aria-hidden="true" />
+      </button>
+      {videoOpen ? (
+        <div className="hero-video-layer" role="dialog" aria-modal="true" aria-label="Видео производства">
+          <button type="button" className="hero-video-backdrop" aria-label="Закрыть видео" onClick={() => setVideoOpen(false)} />
+          <div className="hero-video-frame">
+            <video src="/video/hero.mp4" controls autoPlay playsInline poster="/images/hero-poster.jpg" />
+            <button type="button" className="hero-video-close" onClick={() => setVideoOpen(false)} aria-label="Закрыть">
+              <X size={18} />
+            </button>
+          </div>
+        </div>
+      ) : null}
     </section>
   );
 }
