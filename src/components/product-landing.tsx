@@ -91,7 +91,6 @@ export function ProductLanding({
             <em>{content.titleEm}</em>
           </h1>
           <p className="jq-material-line">{product.summary}</p>
-          <p>{content.lead}</p>
           <div className="hero-actions">
             <a className="primary-cta" href="#calc">
               Рассчитать заказ
