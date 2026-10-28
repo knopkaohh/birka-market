@@ -5,6 +5,8 @@ export const rejectedPhotoSrc = new Set([
   "/images/products/merchi.jpg",
   "/images/merchi/g6.jpg",
   "/images/merchi/g7.jpg",
+  "/images/reflective/live-04.jpg",
+  "/images/reflective/live-07.jpg",
 ]);
 
 export function usablePhoto(src?: string | null) {

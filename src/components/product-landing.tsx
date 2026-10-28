@@ -90,6 +90,7 @@ export function ProductLanding({
             <br />
             <em>{content.titleEm}</em>
           </h1>
+          <p className="jq-material-line">{product.summary}</p>
           <p>{content.lead}</p>
           <div className="hero-actions">
             <a className="primary-cta" href="#calc">
@@ -163,25 +164,14 @@ export function ProductLanding({
           <p>{content.variantIntro}</p>
         </div>
         <div className="jq-variants">
-          {content.variants.map((item) => (
+          {content.variants.map((item, index) => (
             <Link
               href={item.href ?? `${path}?variant=${item.id}#calc`}
               prefetch={false}
               className={`jq-variant is-${item.tone}`}
               key={item.id}
             >
-              {item.image ? (
-                <span className="jq-variant-photo">
-                  <PhotoFrame
-                    src={item.image}
-                    alt={item.name}
-                    width={640}
-                    height={400}
-                    sizes="(max-width: 700px) 90vw, 280px"
-                    cover
-                  />
-                </span>
-              ) : null}
+              <span className="jq-variant-mark">{String(index + 1).padStart(2, "0")}</span>
               <span className="jq-variant-fold">{item.fold}</span>
               <h3>{item.name}</h3>
               <p>{item.text}</p>
