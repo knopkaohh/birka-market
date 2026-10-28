@@ -116,10 +116,10 @@ function MaterialPicker({
 }
 
 const defaultJacquardVariants: LeadVariantOption[] = [
-  { id: "standard", name: "Стандарт" },
-  { id: "loop", name: "Петелька" },
-  { id: "flag", name: "Флаг" },
-  { id: "volume", name: "Объём" },
+  { id: "straight", name: "Прямой рез" },
+  { id: "sides", name: "Подгибка с двух сторон" },
+  { id: "center", name: "Сгиб по центру" },
+  { id: "butterfly", name: "Подгибка бабочка" },
 ];
 
 export function LeadForm({

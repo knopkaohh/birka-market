@@ -12,6 +12,8 @@ export function CalculatorBlock({
   surface = "material",
   bullets = ["Быстрый расчёт", "Своё производство", "Макет до печати"],
   defaultQuantity,
+  variants,
+  defaultVariant,
 }: {
   defaultProduct?: string;
   defaultComment?: string;
@@ -22,6 +24,8 @@ export function CalculatorBlock({
   heading?: "h1" | "h2";
   surface?: "dark" | "material";
   bullets?: string[];
+  variants?: { id: string; name: string }[];
+  defaultVariant?: string;
 }) {
   const lines = title.split("\n");
   const Heading = heading;
@@ -56,6 +60,8 @@ export function CalculatorBlock({
         defaultProduct={defaultProduct}
         defaultComment={defaultComment}
         defaultQuantity={defaultQuantity}
+        variants={variants}
+        defaultVariant={defaultVariant}
       />
     </section>
   );

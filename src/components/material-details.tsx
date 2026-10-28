@@ -60,7 +60,13 @@ export function MaterialDetails({
               {content.specs.map((item) => (
                 <article key={item.title}>
                   <h3>{item.title}</h3>
-                  <p>{item.text}</p>
+                  <p>
+                    {item.text.split("\n").map((line, index) => (
+                      <span className="spec-line" key={`${item.title}-${index}`}>
+                        {line}
+                      </span>
+                    ))}
+                  </p>
                 </article>
               ))}
             </div>

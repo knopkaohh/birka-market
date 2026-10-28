@@ -170,6 +170,18 @@ export function ProductLanding({
               className={`jq-variant is-${item.tone}`}
               key={item.id}
             >
+              {item.image ? (
+                <span className="jq-variant-photo">
+                  <PhotoFrame
+                    src={item.image}
+                    alt={item.name}
+                    width={640}
+                    height={400}
+                    sizes="(max-width: 700px) 90vw, 280px"
+                    cover
+                  />
+                </span>
+              ) : null}
               <span className="jq-variant-fold">{item.fold}</span>
               <h3>{item.name}</h3>
               <p>{item.text}</p>
@@ -207,7 +219,13 @@ export function ProductLanding({
             {specRows(content.specs, product.minQty, product.leadTime).map((item) => (
               <tr key={item.title}>
                 <th scope="row">{item.title}</th>
-                <td>{item.text}</td>
+                <td>
+                  {item.text.split("\n").map((line, index) => (
+                    <span className="spec-line" key={`${item.title}-${index}`}>
+                      {line}
+                    </span>
+                  ))}
+                </td>
               </tr>
             ))}
           </tbody>
@@ -235,6 +253,7 @@ export function ProductLanding({
             </Link>
           ))}
         </div>
+        <p className="jq-price-note">Актуальный прайс уточняйте у менеджера.</p>
       </section>
 
       <CalculatorBlock
@@ -242,6 +261,8 @@ export function ProductLanding({
         defaultProduct={content.slug}
         defaultComment={prefillComment}
         defaultQuantity={quote?.qty ? quoteQuantity(quote.qty) : undefined}
+        defaultVariant={selectedVariant}
+        variants={content.variants.map((item) => ({ id: item.id, name: item.name }))}
         title={"Расчёт\nзаказа"}
       />
 
