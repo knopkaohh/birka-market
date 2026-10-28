@@ -168,7 +168,7 @@ export default function GuidePage() {
         <p className="inner-note">
           Уже поняли материал? Откройте{" "}
           <Link href="/katalog/vshivnye-birki">вшивные бирки</Link> или сразу{" "}
-          <Link href="/raschet">оставьте заявку</Link>. Макет для печати готовим бесплатно.
+          <Link href="/raschet">оставьте заявку</Link>.
           <span className="guide-note-link">
             <Link href="/jacquard">
               Жаккард

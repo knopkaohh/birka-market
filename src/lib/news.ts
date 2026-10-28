@@ -33,16 +33,6 @@ export const newsPosts: NewsPost[] = [
     sourcePath: "/blog/76mrjpgcm1-na-dnyah-vsei-komandoi-posetili-kreml",
   },
   {
-    slug: "aktsiya-sentyabrya",
-    uid: "bjcudtf2r1",
-    title: "АКЦИЯ СЕНТЯБРЯ: Бесплатный макет на ВСЮ продукцию при заказе от 2 000 шт.!",
-    date: "2026-09-02",
-    excerpt: "ПО ПРОМОКОДУ: СЕНТЯБРЬ2026 Бесплатный макет на ВСЁ- только в сентябре! 🎨 Заказывайте любую маркировку или упаковку от 2 000 шт ., а разработку и подгонку макета мы возьмем на себя. 0…",
-    cover: "/images/news/aktsiya-sentyabrya.jpg",
-    html: "<p>ПО ПРОМОКОДУ: <strong>СЕНТЯБРЬ2026</strong></p>\n<p>Бесплатный макет на ВСЁ- только в сентябре! 🎨</p>\n<p>Заказывайте любую маркировку или упаковку <strong>от 2 000 шт</strong>., а разработку и подгонку макета мы возьмем на себя. 0 рублей вместо оплаты дизайнеру!</p>",
-    sourcePath: "/blog/bjcudtf2r1-aktsiya-sentyabrya-besplatnii-maket-na-v",
-  },
-  {
     slug: "angelina-nikolau-i-ivan-birkus",
     uid: "z01go8aus1",
     title: "Все новости сейчас говорят про Ангелину Николау и Ивана Биркуса- пару, покорившую Empire State Building и сердца миллионов 🗽",
