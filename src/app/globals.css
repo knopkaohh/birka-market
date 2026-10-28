@@ -2055,11 +2055,12 @@ footer .logo svg { height: 56px; }
 .jq-hero-copy h1 em { font-family: var(--font-cormorant), Georgia, serif; font-weight: 500; color: var(--yellow); }
 .jq-hero-copy > p { max-width: 560px; margin: 0; color: var(--muted-ink); font-size: 16px; line-height: 1.65; }
 .jq-hero-copy > p.jq-material-line {
-  margin: 0 0 10px;
+  margin: 0 0 14px;
+  max-width: 620px;
   color: var(--ink);
-  font-size: 17px;
-  font-weight: 650;
-  line-height: 1.4;
+  font-size: 16px;
+  font-weight: 450;
+  line-height: 1.6;
 }
 .jq-hero-visual { position: relative; min-height: 640px; background: #f7f4ee; }
 .jq-hero-wall { position: absolute; inset: 0; height: 100%; }
