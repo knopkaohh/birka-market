@@ -303,7 +303,7 @@ button { cursor: pointer; }
   gap: 2px;
 }
 .header-contacts { display: flex; align-items: center; gap: 12px; }
-.phone-link { display: flex; align-items: center; gap: 7px; font-size: 12px; font-weight: 750; }
+.phone-link { display: flex; align-items: center; gap: 7px; color: var(--yellow); font-size: 12px; font-weight: 750; }
 .header-messengers { display: flex; align-items: center; gap: 6px; }
 .header-msg {
   display: grid; place-content: center; width: 44px; height: 44px;
@@ -328,7 +328,7 @@ button { cursor: pointer; }
   justify-content: flex-end;
   gap: 8px;
   margin: 0;
-  color: #111;
+  color: var(--yellow);
   background: transparent;
   border: 0;
   font-family: var(--font-manrope), Arial, sans-serif;
@@ -339,7 +339,7 @@ button { cursor: pointer; }
   white-space: nowrap;
 }
 .header-calc svg { flex: none; }
-.header-calc:hover { color: #8e721f; }
+.header-calc:hover { color: #f2c555; }
 .header-cta, .primary-cta {
   display: inline-flex; align-items: center; justify-content: center; gap: 14px;
   min-height: 48px; padding: 0 20px; color: var(--ink);
@@ -2624,13 +2624,15 @@ footer .logo svg { height: 56px; }
 .site-header.is-over-video .menu-toggle {
   color: #f4f1e9;
 }
-.site-header.is-over-video .header-slogan em { color: var(--yellow); }
+.site-header.is-over-video .header-slogan em,
+.site-header.is-over-video .phone-link,
+.site-header.is-over-video .header-calc { color: var(--yellow); }
 .site-header.is-over-video .desktop-nav a:hover,
 .site-header.is-over-video .desktop-nav a.is-active {
   color: #1c1917;
   background: #f2c555;
 }
-.site-header.is-over-video .header-calc:hover { color: var(--yellow); }
+.site-header.is-over-video .header-calc:hover { color: #f2c555; }
 .site-header.is-over-video .header-msg.is-max { color: #f4f1e9; }
 
 .home-hero {
