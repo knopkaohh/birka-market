@@ -3199,7 +3199,7 @@ footer .logo svg { height: 56px; }
 }
 .footer-callback span, .footer-callback-note { color: #f2c555; font-size: 13px; }
 
-.home-intro { padding-top: clamp(40px, 5vw, 72px); padding-bottom: 8px; text-align: center; }
+.home-intro { padding-top: clamp(40px, 5vw, 72px); padding-bottom: 8px; text-align: center; scroll-margin-top: calc(var(--header-h, 128px) + 8px); }
 .home-intro h2 {
   margin: 0 auto 22px;
   max-width: none;

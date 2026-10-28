@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { ArrowRight, BadgePercent, ChevronDown, Gem, Play, ShieldCheck, Truck, X } from "lucide-react";
 
@@ -17,6 +17,7 @@ const points = [
 /** Первый экран: текущее видео на всю область, текст как на макете. */
 export function HomeHero() {
   const [videoOpen, setVideoOpen] = useState(false);
+  const dialogVideo = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
     if (!videoOpen) return;
@@ -24,6 +25,11 @@ export function HomeHero() {
       if (event.key === "Escape") setVideoOpen(false);
     };
     window.addEventListener("keydown", onKey);
+    const video = dialogVideo.current;
+    if (video) {
+      video.muted = true;
+      void video.play().catch(() => {});
+    }
     return () => window.removeEventListener("keydown", onKey);
   }, [videoOpen]);
 
@@ -91,7 +97,7 @@ export function HomeHero() {
         <div className="hero-video-layer" role="dialog" aria-modal="true" aria-label="Видео производства">
           <button type="button" className="hero-video-backdrop" aria-label="Закрыть видео" onClick={() => setVideoOpen(false)} />
           <div className="hero-video-frame">
-            <video src="/video/hero.mp4" controls autoPlay playsInline poster="/images/hero-poster.jpg" />
+            <video ref={dialogVideo} src="/video/hero.mp4" controls playsInline poster="/images/hero-poster.jpg" />
             <button type="button" className="hero-video-close" onClick={() => setVideoOpen(false)} aria-label="Закрыть">
               <X size={18} />
             </button>
