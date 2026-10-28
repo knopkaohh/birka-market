@@ -113,6 +113,12 @@ export const categories = [
     image: "/images/products/kraft.jpg",
   },
   {
+    slug: "merch",
+    name: "Мерч",
+    intro: "Футболки, худи и стикерпаки с вашим знаком. Собираем тираж, наносим логотип и упаковываем.",
+    image: "/images/merchi/g3.jpg",
+  },
+  {
     slug: "furnitura",
     name: "Фурнитура",
     intro: "Биркодержатели, пуллеры, джибитсы и жаккардовая резинка. Мелкие детали, которые заканчивают изделие.",
@@ -123,12 +129,6 @@ export const categories = [
     name: "Нанесение и патчи",
     intro: "DTF, FlexTran, вышивка, шелкография и ПВХ-патчи. Плоский знак на ткани или объёмная эмблема.",
     image: "/images/products/flextran.jpg",
-  },
-  {
-    slug: "merch",
-    name: "Мерч",
-    intro: "Футболки, худи и стикерпаки с вашим знаком. Собираем тираж, наносим логотип и упаковываем.",
-    image: "/images/merchi/g3.jpg",
   },
 ] as const;
 
