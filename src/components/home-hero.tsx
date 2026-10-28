@@ -33,15 +33,13 @@ export function HomeHero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ ...rise, delay: 0.12 }}
         >
-          <button type="button" className="hero-text" onClick={() => openQuickCalc()}>
+          <button type="button" className="hero-btn" onClick={() => openQuickCalc()}>
             Быстрый расчёт
           </button>
-          <span className="hero-text-dot" aria-hidden="true" />
-          <Link className="hero-text" href="/raschet">
+          <Link className="hero-btn" href="/raschet">
             Скидки от тиража
           </Link>
-          <span className="hero-text-dot" aria-hidden="true" />
-          <Link className="hero-text" href="/o-kompanii">
+          <Link className="hero-btn" href="/o-kompanii">
             Своё производство
           </Link>
         </motion.nav>

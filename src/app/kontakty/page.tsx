@@ -12,13 +12,6 @@ export const metadata: Metadata = {
 };
 
 export default function ContactsPage() {
-  const contactRoles = new Set([
-    "Исполнительный директор",
-    "Руководитель отдела продаж",
-    "Менеджер по продажам",
-  ]);
-  const managers = team.filter((person) => contactRoles.has(person.role));
-
   return (
     <>
       <div className="inner-page">
@@ -92,7 +85,7 @@ export default function ContactsPage() {
         </div>
         <h2 className="block-title">Команда</h2>
         <div className="team-grid">
-          {managers.map((person) => (
+          {team.map((person) => (
             <article key={person.name}>
               <div className="team-photo">
                 <Image src={person.photo} alt={person.name} fill sizes="280px" />

@@ -101,6 +101,12 @@ export const categories = [
     image: "/images/products/birki-karton.jpg",
   },
   {
+    slug: "poligrafiya",
+    name: "Полиграфия",
+    intro: "Визитки, наклейки, флаеры, буклеты, журналы, флаги и баннеры. Для магазина, мероприятия и упаковки.",
+    image: "/images/products/printing.jpg",
+  },
+  {
     slug: "upakovka",
     name: "Упаковка",
     intro: "ZIP Lock, крафт, бумага, ПВД и коробки. Упаковка, в которой покупка доезжает до клиента в товарном виде.",
@@ -123,12 +129,6 @@ export const categories = [
     name: "Мерч",
     intro: "Футболки, худи и стикерпаки с вашим знаком. Собираем тираж, наносим логотип и упаковываем.",
     image: "/images/merchi/g3.jpg",
-  },
-  {
-    slug: "poligrafiya",
-    name: "Полиграфия",
-    intro: "Визитки, наклейки, флаеры, буклеты, журналы, флаги и баннеры. Для магазина, мероприятия и упаковки.",
-    image: "/images/products/printing.jpg",
   },
 ] as const;
 
@@ -610,12 +610,6 @@ export type TeamMember = {
 
 export const team: TeamMember[] = [
   {
-    name: "Антон Федотов",
-    role: "Исполнительный директор",
-    email: "af@birka-market.ru",
-    photo: "/images/team/anton.jpg",
-  },
-  {
     name: "Роман Хрусталёв",
     role: "Руководитель отдела продаж",
     email: "rh@birka-market.ru",
@@ -629,22 +623,21 @@ export const team: TeamMember[] = [
     photo: "/images/team/kristina.jpg",
   },
   {
+    name: "Антон Федотов",
+    role: "Исполнительный директор",
+    email: "af@birka-market.ru",
+    photo: "/images/team/anton.jpg",
+  },
+  {
     name: "Гинтарас Палтарацкас",
-    role: "Менеджер по продажам",
+    role: "Руководитель отдела корпоративных продаж",
     email: "pg@birka-market.ru",
     phone: "+7 988 758-88-98",
     photo: "/images/team/gintaras.jpg",
   },
   {
-    name: "Никита Царьков",
-    role: "Руководитель производства",
-    email: "nc@birka-market.ru",
-    phone: "+7 916 676-27-21",
-    photo: "/images/team/nikita.png",
-  },
-  {
     name: "Нариман Алескеров",
-    role: "Менеджер по продажам",
+    role: "Старший менеджер по продажам",
     email: "na@birka-market.ru",
     phone: "+7 985 238-85-05",
     photo: "/images/team/nariman.jpg",
@@ -654,11 +647,18 @@ export const team: TeamMember[] = [
     role: "Менеджер по продажам",
     email: "ms@birka-market.ru",
     phone: "+7 916 503-45-44",
-    photo: "/images/team/maxim.png",
+    photo: "/images/team/maxim.jpg",
+  },
+  {
+    name: "Никита Царьков",
+    role: "Руководитель отдела производства",
+    email: "nc@birka-market.ru",
+    phone: "+7 916 676-27-21",
+    photo: "/images/team/nikita.jpg",
   },
   {
     name: "Алёна Аверьянова",
-    role: "Производство",
+    role: "Производственник",
     photo: "/images/team/alena.jpg",
   },
 ];
