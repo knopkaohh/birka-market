@@ -6,7 +6,7 @@ const partners = [
   { name: "Lemana Pro", src: "/images/partners/lemana.svg" },
   { name: "Sonox", src: "/images/partners/sonox.png" },
   { name: "Votex", src: "/images/partners/votex.svg" },
-  { name: "АФК Система", src: "/images/partners/logo-dark.png" },
+  { name: "АФК Система", src: "/images/partners/sistema.png" },
 ];
 
 /** Бегущая строка партнёров; на узком экране та же лента становится сеткой. */
