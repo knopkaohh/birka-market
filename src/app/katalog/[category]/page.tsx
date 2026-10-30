@@ -31,7 +31,8 @@ export default async function CategoryPage({ params }: { params: Promise<Params>
 
   return (
     <>
-      <div className="inner-page">
+      <div className="inner-page tone-page">
+        <div className="tone-glow" aria-hidden="true" />
         <div className="catalog-section-head catalog-page-head">
           <div>
             <Breadcrumbs items={[{ href: "/katalog", label: "Каталог" }, { label: item.name }]} />

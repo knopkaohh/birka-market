@@ -3,7 +3,8 @@ import Link from "next/link";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Breadcrumbs } from "@/components/breadcrumbs";
 import { CalculatorBlock } from "@/components/calculator-block";
-import { faqItems } from "@/lib/site";
+import { SoftQuotes } from "@/components/soft-quotes";
+import { company, faqItems } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Вопросы о тираже, сроках и оплате",
@@ -14,7 +15,8 @@ export const metadata: Metadata = {
 export default function FaqPage() {
   return (
     <>
-      <div className="inner-page">
+      <div className="inner-page tone-page">
+        <div className="tone-glow" aria-hidden="true" />
         <div className="inner-hero">
           <Breadcrumbs items={[{ label: "FAQ" }]} />
           <span className="section-number">ВОПРОСЫ</span>
@@ -25,6 +27,13 @@ export default function FaqPage() {
           </h1>
           <p>Не нашли ответ — оставьте заявку. Менеджер и технолог разберут задачу: материал, сгиб и тираж.</p>
         </div>
+        <SoftQuotes
+          items={[
+            { text: "Напишите, что производите и куда встанет бирка. Материал подскажем.", sign: "С чего начать" },
+            { text: "Если файла нет, подготовку посчитаем отдельно и назовём срок до запуска.", sign: "Про файл" },
+            { text: `Менеджер отвечает за ${company.replyIn} в рабочее время.`, sign: "Связь" },
+          ]}
+        />
         <Accordion className="faq-list">
           {faqItems.map((item, index) => (
             <AccordionItem value={`item-${index}`} key={item.q} className="faq-item">

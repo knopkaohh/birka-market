@@ -55,7 +55,8 @@ export default async function NewsArticlePage({ params }: { params: Promise<Para
 
   return (
     <>
-      <article className="inner-page news-article">
+      <article className="inner-page news-article tone-page">
+        <div className="tone-glow" aria-hidden="true" />
         <div className="inner-hero">
           <Breadcrumbs
             items={[

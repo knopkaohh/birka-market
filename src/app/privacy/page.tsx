@@ -9,7 +9,8 @@ export const metadata: Metadata = {
 
 export default function PrivacyPage() {
   return (
-    <div className="inner-page prose-page">
+    <div className="inner-page prose-page tone-page">
+      <div className="tone-glow" aria-hidden="true" />
       <Breadcrumbs items={[{ label: "Конфиденциальность" }]} />
       <h1>
         Политика обработки персональных <em>данных</em>
@@ -24,7 +25,7 @@ export default function PrivacyPage() {
         необходимых для доставки, связи и требований закона.
       </p>
       <p>
-        Заявка хранится на стороне сайта до передачи в рабочий контур менеджера. Вы можете запросить уточнение или
+        Заявка хранится на стороне сайта, пока менеджер не заберёт её в работу. Вы можете запросить уточнение или
         удаление данных, написав на {company.email}.
       </p>
       <p>

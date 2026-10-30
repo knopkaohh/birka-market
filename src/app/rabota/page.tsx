@@ -99,7 +99,7 @@ export default function JobsPage() {
       <section className="jobs-form-block" id="otklik">
         <span className="section-number">ФОРМА ОТКЛИКА</span>
         <h2>Оставьте отклик</h2>
-        <p>Имя, город, возраст и короткий рассказ о себе. Номер можно указать любой — городской или из другого города.</p>
+        <p>Имя, город, возраст и короткий рассказ. Номер можно указать любой.</p>
         <div className="gold-frame">
           <GoldRun items={jobLines} />
           <JobApplication part="form" />

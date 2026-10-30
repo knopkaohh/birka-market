@@ -4,6 +4,7 @@ import Link from "next/link";
 import { ArrowDownRight } from "lucide-react";
 import { Breadcrumbs } from "@/components/breadcrumbs";
 import { CalculatorBlock } from "@/components/calculator-block";
+import { SoftQuotes } from "@/components/soft-quotes";
 import { formatNewsDate, newsPosts } from "@/lib/news";
 
 export const metadata: Metadata = {
@@ -24,7 +25,8 @@ export const metadata: Metadata = {
 export default function NewsPage() {
   return (
     <>
-      <div className="inner-page">
+      <div className="inner-page tone-page">
+        <div className="tone-glow" aria-hidden="true" />
         <div className="inner-hero">
           <Breadcrumbs items={[{ label: "Новости" }]} />
           <span className="section-number">НОВОСТИ</span>
@@ -35,6 +37,13 @@ export default function NewsPage() {
           </h1>
           <p>Акции, выставки и заметки с производства: что делаем и куда ездим.</p>
         </div>
+        <SoftQuotes
+          items={[
+            { text: "Акции, выставки и то, что вышло с производства.", sign: "О чём пишем" },
+            { text: "Сроки в заметках совпадают с тем, что назовёт менеджер в расчёте.", sign: "По делу" },
+            { text: "Нужен тираж — заявка внизу страницы.", sign: "Расчёт" },
+          ]}
+        />
         <div className="news-grid">
           {newsPosts.map((post) => (
             <Link key={post.slug} href={`/novosti/${post.slug}`} className="news-card">

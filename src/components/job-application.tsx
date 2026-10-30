@@ -206,7 +206,7 @@ export function JobApplication({ part = "all" }: { part?: "form" | "direct" | "a
               type="tel"
               inputMode="tel"
               autoComplete="tel"
-              placeholder="Любой город, мобильный или городской"
+              placeholder="Мобильный или городской"
               value={phone}
               aria-invalid={invalid === "phone" || undefined}
               onChange={(event) => onPhone(event.target.value)}
@@ -240,15 +240,25 @@ export function JobApplication({ part = "all" }: { part?: "form" | "direct" | "a
             <label htmlFor="job-previous">Где работали ранее</label>
             <input id="job-previous" name="previous" aria-invalid={invalid === "previous" || undefined} required />
           </div>
-          <div className="jobs-field full">
-            <label htmlFor="job-sales">
-              Опыт в продажах (если есть — опишите, если нет — напишите о своих сильных сторонах)
-            </label>
-            <textarea id="job-sales" name="sales" aria-invalid={invalid === "sales" || undefined} required />
+          <div className="jobs-field span-2">
+            <label htmlFor="job-sales">Опыт в продажах или сильные стороны</label>
+            <textarea
+              id="job-sales"
+              name="sales"
+              placeholder="Если опыта нет — напишите, в чём вы сильны"
+              aria-invalid={invalid === "sales" || undefined}
+              required
+            />
           </div>
-          <div className="jobs-field full">
-            <label htmlFor="job-about">Кратко о себе / резюме</label>
-            <textarea id="job-about" name="about" aria-invalid={invalid === "about" || undefined} required />
+          <div className="jobs-field span-2">
+            <label htmlFor="job-about">Кратко о себе</label>
+            <textarea
+              id="job-about"
+              name="about"
+              placeholder="Чем хотите заниматься и что важно в работе"
+              aria-invalid={invalid === "about" || undefined}
+              required
+            />
           </div>
           <label className="jobs-consent jobs-field full">
             <input

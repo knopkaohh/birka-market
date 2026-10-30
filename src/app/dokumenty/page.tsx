@@ -10,7 +10,8 @@ export const metadata: Metadata = {
 
 export default function DocumentsPage() {
   return (
-    <div className="inner-page prose-page">
+    <div className="inner-page prose-page tone-page">
+      <div className="tone-glow" aria-hidden="true" />
       <Breadcrumbs items={[{ label: "Документы" }]} />
       <h1 className="type-title">Документы</h1>
       <p className="type-body">Реквизиты, по которым можно сверить счёт и договор.</p>

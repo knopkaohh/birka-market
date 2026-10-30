@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Breadcrumbs } from "@/components/breadcrumbs";
 import { CalculatorBlock } from "@/components/calculator-block";
+import { SoftQuotes } from "@/components/soft-quotes";
 import { company } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -12,7 +13,8 @@ export const metadata: Metadata = {
 export default function DeliveryPage() {
   return (
     <>
-      <div className="inner-page">
+      <div className="inner-page tone-page">
+        <div className="tone-glow" aria-hidden="true" />
         <div className="inner-hero">
           <Breadcrumbs items={[{ label: "Доставка" }]} />
           <span className="section-number">ДОСТАВКА</span>
@@ -23,6 +25,13 @@ export default function DeliveryPage() {
           </h1>
           <p>Готовый тираж отправляем курьером и транспортными компаниями или выдаём на складе в Москве.</p>
         </div>
+        <SoftQuotes
+          items={[
+            { text: "Трек-номер присылаем в день отгрузки.", sign: "По России" },
+            { text: "Курьер по Москве приезжает в удобный слот после готовности.", sign: "По Москве" },
+            { text: "Забрать заказ можно со склада на Строительном проезде.", sign: "Самовывоз" },
+          ]}
+        />
         <div className="content-grid gold-cards">
           <article>
             <h2>Сроки</h2>

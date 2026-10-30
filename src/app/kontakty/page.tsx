@@ -2,6 +2,7 @@ import Image from "next/image";
 import type { Metadata } from "next";
 import { Breadcrumbs } from "@/components/breadcrumbs";
 import { CalculatorBlock } from "@/components/calculator-block";
+import { SoftQuotes } from "@/components/soft-quotes";
 import { YandexMap } from "@/components/yandex-map";
 import { company, team } from "@/lib/site";
 
@@ -14,7 +15,8 @@ export const metadata: Metadata = {
 export default function ContactsPage() {
   return (
     <>
-      <div className="inner-page">
+      <div className="inner-page tone-page">
+        <div className="tone-glow" aria-hidden="true" />
         <div className="inner-hero">
           <Breadcrumbs items={[{ label: "Контакты" }]} />
           <span className="section-number">КОНТАКТЫ</span>
@@ -25,6 +27,13 @@ export default function ContactsPage() {
           </h1>
           <p>Менеджер поможет выбрать материал и оформить заказ. Срок и тираж подтверждаем до запуска в производство.</p>
         </div>
+        <SoftQuotes
+          items={[
+            { text: "Один менеджер ведёт заказ от первого звонка до отгрузки.", sign: "Как отвечаем" },
+            { text: `В рабочее время перезваниваем за ${company.replyIn}.`, sign: "Срок ответа" },
+            { text: "Офис и склад — Строительный проезд, дом 2, строение 1.", sign: "Куда ехать" },
+          ]}
+        />
         <div className="contact-board">
           <a href={company.phoneHref}>
             <span>ТЕЛЕФОН</span>
