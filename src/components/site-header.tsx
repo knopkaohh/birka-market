@@ -61,7 +61,7 @@ export function SiteHeader({
   }, [onHome]);
 
   return (
-    <header ref={headerRef} className={`site-header${onHome && overVideo ? " is-over-video" : ""}`}>
+    <header ref={headerRef} className={`site-header${onHome ? " is-home" : ""}${onHome && overVideo ? " is-over-video" : ""}`}>
       <div className="header-inner">
         <p className="header-brandlab">
           лаборатория <em>брендов</em>

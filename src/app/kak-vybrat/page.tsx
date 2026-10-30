@@ -128,10 +128,10 @@ export default function GuidePage() {
             </p>
           </div>
           <div className="guide-folds">
-            {folds.map((item) => (
+            {folds.map((item, index) => (
               <article key={item.id}>
-                <div className="guide-fold-photo">
-                  <Image src={item.image} alt={`${item.name}: ${item.fold}`} fill sizes="(max-width: 760px) 100vw, 25vw" />
+                <div className="guide-fold-mark" aria-hidden="true">
+                  {String(index + 1).padStart(2, "0")}
                 </div>
                 <span>{item.fold}</span>
                 <h3>{item.name}</h3>
