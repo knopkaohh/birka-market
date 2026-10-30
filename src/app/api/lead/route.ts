@@ -1,7 +1,7 @@
 import { mkdir, writeFile } from "fs/promises";
 import path from "path";
 import { NextResponse } from "next/server";
-import { LEAD_GOAL, MAX_FILE_BYTES, validateLeadInput, type LeadRecord } from "@/lib/lead";
+import { LEAD_GOAL, MAX_FILE_BYTES, validateJobApplication, validateLeadInput, type LeadRecord } from "@/lib/lead";
 import { getProduct } from "@/lib/site";
 
 export async function POST(request: Request) {
@@ -14,8 +14,17 @@ export async function POST(request: Request) {
   const minQty = product?.minQty ?? 1;
   const quick = String(form.get("quick") ?? "") === "1";
   const phoneOnly = String(form.get("phoneOnly") ?? "") === "1";
+  const job = String(form.get("job") ?? "") === "1";
+  const city = String(form.get("city") ?? "").trim();
+  const age = String(form.get("age") ?? "").trim();
+  const previousWork = String(form.get("previous") ?? "").trim();
+  const sales = String(form.get("sales") ?? "").trim();
+  const about = String(form.get("about") ?? "").trim();
+  const consent = String(form.get("consent") ?? "") === "1";
 
-  const check = validateLeadInput({ phone, quantity, minQty, name, quick, phoneOnly });
+  const check = job
+    ? validateJobApplication({ name, phone, city, age, previousWork, sales, about, consent })
+    : validateLeadInput({ phone, quantity, minQty, name, quick, phoneOnly });
   if (!check.ok) {
     return NextResponse.json({ ok: false, message: check.message }, { status: 400 });
   }
@@ -35,13 +44,25 @@ export async function POST(request: Request) {
 
   const lead: LeadRecord = {
     createdAt: new Date().toISOString(),
-    product: productSlug,
-    productName: phoneOnly ? "Консультация по выбору" : product?.name ?? "Нужна помощь с выбором",
-    quantity: phoneOnly || quick ? 0 : quantity,
+    product: job ? "job" : productSlug,
+    productName: job
+      ? "Отклик на работу"
+      : phoneOnly
+        ? "Консультация по выбору"
+        : product?.name ?? "Нужна помощь с выбором",
+    quantity: job || phoneOnly || quick ? 0 : quantity,
     name,
     phone,
     contact: String(form.get("contact") ?? "phone"),
-    comment: String(form.get("comment") ?? ""),
+    comment: job
+      ? [
+          `Город: ${city}`,
+          `Возраст: ${age}`,
+          `Где работали ранее: ${previousWork}`,
+          `Опыт в продажах: ${sales}`,
+          `О себе: ${about}`,
+        ].join("\n")
+      : String(form.get("comment") ?? ""),
     variant: String(form.get("variant") ?? ""),
     size: String(form.get("size") ?? ""),
     colors: String(form.get("colors") ?? ""),

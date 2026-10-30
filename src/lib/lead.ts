@@ -24,6 +24,41 @@ export type LeadValidation =
   | { ok: true }
   | { ok: false; message: string };
 
+export function validateJobApplication({
+  name,
+  phone,
+  city,
+  age,
+  previousWork,
+  sales,
+  about,
+  consent,
+}: {
+  name: string;
+  phone: string;
+  city: string;
+  age: string;
+  previousWork: string;
+  sales: string;
+  about: string;
+  consent: boolean;
+}): LeadValidation {
+  const years = Number(age);
+  if (!consent) return { ok: false, message: "Нужно согласие на обработку персональных данных." };
+  if (name.trim().length < 2 || name.length > 120) return { ok: false, message: "Укажите имя." };
+  if (!isCompleteRuPhone(phone)) return { ok: false, message: "Укажите номер телефона." };
+  if (city.trim().length < 2 || city.length > 80) return { ok: false, message: "Укажите город." };
+  if (!/^\d{2}$/.test(age) || years < 14 || years > 80) return { ok: false, message: "Укажите возраст." };
+  if (previousWork.trim().length < 2 || previousWork.length > 2000) {
+    return { ok: false, message: "Напишите, где работали ранее." };
+  }
+  if (sales.trim().length < 2 || sales.length > 2000) {
+    return { ok: false, message: "Опишите опыт в продажах или сильные стороны." };
+  }
+  if (about.trim().length < 2 || about.length > 4000) return { ok: false, message: "Кратко расскажите о себе." };
+  return { ok: true };
+}
+
 export function validateLeadInput({
   phone,
   quantity,

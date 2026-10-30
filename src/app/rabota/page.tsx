@@ -1,93 +1,54 @@
 import type { Metadata } from "next";
 import { Breadcrumbs } from "@/components/breadcrumbs";
-import { company } from "@/lib/site";
+import { JobApplication, JobsMotion, JobsReveal } from "@/components/job-application";
 
 export const metadata: Metadata = {
   title: "Работа у нас",
   description:
-    "Приглашаем в команду продаж Бирка Маркет. Ищем молодых людей с опытом продаж, без опыта научим на совещаниях. В цех не набираем. Телефон +7 495 003-88-81.",
+    "Команда БИРКА МАРКЕТ. Производитель комплексных решений для брендов одежды и бизнеса. Расширяем команду и ждём отклик.",
 };
 
-const paths = [
-  {
-    n: "01",
-    kicker: "Кого зовём",
-    title: (
-      <>
-        Молодых <em>продавцов</em>
-      </>
-    ),
-    text: "Ищем живых людей с характером. Опыт продаж желателен: умеете слушать, держать разговор и доводить клиента до заказа. Энергия здесь важнее длинного стажа.",
-  },
-  {
-    n: "02",
-    kicker: "Если опыта нет",
-    title: (
-      <>
-        Научим на <em>совещаниях</em>
-      </>
-    ),
-    text: "Собираемся и разбираем продажи по-настоящему: что предлагаем, как об этом говорить, зачем клиенту этот материал, срок и тираж. Это учёба для менеджеров, а не планёрка для галочки.",
-  },
-  {
-    n: "03",
-    kicker: "Куда не берём",
-    title: (
-      <>
-        В цех — <em>никого</em>
-      </>
-    ),
-    text: "Производство укомплектовано, в цех набор закрыт. Открыты места в продажах: в офисе в Москве и удалённо, из своего города.",
-  },
-] as const;
+const expectations = [
+  "Для нас энергия, горящие глаза и желание развиваться важнее, чем огромный стаж и десятки лет опыта. Если есть стремление — всему научим и поможем адаптироваться на старте!",
+  "Тех, кто любит живое общение с людьми и умеет слышать клиента.",
+  "Внимательных к мелочам, качеству и эстетике брендов.",
+];
 
 export default function JobsPage() {
   return (
-    <div className="inner-page">
-      <div className="inner-hero">
+    <JobsMotion>
+      <JobsReveal className="inner-hero">
         <Breadcrumbs items={[{ label: "Работа у нас" }]} />
         <span className="section-number">КОМАНДА</span>
         <h1>
-          Приглашаем
+          Команда
           <br />
-          <em>в команду</em>
+          <em>БИРКА МАРКЕТ</em>
         </h1>
+        <p>БИРКА МАРКЕТ — производитель комплексных решений для брендов одежды и бизнеса.</p>
         <p>
-          Мы расширяем команду продаж. Бирка Маркет производит многое: бирки и ярлыки, упаковку, фурнитуру, мерч и
-          полиграфию. Ищем молодых людей, желательно с опытом продаж. Если опыта ещё нет — научим.
+          Мы создаём бирки, упаковку, полиграфию, мерч, корпоративную продукцию, фурнитуру и различные виды нанесения
+          на текстиль.
         </p>
-        <div className="jobs-contacts">
-          <a className="jobs-phone" href={company.phoneHref}>
-            {company.phone}
-          </a>
-          <a className="jobs-mail" href={`mailto:${company.email}`}>
-            {company.email}
-          </a>
-          <span>
-            {company.address}. Звоните {company.hours.toLowerCase()}.
-          </span>
-        </div>
-      </div>
+        <p>
+          Наш проект активно растёт и масштабируется, поэтому мы расширяем команду и ищем близких по духу людей!
+        </p>
+      </JobsReveal>
 
-      <svg className="jobs-thread" viewBox="0 0 1000 20" preserveAspectRatio="none" aria-hidden="true">
-        <path d="M8 10 H992" />
-      </svg>
+      <section className="jobs-expect" aria-labelledby="jobs-expect-title">
+        <JobsReveal as="h2" id="jobs-expect-title">
+          Кого мы ждём
+        </JobsReveal>
+        <ul className="jobs-cards">
+          {expectations.map((text, index) => (
+            <JobsReveal as="li" className="jobs-card" delay={index} key={text}>
+              {text}
+            </JobsReveal>
+          ))}
+        </ul>
+      </section>
 
-      <ol className="jobs-paths">
-        {paths.map((item) => (
-          <li key={item.n}>
-            <span className="jobs-index">{item.n}</span>
-            <span className="jobs-kicker">{item.kicker}</span>
-            <h2>{item.title}</h2>
-            <p>{item.text}</p>
-          </li>
-        ))}
-      </ol>
-
-      <p className="jobs-afterword">
-        Длинную анкету заполнять не нужно. Позвоните или пришлите коротко о себе и резюме — расскажем, какие места
-        открыты и на каких условиях.
-      </p>
-    </div>
+      <JobApplication />
+    </JobsMotion>
   );
 }
