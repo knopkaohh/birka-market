@@ -71,6 +71,7 @@ export const tickerItems = [
   { label: "КОРОБКИ", href: "/cardboardbox" },
   { label: "ЖУРНАЛЫ", href: "/magazine" },
   { label: "DTF-ПЕЧАТЬ", href: "/directtofilm" },
+  { label: "СОЗДАНИЕ САЙТОВ", href: "/sozdanie-sajtov" },
 ] as const;
 
 export type Product = {
@@ -130,6 +131,13 @@ export const categories = [
     name: "Нанесение и патчи",
     intro: "DTF, FlexTran, вышивка, шелкография и ПВХ-патчи. Плоский знак на ткани или объёмная эмблема.",
     image: "/images/products/flextran.jpg",
+  },
+  {
+    slug: "sajty",
+    name: "Создание сайтов",
+    intro:
+      "Сайты для брендов одежды и компаний. Собираем структуру и визуальный стиль, чтобы с первого экрана было понятно, кто вы и как с вами связаться.",
+    image: "/images/websites/site-02.jpg",
   },
 ] as const;
 
@@ -629,6 +637,22 @@ export const products: Product[] = [
     minQty: 1,
     leadTime: "3–6 рабочих дней",
     features: ["До 320 см", "Улица и интерьер", "Люверсы и размер", "Яркая печать"],
+  },
+  {
+    slug: "sozdanie-sajtov",
+    name: "Создание сайтов",
+    shortName: "Создание сайтов",
+    category: "sajty",
+    type: "Сайты для брендов",
+    summary:
+      "Бирка Маркет делает сайты для брендов одежды и компаний. Собираем структуру и визуальный стиль так, чтобы ассортимент, производство и способ связи считывались с первого экрана.",
+    description:
+      "Расскажите о фирме и задаче сайта. Посмотрим вводные и предложим, как собрать страницы под ваш бренд. Объём, стиль и способ связи обсуждаем до старта.",
+    image: "/images/websites/site-05.jpg",
+    sample: false,
+    minQty: 1,
+    leadTime: "по задаче",
+    features: ["Бренды одежды и компании", "Структура и стиль", "Заявка на обсуждение"],
   },
 ];
 

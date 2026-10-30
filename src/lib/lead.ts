@@ -59,6 +59,50 @@ export function validateJobApplication({
   return { ok: true };
 }
 
+export const websiteCurrentOptions = [
+  "Нет сайта",
+  "Есть сайт, нужна новая версия",
+  "Есть сайт, нужны правки",
+] as const;
+
+export function validateWebsiteRequest({
+  companyName,
+  style,
+  purpose,
+  currentSite,
+  name,
+  phone,
+  comment,
+  consent,
+}: {
+  companyName: string;
+  style: string;
+  purpose: string;
+  currentSite: string;
+  name: string;
+  phone: string;
+  comment: string;
+  consent: boolean;
+}): LeadValidation {
+  if (!consent) return { ok: false, message: "Нужно согласие на обработку персональных данных." };
+  if (companyName.trim().length < 2 || companyName.length > 160) {
+    return { ok: false, message: "Укажите название фирмы." };
+  }
+  if (style.trim().length < 2 || style.length > 400) {
+    return { ok: false, message: "Опишите, какой стиль сайта хотели бы." };
+  }
+  if (purpose.trim().length < 2 || purpose.length > 400) {
+    return { ok: false, message: "Напишите, для чего нужен сайт." };
+  }
+  if (!websiteCurrentOptions.includes(currentSite as (typeof websiteCurrentOptions)[number])) {
+    return { ok: false, message: "Укажите, есть ли сайт сейчас." };
+  }
+  if (name.trim().length < 2 || name.length > 120) return { ok: false, message: "Укажите имя." };
+  if (!isCompleteRuPhone(phone)) return { ok: false, message: "Укажите номер телефона." };
+  if (comment.length > 2000) return { ok: false, message: "Комментарий слишком длинный." };
+  return { ok: true };
+}
+
 export function validateLeadInput({
   phone,
   quantity,

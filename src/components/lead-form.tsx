@@ -73,7 +73,7 @@ function MaterialPicker({
           >
             Нужна помощь с выбором
           </button>
-          {categories.map((category) => {
+          {categories.filter((category) => category.slug !== "sajty").map((category) => {
             const items = productsByCategory(category.slug);
             const isOpen = opened === category.slug;
             return (

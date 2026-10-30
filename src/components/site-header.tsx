@@ -63,6 +63,9 @@ export function SiteHeader({
   return (
     <header ref={headerRef} className={`site-header${onHome && overVideo ? " is-over-video" : ""}`}>
       <div className="header-inner">
+        <p className="header-brandlab">
+          лаборатория <em>брендов</em>
+        </p>
         <Link
           className="header-slogan"
           href="/"
@@ -85,9 +88,7 @@ export function SiteHeader({
               key={item.href}
               href={item.href}
               prefetch={false}
-              className={["is-active", "is-compact"]
-                .filter((name) => (name === "is-active" ? isActive(item.href) : item.href === "/rabota"))
-                .join(" ") || undefined}
+              className={isActive(item.href) ? "is-active" : undefined}
             >
               {item.label}
             </Link>

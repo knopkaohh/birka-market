@@ -82,6 +82,13 @@ function MenuIcon({ slug }: { slug: string }) {
         <path d="M7.4 18.4v-.9a4.6 4.6 0 0 1 9.2 0v.9" />
       </>
     ),
+    sajty: (
+      <>
+        <rect x="4.6" y="5.4" width="14.8" height="12.2" rx="1.6" />
+        <path d="M4.6 9h14.8" />
+        <path d="M7.4 7.2h.01M9.4 7.2h.01" />
+      </>
+    ),
   };
   return (
     <svg className="side-icon" viewBox="0 0 24 24" aria-hidden="true">
@@ -240,7 +247,7 @@ export function SidebarMenu({ open, onClose }: SidebarMenuProps) {
             </Link>
             <Link
               href="/rabota"
-              className={`side-main-link is-compact ${pathname.startsWith("/rabota") ? "is-open" : ""}`}
+              className={`side-main-link ${pathname.startsWith("/rabota") ? "is-open" : ""}`}
               prefetch={false}
               onClick={onClose}
             >

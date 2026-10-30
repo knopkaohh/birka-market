@@ -16,7 +16,9 @@ type Search = {
 };
 
 export function generateStaticParams() {
-  return products.filter((item) => item.slug !== "jacquard").map((item) => ({ slug: item.slug }));
+  return products
+    .filter((item) => item.slug !== "jacquard" && item.slug !== "sozdanie-sajtov")
+    .map((item) => ({ slug: item.slug }));
 }
 
 export async function generateMetadata({ params }: { params: Promise<Params> }): Promise<Metadata> {

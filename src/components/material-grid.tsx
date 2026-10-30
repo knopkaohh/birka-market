@@ -11,7 +11,8 @@ import { products } from "@/lib/site";
 export function MaterialGrid() {
   const router = useRouter();
   const [front, setFront] = useState(0);
-  const items = products.map((product) => {
+  const materials = products.filter((product) => product.category !== "sajty");
+  const items = materials.map((product) => {
     const photo = importedPhotos[product.slug]?.[0];
     return {
       src: photo?.src ?? product.image,
@@ -20,7 +21,7 @@ export function MaterialGrid() {
       subtitle: product.summary,
     };
   });
-  const current = products[front] ?? products[0];
+  const current = materials[front] ?? materials[0];
 
   return (
     <section className="section materials-section" id="materials">
@@ -60,7 +61,7 @@ export function MaterialGrid() {
           cornerRadius={12}
           onChange={setFront}
           onItemClick={(_item, index) => {
-            const product = products[index];
+            const product = materials[index];
             if (product) router.push(`/${product.slug}`);
           }}
         />
