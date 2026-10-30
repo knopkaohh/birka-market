@@ -1,4 +1,4 @@
-import { isCompleteRuPhone } from "@/lib/phone";
+import { isCompleteRuPhone, isReachablePhone } from "@/lib/phone";
 
 export const LEAD_GOAL = "LEAD";
 export const MAX_FILE_BYTES = 15 * 1024 * 1024;
@@ -46,7 +46,7 @@ export function validateJobApplication({
   const years = Number(age);
   if (!consent) return { ok: false, message: "Нужно согласие на обработку персональных данных." };
   if (name.trim().length < 2 || name.length > 120) return { ok: false, message: "Укажите имя." };
-  if (!isCompleteRuPhone(phone)) return { ok: false, message: "Укажите номер телефона." };
+  if (!isReachablePhone(phone)) return { ok: false, message: "Укажите номер телефона." };
   if (city.trim().length < 2 || city.length > 80) return { ok: false, message: "Укажите город." };
   if (!/^\d{2}$/.test(age) || years < 14 || years > 80) return { ok: false, message: "Укажите возраст." };
   if (previousWork.trim().length < 2 || previousWork.length > 2000) {

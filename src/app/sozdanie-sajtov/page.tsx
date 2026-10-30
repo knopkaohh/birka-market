@@ -3,6 +3,7 @@ import { ArrowRight } from "lucide-react";
 import { Breadcrumbs } from "@/components/breadcrumbs";
 import DriftWall from "@/components/fx/DriftWall";
 import { GoldEnd } from "@/components/gold-end";
+import { GoldRun } from "@/components/gold-run";
 import { WebsiteRequest } from "@/components/website-request";
 
 export const metadata: Metadata = {
@@ -11,6 +12,28 @@ export const metadata: Metadata = {
     "Бирка Маркет делает сайты для брендов, фирм и компаний любых направлений. Оставьте заявку — обсудим структуру, стиль и способ связи.",
   alternates: { canonical: "https://birka-market.ru/sozdanie-sajtov" },
 };
+
+const siteLines = [
+  "САЙТЫ ДЛЯ ЛЮБОЙ ЗАДАЧИ",
+  "БРЕНДЫ, ФИРМЫ И КОМПАНИИ",
+  "С НУЛЯ СОБЕРЁМ ПОДАЧУ",
+  "ПОЛНЫЙ ЦИКЛ",
+];
+
+const siteQuotes = [
+  {
+    text: "С нуля соберём ваш бренд: от первой бирки и упаковки до сайта, который его представляет.",
+    sign: "Бирка Маркет",
+  },
+  {
+    text: "Полный цикл для бренда, фирмы и компании любого направления. Одна команда на производство и страницу.",
+    sign: "Как мы работаем",
+  },
+  {
+    text: "Слышим, чем вы занимаетесь, и показываем это с первого экрана — ясно, спокойно и в вашем характере.",
+    sign: "Про сайт",
+  },
+];
 
 const heroPhotos = [
   { image: "/images/websites/site-01.jpg", title: "Пример сайта бренда" },
@@ -78,18 +101,32 @@ export default function WebsitePage() {
         </div>
       </section>
 
-      <section className="jq-section" id="zayavka">
-        <div className="jq-heading">
-          <span className="section-number">01 / ЗАЯВКА</span>
-          <h2>
-            <GoldEnd text="Расскажите о задаче сайта" />
-          </h2>
-          <p>
-            Напишите, для чего нужен сайт и какой стиль ближе. Если сайт уже есть, отметьте это в форме. Мы
-            посмотрим вводные и свяжемся, чтобы обсудить страницы и подачу.
-          </p>
+      <section className="site-apply" id="zayavka">
+        <div className="site-apply-main">
+          <div className="jq-heading">
+            <span className="section-number">01 / ЗАЯВКА</span>
+            <h2>
+              <GoldEnd text="Расскажите о задаче сайта" />
+            </h2>
+            <p>
+              Напишите, для чего нужен сайт и какой стиль ближе. Если сайт уже есть, отметьте это в форме. Мы
+              посмотрим вводные и свяжемся, чтобы обсудить страницы и подачу.
+            </p>
+          </div>
+          <div className="gold-frame">
+            <GoldRun items={siteLines} />
+            <WebsiteRequest />
+            <GoldRun items={siteLines} reverse />
+          </div>
         </div>
-        <WebsiteRequest />
+        <ul className="site-quotes">
+          {siteQuotes.map((quote) => (
+            <li className="site-quote" key={quote.sign}>
+              <p>«{quote.text}»</p>
+              <span>{quote.sign}</span>
+            </li>
+          ))}
+        </ul>
       </section>
     </>
   );

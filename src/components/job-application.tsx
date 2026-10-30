@@ -12,7 +12,7 @@ import {
 import { createPortal } from "react-dom";
 import { TelegramIcon } from "@/components/messenger-icons";
 import { trackLeadConversion } from "@/lib/analytics";
-import { formatRuPhone, isCompleteRuPhone } from "@/lib/phone";
+import { formatRuPhone, isReachablePhone } from "@/lib/phone";
 import { company } from "@/lib/site";
 
 type RevealTag = "div" | "li" | "h2" | "section";
@@ -79,8 +79,8 @@ function VkIcon() {
   );
 }
 
-export function JobApplication() {
-  const [phone, setPhone] = useState("+7");
+export function JobApplication({ part = "all" }: { part?: "form" | "direct" | "all" }) {
+  const [phone, setPhone] = useState("");
   const [age, setAge] = useState("");
   const [consent, setConsent] = useState(false);
   const [status, setStatus] = useState<"idle" | "sending" | "done" | "error">("idle");
@@ -116,7 +116,7 @@ export function JobApplication() {
     if (name.length < 2) {
       message = "Укажите имя.";
       field = "name";
-    } else if (!isCompleteRuPhone(phone)) {
+    } else if (!isReachablePhone(phone)) {
       message = "Укажите номер телефона.";
       field = "phone";
     } else if (city.length < 2) {
@@ -158,7 +158,7 @@ export function JobApplication() {
       const payload = (await response.json().catch(() => null)) as { ok?: boolean; message?: string } | null;
       if (!response.ok || !payload?.ok) throw new Error(payload?.message || "Request failed");
       form.reset();
-      setPhone("+7");
+      setPhone("");
       setAge("");
       setConsent(false);
       setStatus("done");
@@ -173,8 +173,17 @@ export function JobApplication() {
     }
   };
 
-  return (
-    <>
+  const onPhone = (value: string) => {
+    const cleaned = value.replace(/[^\d+\s()-]/g, "").slice(0, 22);
+    const digits = cleaned.replace(/\D/g, "");
+    if (digits.length >= 10 && (digits.startsWith("7") || digits.startsWith("8") || digits.startsWith("9"))) {
+      setPhone(formatRuPhone(cleaned));
+      return;
+    }
+    setPhone(cleaned);
+  };
+
+  const formBlock = (
       <JobsReveal as="section" className="jobs-apply">
         <h2>Отклик</h2>
         <form className="jobs-form" onSubmit={submit} noValidate>
@@ -197,10 +206,10 @@ export function JobApplication() {
               type="tel"
               inputMode="tel"
               autoComplete="tel"
-              placeholder="+7 (___) ___-__-__"
+              placeholder="Любой город, мобильный или городской"
               value={phone}
               aria-invalid={invalid === "phone" || undefined}
-              onChange={(event) => setPhone(formatRuPhone(event.target.value))}
+              onChange={(event) => onPhone(event.target.value)}
               required
             />
           </div>
@@ -266,7 +275,9 @@ export function JobApplication() {
           </div>
         </form>
       </JobsReveal>
+  );
 
+  const directBlock = (
       <JobsReveal as="section" className="jobs-direct" delay={1}>
         <p>
           Удобнее связаться напрямую? Пришлите краткое резюме (указав город, возраст и опыт) на почту или
@@ -285,8 +296,13 @@ export function JobApplication() {
           </div>
         </div>
       </JobsReveal>
+  );
 
-      {status === "done" && typeof document !== "undefined"
+  return (
+    <>
+      {part !== "direct" ? formBlock : null}
+      {part !== "form" ? directBlock : null}
+      {part !== "direct" && status === "done" && typeof document !== "undefined"
         ? createPortal(
             <div className="jobs-thanks" onClick={() => setStatus("idle")}>
               <div

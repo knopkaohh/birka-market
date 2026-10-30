@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
+import { ChevronDown } from "lucide-react";
 import { Breadcrumbs } from "@/components/breadcrumbs";
+import { GoldRun } from "@/components/gold-run";
 import { JobApplication, JobsMotion, JobsReveal } from "@/components/job-application";
 
 export const metadata: Metadata = {
@@ -14,25 +16,44 @@ const expectations = [
   "Внимательных к мелочам, качеству и эстетике брендов.",
 ];
 
+const jobLines = [
+  "КОМАНДА БИРКА МАРКЕТ",
+  "ГОРЯЩИЕ ГЛАЗА ВАЖНЕЕ СТАЖА",
+  "НАУЧИМ НА СТАРТЕ",
+  "СЛЫШАТЬ КЛИЕНТА",
+  "ПОЛНЫЙ ЦИКЛ",
+];
+
 export default function JobsPage() {
   return (
     <JobsMotion>
-      <JobsReveal className="inner-hero">
-        <Breadcrumbs items={[{ label: "Работа у нас" }]} />
-        <span className="section-number">КОМАНДА</span>
-        <h1>
-          Команда
-          <br />
-          <em>БИРКА МАРКЕТ</em>
-        </h1>
-        <p>БИРКА МАРКЕТ — производитель комплексных решений для брендов одежды и бизнеса.</p>
-        <p>
-          Мы создаём бирки, упаковку, полиграфию, мерч, корпоративную продукцию и сайты. С нуля сделаем ваш бренд.
-        </p>
-        <p>
-          Наш проект активно растёт и масштабируется, поэтому мы расширяем команду и ищем близких по духу людей!
-        </p>
-      </JobsReveal>
+      <section className="jobs-hero">
+        <div className="jobs-hero-copy">
+          <Breadcrumbs items={[{ label: "Работа у нас" }]} />
+          <span className="section-number">КОМАНДА</span>
+          <h1>
+            Команда
+            <br />
+            <em>БИРКА МАРКЕТ</em>
+          </h1>
+          <p>БИРКА МАРКЕТ — производитель комплексных решений для брендов одежды и бизнеса.</p>
+          <p>Мы создаём бирки, упаковку, полиграфию, мерч, корпоративную продукцию и сайты. С нуля сделаем ваш бренд.</p>
+          <p>Наш проект активно растёт и масштабируется, поэтому мы расширяем команду и ищем близких по духу людей!</p>
+          <a className="jobs-down" href="#otklik">
+            Оформить отклик
+            <ChevronDown size={18} aria-hidden="true" />
+          </a>
+        </div>
+        <div className="jobs-hero-panel" id="otklik">
+          <div className="gold-frame">
+            <GoldRun items={jobLines} />
+            <JobApplication part="form" />
+            <GoldRun items={jobLines} reverse />
+          </div>
+        </div>
+      </section>
+
+      <GoldRun items={jobLines} />
 
       <section className="jobs-expect" aria-labelledby="jobs-expect-title">
         <JobsReveal as="h2" id="jobs-expect-title">
@@ -41,13 +62,14 @@ export default function JobsPage() {
         <ul className="jobs-cards">
           {expectations.map((text, index) => (
             <JobsReveal as="li" className="jobs-card" delay={index} key={text}>
+              <span>0{index + 1}</span>
               {text}
             </JobsReveal>
           ))}
         </ul>
       </section>
 
-      <JobApplication />
+      <JobApplication part="direct" />
     </JobsMotion>
   );
 }
