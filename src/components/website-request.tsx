@@ -101,7 +101,7 @@ export function WebsiteRequest() {
         <input
           id="site-style"
           name="style"
-          placeholder="Спокойный, яркий, близко к вашему бренду"
+          placeholder="Спокойный, яркий, строгий"
           aria-invalid={invalid === "style" || undefined}
           required
         />
@@ -111,7 +111,7 @@ export function WebsiteRequest() {
         <input
           id="site-purpose"
           name="purpose"
-          placeholder="Витрина бренда, магазин, услуги"
+          placeholder="Услуги, каталог, компания, магазин"
           aria-invalid={invalid === "purpose" || undefined}
           required
         />

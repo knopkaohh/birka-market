@@ -274,24 +274,38 @@ button { cursor: pointer; }
   text-align: center;
   color: #111;
   font-family: var(--font-manrope), Arial, sans-serif;
-  font-weight: 590;
-  font-size: clamp(16px, 1.35vw, 26px);
-  line-height: .88;
-  letter-spacing: -.07em;
+  font-weight: 750;
+  font-size: clamp(13px, 1.05vw, 18px);
+  line-height: 1;
+  letter-spacing: .18em;
+  text-transform: uppercase;
   white-space: nowrap;
   pointer-events: none;
 }
 .header-brandlab em {
   font-family: var(--font-cormorant), Georgia, serif;
   font-style: italic;
-  font-weight: 500;
+  font-weight: 600;
+  letter-spacing: .14em;
   color: var(--yellow);
+}
+.header-brandlab::after {
+  content: "";
+  display: block;
+  width: min(220px, 36%);
+  height: 1px;
+  margin: 8px auto 0;
+  background: linear-gradient(90deg, transparent, rgba(237, 193, 71, .15) 10%, var(--yellow) 32%, var(--yellow) 68%, rgba(237, 193, 71, .15) 90%, transparent);
+}
+@media (min-width: 1101px) {
+  .header-inner { padding-top: 12px; }
+  .header-brandlab { order: 3; margin: 12px 0; }
 }
 @media (max-width: 980px) {
   .header-brandlab { font-size: 14px; }
 }
 .desktop-nav {
-  order: 3;
+  order: 4;
   flex: 1 1 100%;
   display: flex;
   align-items: center;
@@ -1202,11 +1216,14 @@ footer .logo svg { height: 56px; }
     flex: 1 1 100%;
     width: 100%;
     transform: none;
-    padding-bottom: 2px;
-    font-size: 15px;
+    margin: 4px 0 8px;
+    padding-bottom: 0;
+    font-size: 12px;
+    letter-spacing: .14em;
     line-height: 1;
     text-align: center;
   }
+  .header-brandlab::after { width: min(168px, 70%); margin-top: 6px; }
   .logo svg { height: 32px; }
   .header-cta { display: none; }
   .header-actions { flex-direction: row; align-items: center; gap: 8px; }
