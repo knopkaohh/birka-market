@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
+import Image from "next/image";
+import Link from "next/link";
 import { Breadcrumbs } from "@/components/breadcrumbs";
-import { company } from "@/lib/site";
+import { company, team } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Работа у нас",
@@ -33,7 +35,32 @@ export default function JobsPage() {
           <span>Звоните в часы работы офиса: {company.hours}.</span>
         </div>
       </div>
-      <div className="content-grid gold-cards">
+      <div className="jobs-stage">
+        <figure className="jobs-film">
+          <video
+            className="jobs-film-media"
+            autoPlay
+            muted
+            loop
+            playsInline
+            poster="/images/hero-poster.jpg"
+          >
+            <source src="/video/hero.mp4" type="video/mp4" />
+          </video>
+          <figcaption>Цех в Москве</figcaption>
+        </figure>
+        <div className="jobs-stills">
+          <figure className="jobs-still">
+            <Image src="/images/company/cover.jpg" alt="Рулоны ленты на складе производства" fill sizes="420px" />
+            <figcaption>Склад ленты</figcaption>
+          </figure>
+          <figure className="jobs-still">
+            <Image src="/images/jacquard/live-01.jpg" alt="Готовые жаккардовые бирки" fill sizes="420px" />
+            <figcaption>Готовый тираж</figcaption>
+          </figure>
+        </div>
+      </div>
+      <div className="content-grid gold-cards jobs-cards">
         <article>
           <h2>
             Офис и <em>производство</em>
@@ -62,6 +89,28 @@ export default function JobsPage() {
           </p>
         </article>
       </div>
+      <section className="jobs-team" aria-labelledby="jobs-team-title">
+        <h2 id="jobs-team-title" className="block-title">
+          Кто уже <em>в команде</em>
+        </h2>
+        <p className="team-intro">
+          Офис, продажи и цех. Написать можно на общую почту выше или напрямую со страницы{" "}
+          <Link href="/kontakty">контактов</Link>.
+        </p>
+        <div className="team-grid">
+          {team.map((person, index) => (
+            <article key={person.name} style={{ animationDelay: `${index * 70}ms` }}>
+              <div className="team-photo">
+                <Image src={person.photo} alt={person.name} fill sizes="(max-width: 760px) 100vw, 280px" />
+              </div>
+              <div className="team-copy">
+                <h3>{person.name}</h3>
+                <p>{person.role}</p>
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
     </div>
   );
 }
