@@ -291,6 +291,10 @@ button { cursor: pointer; }
 .desktop-nav a::after { display: none; }
 .desktop-nav a:hover,
 .desktop-nav a.is-active { color: #1c1917; background: #f2c555; }
+.desktop-nav a.is-compact { padding: 4px 8px; font-size: 13px; font-weight: 650; }
+@media (min-width: 1500px) {
+  .desktop-nav a.is-compact { padding: 5px 9px; font-size: 14px; }
+}
 .nav-item-mega { position: relative; }
 .mega-menu {
   position: absolute; top: calc(100% + 18px); left: -18px; min-width: 280px;
@@ -3185,6 +3189,7 @@ footer .logo svg { height: 56px; }
   background: transparent;
   color: #fff;
 }
+.side-main-link.is-compact { font-size: 18px; }
 .side-icon {
   width: 20px;
   height: 20px;

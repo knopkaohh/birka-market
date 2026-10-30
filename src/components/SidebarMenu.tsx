@@ -240,7 +240,7 @@ export function SidebarMenu({ open, onClose }: SidebarMenuProps) {
             </Link>
             <Link
               href="/rabota"
-              className={`side-main-link ${pathname.startsWith("/rabota") ? "is-open" : ""}`}
+              className={`side-main-link is-compact ${pathname.startsWith("/rabota") ? "is-open" : ""}`}
               prefetch={false}
               onClick={onClose}
             >

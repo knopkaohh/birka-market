@@ -85,7 +85,9 @@ export function SiteHeader({
               key={item.href}
               href={item.href}
               prefetch={false}
-              className={isActive(item.href) ? "is-active" : undefined}
+              className={["is-active", "is-compact"]
+                .filter((name) => (name === "is-active" ? isActive(item.href) : item.href === "/rabota"))
+                .join(" ") || undefined}
             >
               {item.label}
             </Link>
