@@ -3551,6 +3551,7 @@ footer .logo svg { height: 56px; }
   font-size: clamp(16px, 1.3vw, 20px);
   line-height: 1.5;
 }
+.home-intro p + p { margin-top: 12px; }
 .home-intro h2 em,
 .partners > p em,
 .materials-heading h2 em,
