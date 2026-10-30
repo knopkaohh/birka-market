@@ -1,29 +1,60 @@
 import type { Metadata } from "next";
-import Image from "next/image";
-import Link from "next/link";
 import { Breadcrumbs } from "@/components/breadcrumbs";
-import { company, team } from "@/lib/site";
+import { company } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Работа у нас",
   description:
-    "Вакансии Бирка Маркет: офис и производство в Москве, удалённые онлайн-продажи. Открытые места — по телефону +7 495 003-88-81 или на prod@birka-market.ru.",
+    "Работа в Бирка Маркет: офис и производство в Москве, удалённые продажи. Открытые места — по телефону +7 495 003-88-81 или на prod@birka-market.ru.",
 };
+
+const paths = [
+  {
+    n: "01",
+    kicker: "На месте",
+    title: (
+      <>
+        Офис и <em>цех</em>
+      </>
+    ),
+    text: "День среди ленты, станков и разговоров с клиентами. Здесь видно, как из нитки получается бирка, и можно подержать тираж до отгрузки.",
+  },
+  {
+    n: "02",
+    kicker: "На расстоянии",
+    title: (
+      <>
+        Продажи <em>онлайн</em>
+      </>
+    ),
+    text: "Ведёте бренд из своего города: от первого звонка до согласованного заказа. Цех остаётся в Москве, вам нужны спокойный разговор, телефон и почта.",
+  },
+  {
+    n: "03",
+    kicker: "Без анкеты",
+    title: (
+      <>
+        Короткий <em>отклик</em>
+      </>
+    ),
+    text: "Длинные формы не просим. Позвоните — расскажем, какие места открыты и на каких условиях. Или пришлите несколько строк о себе и резюме.",
+  },
+] as const;
 
 export default function JobsPage() {
   return (
     <div className="inner-page">
       <div className="inner-hero">
         <Breadcrumbs items={[{ label: "Работа у нас" }]} />
-        <span className="section-number">КОМАНДА</span>
+        <span className="section-number">РАБОТА</span>
         <h1>
-          Приглашаем
+          Дело, которое
           <br />
-          <em>в команду</em>
+          <em>остаётся на одежде</em>
         </h1>
         <p>
-          Бирка Маркет производит бирки, ярлыки и маркировку для одежды. Компания растёт, и мы регулярно открываем
-          места в офисе, на производстве и в удалённых продажах.
+          Бирка Маркет производит бирки, ярлыки и маркировку. Тираж рождается в Москве, а разговор с брендом можно
+          начать из любого города. Мы расширяем штат: в офис, в цех и на удалённые продажи.
         </p>
         <div className="jobs-contacts">
           <a className="jobs-phone" href={company.phoneHref}>
@@ -32,85 +63,31 @@ export default function JobsPage() {
           <a className="jobs-mail" href={`mailto:${company.email}`}>
             {company.email}
           </a>
-          <span>Звоните в часы работы офиса: {company.hours}.</span>
+          <span>
+            {company.address}. Звоните {company.hours.toLowerCase()}.
+          </span>
         </div>
       </div>
-      <div className="jobs-stage">
-        <figure className="jobs-film">
-          <video
-            className="jobs-film-media"
-            autoPlay
-            muted
-            loop
-            playsInline
-            poster="/images/hero-poster.jpg"
-          >
-            <source src="/video/hero.mp4" type="video/mp4" />
-          </video>
-          <figcaption>Цех в Москве</figcaption>
-        </figure>
-        <div className="jobs-stills">
-          <figure className="jobs-still">
-            <Image src="/images/company/cover.jpg" alt="Рулоны ленты на складе производства" fill sizes="420px" />
-            <figcaption>Склад ленты</figcaption>
-          </figure>
-          <figure className="jobs-still">
-            <Image src="/images/jacquard/live-01.jpg" alt="Готовые жаккардовые бирки" fill sizes="420px" />
-            <figcaption>Готовый тираж</figcaption>
-          </figure>
-        </div>
-      </div>
-      <div className="content-grid gold-cards jobs-cards">
-        <article>
-          <h2>
-            Офис и <em>производство</em>
-          </h2>
-          <p>
-            Для тех, кто хочет работать с изделием и клиентами на месте. Офис и склад: {company.address}. График:{" "}
-            {company.hours}.
-          </p>
-        </article>
-        <article>
-          <h2>
-            Онлайн-<em>продажи</em>
-          </h2>
-          <p>
-            Удалённый формат: продаёте бирки и ведёте клиентов через интернет, из любого города. Производство остаётся
-            в Москве, связь с командой — по телефону и почте.
-          </p>
-        </article>
-        <article>
-          <h2>
-            Как узнать <em>о вакансиях</em>
-          </h2>
-          <p>
-            Длинные анкеты на сайте не собираем. Позвоните — расскажем, какие места открыты и на каких условиях. Или
-            пришлите коротко о себе и резюме на почту, мы ответим.
-          </p>
-        </article>
-      </div>
-      <section className="jobs-team" aria-labelledby="jobs-team-title">
-        <h2 id="jobs-team-title" className="block-title">
-          Кто уже <em>в команде</em>
-        </h2>
-        <p className="team-intro">
-          Офис, продажи и цех. Написать можно на общую почту выше или напрямую со страницы{" "}
-          <Link href="/kontakty">контактов</Link>.
-        </p>
-        <div className="team-grid">
-          {team.map((person, index) => (
-            <article key={person.name} style={{ animationDelay: `${index * 70}ms` }}>
-              <div className="team-photo">
-                <Image src={person.photo} alt={person.name} fill sizes="(max-width: 760px) 100vw, 280px" />
-              </div>
-              <div className="team-copy">
-                <h3>{person.name}</h3>
-                <p>{person.role}</p>
-              </div>
-            </article>
-          ))}
-        </div>
-      </section>
+
+      <svg className="jobs-thread" viewBox="0 0 1000 20" preserveAspectRatio="none" aria-hidden="true">
+        <path d="M8 10 H992" />
+      </svg>
+
+      <ol className="jobs-paths">
+        {paths.map((item) => (
+          <li key={item.n}>
+            <span className="jobs-index">{item.n}</span>
+            <span className="jobs-kicker">{item.kicker}</span>
+            <h2>{item.title}</h2>
+            <p>{item.text}</p>
+          </li>
+        ))}
+      </ol>
+
+      <p className="jobs-afterword">
+        Если удобнее сначала увидеть, как устроен день, приезжайте в офис. Письмо, отправленное вечером, дождётся утра —
+        и мы ответим.
+      </p>
     </div>
   );
 }
