@@ -2,8 +2,10 @@
 
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
+import { FloatingContact } from "@/components/floating-contact";
+import { InactivityPrompt } from "@/components/InactivityPrompt";
 import { Loader } from "@/components/loader";
-import { SideMenu } from "@/components/side-menu";
+import { SidebarMenu } from "@/components/SidebarMenu";
 import { SiteHeader } from "@/components/site-header";
 import { QuickCalc } from "@/components/quick-calc";
 import { ScrollFX } from "@/components/scroll-fx";
@@ -38,7 +40,7 @@ export function SiteChrome({ children }: { children: React.ReactNode }) {
   return (
     <>
       {pathname === "/" ? <Loader /> : null}
-      <SideMenu open={menuOpen} onClose={() => setMenuOpen(false)} />
+      <SidebarMenu open={menuOpen} onClose={() => setMenuOpen(false)} />
       <SiteHeader
         menuOpen={menuOpen}
         onToggleMenu={() => setMenuOpen((value) => !value)}
@@ -46,6 +48,8 @@ export function SiteChrome({ children }: { children: React.ReactNode }) {
       {children}
       <QuickCalc />
       <ScrollFX />
+      <FloatingContact />
+      <InactivityPrompt />
     </>
   );
 }

@@ -1,15 +1,19 @@
-import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, Check } from "lucide-react";
+import { ArrowRight } from "lucide-react";
+import { GoldEnd } from "@/components/gold-end";
 import { Breadcrumbs } from "@/components/breadcrumbs";
-import { CalcResponder } from "@/components/calc-responder";
-import { LeadForm } from "@/components/lead-form";
+import { CalculatorBlock } from "@/components/calculator-block";
 import { MaterialDetails } from "@/components/material-details";
+import DriftWall from "@/components/fx/DriftWall";
+import { MaterialPhotos } from "@/components/material-photos";
+import { PhotoFrame } from "@/components/photo-frame";
 import type { LandingContent, QuotePrefill } from "@/lib/landings/types";
 import { quoteComment, quoteHref, quoteQuantity } from "@/lib/landings/types";
+import { importedPhotos } from "@/lib/imported-photos";
 import { photoKey } from "@/lib/photo-id";
+import { takeUniquePhoto, usablePhoto } from "@/lib/photos";
 import { landingJsonLd } from "@/lib/seo";
-import { company, getCategory, getProduct } from "@/lib/site";
+import { getCategory, getProduct } from "@/lib/site";
 
 function specRows(
   specs: { title: string; text: string }[],
@@ -43,14 +47,24 @@ export function ProductLanding({
   const selectedVariant = variant ?? content.variants[0]?.id;
   const formKey = [selectedVariant, quote?.qty, quote?.size, quote?.spec, quote?.price].filter(Boolean).join("-");
   const prefillComment = quote ? quoteComment(quote) : "";
-  const usedPhotos = new Set<string>(content.hero.map((src) => photoKey(src)));
-  const gallery = [...content.gallery, ...content.variants.map((item) => ({ src: item.image, alt: item.name })), ...content.onProduct.map((item) => ({ src: item.image, alt: item.title }))].filter((item) => {
-    const key = photoKey(item.src);
-    if (usedPhotos.has(key)) return false;
-    usedPhotos.add(key);
-    return true;
-  });
-  const variantHasPhoto = content.variants.map((item) => !usedPhotos.has(photoKey(item.image)));
+  const live = (importedPhotos[content.slug] ?? []).filter((item) => usablePhoto(item.src));
+  const usedPhotos = new Set<string>();
+  const heroPhoto = live[0]?.src ?? takeUniquePhoto(content.hero[0], usedPhotos);
+  if (live[0]) usedPhotos.add(photoKey(live[0].src));
+  const galleryPhotos = live.length
+    ? live.map((item, index) => ({
+        src: item.src,
+        alt: `${product.shortName}: фото ${index + 1}`,
+        title: product.shortName,
+      }))
+    : content.gallery
+        .filter((item) => usablePhoto(item.src))
+        .map((item) => ({
+          src: item.src,
+          alt: item.alt,
+          title: product.shortName,
+          subtitle: item.alt,
+        }));
 
   return (
     <>
@@ -76,7 +90,7 @@ export function ProductLanding({
             <br />
             <em>{content.titleEm}</em>
           </h1>
-          <p>{content.lead}</p>
+          <p className="jq-material-line">{product.summary}</p>
           <div className="hero-actions">
             <a className="primary-cta" href="#calc">
               Рассчитать заказ
@@ -96,22 +110,56 @@ export function ProductLanding({
           </div>
         </div>
         <div className="jq-hero-visual">
-          <div className="jq-hero-main">
-            <Image src={content.hero[0]} alt={content.heroAlts[0]} fill sizes="(max-width: 900px) 100vw, 50vw" priority />
-          </div>
-          <div className="jq-hero-small">
-            <Image src={content.hero[1]} alt={content.heroAlts[1]} fill sizes="280px" />
-          </div>
-          <div className="jq-hero-mid">
-            <Image src={content.hero[2]} alt={content.heroAlts[2]} fill sizes="240px" />
-          </div>
+          {galleryPhotos.length ? (
+            <DriftWall
+              className="jq-hero-wall"
+              ariaLabel={`Фото работ: ${product.shortName}`}
+              items={galleryPhotos.map((item) => ({
+                image: item.src,
+                title: item.alt || product.shortName,
+              }))}
+              columns={3}
+              tileWidth={300}
+              tileHeight={276}
+              gap={18}
+              tilt={-1}
+              turn={-1}
+              perspective={1200}
+              depth={120}
+              speed={60}
+              direction="up"
+              variance={0.45}
+              parallax={0.6}
+              lift={64}
+              fade={0.06}
+              dim={1}
+              overlayColor="#fffdf8"
+              overlayOpacity={0}
+              radius={17}
+              roll={0}
+              pauseOnHover={false}
+              grayscale={false}
+            />
+          ) : (
+            <PhotoFrame
+              src={heroPhoto}
+              alt={content.heroAlts[0]}
+              width={1400}
+              height={1600}
+              sizes="(max-width: 900px) 100vw, 50vw"
+              priority
+              cover
+            />
+          )}
         </div>
       </section>
 
       <section className="jq-section" id="variants">
         <div className="jq-heading">
           <span className="section-number">01 / {content.variantLabel}</span>
-          <h2>{content.variantTitle}</h2>
+          <h2>
+            <GoldEnd text={content.variantTitle} />
+          </h2>
           <p>{content.variantIntro}</p>
         </div>
         <div className="jq-variants">
@@ -122,11 +170,7 @@ export function ProductLanding({
               className={`jq-variant is-${item.tone}`}
               key={item.id}
             >
-              {variantHasPhoto[index] && (
-                <div className="jq-variant-photo">
-                  <Image src={item.image} alt={item.name} fill sizes="280px" />
-                </div>
-              )}
+              <span className="jq-variant-mark">{String(index + 1).padStart(2, "0")}</span>
               <span className="jq-variant-fold">{item.fold}</span>
               <h3>{item.name}</h3>
               <p>{item.text}</p>
@@ -139,27 +183,23 @@ export function ProductLanding({
         </div>
       </section>
 
-      {gallery.length > 0 && (
-        <section className="jq-section" id="works">
-          <div className="jq-heading">
-            <span className="section-number">02 / РАБОТЫ</span>
-            <h2>{content.galleryTitle}</h2>
-            <p>{content.galleryIntro}</p>
-          </div>
-          <div className={`jq-gallery is-${gallery.length}`}>
-            {gallery.map((item) => (
-              <figure key={item.src}>
-                <Image src={item.src} alt={item.alt} fill sizes="(max-width: 700px) 50vw, 25vw" />
-              </figure>
-            ))}
-          </div>
-        </section>
-      )}
+      <section className="jq-section" id="works">
+        <div className="jq-heading">
+          <span className="section-number">02 / РАБОТЫ</span>
+          <h2>
+            <GoldEnd text={content.galleryTitle} />
+          </h2>
+          <p>{content.galleryIntro}</p>
+        </div>
+        <MaterialPhotos items={galleryPhotos} />
+      </section>
 
       <section className="jq-section" id="orientir">
         <div className="jq-heading">
           <span className="section-number">03 / ОРИЕНТИР</span>
-          <h2>{content.quotesTitle}</h2>
+          <h2>
+            <GoldEnd text={content.quotesTitle} />
+          </h2>
           <p>{content.quotesIntro}</p>
         </div>
         <table className="jq-tech-table">
@@ -168,7 +208,13 @@ export function ProductLanding({
             {specRows(content.specs, product.minQty, product.leadTime).map((item) => (
               <tr key={item.title}>
                 <th scope="row">{item.title}</th>
-                <td>{item.text}</td>
+                <td>
+                  {item.text.split("\n").map((line, index) => (
+                    <span className="spec-line" key={`${item.title}-${index}`}>
+                      {line}
+                    </span>
+                  ))}
+                </td>
               </tr>
             ))}
           </tbody>
@@ -196,45 +242,18 @@ export function ProductLanding({
             </Link>
           ))}
         </div>
+        <p className="jq-price-note">Актуальный прайс уточняйте у менеджера.</p>
       </section>
 
-      <section className="jq-calc" id="calc">
-        <div className="jq-calc-intro">
-          <span className="section-number">04 / РАСЧЁТ</span>
-          <h2>
-            {content.calcTitle.split("\n").map((line) => (
-              <span key={line}>
-                {line}
-                <br />
-              </span>
-            ))}
-          </h2>
-          <p>
-            {content.calcIntro} Менеджер свяжется в течение {company.replyIn} в рабочее время {company.hours}.
-          </p>
-          <CalcResponder light />
-          <ul>
-            {content.calcBullets.map((item) => (
-              <li key={item}>
-                <Check size={16} /> {item}
-              </li>
-            ))}
-          </ul>
-        </div>
-        <LeadForm
-          key={formKey || "default"}
-          defaultProduct={content.slug}
-          details
-          defaultVariant={selectedVariant}
-          defaultQuantity={quote?.qty ? quoteQuantity(quote.qty) : content.form.quantityPlaceholder}
-          defaultSize={quote?.size}
-          defaultExtra={quote?.spec}
-          defaultComment={prefillComment}
-          variants={content.variants.map((item) => ({ id: item.id, name: item.name }))}
-          detailFields={content.form}
-          compact
-        />
-      </section>
+      <CalculatorBlock
+        key={formKey || "default"}
+        defaultProduct={content.slug}
+        defaultComment={prefillComment}
+        defaultQuantity={quote?.qty ? quoteQuantity(quote.qty) : undefined}
+        defaultVariant={selectedVariant}
+        variants={content.variants.map((item) => ({ id: item.id, name: item.name }))}
+        title={"Расчёт\nзаказа"}
+      />
 
       <MaterialDetails content={content} usedPhotos={usedPhotos} />
 

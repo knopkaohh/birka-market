@@ -4,6 +4,7 @@ import Link from "next/link";
 import { ArrowDownRight } from "lucide-react";
 import { Breadcrumbs } from "@/components/breadcrumbs";
 import { CalculatorBlock } from "@/components/calculator-block";
+import { SoftQuotes } from "@/components/soft-quotes";
 import { LabelGuide } from "@/components/label-guide";
 import { colorRules, folds, materials, qtyRules } from "@/lib/guide";
 import { company } from "@/lib/site";
@@ -26,37 +27,50 @@ export const metadata: Metadata = {
 export default function GuidePage() {
   return (
     <>
-      <div className="inner-page">
+      <div className="inner-page tone-page">
+        <div className="tone-glow" aria-hidden="true" />
         <div className="inner-hero">
           <Breadcrumbs items={[{ label: "Как выбрать" }]} />
           <span className="section-number">КАК ВЫБРАТЬ</span>
           <h1>
-            Не разбираетесь в бирках —
+            Не знаете, какие бирки нужны —
             <br />
             <em>начните с этой страницы</em>
           </h1>
           <p>
-            Обычно нужны не «какие-нибудь бирки», а комплект: брендовый ярлык и составник. Ниже — три вопроса, затем
-            таблица материалов, сгибы, цвета и тиражи. Если останетесь в сомнении, оставьте телефон — разберём за{" "}
-            {company.replyIn}.
+            Обычно нужен комплект: фирменная бирка и составник. Ниже три коротких вопроса, затем материалы, сгибы, цвета
+            и тиражи.             Если сомневаетесь, оставьте телефон — разберём за {company.replyIn}.
           </p>
         </div>
+        <SoftQuotes
+          items={[
+            { text: "Сначала задача: где стоит бирка и что на ней должно читаться.", sign: "Материал" },
+            { text: "Обычно нужен комплект: фирменная бирка и составник.", sign: "Комплект" },
+            { text: `Если сомневаетесь, разберём за ${company.replyIn}.`, sign: "Подскажем" },
+          ]}
+        />
 
         <div className="guide-kit">
-          <article>
+          <article id="brend">
             <span>01</span>
-            <h2>Брендовая бирка</h2>
-            <p>Кто вы. Живёт на горловине или флаге. Чаще жаккард, иногда сатин или силикон.</p>
+            <h2>
+              Брендовая <em>бирка</em>
+            </h2>
+            <p>Это лицо бренда. Обычно её ставят на горловину или на флаг изделия. Чаще выбирают жаккард, иногда сатин или силикон.</p>
           </article>
-          <article>
+          <article id="sostav">
             <span>02</span>
-            <h2>Состав и уход</h2>
-            <p>Что внутри и как стирать. Почти всегда сатин или нейлон, один цвет, боковой шов.</p>
+            <h2>
+              Состав и <em>уход</em>
+            </h2>
+            <p>Здесь состав ткани и правила ухода. Почти всегда сатин или нейлон, один цвет и боковой шов.</p>
           </article>
-          <article>
+          <article id="naves">
             <span>03</span>
-            <h2>Навес, если нужен</h2>
-            <p>Картон или калька снаружи. Не заменяет вшив: это первое впечатление в зале.</p>
+            <h2>
+              Навес, если <em>нужен</em>
+            </h2>
+            <p>Картон или калька снаружи изделия. Навес не заменяет вшивную бирку: это первое впечатление в зале.</p>
           </article>
         </div>
 
@@ -65,7 +79,9 @@ export default function GuidePage() {
         <section className="guide-section" aria-labelledby="guide-materials-title">
           <div className="jq-heading">
             <span className="section-number">МАТЕРИАЛЫ</span>
-            <h2 id="guide-materials-title">Какой материал выбрать и зачем</h2>
+            <h2 id="guide-materials-title">
+              Какой материал выбрать <em>и зачем</em>
+            </h2>
             <p>
               Преимущество каждого материала — не «красивое слово», а задача. Если задача не совпадает, бирка будет
               либо колоться, либо выглядеть дешевле изделия.
@@ -103,17 +119,19 @@ export default function GuidePage() {
         <section className="guide-section" aria-labelledby="guide-folds-title">
           <div className="jq-heading">
             <span className="section-number">ВИД И ПОДГИБКА</span>
-            <h2 id="guide-folds-title">Какой сгиб поставить в изделие</h2>
+            <h2 id="guide-folds-title">
+              Какой сгиб поставить <em>в изделие</em>
+            </h2>
             <p>
-              Подгибка — это не украшение, а то, как бирку возьмёт швея. Ошиблись со сгибом — бирка торчит, натирает
-              или закрывает размер.
+              Подгибка задаёт, как бирку возьмут на производстве. Верный сгиб сидит ровно: не торчит, не натирает и не
+              закрывает размер.
             </p>
           </div>
           <div className="guide-folds">
-            {folds.map((item) => (
+            {folds.map((item, index) => (
               <article key={item.id}>
-                <div className="guide-fold-photo">
-                  <Image src={item.image} alt={`${item.name}: ${item.fold}`} fill sizes="(max-width: 760px) 100vw, 25vw" />
+                <div className="guide-fold-mark" aria-hidden="true">
+                  {String(index + 1).padStart(2, "0")}
                 </div>
                 <span>{item.fold}</span>
                 <h3>{item.name}</h3>
@@ -127,7 +145,9 @@ export default function GuidePage() {
         <section className="guide-section guide-two" aria-labelledby="guide-colors-title">
           <div>
             <span className="section-number">ЦВЕТА</span>
-            <h2 id="guide-colors-title">Сколько цветов закладывать</h2>
+            <h2 id="guide-colors-title">
+              Сколько цветов <em>закладывать</em>
+            </h2>
             <div className="guide-notes">
               {colorRules.map((item) => (
                 <article key={item.title}>
@@ -139,7 +159,9 @@ export default function GuidePage() {
           </div>
           <div>
             <span className="section-number">ТИРАЖ</span>
-            <h2>Сколько штук заказывать</h2>
+            <h2 id="guide-qty-title">
+              Сколько штук <em>заказывать</em>
+            </h2>
             <div className="guide-notes">
               {qtyRules.map((item) => (
                 <article key={item.title}>
@@ -155,7 +177,7 @@ export default function GuidePage() {
         <p className="inner-note">
           Уже поняли материал? Откройте{" "}
           <Link href="/katalog/vshivnye-birki">вшивные бирки</Link> или сразу{" "}
-          <Link href="/raschet">оставьте заявку</Link>. Макет для печати готовим бесплатно.
+          <Link href="/raschet">оставьте заявку</Link>.
           <span className="guide-note-link">
             <Link href="/jacquard">
               Жаккард

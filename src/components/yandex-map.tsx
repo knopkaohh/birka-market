@@ -15,12 +15,16 @@ export function YandexMap({ height = 600, compact = false }: YandexMapProps) {
             <h2>
               Офис и склад
               <br />
-              в Москве
+              <em>в Москве</em>
             </h2>
           </div>
           <div className="map-meta">
             <p>{company.address}</p>
-            <p>{company.hours}</p>
+            <p>
+              <i className="hours-dot" aria-hidden="true" />
+              {company.hours}
+            </p>
+            <p>{company.hoursNote}</p>
             <a href={company.map.route} target="_blank" rel="noreferrer">
               Открыть в Яндекс Картах
             </a>
@@ -37,20 +41,22 @@ export function YandexMap({ height = 600, compact = false }: YandexMapProps) {
           allowFullScreen
         />
       </div>
-      <div className="map-badge">
+      <div className="map-award">
         <iframe
-          title="Рейтинг Бирка Маркет в Яндекс Справочнике"
+          title="Хорошее место — Бирка Маркет в Яндекс Справочнике"
           src={company.map.sprav}
           width="150"
           height="50"
           loading="lazy"
         />
-        {compact && (
+      </div>
+      {compact && (
+        <div className="map-route">
           <a href={company.map.route} target="_blank" rel="noreferrer">
             Проложить маршрут
           </a>
-        )}
-      </div>
+        </div>
+      )}
     </section>
   );
 }

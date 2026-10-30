@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Breadcrumbs } from "@/components/breadcrumbs";
 import { CalculatorBlock } from "@/components/calculator-block";
+import { SoftQuotes } from "@/components/soft-quotes";
 import { company } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -12,29 +13,41 @@ export const metadata: Metadata = {
 export default function DeliveryPage() {
   return (
     <>
-      <div className="inner-page">
+      <div className="inner-page tone-page">
+        <div className="tone-glow" aria-hidden="true" />
         <div className="inner-hero">
           <Breadcrumbs items={[{ label: "Доставка" }]} />
-          <span className="section-number">ЛОГИСТИКА</span>
+          <span className="section-number">ДОСТАВКА</span>
           <h1>
             Доставка по Москве,
             <br />
             <em>России и СНГ</em>
           </h1>
-          <p>Отправляем готовый тираж курьером, транспортными компаниями или отдаём на самовывоз со склада.</p>
+          <p>Готовый тираж отправляем курьером и транспортными компаниями или выдаём на складе в Москве.</p>
         </div>
-        <div className="content-grid">
+        <SoftQuotes
+          items={[
+            { text: "Трек-номер присылаем в день отгрузки.", sign: "По России" },
+            { text: "Курьер по Москве приезжает в удобный слот после готовности.", sign: "По Москве" },
+            { text: "Забрать заказ можно со склада на Строительном проезде.", sign: "Самовывоз" },
+          ]}
+        />
+        <div className="content-grid gold-cards">
           <article>
             <h2>Сроки</h2>
             <p>Обычно доставка занимает 1–5 рабочих дней и зависит от города и объёма. Точный срок назовём вместе с расчётом заказа.</p>
           </article>
           <article>
-            <h2>По Москве</h2>
+            <h2>
+              По <em>Москве</em>
+            </h2>
             <p>Курьерские службы: Яндекс GO и Dostavista. После готовности заказа согласуем удобный слот.</p>
           </article>
           <article>
-            <h2>По России</h2>
-            <p>СДЭК, Почта России, Major Express и Яндекс Доставка, в том числе в пункты выдачи. После отгрузки присылаем трек-номер.</p>
+            <h2>
+              По <em>России</em>
+            </h2>
+            <p>СДЭК, Почта России и Яндекс Доставка, в том числе в пункты выдачи. После отгрузки присылаем трек-номер.</p>
           </article>
           <article>
             <h2>Самовывоз</h2>

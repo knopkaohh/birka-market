@@ -2,6 +2,7 @@ import Image from "next/image";
 import type { Metadata } from "next";
 import { Breadcrumbs } from "@/components/breadcrumbs";
 import { CalculatorBlock } from "@/components/calculator-block";
+import { SoftQuotes } from "@/components/soft-quotes";
 import { YandexMap } from "@/components/yandex-map";
 import { company, team } from "@/lib/site";
 
@@ -12,16 +13,10 @@ export const metadata: Metadata = {
 };
 
 export default function ContactsPage() {
-  const contactRoles = new Set([
-    "Исполнительный директор",
-    "Руководитель отдела продаж",
-    "Менеджер по продажам",
-  ]);
-  const managers = team.filter((person) => contactRoles.has(person.role));
-
   return (
     <>
-      <div className="inner-page">
+      <div className="inner-page tone-page">
+        <div className="tone-glow" aria-hidden="true" />
         <div className="inner-hero">
           <Breadcrumbs items={[{ label: "Контакты" }]} />
           <span className="section-number">КОНТАКТЫ</span>
@@ -30,8 +25,15 @@ export default function ContactsPage() {
             <br />
             <em>приезжайте в офис</em>
           </h1>
-          <p>Менеджеры помогают с выбором материала и оформлением заказа. Производство отвечает за сроки и тираж.</p>
+          <p>Менеджер поможет выбрать материал и оформить заказ. Срок и тираж подтверждаем до запуска в производство.</p>
         </div>
+        <SoftQuotes
+          items={[
+            { text: "Один менеджер ведёт заказ от первого звонка до отгрузки.", sign: "Как отвечаем" },
+            { text: `В рабочее время перезваниваем за ${company.replyIn}.`, sign: "Срок ответа" },
+            { text: "Офис и склад — Строительный проезд, дом 2, строение 1.", sign: "Куда ехать" },
+          ]}
+        />
         <div className="contact-board">
           <a href={company.phoneHref}>
             <span>ТЕЛЕФОН</span>
@@ -54,21 +56,37 @@ export default function ContactsPage() {
             <strong>max.ru</strong>
           </a>
         </div>
-        <div className="content-grid">
+        <div className="content-grid gold-cards contact-facts">
           <article>
-            <h2>Офис и склад</h2>
-            <p>{company.address}</p>
-            <p>
-              {company.hours}. Выдача готовой продукции: {company.pickupHours}.
-            </p>
+            <h2>
+              Офис и <em>склад</em>
+            </h2>
+            <p>Москва, Строительный проезд, дом 2, строение 1.</p>
+            <p>Этаж 1, офис № 1.</p>
+            <p>Понедельник – пятница, с 10:00 до 18:00.</p>
+            <p>Готовые заказы выдаём на этом же складе.</p>
+            <p>В выходные можно приехать по договорённости с менеджером.</p>
+            <p>В праздники график может измениться.</p>
+            <p>Позвоните, подскажем.</p>
           </article>
           <article>
-            <h2>Как добраться</h2>
-            <p>{company.howToGet}</p>
+            <h2>
+              Как <em>добраться</em>
+            </h2>
+            <p>Метро «Сходненская», второй выход.</p>
+            <p>Трамвай 6 до остановки «Западный мост».</p>
+            <p>Дальше две минуты пешком.</p>
+            <p>Коричневые ворота, затем направо во двор.</p>
+            <p>Отдельный подъём и железная дверь.</p>
+            <p>Звонок слева от двери.</p>
           </article>
           <article>
-            <h2>На карте</h2>
-            <p>{company.map.description}. Строительный проезд, 2с1 — офис в первом подъезде со стороны двора.</p>
+            <h2>
+              На <em>карте</em>
+            </h2>
+            <p>Производство бирок и упаковки для одежды.</p>
+            <p>Строительный проезд, дом 2, строение 1.</p>
+            <p>Офис в первом подъезде, со стороны двора.</p>
             <a href={company.map.route} target="_blank" rel="noreferrer">
               Открыть Яндекс Карты
             </a>
@@ -76,7 +94,7 @@ export default function ContactsPage() {
         </div>
         <h2 className="block-title">Команда</h2>
         <div className="team-grid">
-          {managers.map((person) => (
+          {team.map((person) => (
             <article key={person.name}>
               <div className="team-photo">
                 <Image src={person.photo} alt={person.name} fill sizes="280px" />

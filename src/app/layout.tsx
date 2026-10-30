@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Cormorant_Garamond, Manrope } from "next/font/google";
 import { MobileBar } from "@/components/mobile-bar";
 import { SiteChrome } from "@/components/site-chrome";
-import { SiteFooter } from "@/components/site-footer";
+import { Footer } from "@/components/Footer";
 import { UiFallbackScript } from "@/components/ui-fallback-script";
 import { YandexMetrika } from "@/components/yandex-metrika";
 import { company } from "@/lib/site";
@@ -26,12 +26,12 @@ export const metadata: Metadata = {
     template: "%s | Бирка Маркет",
   },
   description:
-    "Производство бирок, упаковки, фурнитуры, мерча и полиграфии в Москве. Тираж от 100 штук, макет бесплатно, доставка по России. Оставьте заявку — менеджер свяжется за 10 минут.",
+    "Производство бирок, упаковки, фурнитуры, мерча и полиграфии в Москве. Тираж от 100 штук, доставка по России. Оставьте заявку — менеджер свяжется за 10 минут.",
   alternates: { canonical: "https://birka-market.ru/" },
   openGraph: {
     title: `Бирка Маркет — ${company.slogan}`,
     description:
-      "Бирки, упаковка и фурнитура на заказ в Москве: бесплатный макет, тираж от 100 штук, доставка по России.",
+      "Бирки, упаковка и фурнитура на заказ в Москве: тираж от 100 штук, доставка по России.",
     type: "website",
     locale: "ru_RU",
     url: "https://birka-market.ru/",
@@ -49,7 +49,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     email: company.email,
     image: "https://birka-market.ru/images/products/jacquard.jpg",
     priceRange: "₽₽",
-    openingHours: "Mo-Fr 09:00-18:00",
+    openingHours: "Mo-Fr 10:00-18:00",
     areaServed: ["RU", "Москва"],
     address: {
       "@type": "PostalAddress",
@@ -69,7 +69,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           <main id="top" tabIndex={-1}>
             {children}
           </main>
-          <SiteFooter />
+          <Footer />
           <MobileBar />
         </SiteChrome>
         <script

@@ -1,6 +1,6 @@
 "use client";
 
-import { FormEvent, useEffect, useState } from "react";
+import { FormEvent, useEffect, useState, useSyncExternalStore } from "react";
 import { createPortal } from "react-dom";
 import { usePathname } from "next/navigation";
 import { ArrowRight, X } from "lucide-react";
@@ -22,7 +22,11 @@ export function QuickCalc() {
   const [calcVisible, setCalcVisible] = useState(false);
   const [open, setOpen] = useState(false);
   const [shown, setShown] = useState(false);
-  const [mounted, setMounted] = useState(false);
+  const mounted = useSyncExternalStore(
+    () => () => {},
+    () => true,
+    () => false,
+  );
   const [phone, setPhone] = useState("");
   const [phoneError, setPhoneError] = useState("");
   const [status, setStatus] = useState<"idle" | "sending" | "error" | "done">("idle");
@@ -37,11 +41,7 @@ export function QuickCalc() {
 
   const slug = pathname.replace(/^\//, "").split("/")[0] ?? "";
   const product = getProduct(slug);
-  const hiddenPage = pathname === "/raschet" || pathname === "/spasibo";
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
+  const hiddenPage = pathname === "/" || pathname === "/raschet" || pathname === "/spasibo";
 
   const close = () => {
     setShown(false);
@@ -56,7 +56,6 @@ export function QuickCalc() {
 
   useEffect(() => {
     if (!open) {
-      setShown(false);
       document.body.classList.remove("quick-calc-open", "quick-calc-in");
       return;
     }

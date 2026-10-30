@@ -3,41 +3,50 @@ import Link from "next/link";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Breadcrumbs } from "@/components/breadcrumbs";
 import { CalculatorBlock } from "@/components/calculator-block";
-import { faqItems } from "@/lib/site";
+import { SoftQuotes } from "@/components/soft-quotes";
+import { company, faqItems } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Вопросы о тираже, сроках и оплате",
   description:
-    "Минимальный тираж, бесплатный макет, образцы, сроки производства, оплата и доставка бирок Бирка Маркет в Москве.",
+    "Минимальный тираж, макет, образцы, сроки производства, оплата и доставка бирок Бирка Маркет в Москве.",
 };
 
 export default function FaqPage() {
   return (
     <>
-      <div className="inner-page">
+      <div className="inner-page tone-page">
+        <div className="tone-glow" aria-hidden="true" />
         <div className="inner-hero">
           <Breadcrumbs items={[{ label: "FAQ" }]} />
-          <span className="section-number">FAQ</span>
+          <span className="section-number">ВОПРОСЫ</span>
           <h1>
             Вопросы,
             <br />
             <em>которые задают чаще всего</em>
           </h1>
-          <p>Если ответа нет, оставьте заявку — менеджер и технолог разберут вашу задачу по материалу и тиражу.</p>
+          <p>Не нашли ответ — оставьте заявку. Менеджер и технолог разберут задачу: материал, сгиб и тираж.</p>
         </div>
+        <SoftQuotes
+          items={[
+            { text: "Напишите, что производите и куда встанет бирка. Материал подскажем.", sign: "С чего начать" },
+            { text: "Если файла нет, подготовку посчитаем отдельно и назовём срок до запуска.", sign: "Про файл" },
+            { text: `Менеджер отвечает за ${company.replyIn} в рабочее время.`, sign: "Связь" },
+          ]}
+        />
         <Accordion className="faq-list">
           {faqItems.map((item, index) => (
             <AccordionItem value={`item-${index}`} key={item.q} className="faq-item">
               <AccordionTrigger className="faq-trigger">
-                <span>0{index + 1}</span>
-                {item.q}
+                <span className="faq-index">{String(index + 1).padStart(2, "0")}</span>
+                <span className="faq-q">{item.q}</span>
               </AccordionTrigger>
               <AccordionContent className="faq-content">
                 {item.q.includes("материал и сгиб") ? (
                   <>
-                    Откройте страницу <Link href="/kak-vybrat">Как выбрать</Link>: три вопроса подскажут материал,
-                    подгибку, цвета и тираж. Если останетесь в сомнении — оставьте телефон, менеджер соберёт комплект за
-                    10 минут.
+                    Начните со страницы <Link href="/kak-vybrat">Как выбрать</Link>: три вопроса собирают брендовую
+                    бирку, составник и, если нужен, навес. Если знак спорный, технолог скажет до печати, жаккард это,
+                    сатин или силикон. Сомневаетесь — оставьте телефон, комплект разберём за 10 минут.
                   </>
                 ) : (
                   item.a

@@ -4,6 +4,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowDownRight } from "lucide-react";
 import { Breadcrumbs } from "@/components/breadcrumbs";
+import { GoldEnd } from "@/components/gold-end";
 import { CalculatorBlock } from "@/components/calculator-block";
 import { formatNewsDate, getNewsNeighbors, getNewsPost, newsPosts } from "@/lib/news";
 import { company } from "@/lib/site";
@@ -54,7 +55,8 @@ export default async function NewsArticlePage({ params }: { params: Promise<Para
 
   return (
     <>
-      <article className="inner-page news-article">
+      <article className="inner-page news-article tone-page">
+        <div className="tone-glow" aria-hidden="true" />
         <div className="inner-hero">
           <Breadcrumbs
             items={[
@@ -64,7 +66,9 @@ export default async function NewsArticlePage({ params }: { params: Promise<Para
           />
           <span className="section-number">НОВОСТИ</span>
           <time dateTime={post.date}>{formatNewsDate(post.date)}</time>
-          <h1>{post.title}</h1>
+          <h1>
+            <GoldEnd text={post.title} />
+          </h1>
         </div>
         <figure className="news-cover">
           <Image src={post.cover} alt={post.title} fill sizes="(max-width: 900px) 100vw, 860px" priority />

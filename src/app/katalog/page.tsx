@@ -2,17 +2,21 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowDownRight } from "lucide-react";
 import { Breadcrumbs } from "@/components/breadcrumbs";
+import { CalculatorBlock } from "@/components/calculator-block";
 import { CatalogBrowser } from "@/components/catalog-browser";
+import { SoftQuotes } from "@/components/soft-quotes";
 
 export const metadata: Metadata = {
   title: "Каталог бирок, упаковки и мерча на заказ",
   description:
-    "32 позиции на заказ в Москве: вшивные и навесные бирки, упаковка, фурнитура, мерч и полиграфия. Тираж от 100 штук, макет бесплатно.",
+    "Каталог Бирка Маркет: вшивные и навесные бирки, упаковка, фурнитура, мерч и полиграфия. Производство в Москве, тираж от 100 штук.",
 };
 
 export default function CatalogPage() {
   return (
-    <div className="inner-page">
+    <>
+    <div className="inner-page tone-page">
+      <div className="tone-glow" aria-hidden="true" />
       <div className="inner-hero">
         <Breadcrumbs items={[{ label: "Каталог" }]} />
         <span className="section-number">КАТАЛОГ</span>
@@ -22,11 +26,18 @@ export default function CatalogPage() {
           <em>в одном месте</em>
         </h1>
         <p>
-          32 позиции: бирки, упаковка, фурнитура, мерч и полиграфия. Выберите вид или сразу переходите к расчёту.
+          Восемь направлений: от вшивной бирки до сайта. Выберите раздел или оставьте заявку — посчитаем тираж.
         </p>
       </div>
+      <SoftQuotes
+        items={[
+          { text: "От вшивной бирки до сайта — в одном каталоге.", sign: "Направления" },
+          { text: "Комплект собираем в одном заказе, с одним сроком.", sign: "Вместе" },
+          { text: "Тираж посчитаем после материала и количества.", sign: "Расчёт" },
+        ]}
+      />
       <div className="guide-banner">
-        <p>Не разбираетесь в материалах и сгибах? Три вопроса подскажут жаккард или сатин, подгибку, цвета и тираж.</p>
+        <p>Не уверены в материале и сгибе? Три вопроса подскажут, что выбрать: жаккард или сатин, подгибку, число цветов и тираж.</p>
         <Link href="/kak-vybrat">
           Как выбрать бирки
           <ArrowDownRight size={16} />
@@ -34,5 +45,7 @@ export default function CatalogPage() {
       </div>
       <CatalogBrowser />
     </div>
+    <CalculatorBlock title={"Расчёт\nзаказа"} />
+    </>
   );
 }

@@ -1,9 +1,11 @@
 "use client";
 
 import { Suspense, useMemo, useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-import { Search } from "lucide-react";
+import { ArrowRight, Search } from "lucide-react";
+import { GoldEnd } from "@/components/gold-end";
 import { ProductCard } from "@/components/product-card";
 import { categories, matchesProduct, products } from "@/lib/site";
 
@@ -19,12 +21,21 @@ function CatalogBrowserInner() {
     });
   }, [query, category]);
 
+  const groups = useMemo(() => {
+    return categories
+      .map((item, index) => ({
+        item,
+        index,
+        products: list.filter((product) => product.category === item.slug),
+      }))
+      .filter((group) => group.products.length > 0);
+  }, [list]);
+
   return (
     <>
       <div className="catalog-toolbar">
         <div>
-          <span className="section-number">ВСЕ ПОЗИЦИИ</span>
-          <h2>Полный перечень продукции</h2>
+          <span className="section-number">РАЗДЕЛЫ</span>
         </div>
         <label className="search-line catalog-search">
           <Search size={16} strokeWidth={1.8} aria-hidden="true" />
@@ -53,12 +64,46 @@ function CatalogBrowserInner() {
           </button>
         ))}
       </div>
-      {list.length ? (
-        <div className="product-grid">
-          {list.map((item, index) => (
-            <ProductCard key={item.slug} product={item} index={index} />
-          ))}
-        </div>
+      {groups.length ? (
+        groups.map((group) => (
+          <section className="catalog-section" id={group.item.slug} key={group.item.slug}>
+            <div className="catalog-section-head">
+              <div>
+                <span className="section-number">
+                  {String(group.index + 1).padStart(2, "0")} / {group.item.name}
+                </span>
+                <h2>
+                  <GoldEnd text={group.item.name} />
+                </h2>
+                <p>{group.item.intro}</p>
+                <div className="catalog-material-row">
+                  {group.products.map((product) => (
+                    <Link key={product.slug} href={`/${product.slug}`}>
+                      {product.shortName}
+                    </Link>
+                  ))}
+                </div>
+                <Link className="catalog-section-more" href={`/katalog/${group.item.slug}`}>
+                  Открыть раздел
+                  <ArrowRight size={16} />
+                </Link>
+              </div>
+              <div className="catalog-section-photo">
+                <Image
+                  src={group.item.image}
+                  alt={group.item.name}
+                  fill
+                  sizes="(max-width: 760px) 100vw, 360px"
+                />
+              </div>
+            </div>
+            <div className="product-grid">
+              {group.products.map((item, index) => (
+                <ProductCard key={item.slug} product={item} index={index} />
+              ))}
+            </div>
+          </section>
+        ))
       ) : (
         <p className="catalog-empty">
           Ничего не нашли по запросу «{query}». Попробуйте другое слово или{" "}
