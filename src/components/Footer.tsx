@@ -67,6 +67,7 @@ export function Footer() {
         <div>
           <span className="footer-heading-amber">Компания</span>
           <Link href="/o-kompanii">О нас</Link>
+          <Link href="/rabota">Работа у нас</Link>
           <Link href="/dokumenty">Документы</Link>
           <Link href="/faq">FAQ</Link>
           <Link href="/privacy">Политика конфиденциальности</Link>

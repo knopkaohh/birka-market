@@ -268,21 +268,25 @@ button { cursor: pointer; }
   flex: 1 1 100%;
   display: flex;
   align-items: center;
-  flex-wrap: wrap;
-  justify-content: space-evenly;
-  gap: 8px 22px;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  gap: 2px 4px;
   margin: 0;
   padding-bottom: 4px;
 }
 .desktop-nav a {
   position: relative;
-  padding: 6px 12px;
+  padding: 6px 8px;
   border-radius: 999px;
   color: #1c1917;
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 750;
   letter-spacing: .01em;
+  white-space: nowrap;
   transition: background .2s, color .2s;
+}
+@media (min-width: 1500px) {
+  .desktop-nav a { padding: 6px 12px; font-size: 17px; }
 }
 .desktop-nav a::after { display: none; }
 .desktop-nav a:hover,
@@ -1394,6 +1398,21 @@ footer .logo svg { height: 56px; }
 .content-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
 .content-grid h2, .team-copy h3, .block-title { margin: 0 0 12px; font-size: 22px; letter-spacing: -.03em; }
 .content-grid a { font-size: 12px; font-weight: 700; }
+.jobs-contacts {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 8px 22px;
+  margin-top: 22px;
+}
+.jobs-contacts a {
+  color: #1c1917;
+  font-size: 22px;
+  font-weight: 750;
+  letter-spacing: -.03em;
+}
+.jobs-contacts .jobs-phone { color: #8e721f; }
+.jobs-contacts span { color: var(--muted-ink); font-size: 15px; }
 .block-title { margin: 72px 0 24px; font-size: 34px; }
 .team-intro { margin: -12px 0 28px; color: var(--muted-ink); font-size: 15px; line-height: 1.6; max-width: 720px; }
 .team-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }

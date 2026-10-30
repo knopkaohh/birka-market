@@ -76,6 +76,12 @@ function MenuIcon({ slug }: { slug: string }) {
         <path d="M12 16.6h.01" />
       </>
     ),
+    rabota: (
+      <>
+        <circle cx="12" cy="8.1" r="2.15" />
+        <path d="M7.4 18.4v-.9a4.6 4.6 0 0 1 9.2 0v.9" />
+      </>
+    ),
   };
   return (
     <svg className="side-icon" viewBox="0 0 24 24" aria-hidden="true">
@@ -84,7 +90,7 @@ function MenuIcon({ slug }: { slug: string }) {
   );
 }
 
-/** Боковое меню: сплошной графит, поиск-иконка и два пункта. */
+/** Боковое меню: сплошной графит, поиск и разделы. */
 export function SidebarMenu({ open, onClose }: SidebarMenuProps) {
   const pathname = usePathname();
   const router = useRouter();
@@ -231,6 +237,15 @@ export function SidebarMenu({ open, onClose }: SidebarMenuProps) {
             >
               <MenuIcon slug="kak-vybrat" />
               <span>Как выбрать?</span>
+            </Link>
+            <Link
+              href="/rabota"
+              className={`side-main-link ${pathname.startsWith("/rabota") ? "is-open" : ""}`}
+              prefetch={false}
+              onClick={onClose}
+            >
+              <MenuIcon slug="rabota" />
+              <span>Работа у нас</span>
             </Link>
           </div>
         </div>
