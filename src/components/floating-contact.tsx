@@ -26,21 +26,15 @@ export function FloatingContact() {
 
   return (
     <>
-      {onHome ? (
-        <a className="float-contact is-home" href={mailMessage} aria-label="Написать сообщение на почту">
-          <MessageCircle size={22} />
-        </a>
-      ) : (
-        <button
-          type="button"
-          className="float-contact"
-          aria-expanded={open}
-          aria-label={open ? "Закрыть связь" : "Связаться"}
-          onClick={() => setOpen((value) => !value)}
-        >
-          <MessageCircle size={22} />
-        </button>
-      )}
+      <button
+        type="button"
+        className={onHome ? "float-contact is-home" : "float-contact"}
+        aria-expanded={open}
+        aria-label={open ? "Закрыть связь" : "Связаться"}
+        onClick={() => setOpen((value) => !value)}
+      >
+        <MessageCircle size={22} />
+      </button>
       <AnimatePresence>
         {open ? (
           <motion.button
@@ -82,7 +76,7 @@ export function FloatingContact() {
             </a>
             <a href={mailMessage}>
               <Mail size={16} />
-              Почта
+              {company.email}
             </a>
             <button
               type="button"

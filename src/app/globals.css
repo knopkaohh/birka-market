@@ -381,12 +381,12 @@ button { cursor: pointer; }
   align-items: center;
   gap: 6px;
   color: var(--yellow);
-  font-size: 15px;
+  font-size: 17px;
   font-weight: 750;
   letter-spacing: -.04em;
   white-space: nowrap;
 }
-.phone-link svg { width: 14px; height: 14px; }
+.phone-link svg { width: 16px; height: 16px; }
 .header-messengers { display: flex; align-items: center; gap: 6px; }
 .header-msg {
   display: grid; place-content: center; width: 44px; height: 44px;
@@ -416,7 +416,7 @@ button { cursor: pointer; }
   border: 0;
   font-family: var(--font-manrope), Arial, sans-serif;
   font-weight: 590;
-  font-size: 17px;
+  font-size: 20px;
   line-height: .9;
   letter-spacing: -.05em;
   white-space: nowrap;
@@ -1239,10 +1239,10 @@ footer .logo svg { height: 56px; }
 
 @media (max-width: 1100px) {
   .desktop-nav { display: none; }
-  .header-calc { font-size: 15px; }
+  .header-calc { font-size: 17px; }
   .header-actions { margin-left: auto; gap: 2px; }
   .header-mail { font-size: 13px; }
-  .phone-link { font-size: 14px; }
+  .phone-link { font-size: 16px; }
   .hero { grid-template-columns: 1fr 1fr; }
   .hero-copy { padding-left: 34px; padding-right: 25px; }
   .hero h1 { font-size: clamp(50px, 6.8vw, 76px); }
