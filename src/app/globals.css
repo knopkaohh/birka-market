@@ -236,6 +236,7 @@ button { cursor: pointer; }
   border-bottom: 1px solid rgba(34,35,34,.13);
   background: #fff;
 }
+.site-header.is-home { position: relative; }
 .header-inner {
   position: relative;
   width: min(100% - 64px, 1380px); min-height: 0; margin: 0 auto; padding: 8px 0 4px;
@@ -403,6 +404,7 @@ button { cursor: pointer; }
 .header-msg.is-wa { color: #128c7e; }
 .header-msg.is-tg { color: #2aabee; }
 .header-msg.is-max { color: #1c1c1c; }
+.header-msg.is-vk { color: #2787f5; }
 .header-msg:hover { background: #ece7db; }
 .header-messengers .header-msg:hover { background: transparent; opacity: .72; }
 .header-calc {

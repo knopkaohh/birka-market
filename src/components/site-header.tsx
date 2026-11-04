@@ -9,6 +9,19 @@ import { company, navLinks, products } from "@/lib/site";
 
 const productPaths = new Set(products.map((item) => `/${item.slug}`));
 
+function homeNavLinks() {
+  const links: { href: string; label: string }[] = [];
+  for (const item of navLinks) {
+    if (item.href === "/rabota") continue;
+    links.push(item);
+    if (item.href === "/kontakty") {
+      const jobs = navLinks.find((link) => link.href === "/rabota");
+      if (jobs) links.push(jobs);
+    }
+  }
+  return links;
+}
+
 export function SiteHeader({
   menuOpen,
   onToggleMenu,
@@ -83,7 +96,7 @@ export function SiteHeader({
           наша <em>забота!</em>
         </Link>
         <nav className="desktop-nav" aria-label="Основная навигация">
-          {navLinks.map((item) => (
+          {(onHome ? homeNavLinks() : navLinks).map((item) => (
             <Link
               key={item.href}
               href={item.href}

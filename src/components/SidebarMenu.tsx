@@ -76,12 +76,6 @@ function MenuIcon({ slug }: { slug: string }) {
         <path d="M12 16.6h.01" />
       </>
     ),
-    rabota: (
-      <>
-        <circle cx="12" cy="8.1" r="2.15" />
-        <path d="M7.4 18.4v-.9a4.6 4.6 0 0 1 9.2 0v.9" />
-      </>
-    ),
     sajty: (
       <>
         <rect x="4.6" y="5.4" width="14.8" height="12.2" rx="1.6" />
@@ -244,15 +238,6 @@ export function SidebarMenu({ open, onClose }: SidebarMenuProps) {
             >
               <MenuIcon slug="kak-vybrat" />
               <span>Как выбрать?</span>
-            </Link>
-            <Link
-              href="/rabota"
-              className={`side-main-link ${pathname.startsWith("/rabota") ? "is-open" : ""}`}
-              prefetch={false}
-              onClick={onClose}
-            >
-              <MenuIcon slug="rabota" />
-              <span>Работа у нас</span>
             </Link>
           </div>
         </div>

@@ -1,4 +1,4 @@
-import { MaxIcon, TelegramIcon, WhatsAppIcon } from "@/components/messenger-icons";
+import { MaxIcon, TelegramIcon, VkIcon, WhatsAppIcon } from "@/components/messenger-icons";
 import { company } from "@/lib/site";
 
 export const messengerLinks = [
@@ -25,10 +25,22 @@ export const messengerLinks = [
   },
 ] as const;
 
+const headerMessengerLinks = [
+  messengerLinks[1],
+  messengerLinks[2],
+  {
+    id: "vk",
+    href: company.vk,
+    label: "ВКонтакте",
+    tone: "vk",
+    Icon: VkIcon,
+  },
+] as const;
+
 export function HeaderMessengers() {
   return (
     <div className="header-messengers">
-      {messengerLinks.map(({ id, href, label, tone, Icon }) => (
+      {headerMessengerLinks.map(({ id, href, label, tone, Icon }) => (
         <a
           key={id}
           className={`header-msg is-${tone}`}

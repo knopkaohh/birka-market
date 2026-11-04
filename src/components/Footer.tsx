@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { Mail, MessageCircle, Send } from "lucide-react";
+import { Mail, Send } from "lucide-react";
+import { MaxIcon } from "@/components/messenger-icons";
 import { BackToTop } from "@/components/back-to-top";
 import { company } from "@/lib/site";
 
@@ -22,11 +23,11 @@ export function Footer() {
             {company.phone}
           </a>
           <div className="footer-messengers">
-            <a href={company.whatsapp} target="_blank" rel="noreferrer">
+            <a href={company.max} target="_blank" rel="noreferrer">
               <span className="messenger-bubble" aria-hidden="true">
-                <MessageCircle size={18} />
+                <MaxIcon size={18} />
               </span>
-              <small>WhatsApp</small>
+              <small>Макс</small>
             </a>
             <a href={company.telegram} target="_blank" rel="noreferrer">
               <span className="messenger-bubble" aria-hidden="true">
