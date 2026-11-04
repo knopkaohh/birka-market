@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
-import { ArrowDownRight, Mail, Menu, Phone, X } from "lucide-react";
+import { ArrowDownRight, Menu, Phone, X } from "lucide-react";
 import { HeaderMessengers } from "@/components/messengers";
 import { company, navLinks, products } from "@/lib/site";
 
@@ -96,9 +96,9 @@ export function SiteHeader({
         </nav>
         <div className="header-actions">
           <div className="header-contacts">
-            <a className="header-mail" href={`mailto:${company.email}`}>
-              <Mail size={15} aria-hidden="true" />
-              {company.email}
+            <a className="phone-link" href={company.phoneHref}>
+              <Phone size={15} />
+              {company.phone}
             </a>
             <HeaderMessengers />
             <button
@@ -115,16 +115,10 @@ export function SiteHeader({
               {menuOpen ? <X size={22} /> : <Menu size={22} />}
             </button>
           </div>
-          <div className="header-actions-line">
-            <a className="phone-link" href={company.phoneHref}>
-              <Phone size={14} />
-              {company.phone}
-            </a>
-            <Link className="header-calc" href="/raschet" prefetch={false}>
-              <ArrowDownRight size={16} aria-hidden="true" />
-              Рассчитать заказ
-            </Link>
-          </div>
+          <Link className="header-calc" href="/raschet" prefetch={false}>
+            <ArrowDownRight size={18} aria-hidden="true" />
+            Рассчитать заказ
+          </Link>
         </div>
       </div>
     </header>
