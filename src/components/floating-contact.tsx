@@ -7,6 +7,8 @@ import { Mail, MessageCircle, Phone, Send, X } from "lucide-react";
 import { openQuickCalc } from "@/components/quick-calc";
 import { company } from "@/lib/site";
 
+const mailMessage = `mailto:${company.email}?subject=${encodeURIComponent("Сообщение с сайта Бирка Маркет")}&body=${encodeURIComponent("Здравствуйте!\n\n")}`;
+
 /** Круглая кнопка связи справа внизу и короткая панель контактов. */
 export function FloatingContact() {
   const pathname = usePathname();
@@ -24,15 +26,21 @@ export function FloatingContact() {
 
   return (
     <>
-      <button
-        type="button"
-        className={onHome ? "float-contact is-home" : "float-contact"}
-        aria-expanded={open}
-        aria-label={open ? "Закрыть связь" : "Связаться"}
-        onClick={() => setOpen((value) => !value)}
-      >
-        <MessageCircle size={22} />
-      </button>
+      {onHome ? (
+        <a className="float-contact is-home" href={mailMessage} aria-label="Написать сообщение на почту">
+          <MessageCircle size={22} />
+        </a>
+      ) : (
+        <button
+          type="button"
+          className="float-contact"
+          aria-expanded={open}
+          aria-label={open ? "Закрыть связь" : "Связаться"}
+          onClick={() => setOpen((value) => !value)}
+        >
+          <MessageCircle size={22} />
+        </button>
+      )}
       <AnimatePresence>
         {open ? (
           <motion.button
@@ -72,7 +80,7 @@ export function FloatingContact() {
               <Send size={16} />
               Telegram
             </a>
-            <a href={`mailto:${company.email}`}>
+            <a href={mailMessage}>
               <Mail size={16} />
               Почта
             </a>
