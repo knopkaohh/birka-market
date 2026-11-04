@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Mail, Send } from "lucide-react";
-import { MaxIcon } from "@/components/messenger-icons";
+import { MaxGlyph } from "@/components/messenger-icons";
 import { BackToTop } from "@/components/back-to-top";
 import { company } from "@/lib/site";
 
@@ -25,7 +25,7 @@ export function Footer() {
           <div className="footer-messengers">
             <a href={company.max} target="_blank" rel="noreferrer">
               <span className="messenger-bubble" aria-hidden="true">
-                <MaxIcon size={18} />
+                <MaxGlyph size={18} />
               </span>
               <small>Макс</small>
             </a>

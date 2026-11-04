@@ -1,4 +1,4 @@
-import { MaxIcon, TelegramIcon, VkIcon, WhatsAppIcon } from "@/components/messenger-icons";
+import { MaxGlyph, MaxIcon, TelegramIcon, VkIcon, WhatsAppIcon } from "@/components/messenger-icons";
 import { company } from "@/lib/site";
 
 export const messengerLinks = [
@@ -59,11 +59,14 @@ export function HeaderMessengers() {
 export function MobileMessengers() {
   return (
     <div className="mobile-messengers" role="group" aria-label="Написать в мессенджер">
-      {messengerLinks.map(({ id, href, label, Icon }) => (
-        <a key={id} href={href} target="_blank" rel="noreferrer" aria-label={`Написать в ${label}`}>
-          <Icon size={16} />
-        </a>
-      ))}
+      {messengerLinks.map(({ id, href, label, Icon }) => {
+        const Mark = id === "max" ? MaxGlyph : Icon;
+        return (
+          <a key={id} href={href} target="_blank" rel="noreferrer" aria-label={`Написать в ${label}`}>
+            <Mark size={16} />
+          </a>
+        );
+      })}
     </div>
   );
 }
