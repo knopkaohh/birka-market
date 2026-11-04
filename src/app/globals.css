@@ -4250,3 +4250,125 @@ footer .logo svg { height: 56px; }
   .site-request-field textarea,
   .site-request-field select { max-width: 100%; }
 }
+
+body[data-admin="1"] main,
+body[data-admin="1"] footer {
+  width: 100%;
+  margin-left: 0;
+}
+body[data-admin="1"] footer,
+body[data-admin="1"] .mobile-bottom { display: none; }
+
+.admin-app {
+  min-height: 100vh;
+  padding: 32px 20px 64px;
+  background: #f4f1e9;
+  color: #1c1917;
+}
+.admin-login,
+.admin-telegram,
+.admin-list li {
+  width: min(100%, 720px);
+  margin: 0 auto;
+  background: #fffdf8;
+  border: 1px solid rgba(34, 35, 34, .12);
+  border-radius: 28px;
+  box-shadow: 0 10px 28px rgba(34, 35, 34, .08);
+}
+.admin-login {
+  margin-top: 12vh;
+  display: grid;
+  gap: 14px;
+  padding: 32px 28px;
+}
+.admin-login p,
+.admin-top p { margin: 0; color: #8d6410; font-size: 13px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; }
+.admin-login h1,
+.admin-top h1 { margin: 0; font-size: 42px; font-weight: 650; letter-spacing: -.05em; }
+.admin-login label,
+.admin-telegram label { display: grid; gap: 6px; font-size: 14px; font-weight: 750; }
+.admin-login input,
+.admin-telegram input {
+  min-height: 46px;
+  padding: 0 14px;
+  border: 1px solid #d7d3c8;
+  border-radius: 14px;
+  background: #fff;
+  font: inherit;
+}
+.admin-login button,
+.admin-top button,
+.admin-telegram button,
+.admin-filters button,
+.admin-detail button,
+.admin-lead {
+  border: 0;
+  border-radius: 999px;
+  background: #edc147;
+  color: #1c1917;
+  font: inherit;
+  font-weight: 800;
+  cursor: pointer;
+}
+.admin-login button { min-height: 48px; }
+.admin-telegram button:disabled,
+.admin-login button:disabled { opacity: .45; cursor: default; }
+.admin-login span,
+.admin-telegram span { color: #8c2e2e; font-weight: 700; }
+.admin-telegram span.is-ok { color: #2f6b3a; }
+.admin-top {
+  width: min(100%, 720px);
+  margin: 0 auto 18px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+}
+.admin-top h1 em {
+  margin-left: 8px;
+  color: #8d6410;
+  font-family: var(--font-cormorant), Georgia, serif;
+  font-style: italic;
+  font-weight: 500;
+}
+.admin-top button,
+.admin-telegram button,
+.admin-filters button,
+.admin-detail button { min-height: 40px; padding: 0 16px; }
+.admin-telegram {
+  display: grid;
+  gap: 12px;
+  margin-bottom: 18px;
+  padding: 22px;
+}
+.admin-telegram h2 { margin: 0; font-size: 28px; letter-spacing: -.04em; }
+.admin-telegram p,
+.admin-telegram strong { margin: 0; line-height: 1.45; }
+.admin-telegram a { color: #8d6410; font-weight: 800; }
+.admin-row,
+.admin-filters { display: flex; flex-wrap: wrap; gap: 8px; }
+.admin-filters { width: min(100%, 720px); margin: 0 auto 14px; }
+.admin-filters .is-on { background: #1c1917; color: #f4f1e9; }
+.admin-telegram ul { display: grid; gap: 8px; margin: 0; padding: 0; list-style: none; }
+.admin-telegram li button { width: 100%; text-align: left; background: #f4ecda; }
+.admin-list { width: min(100%, 720px); margin: 0 auto; display: grid; gap: 12px; padding: 0; list-style: none; }
+.admin-list li { overflow: hidden; }
+.admin-list li.is-seen { opacity: .72; }
+.admin-lead {
+  width: 100%;
+  display: grid;
+  gap: 2px;
+  padding: 16px 18px;
+  border-radius: 0;
+  background: transparent;
+  text-align: left;
+}
+.admin-lead span { color: #8d6410; font-size: 12px; letter-spacing: .08em; text-transform: uppercase; }
+.admin-lead strong { font-size: 22px; letter-spacing: -.03em; }
+.admin-lead em { font-style: normal; font-weight: 750; }
+.admin-lead small { color: #5c574e; font-weight: 650; }
+.admin-detail { display: grid; gap: 10px; padding: 0 18px 18px; }
+.admin-detail p { margin: 0; white-space: pre-wrap; }
+.admin-detail span { display: block; color: #8d6410; font-size: 12px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
+.admin-detail a { color: #8d6410; font-weight: 800; }
+.admin-empty { width: min(100%, 720px); margin: 24px auto; color: #5c574e; }

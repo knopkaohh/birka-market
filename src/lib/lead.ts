@@ -3,8 +3,16 @@ import { isCompleteRuPhone, isReachablePhone } from "@/lib/phone";
 export const LEAD_GOAL = "LEAD";
 export const MAX_FILE_BYTES = 15 * 1024 * 1024;
 
+export type LeadKind = "order" | "quick" | "call" | "job" | "website";
+export type LeadStatus = "new" | "seen";
+export type TelegramState = "sent" | "skipped" | "failed";
+
 export type LeadRecord = {
+  id?: string;
   createdAt: string;
+  kind?: LeadKind;
+  status?: LeadStatus;
+  telegram?: TelegramState;
   product: string;
   productName: string;
   quantity: number;

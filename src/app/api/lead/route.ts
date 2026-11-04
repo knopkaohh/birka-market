@@ -1,3 +1,4 @@
+import { randomUUID } from "crypto";
 import { mkdir, writeFile } from "fs/promises";
 import path from "path";
 import { NextResponse } from "next/server";
@@ -7,8 +8,11 @@ import {
   validateJobApplication,
   validateLeadInput,
   validateWebsiteRequest,
+  type LeadKind,
   type LeadRecord,
 } from "@/lib/lead";
+import { appendLead, updateLead, uploadsDir } from "@/lib/leads-store";
+import { notifyTelegram } from "@/lib/telegram";
 import { getProduct } from "@/lib/site";
 
 export async function POST(request: Request) {
@@ -50,15 +54,20 @@ export async function POST(request: Request) {
     if (file.size > MAX_FILE_BYTES) {
       return NextResponse.json({ ok: false, message: "Файл больше 15 МБ." }, { status: 400 });
     }
-    const uploadDir = path.join(process.env.VERCEL ? "/tmp" : process.cwd(), "data", "uploads");
+    const uploadDir = uploadsDir();
     await mkdir(uploadDir, { recursive: true });
     const safe = file.name.replace(/[^\w.\-]+/g, "_");
     fileName = `${Date.now()}-${safe}`;
     await writeFile(path.join(uploadDir, fileName), Buffer.from(await file.arrayBuffer()));
   }
 
+  const kind: LeadKind = job ? "job" : website ? "website" : phoneOnly ? "call" : quick ? "quick" : "order";
   const lead: LeadRecord = {
+    id: randomUUID(),
     createdAt: new Date().toISOString(),
+    kind,
+    status: "new",
+    telegram: "skipped",
     product: job ? "job" : website ? "sozdanie-sajtov" : productSlug,
     productName: job
       ? "Отклик на работу"
@@ -98,19 +107,13 @@ export async function POST(request: Request) {
     fileName,
   };
 
-  const dataDir = path.join(process.env.VERCEL ? "/tmp" : process.cwd(), "data");
-  await mkdir(dataDir, { recursive: true });
-  const leadsPath = path.join(dataDir, "leads.json");
-  const { readFile } = await import("fs/promises");
-  let leads: LeadRecord[] = [];
+  await appendLead(lead);
   try {
-    leads = JSON.parse(await readFile(leadsPath, "utf8")) as LeadRecord[];
-    if (!Array.isArray(leads)) leads = [];
+    const telegram = await notifyTelegram(lead);
+    await updateLead(lead.id!, { telegram });
   } catch {
-    leads = [];
+    await updateLead(lead.id!, { telegram: "failed" });
   }
-  leads.push(lead);
-  await writeFile(leadsPath, JSON.stringify(leads, null, 2));
 
-  return NextResponse.json({ ok: true, id: lead.createdAt, goal: LEAD_GOAL });
+  return NextResponse.json({ ok: true, id: lead.id, goal: LEAD_GOAL });
 }

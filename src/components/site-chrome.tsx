@@ -12,6 +12,7 @@ import { ScrollFX } from "@/components/scroll-fx";
 
 export function SiteChrome({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
+  const isAdmin = pathname.startsWith("/admin");
   const [menuOpen, setMenuOpen] = useState(false);
   const [menuPath, setMenuPath] = useState(pathname);
 
@@ -19,6 +20,13 @@ export function SiteChrome({ children }: { children: React.ReactNode }) {
     setMenuPath(pathname);
     setMenuOpen(false);
   }
+
+  useEffect(() => {
+    document.body.dataset.admin = isAdmin ? "1" : "";
+    return () => {
+      delete document.body.dataset.admin;
+    };
+  }, [isAdmin]);
 
   useEffect(() => {
     document.documentElement.dataset.uiReady = "1";
@@ -36,6 +44,8 @@ export function SiteChrome({ children }: { children: React.ReactNode }) {
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
   }, [menuOpen]);
+
+  if (isAdmin) return <>{children}</>;
 
   return (
     <>
