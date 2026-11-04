@@ -134,28 +134,59 @@ export async function sendTelegramTest() {
 
 type TgChat = { id: number | string; title?: string; username?: string; first_name?: string; last_name?: string; type?: string };
 type TgUpdate = {
-  message?: { chat?: TgChat };
+  message?: { chat?: TgChat; new_chat_members?: { is_bot?: boolean }[] };
   edited_message?: { chat?: TgChat };
   channel_post?: { chat?: TgChat };
   my_chat_member?: { chat?: TgChat };
+  chat_member?: { chat?: TgChat };
 };
+
+const GROUP_HINT =
+  "Группу бот пока не видит: у него нет доступа к сообщениям. В «Заявки Бирка Маркет» откройте участников, нажмите birka_market_site и назначьте администратором. Затем снова нажмите «Найти чаты».";
+
+function rememberChat(chats: Map<string, TelegramChat>, chat?: TgChat) {
+  if (!chat?.id) return;
+  const id = String(chat.id);
+  const title = chat.title || [chat.first_name, chat.last_name].filter(Boolean).join(" ") || (chat.username ? `@${chat.username}` : id);
+  const kind = chat.type || "chat";
+  const current = chats.get(id);
+  if (!current || (current.kind === "private" && kind !== "private")) chats.set(id, { id, title, kind });
+}
 
 export async function discoverTelegramChats(tokenOverride?: string) {
   const settings = await readSettings();
   const token = tokenOverride?.trim() || settings.token;
   if (!token) throw new Error("Вставьте токен бота.");
   await telegram<{ username: string }>(token, "getMe");
-  const updates = await telegram<TgUpdate[]>(token, "getUpdates", { limit: 100, timeout: 0 });
+  const updates = await telegram<TgUpdate[]>(token, "getUpdates", {
+    limit: 100,
+    timeout: 0,
+    allowed_updates: ["message", "edited_message", "channel_post", "my_chat_member", "chat_member"],
+  });
   const chats = new Map<string, TelegramChat>();
   for (const update of updates ?? []) {
-    const chat = update.message?.chat || update.edited_message?.chat || update.channel_post?.chat || update.my_chat_member?.chat;
-    if (!chat) continue;
-    const id = String(chat.id);
-    const title = chat.title || [chat.first_name, chat.last_name].filter(Boolean).join(" ") || (chat.username ? `@${chat.username}` : id);
-    chats.set(id, { id, title, kind: chat.type || "chat" });
+    rememberChat(chats, update.message?.chat);
+    rememberChat(chats, update.edited_message?.chat);
+    rememberChat(chats, update.channel_post?.chat);
+    rememberChat(chats, update.my_chat_member?.chat);
+    rememberChat(chats, update.chat_member?.chat);
   }
+  const list = [...chats.values()].sort((a, b) => Number(a.kind === "private") - Number(b.kind === "private"));
+  const group = list.find((chat) => chat.kind !== "private");
   if (tokenOverride?.trim() && tokenOverride.trim() !== settings.token) {
     await saveTelegramSettings({ token: tokenOverride.trim() });
   }
-  return [...chats.values()];
+  if (group) {
+    await saveTelegramSettings({ chatId: group.id, chatTitle: group.title });
+    try {
+      await telegram(token, "sendMessage", {
+        chat_id: group.id,
+        text: "Проверка связи. Заявки с сайта Бирка Маркет будут приходить в этот чат.",
+      });
+    } catch (error) {
+      const message = error instanceof Error ? error.message : "Не удалось отправить сообщение в группу.";
+      return { chats: list, hint: `Группа найдена, но бот не смог написать: ${message}` };
+    }
+  }
+  return { chats: list, hint: group ? "" : GROUP_HINT };
 }

@@ -19,8 +19,8 @@ export async function POST(request: Request) {
   } | null;
   try {
     if (body?.action === "discover") {
-      const chats = await discoverTelegramChats(body.token);
-      return NextResponse.json({ ok: true, chats, ...(await telegramStatus()) });
+      const found = await discoverTelegramChats(body.token);
+      return NextResponse.json({ ok: true, chats: found.chats, hint: found.hint, ...(await telegramStatus()) });
     }
     if (body?.action === "save") {
       const status = await saveTelegramSettings({

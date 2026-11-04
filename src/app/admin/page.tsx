@@ -134,7 +134,9 @@ export default function AdminPage() {
       headers: { "content-type": "application/json" },
       body: JSON.stringify({ action, token, ...extra }),
     });
-    const data = (await response.json().catch(() => null)) as (TelegramInfo & { ok: boolean; message?: string; chats?: Chat[] }) | null;
+    const data = (await response.json().catch(() => null)) as
+      | (TelegramInfo & { ok: boolean; message?: string; chats?: Chat[]; hint?: string })
+      | null;
     setPending(false);
     if (!response.ok || !data?.ok) {
       setError(data?.message || "Telegram не подключился.");
@@ -144,8 +146,9 @@ export default function AdminPage() {
     if (data.chats) setChats(data.chats);
     if (action === "test") setNotice("Проверочное сообщение отправлено.");
     if (action === "save") setNotice("Чат для заявок сохранён.");
-    if (action === "discover" && !data.chats?.length) {
-      setNotice("Чатов пока нет. Напишите боту или добавьте его в группу и отправьте туда любое сообщение.");
+    if (action === "discover" && data.hint) setError(data.hint);
+    if (action === "discover" && data.chatId && data.chatTitle) {
+      setNotice(`Группа подключена: ${data.chatTitle}. Проверочное сообщение уже отправлено.`);
     }
   }
 
@@ -194,11 +197,7 @@ export default function AdminPage() {
       <section className="admin-telegram">
         <h2>Дубль в Telegram</h2>
         <p>
-          Создайте бота у{" "}
-          <a href="https://t.me/BotFather" target="_blank" rel="noreferrer">
-            @BotFather
-          </a>{" "}
-          командой /newbot и вставьте токен. Затем напишите боту в личку или добавьте его в группу и отправьте в чат любое сообщение. После этого нажмите «Найти чаты».
+          Бот уже создан. Чтобы заявки приходили в группу, откройте «Заявки Бирка Маркет», назначьте birka_market_site администратором и нажмите «Найти чаты». Личный чат бот видит и без этого, группу — только после прав администратора.
         </p>
         <label>
           Токен бота
