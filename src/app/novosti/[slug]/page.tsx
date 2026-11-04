@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowDownRight } from "lucide-react";
 import { Breadcrumbs } from "@/components/breadcrumbs";
 import { GoldEnd } from "@/components/gold-end";
 import { CalculatorBlock } from "@/components/calculator-block";
@@ -55,8 +54,7 @@ export default async function NewsArticlePage({ params }: { params: Promise<Para
 
   return (
     <>
-      <article className="inner-page news-article tone-page">
-        <div className="tone-glow" aria-hidden="true" />
+      <article className="inner-page news-article">
         <div className="inner-hero">
           <Breadcrumbs
             items={[
@@ -87,7 +85,6 @@ export default async function NewsArticlePage({ params }: { params: Promise<Para
             <Link href={`/novosti/${next.slug}`}>
               <span>Позднее</span>
               {next.title}
-              <ArrowDownRight size={16} />
             </Link>
           ) : (
             <span />

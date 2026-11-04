@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Breadcrumbs } from "@/components/breadcrumbs";
 import { CalculatorBlock } from "@/components/calculator-block";
-import { SoftQuotes } from "@/components/soft-quotes";
 
 export const metadata: Metadata = {
   title: "Оплата заказа без НДС",
@@ -12,8 +11,7 @@ export const metadata: Metadata = {
 export default function PaymentPage() {
   return (
     <>
-      <div className="inner-page tone-page">
-        <div className="tone-glow" aria-hidden="true" />
+      <div className="inner-page">
         <div className="inner-hero">
           <Breadcrumbs items={[{ label: "Оплата" }]} />
           <span className="section-number">ОПЛАТА</span>
@@ -24,13 +22,6 @@ export default function PaymentPage() {
           </h1>
           <p>Работаем с юридическими и физическими лицами. Менеджер готовит счёт, когда согласованы материал, тираж и ваш файл.</p>
         </div>
-        <SoftQuotes
-          items={[
-            { text: "Счёт выставляем, когда согласованы материал, тираж и ваш файл.", sign: "До оплаты" },
-            { text: "Работаем без НДС. Наценку за способ оплаты называем сразу.", sign: "Прозрачно" },
-            { text: "Тираж запускаем после вашего подтверждения.", sign: "До станка" },
-          ]}
-        />
         <div className="content-grid gold-cards">
           <article>
             <h2>

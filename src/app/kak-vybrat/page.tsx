@@ -4,7 +4,6 @@ import Link from "next/link";
 import { ArrowDownRight } from "lucide-react";
 import { Breadcrumbs } from "@/components/breadcrumbs";
 import { CalculatorBlock } from "@/components/calculator-block";
-import { SoftQuotes } from "@/components/soft-quotes";
 import { LabelGuide } from "@/components/label-guide";
 import { colorRules, folds, materials, qtyRules } from "@/lib/guide";
 import { company } from "@/lib/site";
@@ -27,8 +26,7 @@ export const metadata: Metadata = {
 export default function GuidePage() {
   return (
     <>
-      <div className="inner-page tone-page">
-        <div className="tone-glow" aria-hidden="true" />
+      <div className="inner-page">
         <div className="inner-hero">
           <Breadcrumbs items={[{ label: "Как выбрать" }]} />
           <span className="section-number">КАК ВЫБРАТЬ</span>
@@ -39,16 +37,9 @@ export default function GuidePage() {
           </h1>
           <p>
             Обычно нужен комплект: фирменная бирка и составник. Ниже три коротких вопроса, затем материалы, сгибы, цвета
-            и тиражи.             Если сомневаетесь, оставьте телефон — разберём за {company.replyIn}.
+            и тиражи. Если сомневаетесь, оставьте телефон — разберём за {company.replyIn}.
           </p>
         </div>
-        <SoftQuotes
-          items={[
-            { text: "Сначала задача: где стоит бирка и что на ней должно читаться.", sign: "Материал" },
-            { text: "Обычно нужен комплект: фирменная бирка и составник.", sign: "Комплект" },
-            { text: `Если сомневаетесь, разберём за ${company.replyIn}.`, sign: "Подскажем" },
-          ]}
-        />
 
         <div className="guide-kit">
           <article id="brend">

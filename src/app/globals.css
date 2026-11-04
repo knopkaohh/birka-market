@@ -1940,105 +1940,6 @@ footer .logo svg { height: 56px; }
   letter-spacing: -.04em;
   line-height: 1.12;
 }
-.about-run { margin: 0 0 28px; }
-.tone-page { position: relative; overflow-x: clip; }
-.tone-glow {
-  position: absolute;
-  z-index: 0;
-  top: -20px;
-  right: -6%;
-  left: -6%;
-  height: 460px;
-  pointer-events: none;
-  background:
-    radial-gradient(ellipse at 8% 18%, rgba(237, 193, 71, .42), transparent 46%),
-    radial-gradient(ellipse at 92% 8%, rgba(237, 193, 71, .22), transparent 40%);
-  animation: toneGlow 8s ease-in-out infinite;
-}
-.tone-page > :not(.tone-glow) { position: relative; z-index: 1; }
-.tone-page .stat-row div,
-.tone-page .content-grid article,
-.tone-page .guide-kit article,
-.tone-page .team-grid article {
-  background:
-    radial-gradient(circle at 100% 0, rgba(237, 193, 71, .4), transparent 48%),
-    #f4ecda;
-}
-.tone-page .stat-row div,
-.tone-page .faq-item {
-  border-radius: 22px;
-  box-shadow: 0 0 0 1px rgba(237, 193, 71, .45), 0 10px 24px rgba(142, 114, 31, .08);
-}
-.tone-page .faq-item {
-  background:
-    radial-gradient(circle at 100% 0, rgba(237, 193, 71, .36), transparent 42%),
-    #f4ecda;
-}
-.about-page .about-story {
-  padding: 28px 28px 26px;
-  border-radius: 22px;
-  background:
-    radial-gradient(circle at 0 0, rgba(237, 193, 71, .38), transparent 46%),
-    #f4ecda;
-  box-shadow: 0 0 0 1px rgba(237, 193, 71, .5), 0 14px 32px rgba(142, 114, 31, .08);
-}
-.soft-quotes {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 14px;
-  margin: 0 0 36px;
-  padding: 0;
-  list-style: none;
-}
-.soft-quote {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  min-height: 168px;
-  margin: 0;
-  padding: 22px 20px 18px;
-  border-radius: 22px;
-  background:
-    radial-gradient(circle at 0 0, rgba(237, 193, 71, .55), transparent 58%),
-    #fffdf8;
-  box-shadow: 0 0 0 1px rgba(237, 193, 71, .72), 0 12px 28px rgba(142, 114, 31, .1);
-  animation: toneIn .7s ease both;
-  animation-delay: calc(var(--i, 0) * .12s);
-}
-.soft-quote p {
-  margin: 0;
-  color: #8d6410;
-  font-family: var(--font-cormorant), Georgia, serif;
-  font-size: clamp(22px, 1.8vw, 30px);
-  font-style: italic;
-  font-weight: 500;
-  line-height: 1.15;
-}
-.soft-quote span {
-  display: block;
-  margin-top: 16px;
-  color: #1c1917;
-  font-size: 11px;
-  font-weight: 800;
-  letter-spacing: .14em;
-  text-transform: uppercase;
-}
-.about-cards article {
-  animation: toneIn .7s ease both;
-}
-.about-cards article:nth-child(2) { animation-delay: .08s; }
-.about-cards article:nth-child(3) { animation-delay: .16s; }
-.about-cards article:nth-child(4) { animation-delay: .24s; }
-.about-cards article:nth-child(5) { animation-delay: .32s; }
-.about-cards article:nth-child(6) { animation-delay: .4s; }
-@keyframes toneIn {
-  from { opacity: 0; translate: 0 14px; }
-  to { opacity: 1; translate: 0 0; }
-}
-@keyframes toneGlow {
-  0%, 100% { opacity: 1; }
-  50% { opacity: .62; }
-}
 .map-section { color: var(--paper); background: var(--ink); }
 .map-heading {
   width: min(100% - 80px, 1380px); margin: 0 auto; padding: 90px 0 36px;
@@ -2578,7 +2479,7 @@ footer .logo svg { height: 56px; }
 .header-cta { text-decoration: none; }
 
 @media (max-width: 1100px) {
-  .category-grid, .stat-row, .contact-board, .news-grid, .guide-materials, .guide-two, .guide-kit, .about-cards, .soft-quotes { grid-template-columns: repeat(2, 1fr); }
+  .category-grid, .stat-row, .contact-board, .news-grid, .guide-materials, .guide-two, .guide-kit, .about-cards { grid-template-columns: repeat(2, 1fr); }
   .about-story { grid-template-columns: 1fr; gap: 18px; }
   .guide-folds { grid-template-columns: repeat(2, 1fr); }
   .guide-result { grid-template-columns: 1fr; }
@@ -2593,7 +2494,7 @@ footer .logo svg { height: 56px; }
 
 @media (max-width: 760px) {
   .inner-page { width: calc(100% - 36px); padding-top: 28px; padding-bottom: 90px; }
-  .category-grid, .stat-row, .contact-board, .feature-list, .about-cards, .soft-quotes { grid-template-columns: 1fr; }
+  .category-grid, .stat-row, .contact-board, .feature-list, .about-cards { grid-template-columns: 1fr; }
   .team-grid, .cases-grid { grid-template-columns: 1fr; }
   .inner-hero h1 { font-size: 42px; }
   .news-grid, .news-pager, .guide-kit, .guide-options, .guide-steps, .guide-materials, .guide-folds, .guide-two { grid-template-columns: 1fr; }

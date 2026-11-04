@@ -4,8 +4,6 @@ import Link from "next/link";
 import { Breadcrumbs } from "@/components/breadcrumbs";
 import { CalculatorBlock } from "@/components/calculator-block";
 import { CasesSection } from "@/components/cases-section";
-import { GoldRun } from "@/components/gold-run";
-import { SoftQuotes } from "@/components/soft-quotes";
 import { company } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -13,29 +11,6 @@ export const metadata: Metadata = {
   description:
     "Бирка Маркет больше 10 лет собирает маркировку, упаковку, мерч, полиграфию и сайты на своём производстве в Москве. Один менеджер на весь заказ.",
 };
-
-const aboutLines = [
-  "БОЛЬШЕ 10 ЛЕТ В МОСКВЕ",
-  "СВОЁ ПРОИЗВОДСТВО",
-  "ОДИН МЕНЕДЖЕР НА ЗАКАЗ",
-  "ОТ БИРКИ ДО САЙТА",
-  "С НУЛЯ СОБЕРЁМ БРЕНД",
-];
-
-const quotes = [
-  {
-    text: "Бренд начинается с имени и знака. Мы собираем всё, на чём это имя живёт.",
-    sign: "Бирка Маркет",
-  },
-  {
-    text: "Один менеджер, один срок, один комплект: от ленты до пакета и сайта.",
-    sign: "Как работаем",
-  },
-  {
-    text: "Файл сверяем до станка. Тираж идёт только после вашего подтверждения.",
-    sign: "До печати",
-  },
-];
 
 const steps = [
   {
@@ -97,8 +72,7 @@ const steps = [
 export default function AboutPage() {
   return (
     <>
-      <div className="inner-page about-page tone-page">
-        <div className="tone-glow" aria-hidden="true" />
+      <div className="inner-page about-page">
         <div className="inner-hero">
           <Breadcrumbs items={[{ label: "О Компании" }]} />
           <span className="section-number">О КОМПАНИИ</span>
@@ -108,9 +82,8 @@ export default function AboutPage() {
             <em>с нуля</em>
           </h1>
           <p>
-            <strong className="jobs-gold">Бирка Маркет</strong> больше 10 лет делает маркировку и упаковку на{" "}
-            <span className="jobs-line">своём производстве в Москве</span>. Один менеджер ведёт заказ целиком: бирки,
-            состав, ярлыки, пакеты, фурнитура, мерч, полиграфия и сайт.
+            Бирка Маркет больше 10 лет делает маркировку и упаковку на своём производстве в Москве. Один менеджер ведёт
+            заказ целиком: бирки, состав, ярлыки, пакеты, фурнитура, мерч, полиграфия и сайт.
           </p>
         </div>
         <figure className="about-cover">
@@ -141,12 +114,6 @@ export default function AboutPage() {
             <span>видов продукции: от ленты до сайта</span>
           </div>
         </div>
-
-        <div className="about-run">
-          <GoldRun items={aboutLines} />
-        </div>
-
-        <SoftQuotes items={quotes} />
 
         <section className="about-story" aria-labelledby="about-story-title">
           <div>

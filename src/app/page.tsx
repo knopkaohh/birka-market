@@ -1,6 +1,5 @@
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowDownRight } from "lucide-react";
 import { CalculatorBlock } from "@/components/calculator-block";
 import { HomeHero } from "@/components/home-hero";
 import { MaterialGrid } from "@/components/material-grid";
@@ -45,7 +44,6 @@ export default function Home() {
           </div>
           <Link className="text-link" href="/novosti">
             Все новости
-            <ArrowDownRight size={18} />
           </Link>
         </div>
         <div className="news-grid">
@@ -58,10 +56,7 @@ export default function Home() {
                 <time dateTime={post.date}>{formatNewsDate(post.date)}</time>
                 <h2>{post.title}</h2>
                 <p>{post.excerpt}</p>
-                <em>
-                  Читать
-                  <ArrowDownRight size={16} />
-                </em>
+                <em>Читать</em>
               </span>
             </Link>
           ))}
