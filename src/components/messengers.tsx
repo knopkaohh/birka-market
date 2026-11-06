@@ -47,7 +47,7 @@ export function HeaderMessengers() {
           href={href}
           target="_blank"
           rel="noreferrer"
-          aria-label={id === "max" ? `Написать в Макс: ${company.maxPhone}` : `Написать в ${label}`}
+          aria-label={`Написать в ${label}`}
         >
           <Icon size={18} />
         </a>
@@ -67,7 +67,7 @@ export function MobileMessengers() {
             href={href}
             target="_blank"
             rel="noreferrer"
-            aria-label={id === "max" ? `Написать в Макс: ${company.maxPhone}` : `Написать в ${label}`}
+            aria-label={`Написать в ${label}`}
           >
             <Mark size={16} />
           </a>

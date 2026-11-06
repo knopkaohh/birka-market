@@ -44,7 +44,7 @@ export default function ContactsPage() {
           </a>
           <a className="is-messenger" href={company.max} target="_blank" rel="noreferrer">
             <span>МАКС</span>
-            <strong>{company.maxPhone}</strong>
+            <strong>Написать</strong>
           </a>
         </div>
         <div className="content-grid gold-cards contact-facts">
@@ -56,7 +56,8 @@ export default function ContactsPage() {
             <p>Этаж 1, офис № 1.</p>
             <p>Понедельник – пятница, с 10:00 до 18:00.</p>
             <p>Готовые заказы выдаём на этом же складе.</p>
-            <p>В выходные тоже можно приехать: напишите, согласуем время.</p>
+            <p>В выходные мы на связи и принимаем заказы.</p>
+            <p>В праздники чаще тоже работаем, но лучше заранее уточнить по телефону.</p>
           </article>
           <article>
             <h2>

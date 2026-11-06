@@ -23,15 +23,11 @@ export function Footer() {
             {company.phone}
           </a>
           <div className="footer-messengers">
-            <a href={company.max} target="_blank" rel="noreferrer" aria-label={`Написать в Макс: ${company.maxPhone}`}>
+            <a href={company.max} target="_blank" rel="noreferrer" aria-label="Написать в Макс">
               <span className="messenger-bubble" aria-hidden="true">
                 <MaxGlyph size={18} />
               </span>
-              <small>
-                Макс
-                <br />
-                {company.maxPhone}
-              </small>
+              <small>Макс</small>
             </a>
             <a href={company.telegram} target="_blank" rel="noreferrer">
               <span className="messenger-bubble" aria-hidden="true">
@@ -66,7 +62,8 @@ export function Footer() {
             <i className="gold-dot" aria-hidden="true" />
             Понедельник – Пятница с 10:00 до 18:00
           </p>
-          <p>В субботу и воскресенье тоже на связи: напишите, согласуем время визита.</p>
+          <p>В субботу и воскресенье мы на связи и принимаем заказы.</p>
+          <p>В праздники чаще тоже работаем, но лучше заранее уточнить по телефону.</p>
         </div>
         <div>
           <span className="footer-heading-amber">Компания</span>

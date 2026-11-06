@@ -76,7 +76,7 @@ export function FloatingContact() {
             </a>
             <a href={company.max} target="_blank" rel="noreferrer">
               <MessageCircle size={16} />
-              Макс {company.maxPhone}
+              Макс
             </a>
             <a href={mailMessage}>
               <Mail size={16} />
