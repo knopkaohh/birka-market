@@ -4373,3 +4373,33 @@ body[data-admin="1"] .mobile-bottom { display: none; }
 .admin-detail span { display: block; color: #8d6410; font-size: 12px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
 .admin-detail a { color: #8d6410; font-weight: 800; }
 .admin-empty { width: min(100%, 720px); margin: 24px auto; color: #5c574e; }
+
+.catalog-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+.catalog-card { display: flex; flex-direction: column; background: #eae5db; min-height: 100%; }
+.catalog-photo { position: relative; display: block; aspect-ratio: 1; overflow: hidden; background: #f7f4ee; }
+.catalog-body { display: flex; flex-direction: column; gap: 8px; padding: 22px 22px 24px; flex: 1; }
+.catalog-body h3 { margin: 0; font-size: 22px; letter-spacing: -.03em; line-height: 1.15; }
+.catalog-body h3 a { color: inherit; text-decoration: none; }
+.catalog-body p { margin: 0; color: var(--muted-ink); font-size: 14px; line-height: 1.5; }
+.catalog-body strong { margin-top: 8px; font-size: 32px; letter-spacing: -.05em; }
+.catalog-price-note { color: #8a8b84; font-size: 12px; font-weight: 700; }
+.catalog-order {
+  margin-top: 14px; align-self: flex-start; display: inline-flex; align-items: center; gap: 8px;
+  padding: 12px 18px; background: var(--yellow); color: var(--ink);
+  font-size: 13px; font-weight: 800; text-decoration: none;
+}
+.catalog-facts { list-style: none; margin: 22px 0 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
+.catalog-facts span { display: block; font-size: 11px; font-weight: 800; letter-spacing: .04em; text-transform: uppercase; color: #8a8b84; }
+.catalog-offer { display: flex; flex-direction: column; align-items: flex-start; gap: 6px; margin-top: 28px; }
+.catalog-offer strong { font-size: 42px; letter-spacing: -.05em; line-height: 1; }
+.catalog-offer > span { color: var(--muted-ink); }
+.catalog-offer .primary-cta { margin-top: 10px; }
+.catalog-hero-photo { object-fit: cover; }
+#zakaz, #katalog-primerov { scroll-margin-top: 92px; }
+@media (max-width: 1100px) {
+  .catalog-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 700px) {
+  .catalog-grid { grid-template-columns: 1fr; }
+  .catalog-offer strong { font-size: 34px; }
+}

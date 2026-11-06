@@ -12,6 +12,7 @@ import { quoteComment, quoteHref, quoteQuantity } from "@/lib/landings/types";
 import { importedPhotos } from "@/lib/imported-photos";
 import { photoKey } from "@/lib/photo-id";
 import { takeUniquePhoto, usablePhoto } from "@/lib/photos";
+import { MaterialCatalog } from "@/components/material-catalog";
 import { landingJsonLd } from "@/lib/seo";
 import { getCategory, getProduct } from "@/lib/site";
 
@@ -192,6 +193,8 @@ export function ProductLanding({
         </div>
         <MaterialPhotos items={galleryPhotos} />
       </section>
+
+      <MaterialCatalog slug={content.slug} />
 
       <section className="jq-section" id="orientir">
         <div className="jq-heading">

@@ -24,7 +24,7 @@ const nextConfig: NextConfig = {
   ],
   async redirects() {
     return [
-      { source: "/:category/tproduct/:path*", destination: "/:category", permanent: true },
+      { source: "/plastic/tproduct/:path*", destination: "/satin/tproduct/:path*", permanent: true },
       { source: "/page143553596.html", destination: "/", permanent: true },
       { source: "/page185433209.html", destination: "/", permanent: true },
       { source: "/page274943709.html", destination: "/", permanent: true },
