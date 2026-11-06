@@ -6,7 +6,7 @@ import { ArrowRight } from "lucide-react";
 import { Breadcrumbs } from "@/components/breadcrumbs";
 import { CalculatorBlock } from "@/components/calculator-block";
 import { MaterialCatalog, catalogBlurb } from "@/components/material-catalog";
-import { catalogItems, catalogOrderHref, getCatalogItem, lowestQuote } from "@/lib/catalog";
+import { catalogItems, catalogOrderHref, getCatalogItem } from "@/lib/catalog";
 import { getLanding } from "@/lib/landings";
 import { quoteComment, quoteQuantity, type QuotePrefill } from "@/lib/landings/types";
 import { canonical, siteUrl } from "@/lib/seo";
@@ -70,7 +70,6 @@ export default async function CatalogExamplePage({
   if (!item || !product || !landing) notFound();
   const category = getCategory(product.category);
   const { head, tail } = titleParts(item.title);
-  const from = lowestQuote(landing.quotes);
   const quote = query.price ? query : undefined;
   const comment = [`Пример: ${item.title}`, quote ? quoteComment(quote) : ""].filter(Boolean).join(". ");
 
@@ -119,18 +118,10 @@ export default async function CatalogExamplePage({
               ))}
             </ul>
           ) : null}
-          {from ? (
-            <div className="catalog-offer">
-              <strong>{from.price.trim().toLowerCase().startsWith("от") ? from.price : `от ${from.price}`}</strong>
-              <span>
-                {from.qty} · {from.size} · {from.spec}
-              </span>
-              <Link className="primary-cta" href={catalogOrderHref(item, from)}>
-                Заказать
-                <ArrowRight size={18} />
-              </Link>
-            </div>
-          ) : null}
+          <Link className="primary-cta catalog-offer-cta" href="#zakaz">
+            Рассчитать свой заказ
+            <ArrowRight size={18} />
+          </Link>
         </div>
         <div className="jq-hero-visual">
           <Image
@@ -148,7 +139,7 @@ export default async function CatalogExamplePage({
         <div className="jq-heading">
           <span className="section-number">ЦЕНА</span>
           <h2>Ориентир по этому материалу</h2>
-          <p>Цена примера считается как у {product.shortName.toLowerCase()}: размер, тираж и печать. Под каждой ценой можно заказать такой же комплект.</p>
+          <p>Цена примера считается как у {product.shortName.toLowerCase()}: размер, тираж и печать. Под каждой ценой можно рассчитать свой заказ.</p>
         </div>
         <div className="jq-quotes">
           {landing.quotes.map((tier) => (
@@ -167,13 +158,20 @@ export default async function CatalogExamplePage({
                 <li>{tier.time}</li>
               </ul>
               <span className="jq-quote-cta">
-                Заказать
+                Рассчитать свой заказ
                 <ArrowRight size={16} />
               </span>
             </Link>
           ))}
         </div>
       </section>
+
+      <MaterialCatalog
+        slug={slug}
+        except={item.path}
+        title="Другие примеры"
+        intro={`Ещё готовые комплекты: ${product.name.toLowerCase()}.`}
+      />
 
       <div id="zakaz">
         <CalculatorBlock
@@ -185,13 +183,6 @@ export default async function CatalogExamplePage({
           lead={`Оставьте телефон — посчитаем комплект «${item.title}» и скажем, что нужно для макета.`}
         />
       </div>
-
-      <MaterialCatalog
-        slug={slug}
-        except={item.path}
-        title="Другие примеры"
-        intro={`Ещё готовые комплекты: ${product.name.toLowerCase()}.`}
-      />
     </>
   );
 }

@@ -1,9 +1,7 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { PhotoFrame } from "@/components/photo-frame";
-import { catalogByMaterial, catalogHref, catalogOrderHref, lowestQuote, type CatalogItem } from "@/lib/catalog";
-import { getLanding } from "@/lib/landings";
-import { getProduct } from "@/lib/site";
+import { catalogByMaterial, catalogHref, catalogOrderHref, type CatalogItem } from "@/lib/catalog";
 
 export function catalogBlurb(item: CatalogItem) {
   if (item.description && item.description !== item.title) return item.description;
@@ -15,7 +13,7 @@ export function MaterialCatalog({
   slug,
   except,
   title = "Каталог примеров",
-  intro = "Готовые комплекты с производства. Карточка открывает страницу примера, кнопка «Заказать» под ценой сразу ведёт к расчёту такого комплекта.",
+  intro = "Готовые комплекты с производства. Карточка открывает страницу примера, кнопка считает ваш заказ по этому образцу.",
 }: {
   slug: string;
   except?: string;
@@ -24,10 +22,6 @@ export function MaterialCatalog({
 }) {
   const items = catalogByMaterial(slug).filter((item) => item.path !== except);
   if (!items.length) return null;
-  const landing = getLanding(slug);
-  const product = getProduct(slug);
-  const quote = lowestQuote(landing?.quotes ?? []);
-  if (!quote || !product) return null;
 
   return (
     <section className="jq-section" id="katalog-primerov">
@@ -54,12 +48,8 @@ export function MaterialCatalog({
                 <Link href={catalogHref(item)}>{item.title}</Link>
               </h3>
               <p>{catalogBlurb(item)}</p>
-              <strong>{quote.price.trim().toLowerCase().startsWith("от") ? quote.price : `от ${quote.price}`}</strong>
-              <span className="catalog-price-note">
-                {quote.qty} · {quote.size}
-              </span>
-              <Link className="catalog-order" href={catalogOrderHref(item, quote)}>
-                Заказать
+              <Link className="catalog-order" href={catalogOrderHref(item)}>
+                Рассчитать свой заказ
                 <ArrowRight size={16} />
               </Link>
             </div>

@@ -194,8 +194,6 @@ export function ProductLanding({
         <MaterialPhotos items={galleryPhotos} />
       </section>
 
-      <MaterialCatalog slug={content.slug} />
-
       <section className="jq-section" id="orientir">
         <div className="jq-heading">
           <span className="section-number">03 / ОРИЕНТИР</span>
@@ -246,6 +244,8 @@ export function ProductLanding({
         </div>
         <p className="jq-price-note">Актуальный прайс уточняйте у менеджера.</p>
       </section>
+
+      <MaterialCatalog slug={content.slug} />
 
       <CalculatorBlock
         key={formKey || "default"}
