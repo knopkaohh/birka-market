@@ -74,6 +74,10 @@ export function FloatingContact() {
               <Send size={16} />
               Telegram
             </a>
+            <a href={company.max} target="_blank" rel="noreferrer">
+              <MessageCircle size={16} />
+              Макс {company.maxPhone}
+            </a>
             <a href={mailMessage}>
               <Mail size={16} />
               {company.email}

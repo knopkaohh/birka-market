@@ -111,7 +111,7 @@ export function WebsiteRequest() {
         <input
           id="site-purpose"
           name="purpose"
-          placeholder="Услуги, каталог, компания, магазин"
+          placeholder="Новый сайт, редизайн, каталог, магазин"
           aria-invalid={invalid === "purpose" || undefined}
           required
         />

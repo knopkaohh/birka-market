@@ -1,7 +1,7 @@
 "use client";
 
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useState } from "react";
 import { FloatingContact } from "@/components/floating-contact";
 import { InactivityPrompt } from "@/components/InactivityPrompt";
 import { Loader } from "@/components/loader";
@@ -20,6 +20,30 @@ export function SiteChrome({ children }: { children: React.ReactNode }) {
     setMenuPath(pathname);
     setMenuOpen(false);
   }
+
+  useLayoutEffect(() => {
+    if (pathname !== "/" || isAdmin) return;
+    const html = document.documentElement;
+    html.style.setProperty("overflow-anchor", "none");
+    html.style.setProperty("scroll-behavior", "auto", "important");
+    const snap = () => {
+      html.scrollTop = 0;
+      document.body.scrollTop = 0;
+      window.scrollTo(0, 0);
+    };
+    snap();
+    const later = window.setTimeout(snap, 80);
+    const release = window.setTimeout(() => {
+      html.style.removeProperty("scroll-behavior");
+      html.style.removeProperty("overflow-anchor");
+    }, 600);
+    return () => {
+      window.clearTimeout(later);
+      window.clearTimeout(release);
+      html.style.removeProperty("scroll-behavior");
+      html.style.removeProperty("overflow-anchor");
+    };
+  }, [pathname, isAdmin]);
 
   useEffect(() => {
     document.body.dataset.admin = isAdmin ? "1" : "";

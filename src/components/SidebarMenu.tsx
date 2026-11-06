@@ -7,7 +7,7 @@ import { ChevronDown, Search } from "lucide-react";
 import BranchedMenu from "@/components/fx/BranchedMenu";
 import FluxLines from "@/components/fx/FluxLines";
 import { Logo } from "@/components/logo";
-import { categories, matchesProduct, products, productsByCategory } from "@/lib/site";
+import { categories, matchesProduct, navLinks, products, productsByCategory } from "@/lib/site";
 
 type SidebarMenuProps = {
   open: boolean;
@@ -83,6 +83,49 @@ function MenuIcon({ slug }: { slug: string }) {
         <path d="M7.4 7.2h.01M9.4 7.2h.01" />
       </>
     ),
+    "o-kompanii": (
+      <>
+        <path d="M5.2 19.2V8.2L12 4.6l6.8 3.6v11" />
+        <path d="M10 19.2v-4.4h4v4.4" />
+      </>
+    ),
+    novosti: (
+      <>
+        <path d="M6.2 5.4h9.2l2.4 2.4v11a1.2 1.2 0 0 1-1.2 1.2H6.2A1.2 1.2 0 0 1 5 18.8V6.6a1.2 1.2 0 0 1 1.2-1.2Z" />
+        <path d="M8 10.2h6.4M8 13.2h6.4M8 16.2h4" />
+      </>
+    ),
+    dostavka: (
+      <>
+        <path d="M4.4 8.2h9.2v7.2H4.4Z" />
+        <path d="M13.6 10.4h3.2l2.6 2.6v2.4h-5.8" />
+        <circle cx="7.4" cy="17.2" r="1.3" />
+        <circle cx="16.4" cy="17.2" r="1.3" />
+      </>
+    ),
+    oplata: (
+      <>
+        <rect x="4.2" y="6.2" width="15.6" height="11.2" rx="1.6" />
+        <path d="M4.2 10h15.6" />
+      </>
+    ),
+    rabota: (
+      <>
+        <rect x="5" y="7.2" width="14" height="11" rx="1.6" />
+        <path d="M9 7.2V5.8A1.6 1.6 0 0 1 10.6 4.2h2.8A1.6 1.6 0 0 1 15 5.8v1.4" />
+      </>
+    ),
+    kontakty: (
+      <>
+        <path d="M8.2 5.4h2.2l1.2 2.6-1.6 1a8.2 8.2 0 0 0 4 4l1-1.6 2.6 1.2v2.2a1.4 1.4 0 0 1-1.5 1.4A12.2 12.2 0 0 1 6.8 6.9a1.4 1.4 0 0 1 1.4-1.5Z" />
+      </>
+    ),
+    faq: (
+      <>
+        <path d="M6.4 7.2a6.2 6.2 0 0 1 10.6 4.4c0 3.2-2.2 4.6-3.6 5.4-.6.3-1 .8-1 1.4" />
+        <path d="M12 19.4h.01" />
+      </>
+    ),
   };
   return (
     <svg className="side-icon" viewBox="0 0 24 24" aria-hidden="true">
@@ -99,7 +142,7 @@ export function SidebarMenu({ open, onClose }: SidebarMenuProps) {
     if (pathname === `/katalog/${category.slug}`) return true;
     return productsByCategory(category.slug).some((item) => pathname === `/${item.slug}`);
   })?.slug;
-  const [productsOpen, setProductsOpen] = useState(true);
+  const [productsOpen, setProductsOpen] = useState(false);
   const [query, setQuery] = useState("");
   const branchItems = useMemo(
     () =>
@@ -134,7 +177,7 @@ export function SidebarMenu({ open, onClose }: SidebarMenuProps) {
         aria-label="Закрыть меню"
         onClick={onClose}
       />
-      <aside id="side-menu" className={`side-menu ${open ? "is-open" : ""}`} aria-label="Каталог продукции">
+      <aside id="side-menu" className={`side-menu ${open ? "is-open" : ""}`} aria-label="Меню сайта">
         <FluxLines
           className="side-menu-flux"
           style={{ position: "absolute", inset: 0, zIndex: 0, pointerEvents: "none" }}
@@ -161,7 +204,7 @@ export function SidebarMenu({ open, onClose }: SidebarMenuProps) {
         />
         <div className="side-menu-inner">
           <div className="side-menu-logo">
-            <Logo />
+            <Logo onNavigate={onClose} />
           </div>
 
           <form className="side-search-panel" onSubmit={submitSearch}>
@@ -239,6 +282,20 @@ export function SidebarMenu({ open, onClose }: SidebarMenuProps) {
               <MenuIcon slug="kak-vybrat" />
               <span>Как выбрать?</span>
             </Link>
+            {navLinks
+              .filter((item) => item.href !== "/katalog" && item.href !== "/kak-vybrat")
+              .map((item) => (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className={`side-main-link ${pathname.startsWith(item.href) ? "is-open" : ""}`}
+                  prefetch={false}
+                  onClick={onClose}
+                >
+                  <MenuIcon slug={item.href.slice(1)} />
+                  <span>{item.label}</span>
+                </Link>
+              ))}
           </div>
         </div>
       </aside>

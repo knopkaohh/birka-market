@@ -5,22 +5,10 @@ import { usePathname } from "next/navigation";
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { ArrowDownRight, Mail, Menu, Phone, X } from "lucide-react";
 import { HeaderMessengers } from "@/components/messengers";
+import { scrollPageTop } from "@/lib/scroll-top";
 import { company, navLinks, products } from "@/lib/site";
 
 const productPaths = new Set(products.map((item) => `/${item.slug}`));
-
-function homeNavLinks() {
-  const links: { href: string; label: string }[] = [];
-  for (const item of navLinks) {
-    if (item.href === "/rabota") continue;
-    links.push(item);
-    if (item.href === "/kontakty") {
-      const jobs = navLinks.find((link) => link.href === "/rabota");
-      if (jobs) links.push(jobs);
-    }
-  }
-  return links;
-}
 
 export function SiteHeader({
   menuOpen,
@@ -86,17 +74,15 @@ export function SiteHeader({
           onClick={(event) => {
             if (pathname !== "/") return;
             event.preventDefault();
-            const top = document.querySelector<HTMLElement>("#top");
-            const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-            top?.focus({ preventScroll: true });
-            window.scrollTo({ top: 0, behavior: reduce ? "auto" : "smooth" });
+            if (menuOpen) onToggleMenu();
+            scrollPageTop();
           }}
         >
-          Ваш бренд -<br />
+          Ваш бренд —<br />
           наша <em>забота!</em>
         </Link>
         <nav className="desktop-nav" aria-label="Основная навигация">
-          {(onHome ? homeNavLinks() : navLinks).map((item) => (
+          {navLinks.map((item) => (
             <Link
               key={item.href}
               href={item.href}

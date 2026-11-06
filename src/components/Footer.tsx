@@ -23,11 +23,15 @@ export function Footer() {
             {company.phone}
           </a>
           <div className="footer-messengers">
-            <a href={company.max} target="_blank" rel="noreferrer">
+            <a href={company.max} target="_blank" rel="noreferrer" aria-label={`Написать в Макс: ${company.maxPhone}`}>
               <span className="messenger-bubble" aria-hidden="true">
                 <MaxGlyph size={18} />
               </span>
-              <small>Макс</small>
+              <small>
+                Макс
+                <br />
+                {company.maxPhone}
+              </small>
             </a>
             <a href={company.telegram} target="_blank" rel="noreferrer">
               <span className="messenger-bubble" aria-hidden="true">
@@ -49,7 +53,7 @@ export function Footer() {
         </div>
         <div>
           <span className="footer-heading-amber">Приезжайте в наш офис</span>
-          <p>г. Москва, Строительный проезд, дом 2 стр. 1, этаж 1, офис № 1.</p>
+          <p>г. Москва, Строительный проезд, дом 2, стр. 1, этаж 1, офис № 1.</p>
           <strong>Выдача заказов и самовывоз со склада</strong>
           <p>
             Выдача готовой продукции осуществляется на территории нашего складского комплекса. Для вашего удобства мы
@@ -62,13 +66,13 @@ export function Footer() {
             <i className="gold-dot" aria-hidden="true" />
             Понедельник – Пятница с 10:00 до 18:00
           </p>
-          <p>Суббота и воскресенье: по согласованию с менеджером.</p>
-          <p>В праздничные дни график может отличаться — пожалуйста, звоните для уточнения.</p>
+          <p>В субботу и воскресенье тоже на связи: напишите, согласуем время визита.</p>
         </div>
         <div>
           <span className="footer-heading-amber">Компания</span>
           <Link href="/o-kompanii">О нас</Link>
           <Link href="/rabota">Работа у нас</Link>
+          <Link href="/kontakty">Контакты</Link>
           <Link href="/dokumenty">Документы</Link>
           <Link href="/faq">FAQ</Link>
           <Link href="/privacy">Политика конфиденциальности</Link>

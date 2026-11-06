@@ -43,7 +43,7 @@ export default function DeliveryPage() {
           <article>
             <h2>Самовывоз</h2>
             <p>
-              {company.address}. После готовности придёт SMS. Забрать заказ можно {company.pickupHours.toLowerCase()}.
+              {company.address}. После готовности придёт SMS. {company.pickupHours}
             </p>
           </article>
           <article>

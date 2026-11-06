@@ -74,7 +74,7 @@ export default function AboutPage() {
     <>
       <div className="inner-page about-page">
         <div className="inner-hero">
-          <Breadcrumbs items={[{ label: "О Компании" }]} />
+          <Breadcrumbs items={[{ label: "О компании" }]} />
           <span className="section-number">О КОМПАНИИ</span>
           <h1>
             Собираем бренд

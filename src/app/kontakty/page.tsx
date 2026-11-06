@@ -44,7 +44,7 @@ export default function ContactsPage() {
           </a>
           <a className="is-messenger" href={company.max} target="_blank" rel="noreferrer">
             <span>МАКС</span>
-            <strong>max.ru</strong>
+            <strong>{company.maxPhone}</strong>
           </a>
         </div>
         <div className="content-grid gold-cards contact-facts">
@@ -56,9 +56,7 @@ export default function ContactsPage() {
             <p>Этаж 1, офис № 1.</p>
             <p>Понедельник – пятница, с 10:00 до 18:00.</p>
             <p>Готовые заказы выдаём на этом же складе.</p>
-            <p>В выходные можно приехать по договорённости с менеджером.</p>
-            <p>В праздники график может измениться.</p>
-            <p>Позвоните, подскажем.</p>
+            <p>В выходные тоже можно приехать: напишите, согласуем время.</p>
           </article>
           <article>
             <h2>

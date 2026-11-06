@@ -47,7 +47,7 @@ export function HeaderMessengers() {
           href={href}
           target="_blank"
           rel="noreferrer"
-          aria-label={`Написать в ${label}`}
+          aria-label={id === "max" ? `Написать в Макс: ${company.maxPhone}` : `Написать в ${label}`}
         >
           <Icon size={18} />
         </a>
@@ -62,7 +62,13 @@ export function MobileMessengers() {
       {messengerLinks.map(({ id, href, label, Icon }) => {
         const Mark = id === "max" ? MaxGlyph : Icon;
         return (
-          <a key={id} href={href} target="_blank" rel="noreferrer" aria-label={`Написать в ${label}`}>
+          <a
+            key={id}
+            href={href}
+            target="_blank"
+            rel="noreferrer"
+            aria-label={id === "max" ? `Написать в Макс: ${company.maxPhone}` : `Написать в ${label}`}
+          >
             <Mark size={16} />
           </a>
         );
