@@ -743,16 +743,6 @@ export const catalogItems: CatalogItem[] = [
   },
   {
     material: "zip-pack",
-    uid: "374732634432",
-    path: "374732634432-zip-lock-paket-dumed",
-    title: "ZIP-Lock пакет DUMED",
-    description: "Пакеты с замком ZIP Lock DUMED - 500 шт",
-    text: "ZIP-Lock пакет DUMED",
-    image: "/images/catalog/zip-pack/374732634432.jpg",
-    characteristics: [{ title: "Цвет", value: "Полиэтилен EVA" }, { title: "Материал", value: "Полиэтилен EVA" }, { title: "Форма", value: "Пакет с вырубной ручкой" }],
-  },
-  {
-    material: "zip-pack",
     uid: "542975168642",
     path: "542975168642-zip-lock-paket-asertive",
     title: "ZIP-Lock пакет Asertive",

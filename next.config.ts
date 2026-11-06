@@ -25,6 +25,7 @@ const nextConfig: NextConfig = {
   async redirects() {
     return [
       { source: "/plastic/tproduct/:path*", destination: "/satin/tproduct/:path*", permanent: true },
+      { source: "/zip-pack/tproduct/374732634432-zip-lock-paket-dumed", destination: "/zip-pack", permanent: true },
       { source: "/page143553596.html", destination: "/", permanent: true },
       { source: "/page185433209.html", destination: "/", permanent: true },
       { source: "/page274943709.html", destination: "/", permanent: true },
