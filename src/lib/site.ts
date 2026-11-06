@@ -1,3 +1,5 @@
+const messengerGreeting = "Здравствуйте! Пишу с сайта Бирка Маркет.";
+
 export const company = {
   name: "Бирка Маркет",
   slogan: "Ваш бренд — наша забота!",
@@ -5,8 +7,8 @@ export const company = {
   phoneHref: "tel:+74950038881",
   email: "prod@birka-market.ru",
   telegram: "https://t.me/birka_market_ru",
-  whatsapp: `https://wa.me/79163549287?text=${encodeURIComponent("Здравствуйте! Пишу с сайта Бирка Маркет.")}`,
-  max: "https://max.ru/u/f9LHodD0cOKy8mEM_ckeVhpbwBK4cRsaiewG8RPER9i1TxrrWpYlzfw3OG0",
+  whatsapp: `https://wa.me/79163549287?text=${encodeURIComponent(messengerGreeting)}`,
+  max: `https://max.ru/u/f9LHodD0cOKy8mEM_ckeVhpbwBK4cRsaiewG8RPER9i1TxrrWpYlzfw3OG0?text=${encodeURIComponent(messengerGreeting)}`,
   vk: "https://vk.me/birka_market",
   address: "Москва, Строительный проезд, дом 2, стр. 1, офис № 1",
   hours: "Пн–Пт, 10:00–18:00",
