@@ -12,7 +12,6 @@ import {
   flagsLanding,
   leafletLanding,
   magazineLanding,
-  printingLanding,
   stickerLanding,
 } from "./poligrafiya";
 export type { LandingContent } from "./types";
@@ -42,7 +41,6 @@ export const landings: Record<string, LandingContent> = {
   embroideryprint: embroideryLanding,
   merchi: merchLanding,
   stickerpack: stickerpackLanding,
-  printing: printingLanding,
   businesscard: businesscardLanding,
   sticker: stickerLanding,
   leaflet: leafletLanding,

@@ -2,11 +2,21 @@ import type { Metadata } from "next";
 import type { LandingContent } from "@/lib/landings/types";
 import { company, type Product } from "@/lib/site";
 
-const siteUrl = "https://birka-market.ru";
+export const siteUrl = "https://birka-market.ru";
+
+export function canonical(path: string) {
+  return { canonical: path === "/" ? `${siteUrl}/` : `${siteUrl}${path}` };
+}
+
+/** Старые заголовки Тильды уже содержат ключи и город, шаблон «| Бирка Маркет» их дублирует. */
+function landingTitle(title: string): Metadata["title"] {
+  const keepExact = /логотип|производств|оптом|этикет|ФлексТран|DTF-печать|Пуллеры|ПВД-пакеты|Крафтовые пакеты|маркировки/.test(title);
+  return keepExact ? { absolute: title } : title;
+}
 
 export function landingMetadata(landing: LandingContent, product: Product): Metadata {
   return {
-    title: landing.seoTitle,
+    title: landingTitle(landing.seoTitle),
     description: landing.seoDescription,
     alternates: { canonical: `${siteUrl}/${landing.slug}` },
     openGraph: {

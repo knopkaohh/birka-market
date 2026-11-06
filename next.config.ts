@@ -24,6 +24,18 @@ const nextConfig: NextConfig = {
   ],
   async redirects() {
     return [
+      { source: "/plastic/tproduct/:path*", destination: "/satin/tproduct/:path*", permanent: true },
+      { source: "/zip-pack/tproduct/374732634432-zip-lock-paket-dumed", destination: "/zip-pack", permanent: true },
+      { source: "/page143553596.html", destination: "/", permanent: true },
+      { source: "/page185433209.html", destination: "/", permanent: true },
+      { source: "/page274943709.html", destination: "/", permanent: true },
+      { source: "/katalog/sajty", destination: "/sozdanie-sajtov", permanent: true },
+      { source: "/sajty", destination: "/sozdanie-sajtov", permanent: true },
+      {
+        source: "/blog/bjcudtf2r1-aktsiya-sentyabrya-besplatnii-maket-na-v",
+        destination: "/novosti",
+        permanent: true,
+      },
       { source: "/products", destination: "/katalog", permanent: true },
       { source: "/info", destination: "/o-kompanii", permanent: true },
       { source: "/delivery", destination: "/dostavka", permanent: true },
@@ -41,6 +53,7 @@ const nextConfig: NextConfig = {
       { source: "/landing-page", destination: "/katalog", permanent: true },
       { source: "/guide", destination: "/kak-vybrat", permanent: true },
       { source: "/podbor", destination: "/kak-vybrat", permanent: true },
+      { source: "/printing", destination: "/katalog/poligrafiya", permanent: true },
     ];
   },
 };

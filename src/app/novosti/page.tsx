@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowDownRight } from "lucide-react";
 import { Breadcrumbs } from "@/components/breadcrumbs";
 import { CalculatorBlock } from "@/components/calculator-block";
 import { formatNewsDate, newsPosts } from "@/lib/news";
@@ -9,7 +8,7 @@ import { formatNewsDate, newsPosts } from "@/lib/news";
 export const metadata: Metadata = {
   title: "Новости производства и акций",
   description:
-    "Новости Бирка Маркет: акции на бирки и упаковку, выставки, кейсы и обновления производства. Все публикации со старого сайта с датами и полным текстом.",
+    "Новости Бирка Маркет: акции на бирки и упаковку, выставки, кейсы и обновления производства.",
   alternates: { canonical: "https://birka-market.ru/novosti" },
   openGraph: {
     title: "Новости Бирка Маркет",
@@ -29,14 +28,10 @@ export default function NewsPage() {
           <Breadcrumbs items={[{ label: "Новости" }]} />
           <span className="section-number">НОВОСТИ</span>
           <h1>
-            Что происходит
-            <br />
+            Что происходит <br />
             <em>на производстве и в отрасли</em>
           </h1>
-          <p>
-            {newsPosts.length} публикаций с датами и полным текстом со старого сайта birka-market.ru: акции, выставки,
-            материалы о бирках и упаковке.
-          </p>
+          <p>Акции, выставки и заметки с производства: что делаем и куда ездим.</p>
         </div>
         <div className="news-grid">
           {newsPosts.map((post) => (
@@ -48,10 +43,7 @@ export default function NewsPage() {
                 <time dateTime={post.date}>{formatNewsDate(post.date)}</time>
                 <h2>{post.title}</h2>
                 <p>{post.excerpt}</p>
-                <em>
-                  Читать
-                  <ArrowDownRight size={16} />
-                </em>
+                <em>Читать</em>
               </span>
             </Link>
           ))}

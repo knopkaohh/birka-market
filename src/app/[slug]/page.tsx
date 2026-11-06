@@ -16,7 +16,9 @@ type Search = {
 };
 
 export function generateStaticParams() {
-  return products.filter((item) => item.slug !== "jacquard").map((item) => ({ slug: item.slug }));
+  return products
+    .filter((item) => item.slug !== "jacquard" && item.slug !== "sozdanie-sajtov")
+    .map((item) => ({ slug: item.slug }));
 }
 
 export async function generateMetadata({ params }: { params: Promise<Params> }): Promise<Metadata> {
@@ -37,7 +39,7 @@ export default async function ProductPage({
   const { slug } = await params;
   const { variant, qty, size, spec, time, price } = await searchParams;
   const landing = getLanding(slug);
-  if (!landing) notFound();
+  if (!landing || !getProduct(slug)) notFound();
   return (
     <ProductLanding
       content={landing}

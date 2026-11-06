@@ -18,3 +18,9 @@ export function isCompleteRuPhone(value: string): boolean {
   const digits = value.replace(/\D/g, "");
   return digits.length === 11 && digits.startsWith("7");
 }
+
+/** Любой город или страна: достаточно цифр, без обязательной маски +7. */
+export function isReachablePhone(value: string): boolean {
+  const digits = value.replace(/\D/g, "");
+  return digits.length >= 6 && digits.length <= 15;
+}

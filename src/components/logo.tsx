@@ -1,4 +1,8 @@
+"use client";
+
 import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { scrollPageTop } from "@/lib/scroll-top";
 
 export function LogoMark({ className }: { className?: string }) {
   return (
@@ -50,9 +54,21 @@ export function LogoMark({ className }: { className?: string }) {
   );
 }
 
-export function Logo() {
+export function Logo({ onNavigate }: { onNavigate?: () => void }) {
+  const pathname = usePathname();
   return (
-    <Link className="logo" href="/" aria-label="Бирка Маркет — на главную">
+    <Link
+      className="logo"
+      href="/"
+      aria-label="Бирка Маркет — на главную"
+      onClick={(event) => {
+        onNavigate?.();
+        if (pathname === "/") {
+          event.preventDefault();
+          scrollPageTop();
+        }
+      }}
+    >
       <LogoMark />
     </Link>
   );

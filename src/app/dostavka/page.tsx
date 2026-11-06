@@ -7,6 +7,7 @@ export const metadata: Metadata = {
   title: "Доставка по Москве и России",
   description:
     "Доставка бирок и упаковки по Москве, России и СНГ. Курьер, СДЭК, Почта России. Самовывоз со склада в Москве, Строительный проезд 2с1.",
+  alternates: { canonical: "https://birka-market.ru/dostavka" },
 };
 
 export default function DeliveryPage() {
@@ -15,32 +16,36 @@ export default function DeliveryPage() {
       <div className="inner-page">
         <div className="inner-hero">
           <Breadcrumbs items={[{ label: "Доставка" }]} />
-          <span className="section-number">ЛОГИСТИКА</span>
+          <span className="section-number">ДОСТАВКА</span>
           <h1>
-            Доставка по Москве,
-            <br />
+            Доставка по Москве, <br />
             <em>России и СНГ</em>
           </h1>
-          <p>Отправляем готовый тираж курьером, транспортными компаниями или отдаём на самовывоз со склада.</p>
+          <p>Готовый тираж отправляем курьером и транспортными компаниями или выдаём на складе в Москве.</p>
         </div>
-        <div className="content-grid">
+        <div className="content-grid gold-cards">
           <article>
             <h2>Сроки</h2>
             <p>Обычно доставка занимает 1–5 рабочих дней и зависит от города и объёма. Точный срок назовём вместе с расчётом заказа.</p>
           </article>
           <article>
-            <h2>По Москве</h2>
+            <h2>
+              По <em>Москве</em>
+            </h2>
             <p>Курьерские службы: Яндекс GO и Dostavista. После готовности заказа согласуем удобный слот.</p>
           </article>
           <article>
-            <h2>По России</h2>
-            <p>СДЭК, Почта России, Major Express и Яндекс Доставка, в том числе в пункты выдачи. После отгрузки присылаем трек-номер.</p>
+            <h2>
+              По <em>России</em>
+            </h2>
+            <p>СДЭК, Почта России и Яндекс Доставка, в том числе в пункты выдачи. После отгрузки присылаем трек-номер.</p>
           </article>
           <article>
             <h2>Самовывоз</h2>
-            <p>
-              {company.address}. После готовности придёт SMS. Забрать заказ можно {company.pickupHours.toLowerCase()}.
-            </p>
+            <p>{company.address}. После готовности придёт SMS.</p>
+            {company.schedule.map((line) => (
+              <p key={line}>{line}</p>
+            ))}
           </article>
           <article>
             <h2>Стоимость</h2>
