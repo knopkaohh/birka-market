@@ -60,10 +60,10 @@ export function Footer() {
           <span className="footer-heading-amber">График работы офиса</span>
           <p className="hours-main">
             <i className="gold-dot" aria-hidden="true" />
-            Понедельник – Пятница с 10:00 до 18:00
+            {company.schedule[0]}
           </p>
-          <p>В субботу и воскресенье мы на связи и принимаем заказы.</p>
-          <p>В праздники чаще тоже работаем, но лучше заранее уточнить по телефону.</p>
+          <p>{company.schedule[1]}</p>
+          <p>{company.schedule[2]}</p>
         </div>
         <div>
           <span className="footer-heading-amber">Компания</span>

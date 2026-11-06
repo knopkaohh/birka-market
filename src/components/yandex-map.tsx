@@ -20,11 +20,9 @@ export function YandexMap({ height = 600, compact = false }: YandexMapProps) {
           </div>
           <div className="map-meta">
             <p>{company.address}</p>
-            <p>
-              <i className="hours-dot" aria-hidden="true" />
-              {company.hours}
-            </p>
-            <p>{company.hoursNote}</p>
+            {company.schedule.map((line) => (
+              <p key={line}>{line}</p>
+            ))}
             <a href={company.map.route} target="_blank" rel="noreferrer">
               Открыть в Яндекс Картах
             </a>

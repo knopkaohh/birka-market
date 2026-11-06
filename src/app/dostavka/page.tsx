@@ -42,9 +42,10 @@ export default function DeliveryPage() {
           </article>
           <article>
             <h2>Самовывоз</h2>
-            <p>
-              {company.address}. После готовности придёт SMS. {company.pickupHours}
-            </p>
+            <p>{company.address}. После готовности придёт SMS.</p>
+            {company.schedule.map((line) => (
+              <p key={line}>{line}</p>
+            ))}
           </article>
           <article>
             <h2>Стоимость</h2>
