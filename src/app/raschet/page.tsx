@@ -6,6 +6,7 @@ export const metadata: Metadata = {
   title: "Рассчитать заказ бирок и упаковки",
   description:
     "Оставьте заявку на расчёт бирок, упаковки или мерча. Производство в Москве. Менеджер свяжется в течение 10 минут.",
+  alternates: { canonical: "https://birka-market.ru/raschet" },
 };
 
 export default async function CalcPage({

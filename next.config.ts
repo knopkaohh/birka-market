@@ -24,6 +24,17 @@ const nextConfig: NextConfig = {
   ],
   async redirects() {
     return [
+      { source: "/:category/tproduct/:path*", destination: "/:category", permanent: true },
+      { source: "/page143553596.html", destination: "/", permanent: true },
+      { source: "/page185433209.html", destination: "/", permanent: true },
+      { source: "/page274943709.html", destination: "/", permanent: true },
+      { source: "/katalog/sajty", destination: "/sozdanie-sajtov", permanent: true },
+      { source: "/sajty", destination: "/sozdanie-sajtov", permanent: true },
+      {
+        source: "/blog/bjcudtf2r1-aktsiya-sentyabrya-besplatnii-maket-na-v",
+        destination: "/novosti",
+        permanent: true,
+      },
       { source: "/products", destination: "/katalog", permanent: true },
       { source: "/info", destination: "/o-kompanii", permanent: true },
       { source: "/delivery", destination: "/dostavka", permanent: true },

@@ -38,7 +38,7 @@ export function CalculatorBlock({
           {lines.map((line, index) => (
             <span key={line}>
               {line}
-              {(index < lines.length - 1 || titleAccent) && <br />}
+              {(index < lines.length - 1 || titleAccent) && <> <br /></>}
             </span>
           ))}
           {titleAccent ? <em>{titleAccent}</em> : null}

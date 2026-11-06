@@ -8,6 +8,7 @@ export const metadata: Metadata = {
   title: "Работа у нас",
   description:
     "Команда БИРКА МАРКЕТ. Полный цикл для бренда: бирки, упаковка, полиграфия, мерч и сайты. Расширяем команду и ждём отклик.",
+  alternates: { canonical: "https://birka-market.ru/rabota" },
 };
 
 const seekers = [
@@ -70,8 +71,7 @@ export default function JobsPage() {
           <Breadcrumbs items={[{ label: "Работа у нас" }]} />
           <span className="section-number">КОМАНДА</span>
           <h1>
-            Команда
-            <br />
+            Команда <br />
             <em>БИРКА МАРКЕТ</em>
           </h1>
           <p>

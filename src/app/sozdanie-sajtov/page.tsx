@@ -56,8 +56,7 @@ export default function WebsitePage() {
             Новый сайт или редизайн
           </span>
           <h1>
-            Создание сайтов
-            <br />
+            Создание сайтов <br />
             <em>и редизайн сайтов</em>
           </h1>
           <p className="jq-material-line">

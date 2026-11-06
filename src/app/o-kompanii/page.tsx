@@ -10,6 +10,7 @@ export const metadata: Metadata = {
   title: "О компании — производство бирок и упаковки в Москве",
   description:
     "Бирка Маркет больше 10 лет собирает маркировку, упаковку, мерч, полиграфию и сайты на своём производстве в Москве. Один менеджер на весь заказ.",
+  alternates: { canonical: "https://birka-market.ru/o-kompanii" },
 };
 
 const steps = [
@@ -77,8 +78,7 @@ export default function AboutPage() {
           <Breadcrumbs items={[{ label: "О компании" }]} />
           <span className="section-number">О КОМПАНИИ</span>
           <h1>
-            Собираем бренд
-            <br />
+            Собираем бренд <br />
             <em>с нуля</em>
           </h1>
           <p>

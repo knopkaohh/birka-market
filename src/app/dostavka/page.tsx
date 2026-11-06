@@ -7,6 +7,7 @@ export const metadata: Metadata = {
   title: "Доставка по Москве и России",
   description:
     "Доставка бирок и упаковки по Москве, России и СНГ. Курьер, СДЭК, Почта России. Самовывоз со склада в Москве, Строительный проезд 2с1.",
+  alternates: { canonical: "https://birka-market.ru/dostavka" },
 };
 
 export default function DeliveryPage() {
@@ -17,8 +18,7 @@ export default function DeliveryPage() {
           <Breadcrumbs items={[{ label: "Доставка" }]} />
           <span className="section-number">ДОСТАВКА</span>
           <h1>
-            Доставка по Москве,
-            <br />
+            Доставка по Москве, <br />
             <em>России и СНГ</em>
           </h1>
           <p>Готовый тираж отправляем курьером и транспортными компаниями или выдаём на складе в Москве.</p>

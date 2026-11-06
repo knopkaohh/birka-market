@@ -3,9 +3,8 @@ import { g, gallery, p } from "./types";
 
 export const rubberLanding: LandingContent = {
   slug: "rubber",
-  seoTitle: "ПВХ-патчи на заказ в Москве — от 100 шт.",
-  seoDescription:
-    "ПВХ и резиновые патчи с логотипом на заказ в Москве от 100 шт. Объёмный знак для одежды и сумок. Оставьте заявку — ответ за 10 минут.",
+  seoTitle: "Резиновые бирки (ПВХ патчи) для одежды с логотипом на заказ - производство и печать",
+  seoDescription: "Резиновые бирки (ПВХ патчи) для одежды с логотипом на заказ - производство и печать",
   eyebrow: "Объёмный знак • Тираж от 100 шт.",
   title: "ПВХ-патчи",
   titleEm: "логотип с плотностью и статусом",
@@ -167,9 +166,8 @@ export const rubberLanding: LandingContent = {
 
 export const flextranLanding: LandingContent = {
   slug: "flextran",
-  seoTitle: "FlexTran на одежду на заказ в Москве — от 50 шт.",
-  seoDescription:
-    "FlexTran — 3D-нанесение на одежду на заказ в Москве от 50 шт. Гибкий ПВХ или силикон. Доставка по России. Ответ за 10 минут.",
+  seoTitle: "ФлексТран -печать в Москве на заказ, нанесение на одежду логотипов",
+  seoDescription: "ФлексТран -печать в Москве на заказ, нанесение на одежду логотипов",
   eyebrow: "3D-нанесение • Тираж от 50 шт.",
   title: "FlexTran",
   titleEm: "объём, который держится на ткани",
@@ -332,9 +330,8 @@ export const flextranLanding: LandingContent = {
 
 export const dtfLanding: LandingContent = {
   slug: "directtofilm",
-  seoTitle: "DTF-печать на одежде на заказ в Москве — от 10 шт.",
-  seoDescription:
-    "DTF-печать на одежде на заказ в Москве от 10 шт. Полноцветный термоперенос на текстиль и аксессуары. Ответ за 10 минут.",
+  seoTitle: "DTF-печать на текстиле с логотипом на заказ в Москве - производство",
+  seoDescription: "DTF-печать на текстиле с логотипом на заказ в Москве - производство",
   eyebrow: "Полноцвет • Тираж от 10 шт.",
   title: "DTF-печать",
   titleEm: "сложная графика без ограничения по цветам",

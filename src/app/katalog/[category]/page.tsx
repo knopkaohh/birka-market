@@ -5,6 +5,7 @@ import { Breadcrumbs } from "@/components/breadcrumbs";
 import { GoldEnd } from "@/components/gold-end";
 import { CalculatorBlock } from "@/components/calculator-block";
 import { ProductCard } from "@/components/product-card";
+import { canonical } from "@/lib/seo";
 import { categories, getCategory, productsByCategory } from "@/lib/site";
 
 type Params = { category: string };
@@ -20,6 +21,8 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
   return {
     title: `${item.name} на заказ в Москве`,
     description: `${item.intro} Оставьте заявку — менеджер свяжется за 10 минут.`,
+    alternates:
+      item.slug === "sajty" ? canonical("/sozdanie-sajtov") : canonical(`/katalog/${item.slug}`),
   };
 }
 

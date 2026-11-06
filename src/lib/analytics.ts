@@ -7,7 +7,9 @@ declare global {
   }
 }
 
-export const METRIKA_COUNTER_ID = Number(process.env.NEXT_PUBLIC_YANDEX_METRIKA_ID ?? 0);
+const metrikaFromEnv = process.env.NEXT_PUBLIC_YANDEX_METRIKA_ID?.trim();
+/** Публичный номер счётчика birka-market.ru. Пустая переменная окружения его не затирает. */
+export const METRIKA_COUNTER_ID = Number(metrikaFromEnv || 100471214);
 
 function fireLeadGoal() {
   if (typeof window === "undefined") return;

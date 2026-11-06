@@ -28,8 +28,7 @@ export default function NewsPage() {
           <Breadcrumbs items={[{ label: "Новости" }]} />
           <span className="section-number">НОВОСТИ</span>
           <h1>
-            Что происходит
-            <br />
+            Что происходит <br />
             <em>на производстве и в отрасли</em>
           </h1>
           <p>Акции, выставки и заметки с производства: что делаем и куда ездим.</p>

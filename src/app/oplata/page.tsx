@@ -6,6 +6,7 @@ export const metadata: Metadata = {
   title: "Оплата заказа без НДС",
   description:
     "Оплата тиража Бирка Маркет: расчётный счёт для юрлиц и электронный платёж. Работаем без НДС. Счёт после согласования файла и тиража.",
+  alternates: { canonical: "https://birka-market.ru/oplata" },
 };
 
 export default function PaymentPage() {
@@ -16,8 +17,7 @@ export default function PaymentPage() {
           <Breadcrumbs items={[{ label: "Оплата" }]} />
           <span className="section-number">ОПЛАТА</span>
           <h1>
-            Прозрачные условия
-            <br />
+            Прозрачные условия <br />
             <em>до запуска тиража</em>
           </h1>
           <p>Работаем с юридическими и физическими лицами. Менеджер готовит счёт, когда согласованы материал, тираж и ваш файл.</p>

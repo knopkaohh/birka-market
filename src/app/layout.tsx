@@ -27,14 +27,13 @@ export const metadata: Metadata = {
   },
   description:
     "Производство бирок, упаковки, фурнитуры, мерча и полиграфии в Москве. Тираж от 100 штук, доставка по России. Оставьте заявку — менеджер свяжется за 10 минут.",
-  alternates: { canonical: "https://birka-market.ru/" },
+  verification: { yandex: "778b0edaaf074370" },
   openGraph: {
     title: `Бирка Маркет — ${company.slogan}`,
     description:
       "Бирки, упаковка и фурнитура на заказ в Москве: тираж от 100 штук, доставка по России.",
     type: "website",
     locale: "ru_RU",
-    url: "https://birka-market.ru/",
     images: [{ url: "/images/products/jacquard.jpg", alt: "Жаккардовые бирки Бирка Маркет" }],
   },
 };

@@ -9,6 +9,7 @@ export const metadata: Metadata = {
   title: "Контакты производства в Москве",
   description:
     "Телефон +7 495 003-88-81, почта, Telegram, WhatsApp и адрес склада Бирка Маркет в Москве. Менеджер свяжется за 10 минут в рабочее время.",
+  alternates: { canonical: "https://birka-market.ru/kontakty" },
 };
 
 export default function ContactsPage() {
@@ -19,8 +20,7 @@ export default function ContactsPage() {
           <Breadcrumbs items={[{ label: "Контакты" }]} />
           <span className="section-number">КОНТАКТЫ</span>
           <h1>
-            Напишите или
-            <br />
+            Напишите или <br />
             <em>приезжайте в офис</em>
           </h1>
           <p>Менеджер поможет выбрать материал и оформить заказ. Срок и тираж подтверждаем до запуска в производство.</p>

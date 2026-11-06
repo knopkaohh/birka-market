@@ -9,6 +9,7 @@ export const metadata: Metadata = {
   title: "Каталог бирок, упаковки и мерча на заказ",
   description:
     "Каталог Бирка Маркет: вшивные и навесные бирки, упаковка, фурнитура, мерч и полиграфия. Производство в Москве, тираж от 100 штук.",
+  alternates: { canonical: "https://birka-market.ru/katalog" },
 };
 
 export default function CatalogPage() {
@@ -19,8 +20,7 @@ export default function CatalogPage() {
         <Breadcrumbs items={[{ label: "Каталог" }]} />
         <span className="section-number">КАТАЛОГ</span>
         <h1>
-          Вся продукция
-          <br />
+          Вся продукция <br />
           <em>в одном месте</em>
         </h1>
         <p>

@@ -31,8 +31,7 @@ export default function GuidePage() {
           <Breadcrumbs items={[{ label: "Как выбрать" }]} />
           <span className="section-number">КАК ВЫБРАТЬ</span>
           <h1>
-            Не знаете, какие бирки нужны —
-            <br />
+            Не знаете, какие бирки нужны — <br />
             <em>начните с этой страницы</em>
           </h1>
           <p>

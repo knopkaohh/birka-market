@@ -9,6 +9,7 @@ export const metadata: Metadata = {
   title: "Вопросы о тираже, сроках и оплате",
   description:
     "Минимальный тираж, макет, образцы, сроки производства, оплата и доставка бирок Бирка Маркет в Москве.",
+  alternates: { canonical: "https://birka-market.ru/faq" },
 };
 
 export default function FaqPage() {
@@ -19,8 +20,7 @@ export default function FaqPage() {
           <Breadcrumbs items={[{ label: "FAQ" }]} />
           <span className="section-number">ВОПРОСЫ</span>
           <h1>
-            Вопросы,
-            <br />
+            Вопросы, <br />
             <em>которые задают чаще всего</em>
           </h1>
           <p>Не нашли ответ — оставьте заявку. Менеджер и технолог разберут задачу: материал, сгиб и тираж.</p>

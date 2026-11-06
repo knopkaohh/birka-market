@@ -1,4 +1,4 @@
-import { redirect } from "next/navigation";
+import { permanentRedirect } from "next/navigation";
 import { getNewsByUid, getNewsPost, newsPosts } from "@/lib/news";
 
 type Params = { slug: string };
@@ -11,5 +11,5 @@ export default async function OldBlogRedirect({ params }: { params: Promise<Para
   const { slug } = await params;
   const uid = slug.split("-")[0] ?? "";
   const post = getNewsByUid(uid) ?? getNewsPost(slug);
-  redirect(post ? `/novosti/${post.slug}` : "/novosti");
+  permanentRedirect(post ? `/novosti/${post.slug}` : "/novosti");
 }

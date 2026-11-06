@@ -5,6 +5,7 @@ import { company } from "@/lib/site";
 export const metadata: Metadata = {
   title: "Политика конфиденциальности",
   description: "Политика обработки персональных данных Бирка Маркет.",
+  alternates: { canonical: "https://birka-market.ru/privacy" },
 };
 
 export default function PrivacyPage() {

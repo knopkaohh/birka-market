@@ -86,8 +86,7 @@ export function ProductLanding({
             {content.eyebrow}
           </span>
           <h1>
-            {content.title}
-            <br />
+            {content.title} <br />
             <em>{content.titleEm}</em>
           </h1>
           <p className="jq-material-line">{product.summary}</p>

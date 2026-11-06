@@ -334,9 +334,8 @@ export const elasticLanding: LandingContent = {
 
 export const pullLanding: LandingContent = {
   slug: "pull",
-  seoTitle: "Пуллеры для молний на заказ в Москве — от 100 шт.",
-  seoDescription:
-    "Пуллеры на бегунок молнии с логотипом на заказ в Москве от 100 шт. Для курток и сумок. Доставка по России. Ответ за 10 минут.",
+  seoTitle: "Пуллеры для молний с логотипом на заказ",
+  seoDescription: "Пуллеры для молний с логотипом на заказ",
   eyebrow: "Деталь фурнитуры • Тираж от 100 шт.",
   title: "Пуллеры для молний",
   titleEm: "хват, который узнают",

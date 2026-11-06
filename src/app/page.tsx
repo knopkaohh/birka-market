@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import { CalculatorBlock } from "@/components/calculator-block";
@@ -6,6 +7,22 @@ import { MaterialGrid } from "@/components/material-grid";
 import { PartnersMarquee } from "@/components/partners-marquee";
 import { YandexMap } from "@/components/yandex-map";
 import { formatNewsDate, newsPosts } from "@/lib/news";
+import { canonical } from "@/lib/seo";
+
+const homeTitle = "Бирки для одежды с логотипом на заказ в Москве, печать этикеток оптом";
+const homeDescription =
+  "Бирки для одежды на заказ с логотипом в Москве, производство и печать этикеток, лейблов, составников с логотипом в Москве Заказать бирки с логотипом оптом в Birka-market. Изготовление бирок, этикеток для одежды. Быстрая доставка по России. Низкие цены.";
+
+export const metadata: Metadata = {
+  title: { absolute: homeTitle },
+  description: homeDescription,
+  alternates: canonical("/"),
+  openGraph: {
+    title: homeTitle,
+    description: homeDescription,
+    url: "https://birka-market.ru/",
+  },
+};
 
 /** Главная: видео, команда, материалы, расчёт, партнёры, новости и офис. */
 export default function Home() {
