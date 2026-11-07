@@ -41,6 +41,8 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-# incoming leads and uploaded mockups
+# incoming leads, uploads, admin session and telegram token
 /data/leads.json
 /data/uploads
+/data/telegram.json
+/data/session-secret

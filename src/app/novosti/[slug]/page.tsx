@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowDownRight } from "lucide-react";
 import { Breadcrumbs } from "@/components/breadcrumbs";
+import { GoldEnd } from "@/components/gold-end";
 import { CalculatorBlock } from "@/components/calculator-block";
 import { formatNewsDate, getNewsNeighbors, getNewsPost, newsPosts } from "@/lib/news";
 import { company } from "@/lib/site";
@@ -64,7 +64,9 @@ export default async function NewsArticlePage({ params }: { params: Promise<Para
           />
           <span className="section-number">НОВОСТИ</span>
           <time dateTime={post.date}>{formatNewsDate(post.date)}</time>
-          <h1>{post.title}</h1>
+          <h1>
+            <GoldEnd text={post.title} />
+          </h1>
         </div>
         <figure className="news-cover">
           <Image src={post.cover} alt={post.title} fill sizes="(max-width: 900px) 100vw, 860px" priority />
@@ -83,7 +85,6 @@ export default async function NewsArticlePage({ params }: { params: Promise<Para
             <Link href={`/novosti/${next.slug}`}>
               <span>Позднее</span>
               {next.title}
-              <ArrowDownRight size={16} />
             </Link>
           ) : (
             <span />

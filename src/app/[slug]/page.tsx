@@ -6,17 +6,11 @@ import { landingMetadata } from "@/lib/seo";
 import { getProduct, products } from "@/lib/site";
 
 type Params = { slug: string };
-type Search = {
-  variant?: string;
-  qty?: string;
-  size?: string;
-  spec?: string;
-  time?: string;
-  price?: string;
-};
 
 export function generateStaticParams() {
-  return products.filter((item) => item.slug !== "jacquard").map((item) => ({ slug: item.slug }));
+  return products
+    .filter((item) => item.slug !== "jacquard" && item.slug !== "sozdanie-sajtov")
+    .map((item) => ({ slug: item.slug }));
 }
 
 export async function generateMetadata({ params }: { params: Promise<Params> }): Promise<Metadata> {
@@ -27,22 +21,9 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
   return landingMetadata(landing, product);
 }
 
-export default async function ProductPage({
-  params,
-  searchParams,
-}: {
-  params: Promise<Params>;
-  searchParams: Promise<Search>;
-}) {
+export default async function ProductPage({ params }: { params: Promise<Params> }) {
   const { slug } = await params;
-  const { variant, qty, size, spec, time, price } = await searchParams;
   const landing = getLanding(slug);
-  if (!landing) notFound();
-  return (
-    <ProductLanding
-      content={landing}
-      variant={variant}
-      quote={{ qty, size, spec, time, price }}
-    />
-  );
+  if (!landing || !getProduct(slug)) notFound();
+  return <ProductLanding content={landing} />;
 }

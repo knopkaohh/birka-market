@@ -2,9 +2,10 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { ArrowDownRight, Menu, Phone, X } from "lucide-react";
-import { Logo } from "@/components/logo";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { ArrowDownRight, Mail, Menu, Phone, X } from "lucide-react";
 import { HeaderMessengers } from "@/components/messengers";
+import { scrollPageTop } from "@/lib/scroll-top";
 import { company, navLinks, products } from "@/lib/site";
 
 const productPaths = new Set(products.map((item) => `/${item.slug}`));
@@ -17,15 +18,69 @@ export function SiteHeader({
   onToggleMenu: () => void;
 }) {
   const pathname = usePathname();
+  const onHome = pathname === "/";
+  const headerRef = useRef<HTMLElement>(null);
+  const [overVideo, setOverVideo] = useState(onHome);
   const isActive = (href: string) => {
     if (href === "/katalog") return pathname.startsWith("/katalog") || productPaths.has(pathname);
     return pathname.startsWith(href);
   };
 
+  useLayoutEffect(() => {
+    const el = headerRef.current;
+    if (!el) return;
+    const apply = () => {
+      document.documentElement.style.setProperty("--header-h", `${el.offsetHeight}px`);
+    };
+    apply();
+    const observer = new ResizeObserver(apply);
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (!onHome) {
+      setOverVideo(false);
+      return;
+    }
+    const onScroll = () => {
+      const hero = document.querySelector(".home-hero");
+      const header = headerRef.current;
+      if (!hero || !header) {
+        setOverVideo(window.scrollY < 24);
+        return;
+      }
+      setOverVideo(hero.getBoundingClientRect().bottom > header.offsetHeight + 12);
+    };
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+    };
+  }, [onHome]);
+
   return (
-    <header className="site-header">
+    <header ref={headerRef} className={`site-header${onHome ? " is-home" : ""}${onHome && overVideo ? " is-over-video" : ""}`}>
       <div className="header-inner">
-        <Logo />
+        <p className="header-brandlab">
+          лаборатория <em>брендов</em>
+        </p>
+        <Link
+          className="header-slogan"
+          href="/"
+          aria-label="Бирка Маркет — наверх"
+          onClick={(event) => {
+            if (pathname !== "/") return;
+            event.preventDefault();
+            if (menuOpen) onToggleMenu();
+            scrollPageTop();
+          }}
+        >
+          Ваш бренд —<br />
+          наша <em>забота!</em>
+        </Link>
         <nav className="desktop-nav" aria-label="Основная навигация">
           {navLinks.map((item) => (
             <Link
@@ -39,28 +94,36 @@ export function SiteHeader({
           ))}
         </nav>
         <div className="header-actions">
-          <a className="phone-link" href={company.phoneHref}>
-            <Phone size={15} />
-            {company.phone}
-          </a>
-          <HeaderMessengers />
-          <Link className="header-cta" href="/raschet" prefetch={false}>
-            Рассчитать заказ
-            <ArrowDownRight size={17} />
-          </Link>
-          <button
-            type="button"
-            className={`menu-toggle ${menuOpen ? "is-open" : ""}`}
-            aria-label={menuOpen ? "Закрыть меню" : "Открыть меню каталога"}
-            aria-expanded={menuOpen}
-            aria-controls="side-menu"
-            onClick={(event) => {
-              event.stopPropagation();
-              onToggleMenu();
-            }}
-          >
-            {menuOpen ? <X size={22} /> : <Menu size={22} />}
-          </button>
+          <div className="header-contacts">
+            <a className="header-mail" href={`mailto:${company.email}`}>
+              <Mail size={15} aria-hidden="true" />
+              {company.email}
+            </a>
+            <HeaderMessengers />
+            <button
+              type="button"
+              className={`menu-toggle ${menuOpen ? "is-open" : ""}`}
+              aria-label={menuOpen ? "Закрыть меню" : "Открыть меню каталога"}
+              aria-expanded={menuOpen}
+              aria-controls="side-menu"
+              onClick={(event) => {
+                event.stopPropagation();
+                onToggleMenu();
+              }}
+            >
+              {menuOpen ? <X size={22} /> : <Menu size={22} />}
+            </button>
+          </div>
+          <div className="header-actions-line">
+            <a className="phone-link" href={company.phoneHref}>
+              <Phone size={14} />
+              {company.phone}
+            </a>
+            <Link className="header-calc" href="/raschet" prefetch={false}>
+              <ArrowDownRight size={16} aria-hidden="true" />
+              Рассчитать заказ
+            </Link>
+          </div>
         </div>
       </div>
     </header>

@@ -49,7 +49,9 @@ export function LabelGuide() {
     <section className="guide-wizard" aria-labelledby="guide-wizard-title">
       <div className="guide-wizard-head">
         <span className="section-number">ПОДБОР</span>
-        <h2 id="guide-wizard-title">Три вопроса — и понятный комплект</h2>
+        <h2 id="guide-wizard-title">
+          Три вопроса — и понятный <em>комплект</em>
+        </h2>
         <p>Можно не знать терминов. Ответьте, что шьёте и где будет бирка. Мы назовём материал, сгиб, цвета и тираж.</p>
       </div>
       <ol className="guide-steps" aria-label="Шаги подбора">

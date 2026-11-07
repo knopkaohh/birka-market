@@ -1,5 +1,14 @@
-import { redirect } from "next/navigation";
+import { permanentRedirect } from "next/navigation";
 
 export default function OldBlogIndex() {
-  redirect("/novosti");
+  if (process.env.STATIC_EXPORT === "1") {
+    return (
+      <main className="page-wrap">
+        <p>
+          <a href="/novosti">Перейти в новости</a>
+        </p>
+      </main>
+    );
+  }
+  permanentRedirect("/novosti");
 }
