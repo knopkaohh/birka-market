@@ -1,6 +1,9 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  // Сервер для VPS: после сборки запускается .next/standalone/server.js.
+  // public и .next/static в архив копируются отдельно.
+  output: "standalone",
   devIndicators: false,
   allowedDevOrigins: [
     "127.0.0.1",
