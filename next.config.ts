@@ -6,7 +6,7 @@ const nextConfig: NextConfig = {
   // Обычная сборка — сервер для VPS. STATIC_EXPORT=1 собирает HTML-файлы
   // для распаковки в ispmanager: в корне архива лежит index.html.
   ...(staticExport
-    ? { output: "export" as const, images: { unoptimized: true } }
+    ? { output: "export" as const, images: { unoptimized: true }, trailingSlash: true }
     : { output: "standalone" as const }),
   devIndicators: false,
   allowedDevOrigins: [

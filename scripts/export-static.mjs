@@ -29,7 +29,8 @@ function rule(source, destination) {
   const target = destination.replace(/:path\*/g, "$1");
   const optional = pattern.endsWith("/(.+)") ? pattern.replace("/(.+)", "(?:/(.+))?") : pattern;
   const used = source.includes(":path*") && !destination.includes(":path*") ? optional : pattern;
-  const dest = source.includes(":path*") && !destination.includes(":path*") ? destination : target;
+  let dest = source.includes(":path*") && !destination.includes(":path*") ? destination : target;
+  if (dest !== "/" && !dest.endsWith("/")) dest += "/";
   return `RewriteRule ^${used}/?$ ${dest} [R=301,L]`;
 }
 
@@ -78,14 +79,8 @@ function htaccess() {
     if (!source || !slug) return;
     lines.push(rule(source, `/novosti/${slug}`));
   });
-  lines.push("RewriteRule ^blog/(.+)$ /novosti [R=301,L]");
-  lines.push("RewriteCond %{REQUEST_FILENAME} !-f");
-  lines.push("RewriteCond %{REQUEST_FILENAME} !-d");
-  lines.push("RewriteRule ^(.+)/$ /$1 [R=301,L]");
-  lines.push("RewriteCond %{REQUEST_FILENAME} !-f");
-  lines.push("RewriteCond %{REQUEST_FILENAME} !-d");
-  lines.push("RewriteCond %{REQUEST_FILENAME}.html -f");
-  lines.push("RewriteRule ^(.+)$ $1.html [L]");
+  lines.push("RewriteRule ^blog/(.+)$ /novosti/ [R=301,L]");
+  lines.push("DirectorySlash On");
   fs.writeFileSync(path.join(outDir, ".htaccess"), lines.join("\n") + "\n");
 }
 
