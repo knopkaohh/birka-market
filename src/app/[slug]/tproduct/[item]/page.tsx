@@ -8,12 +8,10 @@ import { CalculatorBlock } from "@/components/calculator-block";
 import { MaterialCatalog, catalogBlurb } from "@/components/material-catalog";
 import { catalogItems, catalogOrderHref, getCatalogItem } from "@/lib/catalog";
 import { getLanding } from "@/lib/landings";
-import { quoteComment, quoteQuantity, type QuotePrefill } from "@/lib/landings/types";
 import { canonical, siteUrl } from "@/lib/seo";
 import { getCategory, getProduct } from "@/lib/site";
 
 type Params = { slug: string; item: string };
-type Search = QuotePrefill & { example?: string };
 
 function titleParts(title: string) {
   const lower = title.toLowerCase();
@@ -55,23 +53,15 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
   };
 }
 
-export default async function CatalogExamplePage({
-  params,
-  searchParams,
-}: {
-  params: Promise<Params>;
-  searchParams: Promise<Search>;
-}) {
+export default async function CatalogExamplePage({ params }: { params: Promise<Params> }) {
   const { slug, item: path } = await params;
-  const query = await searchParams;
   const item = getCatalogItem(slug, path);
   const product = getProduct(slug);
   const landing = getLanding(slug);
   if (!item || !product || !landing) notFound();
   const category = getCategory(product.category);
   const { head, tail } = titleParts(item.title);
-  const quote = query.price ? query : undefined;
-  const comment = [`Пример: ${item.title}`, quote ? quoteComment(quote) : ""].filter(Boolean).join(". ");
+  const comment = `Пример: ${item.title}`;
 
   return (
     <>
@@ -175,10 +165,9 @@ export default async function CatalogExamplePage({
 
       <div id="zakaz">
         <CalculatorBlock
-          key={[query.qty, query.size, query.price, item.uid].filter(Boolean).join("-") || item.uid}
+          key={item.uid}
           defaultProduct={product.slug}
           defaultComment={comment}
-          defaultQuantity={query.qty ? quoteQuantity(query.qty) : undefined}
           title={"Заказать\nэтот пример"}
           lead={`Оставьте телефон — посчитаем комплект «${item.title}» и скажем, что нужно для макета.`}
         />

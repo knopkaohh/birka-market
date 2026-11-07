@@ -1,6 +1,36 @@
+"use client";
+
+import { useEffect, useState } from "react";
 import { Check } from "lucide-react";
 import { LeadForm } from "@/components/lead-form";
 import { CalcResponder } from "@/components/calc-responder";
+import { quoteComment, quoteQuantity, type QuotePrefill } from "@/lib/landings/types";
+
+type FormSeed = {
+  product?: string;
+  comment?: string;
+  quantity?: string;
+  variant?: string;
+};
+
+function withQuery(base: FormSeed): FormSeed {
+  const params = new URLSearchParams(window.location.search);
+  if (![...params.keys()].length) return base;
+  const quote: QuotePrefill = {
+    qty: params.get("qty") ?? undefined,
+    size: params.get("size") ?? undefined,
+    spec: params.get("spec") ?? undefined,
+    time: params.get("time") ?? undefined,
+    price: params.get("price") ?? undefined,
+  };
+  const extra = [params.get("comment"), quoteComment(quote)].filter(Boolean).join(". ");
+  return {
+    product: params.get("product") || base.product,
+    comment: [base.comment, extra].filter(Boolean).join(". "),
+    quantity: quote.qty ? quoteQuantity(quote.qty) : base.quantity,
+    variant: params.get("variant") || base.variant,
+  };
+}
 
 export function CalculatorBlock({
   defaultProduct,
@@ -30,6 +60,15 @@ export function CalculatorBlock({
   const lines = title.split("\n");
   const Heading = heading;
   const likeMaterial = surface === "material";
+  const [filled, setFilled] = useState<FormSeed>({
+    product: defaultProduct,
+    comment: defaultComment,
+    quantity: defaultQuantity,
+    variant: defaultVariant,
+  });
+  useEffect(() => {
+    setFilled(withQuery({ product: defaultProduct, comment: defaultComment, quantity: defaultQuantity, variant: defaultVariant }));
+  }, [defaultProduct, defaultComment, defaultQuantity, defaultVariant]);
   return (
     <section className={likeMaterial ? "jq-calc" : "calculator-section"} id="calc">
       <div className={likeMaterial ? "jq-calc-intro" : "calculator-intro"}>
@@ -56,12 +95,12 @@ export function CalculatorBlock({
         ) : null}
       </div>
       <LeadForm
-        key={`${defaultProduct ?? "unknown"}-${defaultComment ?? ""}`}
-        defaultProduct={defaultProduct}
-        defaultComment={defaultComment}
-        defaultQuantity={defaultQuantity}
+        key={`${filled.product ?? "unknown"}-${filled.comment ?? ""}-${filled.variant ?? ""}-${filled.quantity ?? ""}`}
+        defaultProduct={filled.product}
+        defaultComment={filled.comment}
+        defaultQuantity={filled.quantity}
         variants={variants}
-        defaultVariant={defaultVariant}
+        defaultVariant={filled.variant}
       />
     </section>
   );

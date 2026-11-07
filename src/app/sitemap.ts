@@ -3,6 +3,8 @@ import { catalogHref, catalogItems } from "@/lib/catalog";
 import { newsPosts } from "@/lib/news";
 import { categories, products } from "@/lib/site";
 
+export const dynamic = "force-static";
+
 export default function sitemap(): MetadataRoute.Sitemap {
   const base = "https://birka-market.ru";
   const now = new Date();

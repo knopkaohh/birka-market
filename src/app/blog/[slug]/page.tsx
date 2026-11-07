@@ -11,5 +11,15 @@ export default async function OldBlogRedirect({ params }: { params: Promise<Para
   const { slug } = await params;
   const uid = slug.split("-")[0] ?? "";
   const post = getNewsByUid(uid) ?? getNewsPost(slug);
-  permanentRedirect(post ? `/novosti/${post.slug}` : "/novosti");
+  const dest = post ? `/novosti/${post.slug}` : "/novosti";
+  if (process.env.STATIC_EXPORT === "1") {
+    return (
+      <main className="page-wrap">
+        <p>
+          <a href={dest}>Перейти в новости</a>
+        </p>
+      </main>
+    );
+  }
+  permanentRedirect(dest);
 }

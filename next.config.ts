@@ -1,9 +1,13 @@
 import type { NextConfig } from "next";
 
+const staticExport = process.env.STATIC_EXPORT === "1";
+
 const nextConfig: NextConfig = {
-  // Сервер для VPS: после сборки запускается .next/standalone/server.js.
-  // public и .next/static в архив копируются отдельно.
-  output: "standalone",
+  // Обычная сборка — сервер для VPS. STATIC_EXPORT=1 собирает HTML-файлы
+  // для распаковки в ispmanager: в корне архива лежит index.html.
+  ...(staticExport
+    ? { output: "export" as const, images: { unoptimized: true } }
+    : { output: "standalone" as const }),
   devIndicators: false,
   allowedDevOrigins: [
     "127.0.0.1",
@@ -25,40 +29,39 @@ const nextConfig: NextConfig = {
     "**.loca.lt",
     ...(process.env.ALLOWED_DEV_ORIGINS?.split(",").map((item) => item.trim()).filter(Boolean) ?? []),
   ],
-  async redirects() {
-    return [
-      { source: "/plastic/tproduct/:path*", destination: "/satin/tproduct/:path*", permanent: true },
-      { source: "/zip-pack/tproduct/374732634432-zip-lock-paket-dumed", destination: "/zip-pack", permanent: true },
-      { source: "/page143553596.html", destination: "/", permanent: true },
-      { source: "/page185433209.html", destination: "/", permanent: true },
-      { source: "/page274943709.html", destination: "/", permanent: true },
-      { source: "/katalog/sajty", destination: "/sozdanie-sajtov", permanent: true },
-      { source: "/sajty", destination: "/sozdanie-sajtov", permanent: true },
-      {
-        source: "/blog/bjcudtf2r1-aktsiya-sentyabrya-besplatnii-maket-na-v",
-        destination: "/novosti",
-        permanent: true,
-      },
-      { source: "/products", destination: "/katalog", permanent: true },
-      { source: "/info", destination: "/o-kompanii", permanent: true },
-      { source: "/delivery", destination: "/dostavka", permanent: true },
-      { source: "/payment", destination: "/oplata", permanent: true },
-      { source: "/contacts", destination: "/kontakty", permanent: true },
-      { source: "/news", destination: "/novosti", permanent: true },
-      { source: "/news/:path*", destination: "/novosti", permanent: true },
-      { source: "/thanks", destination: "/spasibo", permanent: true },
-      { source: "/sayty", destination: "/katalog", permanent: true },
-      { source: "/razrabotka-saytov", destination: "/katalog", permanent: true },
-      { source: "/lending", destination: "/katalog", permanent: true },
-      { source: "/internet-magazin", destination: "/katalog", permanent: true },
-      { source: "/korporativnyy-sayt", destination: "/katalog", permanent: true },
-      { source: "/landing", destination: "/katalog", permanent: true },
-      { source: "/landing-page", destination: "/katalog", permanent: true },
-      { source: "/guide", destination: "/kak-vybrat", permanent: true },
-      { source: "/podbor", destination: "/kak-vybrat", permanent: true },
-      { source: "/printing", destination: "/katalog/poligrafiya", permanent: true },
-    ];
-  },
 };
+
+const hostRedirects = [
+  { source: "/plastic/tproduct/:path*", destination: "/satin/tproduct/:path*", permanent: true },
+  { source: "/zip-pack/tproduct/374732634432-zip-lock-paket-dumed", destination: "/zip-pack", permanent: true },
+  { source: "/page143553596.html", destination: "/", permanent: true },
+  { source: "/page185433209.html", destination: "/", permanent: true },
+  { source: "/page274943709.html", destination: "/", permanent: true },
+  { source: "/katalog/sajty", destination: "/sozdanie-sajtov", permanent: true },
+  { source: "/sajty", destination: "/sozdanie-sajtov", permanent: true },
+  { source: "/blog/bjcudtf2r1-aktsiya-sentyabrya-besplatnii-maket-na-v", destination: "/novosti", permanent: true },
+  { source: "/products", destination: "/katalog", permanent: true },
+  { source: "/info", destination: "/o-kompanii", permanent: true },
+  { source: "/delivery", destination: "/dostavka", permanent: true },
+  { source: "/payment", destination: "/oplata", permanent: true },
+  { source: "/contacts", destination: "/kontakty", permanent: true },
+  { source: "/news", destination: "/novosti", permanent: true },
+  { source: "/news/:path*", destination: "/novosti", permanent: true },
+  { source: "/thanks", destination: "/spasibo", permanent: true },
+  { source: "/sayty", destination: "/katalog", permanent: true },
+  { source: "/razrabotka-saytov", destination: "/katalog", permanent: true },
+  { source: "/lending", destination: "/katalog", permanent: true },
+  { source: "/internet-magazin", destination: "/katalog", permanent: true },
+  { source: "/korporativnyy-sayt", destination: "/katalog", permanent: true },
+  { source: "/landing", destination: "/katalog", permanent: true },
+  { source: "/landing-page", destination: "/katalog", permanent: true },
+  { source: "/guide", destination: "/kak-vybrat", permanent: true },
+  { source: "/podbor", destination: "/kak-vybrat", permanent: true },
+  { source: "/printing", destination: "/katalog/poligrafiya", permanent: true },
+];
+
+if (!staticExport) {
+  nextConfig.redirects = async () => hostRedirects;
+}
 
 export default nextConfig;
