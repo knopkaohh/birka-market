@@ -98,6 +98,7 @@ function runBuild() {
   });
 }
 
+fs.rmSync(path.join(root, ".next/dev"), { recursive: true, force: true });
 hideApi();
 try {
   await runBuild();

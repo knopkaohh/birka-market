@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { ArrowDownRight, Mail, Menu, Phone, X } from "lucide-react";
+import { LogoMark } from "@/components/logo";
 import { HeaderMessengers } from "@/components/messengers";
 import { scrollPageTop } from "@/lib/scroll-top";
 import { company, navLinks, products } from "@/lib/site";
@@ -67,6 +68,19 @@ export function SiteHeader({
         <p className="header-brandlab">
           лаборатория <em>брендов</em>
         </p>
+        <Link
+          className="header-mark"
+          href="/"
+          aria-label="Бирка Маркет — на главную"
+          onClick={(event) => {
+            if (pathname !== "/") return;
+            event.preventDefault();
+            if (menuOpen) onToggleMenu();
+            scrollPageTop();
+          }}
+        >
+          <LogoMark />
+        </Link>
         <Link
           className="header-slogan"
           href="/"
