@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Cormorant_Garamond, Manrope } from "next/font/google";
 import { MobileBar } from "@/components/mobile-bar";
 import { SiteChrome } from "@/components/site-chrome";
@@ -18,6 +18,13 @@ const cormorant = Cormorant_Garamond({
   subsets: ["cyrillic", "latin"],
   weight: ["400", "500", "600", "700"],
 });
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
+  themeColor: "#1c1917",
+};
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://birka-market.ru"),

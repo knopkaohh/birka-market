@@ -46,3 +46,6 @@ next-env.d.ts
 /data/uploads
 /data/telegram.json
 /data/session-secret
+/public/leads/telegram.php
+/public/leads/leads.jsonl
+/public/leads/files

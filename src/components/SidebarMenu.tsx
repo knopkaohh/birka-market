@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { FormEvent, useMemo, useState, type ReactNode } from "react";
+import { FormEvent, useEffect, useMemo, useState, type ReactNode } from "react";
 import { ChevronDown, Search } from "lucide-react";
 import BranchedMenu from "@/components/fx/BranchedMenu";
 import FluxLines from "@/components/fx/FluxLines";
@@ -101,6 +101,14 @@ export function SidebarMenu({ open, onClose }: SidebarMenuProps) {
   })?.slug;
   const [productsOpen, setProductsOpen] = useState(true);
   const [query, setQuery] = useState("");
+  const [showFlux, setShowFlux] = useState(false);
+  useEffect(() => {
+    const media = window.matchMedia("(min-width: 1151px)");
+    const sync = () => setShowFlux(media.matches);
+    sync();
+    media.addEventListener("change", sync);
+    return () => media.removeEventListener("change", sync);
+  }, []);
   const branchItems = useMemo(
     () =>
       categories.map((category) => ({
@@ -135,30 +143,32 @@ export function SidebarMenu({ open, onClose }: SidebarMenuProps) {
         onClick={onClose}
       />
       <aside id="side-menu" className={`side-menu ${open ? "is-open" : ""}`} aria-label="Каталог продукции">
-        <FluxLines
-          className="side-menu-flux"
-          style={{ position: "absolute", inset: 0, zIndex: 0, pointerEvents: "none" }}
-          colors={["#ffffff", "#ffffff", "#ffffff"]}
-          glow={0.95}
-          rimWidth={0.14}
-          lineWidth={0.8}
-          flowDirection="down"
-          mouseInteraction
-          clickSwirl
-          speed={0.5}
-          scale={1.2}
-          turbulence={1}
-          fluidity={0.1}
-          sharpness={1.7}
-          shimmer={1.5}
-          mouseStrength={0.22}
-          mouseRadius={0.1}
-          swirlStrength={0.18}
-          swirlRadius={0.07}
-          intro
-          lightMode={false}
-          aria-hidden="true"
-        />
+        {showFlux ? (
+          <FluxLines
+            className="side-menu-flux"
+            style={{ position: "absolute", inset: 0, zIndex: 0, pointerEvents: "none" }}
+            colors={["#ffffff", "#ffffff", "#ffffff"]}
+            glow={0.95}
+            rimWidth={0.14}
+            lineWidth={0.8}
+            flowDirection="down"
+            mouseInteraction
+            clickSwirl
+            speed={0.5}
+            scale={1.2}
+            turbulence={1}
+            fluidity={0.1}
+            sharpness={1.7}
+            shimmer={1.5}
+            mouseStrength={0.22}
+            mouseRadius={0.1}
+            swirlStrength={0.18}
+            swirlRadius={0.07}
+            intro
+            lightMode={false}
+            aria-hidden="true"
+          />
+        ) : null}
         <div className="side-menu-inner">
           <div className="side-menu-logo">
             <Logo onNavigate={onClose} />

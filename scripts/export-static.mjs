@@ -98,6 +98,7 @@ function runBuild() {
   });
 }
 
+fs.rmSync(path.join(root, ".next/dev"), { recursive: true, force: true });
 hideApi();
 try {
   await runBuild();
@@ -105,6 +106,12 @@ try {
     throw new Error("out/index.html was not created");
   }
   htaccess();
+  const adminHtml = path.join(outDir, "admin", "index.html");
+  fs.mkdirSync(path.dirname(adminHtml), { recursive: true });
+  fs.writeFileSync(
+    adminHtml,
+    '<!doctype html><meta charset="utf-8"><meta http-equiv="refresh" content="0;url=index.php"><script>location.replace("index.php")</script><title>Заявки</title>',
+  );
   console.log("static export ready:", outDir);
 } finally {
   restoreApi();

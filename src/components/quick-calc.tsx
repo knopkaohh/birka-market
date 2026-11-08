@@ -111,7 +111,7 @@ export function QuickCalc() {
     data.set("product", product?.slug ?? "unknown");
     data.set("page", window.location.pathname);
     try {
-      const response = await fetch("/api/lead", { method: "POST", body: data });
+      const response = await fetch("/lead.php", { method: "POST", body: data });
       const payload = (await response.json().catch(() => null)) as
         | { ok?: boolean; message?: string }
         | null;

@@ -62,6 +62,7 @@ const hostRedirects = [
 
 if (!staticExport) {
   nextConfig.redirects = async () => hostRedirects;
+  nextConfig.rewrites = async () => [{ source: "/lead.php", destination: "/api/lead" }];
 }
 
 export default nextConfig;

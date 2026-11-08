@@ -8,8 +8,9 @@ import { company } from "@/lib/site";
 export function MobileBar() {
   return (
     <div className="mobile-bottom">
-      <a href={company.phoneHref}>
-        <Phone /> Позвонить
+      <a className="mobile-call" href={company.phoneHref}>
+        <Phone size={18} aria-hidden="true" />
+        <span>Позвонить</span>
       </a>
       <MobileMessengers />
       <button type="button" className="mobile-calc" onClick={openQuickCalc}>
