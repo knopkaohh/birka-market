@@ -62,7 +62,7 @@ export function WebsiteRequest() {
     data.set("consent", "1");
     data.set("page", "/sozdanie-sajtov");
     try {
-      const response = await fetch("/api/lead", { method: "POST", body: data });
+      const response = await fetch("/lead.php", { method: "POST", body: data });
       const payload = (await response.json().catch(() => null)) as { ok?: boolean; message?: string } | null;
       if (!response.ok || !payload?.ok) throw new Error(payload?.message || "Request failed");
       form.reset();

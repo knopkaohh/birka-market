@@ -170,7 +170,7 @@ export function InactivityPrompt() {
     body.set("comment", "Подсказка: клиент просит менеджера подобрать материал и перезвонить");
     body.set("page", window.location.pathname);
     try {
-      const response = await fetch("/api/lead", { method: "POST", body });
+      const response = await fetch("/lead.php", { method: "POST", body });
       if (!response.ok) throw new Error("lead");
       setStatus("done");
     } catch {
