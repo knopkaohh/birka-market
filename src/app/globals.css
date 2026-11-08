@@ -467,9 +467,11 @@ button { cursor: pointer; }
   z-index: 180;
   width: 280px;
   height: 100vh;
+  height: 100dvh;
   display: flex;
   flex-direction: column;
-  color: #d5d2ca;
+  color: #f4f1ea;
+  color-scheme: dark;
   background: #1f201f;
 }
 .side-menu-flux {
@@ -650,8 +652,11 @@ button { cursor: pointer; }
     transform: translateX(-100%);
     visibility: hidden;
     pointer-events: none;
+    background: #1f201f;
     transition: transform .4s cubic-bezier(.4, 0, .2, 1), visibility .4s;
   }
+  .side-menu-flux { display: none; }
+  .side-menu-inner { background: #1f201f; }
   .side-menu.is-open {
     transform: translateX(0);
     visibility: visible;
