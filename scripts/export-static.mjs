@@ -106,6 +106,8 @@ try {
     throw new Error("out/index.html was not created");
   }
   htaccess();
+  const adminHtml = path.join(outDir, "admin", "index.html");
+  if (fs.existsSync(adminHtml)) fs.rmSync(adminHtml);
   console.log("static export ready:", outDir);
 } finally {
   restoreApi();

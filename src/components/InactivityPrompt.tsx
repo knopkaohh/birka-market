@@ -166,6 +166,7 @@ export function InactivityPrompt() {
     const body = new FormData();
     body.set("phone", phone);
     body.set("phoneOnly", "1");
+    body.set("form", "callback");
     body.set("product", "callback");
     body.set("comment", "Подсказка: клиент просит менеджера подобрать материал и перезвонить");
     body.set("page", window.location.pathname);

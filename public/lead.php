@@ -31,6 +31,9 @@ function telegramSettings(): array
     $token = trim((string) getenv('TELEGRAM_BOT_TOKEN'));
     $chatId = trim((string) getenv('TELEGRAM_CHAT_ID'));
     $path = __DIR__ . '/leads/telegram.php';
+    if (!is_file($path)) {
+        $path = __DIR__ . '/leads/telegram.example.php';
+    }
     if (is_file($path)) {
         $saved = include $path;
         if (is_array($saved)) {
@@ -51,26 +54,38 @@ function telegramSettings(): array
 function telegramRequest(string $token, string $method, array $payload): bool
 {
     $url = 'https://api.telegram.org/bot' . $token . '/' . $method;
-    $body = null;
+    $hasFile = false;
+    foreach ($payload as $value) {
+        if ($value instanceof CURLFile) {
+            $hasFile = true;
+            break;
+        }
+    }
+    $body = '';
     if (function_exists('curl_init')) {
         $ch = curl_init($url);
-        curl_setopt_array($ch, [
+        $options = [
             CURLOPT_POST => true,
-            CURLOPT_POSTFIELDS => $payload,
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_CONNECTTIMEOUT => 5,
             CURLOPT_TIMEOUT => 12,
-        ]);
+        ];
+        if ($hasFile) {
+            $options[CURLOPT_POSTFIELDS] = $payload;
+        } else {
+            $options[CURLOPT_HTTPHEADER] = ['Content-Type: application/json'];
+            $options[CURLOPT_POSTFIELDS] = json_encode($payload, JSON_UNESCAPED_UNICODE);
+        }
+        curl_setopt_array($ch, $options);
         $raw = curl_exec($ch);
         curl_close($ch);
         $body = is_string($raw) ? $raw : '';
-    } else {
-        $json = json_encode($payload, JSON_UNESCAPED_UNICODE);
+    } elseif (!$hasFile) {
         $context = stream_context_create([
             'http' => [
                 'method' => 'POST',
                 'header' => "Content-Type: application/json\r\n",
-                'content' => $json,
+                'content' => json_encode($payload, JSON_UNESCAPED_UNICODE),
                 'timeout' => 12,
             ],
         ]);
@@ -78,7 +93,11 @@ function telegramRequest(string $token, string $method, array $payload): bool
         $body = is_string($raw) ? $raw : '';
     }
     $data = json_decode($body, true);
-    return is_array($data) && !empty($data['ok']);
+    if (is_array($data) && !empty($data['ok'])) {
+        return true;
+    }
+    $GLOBALS['telegramError'] = is_array($data) ? (string) ($data['description'] ?? 'Telegram не принял сообщение') : 'Telegram не ответил';
+    return false;
 }
 
 function notifyTelegram(string $text, string $filePath): string
@@ -148,9 +167,17 @@ if (is_array($file) && ($file['error'] ?? UPLOAD_ERR_NO_FILE) !== UPLOAD_ERR_NO_
 
 $job = field('job') === '1';
 $website = field('website') === '1';
-$phoneOnly = field('phoneOnly') === '1';
+$phoneOnly = field('phoneOnly') === '1' || field('form') === 'callback';
 $quick = field('quick') === '1';
-$title = $job ? 'Отклик на работу' : ($website ? 'Заявка на сайт' : ($phoneOnly ? 'Звонок' : ($quick ? 'Быстрый расчёт' : 'Расчёт заказа')));
+$kind = $job ? 'job' : ($website ? 'website' : ($phoneOnly ? 'call' : ($quick ? 'quick' : 'order')));
+$titles = [
+    'job' => 'Отклик на работу',
+    'website' => 'Заявка на сайт',
+    'call' => 'Подбор материала',
+    'quick' => 'Быстрый расчёт',
+    'order' => 'Расчёт заказа',
+];
+$title = $titles[$kind];
 
 $contacts = [
     'phone' => 'Телефон',
@@ -161,12 +188,19 @@ $contacts = [
 $contact = field('contact');
 $contactLabel = $contacts[$contact] ?? $contact;
 
+$product = field('product');
+if ($product === 'callback' || $product === 'unknown' || $product === 'job') {
+    $product = '';
+}
 $lead = [
     'id' => bin2hex(random_bytes(8)),
     'createdAt' => gmdate('c'),
+    'kind' => $kind,
+    'title' => $title,
+    'status' => 'new',
     'name' => field('name'),
     'phone' => $phone,
-    'product' => field('product'),
+    'product' => $product,
     'quantity' => field('quantity'),
     'comment' => field('comment'),
     'variant' => field('variant'),
@@ -225,7 +259,11 @@ if (function_exists('mb_substr')) {
     $text = substr($text, 0, 4000);
 }
 
+$GLOBALS['telegramError'] = '';
 $lead['telegram'] = notifyTelegram($text, $filePath);
+if ($lead['telegram'] === 'failed' && $GLOBALS['telegramError'] !== '') {
+    $lead['telegramError'] = $GLOBALS['telegramError'];
+}
 file_put_contents($dir . '/leads.jsonl', json_encode($lead, JSON_UNESCAPED_UNICODE) . "\n", FILE_APPEND | LOCK_EX);
 
 $mailLines = [];
