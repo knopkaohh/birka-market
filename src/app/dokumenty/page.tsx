@@ -4,7 +4,7 @@ import { Breadcrumbs } from "@/components/breadcrumbs";
 import { company } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Документы",
+  title: "Реквизиты производителя бирок в Москве",
   description:
     "Реквизиты производителя Бирка Маркет: ИП Федотов Антон Вадимович, ИНН и ОГРНИП. Бирки и упаковка на заказ в Москве, печать оптом.",
   alternates: { canonical: "https://birka-market.ru/dokumenty" },

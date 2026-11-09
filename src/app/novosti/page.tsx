@@ -12,7 +12,8 @@ export const metadata: Metadata = {
   alternates: { canonical: "https://birka-market.ru/novosti" },
   openGraph: {
     title: "Новости Бирка Маркет",
-    description: "Акции, выставки и материалы о бирках, упаковке и мерче.",
+    description:
+      "Новости Бирка Маркет: бирки и упаковка на заказ от производителя в Москве. Печать оптом, акции и выставки.",
     url: "https://birka-market.ru/novosti",
     locale: "ru_RU",
     type: "website",

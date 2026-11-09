@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { FormEvent, useMemo, useState, type ReactNode } from "react";
+import { FormEvent, useEffect, useMemo, useState, type ReactNode } from "react";
 import { ChevronDown, Search } from "lucide-react";
 import BranchedMenu from "@/components/fx/BranchedMenu";
 import FluxLines from "@/components/fx/FluxLines";
@@ -100,6 +100,14 @@ export function SidebarMenu({ open, onClose }: SidebarMenuProps) {
     return productsByCategory(category.slug).some((item) => pathname === `/${item.slug}`);
   })?.slug;
   const [productsOpen, setProductsOpen] = useState(true);
+  const [roomy, setRoomy] = useState(false);
+  useEffect(() => {
+    const query = window.matchMedia("(max-width: 1150px)");
+    const apply = () => setRoomy(query.matches);
+    apply();
+    query.addEventListener("change", apply);
+    return () => query.removeEventListener("change", apply);
+  }, []);
   const [query, setQuery] = useState("");
   const branchItems = useMemo(
     () =>
@@ -135,34 +143,28 @@ export function SidebarMenu({ open, onClose }: SidebarMenuProps) {
         onClick={onClose}
       />
       <aside id="side-menu" className={`side-menu ${open ? "is-open" : ""}`} aria-label="Каталог продукции">
-        <div className="side-menu-lines" aria-hidden="true">
-          <div className="side-menu-lines-shift" />
-        </div>
         <FluxLines
           className="side-menu-flux"
           style={{ position: "absolute", inset: 0, zIndex: 0, pointerEvents: "none" }}
-          colors={["#ffffff", "#f2c555", "#ffffff"]}
-          glow={0.46}
-          rimWidth={0.1}
-          lineWidth={0.55}
+          colors={["#ffffff", "#ffffff", "#ffffff"]}
+          glow={0.95}
+          rimWidth={0.14}
+          lineWidth={0.8}
           flowDirection="down"
           mouseInteraction
           clickSwirl
-          speed={0.42}
-          scale={1.15}
-          turbulence={0.85}
-          fluidity={0.08}
-          sharpness={2.4}
-          shimmer={0.65}
-          opacity={0.72}
-          mouseStrength={0.16}
-          mouseRadius={0.08}
-          swirlStrength={0.12}
-          swirlRadius={0.06}
+          speed={0.5}
+          scale={1.2}
+          turbulence={1}
+          fluidity={0.1}
+          sharpness={1.7}
+          shimmer={1.5}
+          mouseStrength={0.22}
+          mouseRadius={0.1}
+          swirlStrength={0.18}
+          swirlRadius={0.07}
           intro
           lightMode={false}
-          transparent={false}
-          backgroundColor="#1f201f"
           aria-hidden="true"
         />
         <div className="side-menu-inner">
@@ -224,13 +226,13 @@ export function SidebarMenu({ open, onClose }: SidebarMenuProps) {
                 color="#f5f5f5"
                 accentColor="#f5f5f5"
                 lineColor="#3f3f46"
-                width={240}
-                rowHeight={40}
-                indent={40}
+                width={roomy ? 460 : 240}
+                rowHeight={roomy ? 64 : 40}
+                indent={roomy ? 52 : 40}
                 trunk={14}
                 radius={10}
                 lineWidth={1.5}
-                fontSize={16}
+                fontSize={roomy ? 24 : 16}
                 drawDuration={400}
                 foldDuration={300}
               />
