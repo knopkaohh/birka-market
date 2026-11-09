@@ -3926,8 +3926,16 @@ footer .logo svg { height: 56px; }
   font-weight: 500;
   color: #8e721f;
 }
-.materials-section { padding-top: 36px; padding-bottom: 20px; }
-.materials-heading { margin-bottom: 10px; text-align: center; }
+.materials-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 100%;
+  padding-top: 36px;
+  padding-bottom: 20px;
+  overflow-x: clip;
+}
+.materials-heading { width: 100%; margin-bottom: 0; text-align: center; }
 .materials-heading h2 {
   margin: 0;
   color: #111;
@@ -3944,11 +3952,20 @@ footer .logo svg { height: 56px; }
   font-size: 20px;
   line-height: 1.4;
 }
-.materials-carousel { height: 300px; }
+.materials-carousel {
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  height: 300px;
+  margin: 32px auto 0;
+  overflow: hidden;
+}
 @media (max-width: 760px) {
+  .materials-section { width: 100%; }
+  .materials-heading { padding: 0 18px; }
   .materials-heading h2, .home-intro h2 { font-size: 34px; }
   .home-intro h2 span { white-space: normal; }
-  .materials-carousel { height: 220px; }
+  .materials-carousel { height: 260px; }
 }
 .materials-current {
   display: flex;

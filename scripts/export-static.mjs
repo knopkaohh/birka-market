@@ -71,6 +71,11 @@ function htaccess() {
     "DirectoryIndex index.html",
     "Options -MultiViews",
     "RewriteEngine On",
+    "RewriteCond %{HTTP_HOST} ^www\\.birka-market\\.ru$ [NC]",
+    "RewriteRule ^ https://birka-market.ru%{REQUEST_URI} [R=301,L]",
+    "RewriteCond %{HTTPS} !=on",
+    "RewriteCond %{HTTP:X-Forwarded-Proto} !https [NC]",
+    "RewriteRule ^ https://birka-market.ru%{REQUEST_URI} [R=301,L]",
     "RewriteRule ^api/lead/?$ /lead.php [L]",
     ...fixed.map(([source, destination]) => rule(source, destination)),
   ];

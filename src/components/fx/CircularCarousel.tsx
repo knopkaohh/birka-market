@@ -137,11 +137,6 @@ interface Settings {
   reduced: boolean;
 }
 
-interface IntroPose {
-  radius: number;
-  lift: number;
-}
-
 interface Leaving {
   id: number;
   items: CircularCarouselItem[];
@@ -285,8 +280,6 @@ const TO_RAD = Math.PI / 180;
 const clamp = (value: number, min: number, max: number) => Math.min(max, Math.max(min, value));
 const wrap = (degrees: number) => ((((degrees + 180) % 360) + 360) % 360) - 180;
 const easeOut = (t: number) => 1 - Math.pow(1 - t, 4);
-const easeOutQuint = (t: number) => 1 - Math.pow(1 - t, 5);
-
 const rotateX = (p: Vec3, degrees: number): Vec3 => {
   const r = degrees * TO_RAD;
   const c = Math.cos(r);
@@ -573,8 +566,9 @@ const CircularCarousel = ({
       const rect = root.getBoundingClientRect();
       if (!rect.width || !rect.height) return;
       const room = s.captions ? CAPTION_SPACE : 0;
-      const width = rect.width * 0.94;
-      const height = (rect.height - room) * 0.92;
+      const phone = rect.width <= 760;
+      const width = rect.width * (phone ? 1 : 0.94);
+      const height = (rect.height - room) * (phone ? 0.98 : 0.92);
       const P = s.perspective;
       let minX = Infinity;
       let maxX = -Infinity;
@@ -622,30 +616,30 @@ const CircularCarousel = ({
         ? 4 - rect.height / 2 - minY * fit
         : -((minY + maxY) / 2) * fit - room / 2;
       state.drop = s.axis === 'x' ? (rect.width / fit) * 0.55 + s.cardW : (rect.height / fit) * 0.55 + s.cardH;
-      stage.style.perspective = `${P}px`;
       stage.style.transform = `translate3d(0, ${state.shift}px, 0) scale(${fit})`;
+      placeCards();
     };
     measureRef.current = measure;
 
-    const introCard = (elapsed: number, landing: number): IntroPose => {
-      if (!state.intro) return { radius: 1, lift: 0 };
-      const type = state.intro.type;
-      const reach = Math.abs(wrap(landing + state.angle));
-      if (type === 'assemble') {
-        const delay = (reach / 180) * 420;
-        const p = easeOut(clamp((elapsed - delay) / 1080, 0, 1));
-        return { radius: 1 + 0.6 * (1 - p), lift: 0 };
+    const placeCards = () => {
+      const s = settingsRef.current;
+      if (s.axis === 'x') camera.style.transform = `translate3d(0, 0, ${-s.radius}px) rotateY(${s.tilt}deg)`;
+      else if (s.layout.inward) camera.style.transform = `translate3d(0, 0, ${s.perspective - 1}px) rotateX(${s.tilt}deg)`;
+      else camera.style.transform = `translate3d(0, 0, ${-s.radius}px) rotateX(${s.tilt}deg)`;
+      for (let index = 0; index < s.count; index++) {
+        const card = cardRefs.current[index];
+        if (!card) continue;
+        const base = index * s.step;
+        let transform: string;
+        if (s.axis === 'x') transform = `rotateX(${-base}deg) translateZ(${s.radius}px) translateZ(0)`;
+        else if (s.layout.inward) transform = `rotateY(${base}deg) translateZ(${-s.radius}px) translateZ(0)`;
+        else {
+          transform = `rotateY(${base}deg) translateZ(${s.radius}px) translateZ(0)`;
+          if (s.layout.billboard) transform += ` rotateY(${-base}deg)`;
+        }
+        card.style.transform = transform;
+        card.style.willChange = 'transform';
       }
-      if (type === 'rise') {
-        const delay = (reach / 180) * 480;
-        const p = easeOutQuint(clamp((elapsed - delay) / 900, 0, 1));
-        return { radius: 1, lift: (1 - p) * state.drop };
-      }
-      if (type === 'spin') {
-        const p = easeOut(clamp(elapsed / INTRO_LENGTH.spin, 0, 1));
-        return { radius: 1 + 0.28 * (1 - p), lift: 0 };
-      }
-      return { radius: 1, lift: 0 };
     };
 
     const advance = (s: Settings, dt: number, now: number) => {
@@ -705,19 +699,11 @@ const CircularCarousel = ({
 
       if (now < state.holdUntil) busy = true;
 
-      const ease = 1 - Math.exp(-dt / 0.35);
-      const aimYaw = state.pointer.inside ? state.pointer.x * s.parallax * 9 : 0;
-      const aimPitch = state.pointer.inside ? -state.pointer.y * s.parallax * 6 : 0;
-      state.yaw += (aimYaw - state.yaw) * ease;
-      state.pitch += (aimPitch - state.pitch) * ease;
-      if (Math.abs(aimYaw - state.yaw) > 0.01 || Math.abs(aimPitch - state.pitch) > 0.01) busy = true;
-
       return busy;
     };
 
     const render = (s: Settings, now: number) => {
       const elapsed = state.intro ? now - state.intro.start : 0;
-      const swell = 1 + s.stretch * 0.12 * Math.min(1, Math.abs(state.velocity) / 420);
       let spinOffset = 0;
       if (state.intro?.type === 'spin') {
         const p = easeOut(clamp(elapsed / INTRO_LENGTH.spin, 0, 1));
@@ -727,38 +713,12 @@ const CircularCarousel = ({
         spinOffset = -32 * state.dir * (1 - p);
       }
       const angle = state.angle + spinOffset;
-      const R = s.radius * swell;
-
-      if (s.axis === 'x') {
-        camera.style.transform = `translate3d(0, 0, ${-R}px) rotateY(${s.tilt + state.yaw}deg) rotateX(${state.pitch}deg)`;
-        ring.style.transform = `rotateX(${-angle}deg)`;
-      } else if (s.layout.inward) {
-        camera.style.transform = `translate3d(0, 0, ${s.perspective - 1}px) rotateX(${s.tilt + state.pitch}deg) rotateY(${state.yaw}deg)`;
-        ring.style.transform = `rotateY(${angle}deg)`;
-      } else {
-        camera.style.transform = `translate3d(0, 0, ${-R}px) rotateX(${s.tilt + state.pitch}deg) rotateY(${state.yaw}deg)`;
-        ring.style.transform = `rotateY(${angle}deg)`;
-      }
+      ring.style.transform = s.axis === 'x' ? `rotateX(${-angle}deg)` : `rotateY(${angle}deg)`;
 
       for (let index = 0; index < s.count; index++) {
         const card = cardRefs.current[index];
         if (!card) continue;
-        const base = index * s.step;
-        const mod = introCard(elapsed, base);
-        const r = R * mod.radius;
-        let transform: string;
-        if (s.axis === 'x') {
-          transform = `rotateX(${-base}deg) translateZ(${r}px)`;
-        } else if (s.layout.inward) {
-          transform = `rotateY(${base}deg) translateZ(${-r}px)`;
-        } else {
-          transform = `rotateY(${base}deg) translateZ(${r}px)`;
-          if (s.layout.billboard) transform += ` rotateY(${-(base + angle)}deg)`;
-        }
-        if (mod.lift) transform += s.axis === 'x' ? ` translateX(${mod.lift}px)` : ` translateY(${mod.lift}px)`;
-        card.style.transform = transform;
-
-        const world = wrap(base + angle);
+        const world = wrap(index * s.step + angle);
         const facing = Math.cos(world * TO_RAD);
         if (s.layout.inward) card.style.visibility = Math.abs(world) > 86 ? 'hidden' : '';
         const fade = s.depthFade * Math.pow((1 - facing) / 2, 1.25);
@@ -797,9 +757,13 @@ const CircularCarousel = ({
       } else wake();
     };
 
+    let resizeTimer = 0;
     const resize = new ResizeObserver(() => {
-      measure();
-      wake();
+      window.clearTimeout(resizeTimer);
+      resizeTimer = window.setTimeout(() => {
+        measure();
+        wake();
+      }, 120);
     });
     resize.observe(root);
 
@@ -832,7 +796,109 @@ const CircularCarousel = ({
       }, 140);
       wake();
     };
+    const updatePointer = (event: PointerEvent) => {
+      const box = root.getBoundingClientRect();
+      const pointer = state.pointer;
+      pointer.x = clamp(((event.clientX - box.left) / box.width) * 2 - 1, -1, 1);
+      pointer.y = clamp(((event.clientY - box.top) / box.height) * 2 - 1, -1, 1);
+    };
+
+    const onPointerDown = (event: PointerEvent) => {
+      state.suppressClick = false;
+      const s = settingsRef.current;
+      if (!s.draggable || event.button !== 0) return;
+      state.press = {
+        id: event.pointerId,
+        x: event.clientX,
+        y: event.clientY,
+        angle: state.angle,
+        moved: false,
+        origin: 0,
+        samples: [{ time: performance.now(), angle: state.angle }]
+      };
+    };
+
+    const onPointerMove = (event: PointerEvent) => {
+      if (event.pointerType === 'mouse') {
+        state.pointer.inside = true;
+        updatePointer(event);
+      }
+      const press = state.press;
+      if (!press || press.id !== event.pointerId) {
+        wake();
+        return;
+      }
+      const s = settingsRef.current;
+      const delta = s.axis === 'x' ? event.clientY - press.y : event.clientX - press.x;
+      const cross = s.axis === 'x' ? event.clientX - press.x : event.clientY - press.y;
+      if (!press.moved) {
+        if (Math.abs(delta) < DRAG_THRESHOLD) return;
+        if (Math.abs(cross) > Math.abs(delta) * 1.2 && event.pointerType !== 'mouse') {
+          state.press = null;
+          return;
+        }
+        press.moved = true;
+        press.origin = delta;
+        state.drag = true;
+        state.target = null;
+        state.velocity = 0;
+        setDragging(true);
+        try {
+          root.setPointerCapture(event.pointerId);
+        } catch {}
+      }
+      const perPixel = 180 / (Math.PI * s.radius * state.fit);
+      state.angle = press.angle + (delta - press.origin) * perPixel * (s.layout.inward ? -1 : 1);
+      const now = performance.now();
+      press.samples.push({ time: now, angle: state.angle });
+      while (press.samples.length > 2 && now - press.samples[0].time > 110) press.samples.shift();
+      wake();
+    };
+
+    const onPointerUp = (event: PointerEvent) => {
+      const press = state.press;
+      if (!press || press.id !== event.pointerId) return;
+      state.press = null;
+      if (!press.moved) return;
+      state.drag = false;
+      setDragging(false);
+      state.suppressClick = true;
+      const s = settingsRef.current;
+      const first = press.samples[0];
+      const last = press.samples[press.samples.length - 1];
+      const span = (last.time - first.time) / 1000;
+      const velocity = span > 0.008 ? clamp((last.angle - first.angle) / span, -1400, 1400) : 0;
+      state.velocity = velocity;
+      if (Math.abs(velocity) > 60) state.dir = Math.sign(velocity);
+      const coasting = s.autoplay === 'drift' && !(s.pauseOnHover && state.hover && event.pointerType === 'mouse');
+      if (s.snap && !coasting) {
+        const tau = 0.18 + s.momentum * 1.5;
+        state.target = Math.round((state.angle + velocity * tau * 0.55) / s.step) * s.step;
+      }
+      wake();
+    };
+
+    const onPointerEnter = (event: PointerEvent) => {
+      if (event.pointerType !== 'mouse') return;
+      state.hover = true;
+      wake();
+    };
+
+    const onPointerLeave = (event: PointerEvent) => {
+      if (event.pointerType === 'mouse') {
+        state.hover = false;
+        state.pointer.inside = false;
+      }
+      wake();
+    };
+
     root.addEventListener('wheel', onWheel, { passive: false });
+    root.addEventListener('pointerdown', onPointerDown, { passive: true });
+    root.addEventListener('pointermove', onPointerMove, { passive: true });
+    root.addEventListener('pointerup', onPointerUp, { passive: true });
+    root.addEventListener('pointercancel', onPointerUp, { passive: true });
+    root.addEventListener('pointerenter', onPointerEnter, { passive: true });
+    root.addEventListener('pointerleave', onPointerLeave, { passive: true });
     document.addEventListener('visibilitychange', onVisibility);
 
     measure();
@@ -841,10 +907,17 @@ const CircularCarousel = ({
 
     return () => {
       cancelAnimationFrame(raf);
+      window.clearTimeout(resizeTimer);
       resize.disconnect();
       io.disconnect();
       clearTimeout(state.wheelTimer);
       root.removeEventListener('wheel', onWheel);
+      root.removeEventListener('pointerdown', onPointerDown);
+      root.removeEventListener('pointermove', onPointerMove);
+      root.removeEventListener('pointerup', onPointerUp);
+      root.removeEventListener('pointercancel', onPointerUp);
+      root.removeEventListener('pointerenter', onPointerEnter);
+      root.removeEventListener('pointerleave', onPointerLeave);
       document.removeEventListener('visibilitychange', onVisibility);
     };
   }, []);
@@ -876,107 +949,6 @@ const CircularCarousel = ({
     state.holdUntil = performance.now() + 2800;
     wakeRef.current();
   }, []);
-
-  const updatePointer = (event: React.PointerEvent<HTMLDivElement>) => {
-    const root = rootRef.current;
-    if (!root) return;
-    const rect = root.getBoundingClientRect();
-    const pointer = stateRef.current.pointer;
-    pointer.x = clamp(((event.clientX - rect.left) / rect.width) * 2 - 1, -1, 1);
-    pointer.y = clamp(((event.clientY - rect.top) / rect.height) * 2 - 1, -1, 1);
-  };
-
-  const handlePointerDown = (event: React.PointerEvent<HTMLDivElement>) => {
-    const state = stateRef.current;
-    state.suppressClick = false;
-    if (!draggable || event.button !== 0) return;
-    state.press = {
-      id: event.pointerId,
-      x: event.clientX,
-      y: event.clientY,
-      angle: state.angle,
-      moved: false,
-      origin: 0,
-      samples: [{ time: performance.now(), angle: state.angle }]
-    };
-  };
-
-  const handlePointerMove = (event: React.PointerEvent<HTMLDivElement>) => {
-    const state = stateRef.current;
-    if (event.pointerType === 'mouse') {
-      state.pointer.inside = true;
-      updatePointer(event);
-    }
-    const press = state.press;
-    if (!press || press.id !== event.pointerId) {
-      wakeRef.current();
-      return;
-    }
-    const s = settingsRef.current;
-    const delta = s.axis === 'x' ? event.clientY - press.y : event.clientX - press.x;
-    const cross = s.axis === 'x' ? event.clientX - press.x : event.clientY - press.y;
-    if (!press.moved) {
-      if (Math.abs(delta) < DRAG_THRESHOLD) return;
-      if (Math.abs(cross) > Math.abs(delta) * 1.2 && event.pointerType !== 'mouse') {
-        state.press = null;
-        return;
-      }
-      press.moved = true;
-      press.origin = delta;
-      state.drag = true;
-      state.target = null;
-      state.velocity = 0;
-      setDragging(true);
-      try {
-        rootRef.current?.setPointerCapture(event.pointerId);
-      } catch {}
-    }
-    const perPixel = 180 / (Math.PI * s.radius * state.fit);
-    state.angle = press.angle + (delta - press.origin) * perPixel * (s.layout.inward ? -1 : 1);
-    const now = performance.now();
-    press.samples.push({ time: now, angle: state.angle });
-    while (press.samples.length > 2 && now - press.samples[0].time > 110) press.samples.shift();
-    wakeRef.current();
-  };
-
-  const releasePointer = (event: React.PointerEvent<HTMLDivElement>) => {
-    const state = stateRef.current;
-    const press = state.press;
-    if (!press || press.id !== event.pointerId) return;
-    state.press = null;
-    if (!press.moved) return;
-    state.drag = false;
-    setDragging(false);
-    state.suppressClick = true;
-    const s = settingsRef.current;
-    const first = press.samples[0];
-    const last = press.samples[press.samples.length - 1];
-    const span = (last.time - first.time) / 1000;
-    const velocity = span > 0.008 ? clamp((last.angle - first.angle) / span, -1400, 1400) : 0;
-    state.velocity = velocity;
-    if (Math.abs(velocity) > 60) state.dir = Math.sign(velocity);
-    const coasting = s.autoplay === 'drift' && !(s.pauseOnHover && state.hover && event.pointerType === 'mouse');
-    if (s.snap && !coasting) {
-      const tau = 0.18 + s.momentum * 1.5;
-      state.target = Math.round((state.angle + velocity * tau * 0.55) / s.step) * s.step;
-    }
-    wakeRef.current();
-  };
-
-  const handlePointerEnter = (event: React.PointerEvent<HTMLDivElement>) => {
-    if (event.pointerType !== 'mouse') return;
-    stateRef.current.hover = true;
-    wakeRef.current();
-  };
-
-  const handlePointerLeave = (event: React.PointerEvent<HTMLDivElement>) => {
-    const state = stateRef.current;
-    if (event.pointerType === 'mouse') {
-      state.hover = false;
-      state.pointer.inside = false;
-    }
-    wakeRef.current();
-  };
 
   const handleClick = (event: React.MouseEvent<HTMLDivElement>) => {
     const state = stateRef.current;
@@ -1085,12 +1057,6 @@ const CircularCarousel = ({
       data-ready={ready ? '' : undefined}
       data-draggable={draggable ? '' : undefined}
       data-dragging={dragging ? '' : undefined}
-      onPointerDown={handlePointerDown}
-      onPointerMove={handlePointerMove}
-      onPointerUp={releasePointer}
-      onPointerCancel={releasePointer}
-      onPointerEnter={handlePointerEnter}
-      onPointerLeave={handlePointerLeave}
       onClick={handleClick}
       onKeyDown={handleKeyDown}
     >
@@ -1100,17 +1066,18 @@ const CircularCarousel = ({
       >
         <div
           ref={stageRef}
-          className="absolute inset-0 flex items-center justify-center opacity-0 transition-opacity duration-[450ms] ease-[ease] group-data-[ready]/cc:opacity-100 motion-reduce:transition-none"
+          className="absolute inset-0 flex items-center justify-center opacity-0 transition-opacity duration-[450ms] ease-[ease] [transform-style:preserve-3d] group-data-[ready]/cc:opacity-100 motion-reduce:transition-none"
+          style={{ perspective: `${layout.inward ? radius : (perspective ?? layout.perspective)}px` }}
         >
           <div ref={cameraRef} className="relative h-0 w-0 [transform-style:preserve-3d]">
-            <div ref={ringRef} className="absolute left-0 top-0 h-0 w-0 [transform-style:preserve-3d]">
+            <div ref={ringRef} className="absolute left-0 top-0 h-0 w-0 [transform-style:preserve-3d] [will-change:transform]">
               {list.map((item, index) => (
                 <div
                   key={index}
                   ref={element => {
                     cardRefs.current[index] = element;
                   }}
-                  className="absolute left-0 top-0 h-0 w-0 [transform-style:preserve-3d]"
+                  className="absolute left-0 top-0 h-0 w-0 [transform-style:preserve-3d] [will-change:transform]"
                   data-cc-index={index}
                   role="group"
                   aria-roledescription="slide"
