@@ -310,7 +310,6 @@ export function LeadForm({
           <label htmlFor="contact">Как удобнее связаться</label>
           <select id="contact" name="contact" defaultValue="phone">
             <option value="phone">Телефон</option>
-            <option value="whatsapp">WhatsApp</option>
             <option value="telegram">Telegram</option>
             <option value="max">Макс</option>
           </select>

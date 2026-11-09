@@ -181,7 +181,6 @@ $title = $titles[$kind];
 
 $contacts = [
     'phone' => 'Телефон',
-    'whatsapp' => 'WhatsApp',
     'telegram' => 'Telegram',
     'max' => 'Макс',
 ];

@@ -38,10 +38,6 @@ export default function ContactsPage() {
             <span>TELEGRAM</span>
             <strong>birka_market_ru</strong>
           </a>
-          <a className="is-messenger" href={company.whatsapp} target="_blank" rel="noreferrer">
-            <span>WHATSAPP</span>
-            <strong>+7 916 354-92-87</strong>
-          </a>
           <a className="is-messenger" href={company.max} target="_blank" rel="noreferrer">
             <span>МАКС</span>
             <strong>Написать</strong>

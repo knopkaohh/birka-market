@@ -66,10 +66,6 @@ export function FloatingContact() {
               <Phone size={16} />
               {company.phone}
             </a>
-            <a href={company.whatsapp} target="_blank" rel="noreferrer">
-              <MessageCircle size={16} />
-              WhatsApp
-            </a>
             <a href={company.telegram} target="_blank" rel="noreferrer">
               <Send size={16} />
               Telegram

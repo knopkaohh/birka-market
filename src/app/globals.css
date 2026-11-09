@@ -405,7 +405,6 @@ button { cursor: pointer; }
   border-radius: 0;
   background: transparent;
 }
-.header-msg.is-wa { color: #128c7e; }
 .header-msg.is-tg { color: #2aabee; }
 .header-msg.is-max { color: #1c1c1c; }
 .header-msg.is-vk { color: #2787f5; }
