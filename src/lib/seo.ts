@@ -8,20 +8,27 @@ export function canonical(path: string) {
   return { canonical: path === "/" ? `${siteUrl}/` : `${siteUrl}${path}` };
 }
 
-/** Старые заголовки Тильды уже содержат ключи и город, шаблон «| Бирка Маркет» их дублирует. */
-function landingTitle(title: string): Metadata["title"] {
-  const keepExact = /логотип|производств|оптом|этикет|ФлексТран|DTF-печать|Пуллеры|ПВД-пакеты|Крафтовые пакеты|маркировки/.test(title);
-  return keepExact ? { absolute: title } : title;
+/** Уникальный title: материал, «на заказ», город и бренд. Шаблон сайта не дублирует имя. */
+export function offerTitle(subject: string): { absolute: string } {
+  return { absolute: `${subject} на заказ в Москве | Бирка Маркет` };
+}
+
+/** Description с материалом, производителем, городом и печатью оптом. */
+export function offerDescription(subject: string, detail: string) {
+  const text = detail.replace(/\s+/g, " ").trim();
+  const body = `${subject} на заказ от производителя Бирка Маркет в Москве. Печать оптом. ${text} Доставка по России.`;
+  return body.length > 200 ? `${body.slice(0, 197).trimEnd()}…` : body;
 }
 
 export function landingMetadata(landing: LandingContent, product: Product): Metadata {
+  const description = offerDescription(product.name, product.summary || landing.seoDescription);
   return {
-    title: landingTitle(landing.seoTitle),
-    description: landing.seoDescription,
+    title: offerTitle(product.name),
+    description,
     alternates: { canonical: `${siteUrl}/${landing.slug}` },
     openGraph: {
-      title: landing.seoTitle,
-      description: landing.seoDescription,
+      title: `${product.name} на заказ в Москве | Бирка Маркет`,
+      description,
       url: `${siteUrl}/${landing.slug}`,
       locale: "ru_RU",
       type: "website",
@@ -35,7 +42,7 @@ export function landingJsonLd(landing: LandingContent, product: Product) {
     "@context": "https://schema.org",
     "@type": "Product",
     name: product.name,
-    description: landing.seoDescription,
+    description: offerDescription(product.name, product.summary || landing.seoDescription),
     image: `${siteUrl}${product.image}`,
     brand: { "@type": "Brand", name: company.name },
     offers: {

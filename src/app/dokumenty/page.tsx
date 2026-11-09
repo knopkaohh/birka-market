@@ -5,7 +5,8 @@ import { company } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Документы",
-  description: "Реквизиты ИП Федотов Антон Вадимович: ИНН, ОГРНИП и контакты Бирка Маркет.",
+  description:
+    "Реквизиты производителя Бирка Маркет: ИП Федотов Антон Вадимович, ИНН и ОГРНИП. Бирки и упаковка на заказ в Москве, печать оптом.",
   alternates: { canonical: "https://birka-market.ru/dokumenty" },
 };
 

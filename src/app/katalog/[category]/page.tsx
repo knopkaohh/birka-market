@@ -5,7 +5,7 @@ import { Breadcrumbs } from "@/components/breadcrumbs";
 import { GoldEnd } from "@/components/gold-end";
 import { CalculatorBlock } from "@/components/calculator-block";
 import { ProductCard } from "@/components/product-card";
-import { canonical } from "@/lib/seo";
+import { canonical, offerDescription, offerTitle } from "@/lib/seo";
 import { categories, getCategory, productsByCategory } from "@/lib/site";
 
 type Params = { category: string };
@@ -19,8 +19,8 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
   const item = getCategory(category);
   if (!item) return {};
   return {
-    title: `${item.name} на заказ в Москве`,
-    description: `${item.intro} Оставьте заявку — менеджер свяжется за 10 минут.`,
+    title: offerTitle(item.name),
+    description: offerDescription(item.name, item.intro),
     alternates:
       item.slug === "sajty" ? canonical("/sozdanie-sajtov") : canonical(`/katalog/${item.slug}`),
   };

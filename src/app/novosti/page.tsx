@@ -6,9 +6,9 @@ import { CalculatorBlock } from "@/components/calculator-block";
 import { formatNewsDate, newsPosts } from "@/lib/news";
 
 export const metadata: Metadata = {
-  title: "Новости производства и акций",
+  title: "Новости о бирках и упаковке на заказ",
   description:
-    "Новости Бирка Маркет: акции на бирки и упаковку, выставки, кейсы и обновления производства.",
+    "Новости Бирка Маркет: акции на бирки и упаковку на заказ от производителя в Москве. Печать оптом, выставки и кейсы производства.",
   alternates: { canonical: "https://birka-market.ru/novosti" },
   openGraph: {
     title: "Новости Бирка Маркет",

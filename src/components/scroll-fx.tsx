@@ -1,8 +1,35 @@
 "use client";
 
-import { useEffect } from "react";
+import { usePathname } from "next/navigation";
+import { useEffect, useLayoutEffect } from "react";
 
 export function ScrollFX() {
+  const pathname = usePathname();
+
+  useLayoutEffect(() => {
+    const nodes = Array.from(document.querySelectorAll<HTMLElement>("main .section"));
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduce) {
+      nodes.forEach((node) => node.classList.add("is-in"));
+      return;
+    }
+    const seen = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add("is-in");
+          seen.unobserve(entry.target);
+        });
+      },
+      { rootMargin: "0px 0px -8% 0px", threshold: 0.12 },
+    );
+    nodes.forEach((node) => {
+      node.classList.add("reveal");
+      seen.observe(node);
+    });
+    return () => seen.disconnect();
+  }, [pathname]);
+
   useEffect(() => {
     const motion = window.matchMedia("(prefers-reduced-motion: reduce)");
     if (motion.matches) return;

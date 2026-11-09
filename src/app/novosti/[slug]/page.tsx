@@ -18,13 +18,14 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
   const { slug } = await params;
   const post = getNewsPost(slug);
   if (!post) return {};
+  const description = `${post.excerpt} Бирка Маркет: бирки и упаковка на заказ в Москве.`;
   return {
     title: post.title,
-    description: post.excerpt,
+    description,
     alternates: { canonical: `https://birka-market.ru/novosti/${post.slug}` },
     openGraph: {
-      title: post.title,
-      description: post.excerpt,
+      title: `${post.title} | Бирка Маркет`,
+      description,
       url: `https://birka-market.ru/novosti/${post.slug}`,
       locale: "ru_RU",
       type: "article",

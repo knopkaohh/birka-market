@@ -54,9 +54,15 @@ export function SiteChrome({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     document.documentElement.dataset.uiReady = "1";
+    document.body.classList.toggle("menu-open", menuOpen);
+    document.documentElement.classList.toggle("menu-open", menuOpen);
     document.body.style.overflow = menuOpen ? "hidden" : "";
+    document.documentElement.style.overflow = menuOpen ? "hidden" : "";
     return () => {
+      document.body.classList.remove("menu-open");
+      document.documentElement.classList.remove("menu-open");
       document.body.style.overflow = "";
+      document.documentElement.style.overflow = "";
     };
   }, [menuOpen]);
 

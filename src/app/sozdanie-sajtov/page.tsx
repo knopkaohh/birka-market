@@ -7,9 +7,9 @@ import { GoldRun } from "@/components/gold-run";
 import { WebsiteRequest } from "@/components/website-request";
 
 export const metadata: Metadata = {
-  title: "Создание сайтов и редизайн сайтов",
+  title: "Создание сайтов для брендов одежды в Москве",
   description:
-    "Бирка Маркет делает новые сайты и редизайн уже работающих. Оставьте заявку — обсудим структуру, стиль и способ связи.",
+    "Сайты и редизайн на заказ от Бирка Маркет в Москве: структура, стиль и связь с производством бирок и упаковки. Печать оптом остаётся на том же менеджере.",
   alternates: { canonical: "https://birka-market.ru/sozdanie-sajtov" },
 };
 

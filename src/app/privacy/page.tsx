@@ -4,7 +4,8 @@ import { company } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Политика конфиденциальности",
-  description: "Политика обработки персональных данных Бирка Маркет.",
+  description:
+    "Политика обработки персональных данных Бирка Маркет. Заявки на бирки и упаковку на заказ в Москве принимаем по телефону и через формы сайта.",
   alternates: { canonical: "https://birka-market.ru/privacy" },
 };
 
