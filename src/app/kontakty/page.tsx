@@ -6,7 +6,7 @@ import { YandexMap } from "@/components/yandex-map";
 import { company, team } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Контакты производителя бирок в Москве",
+  title: "Контакты производителя бирок и этикеток для одежды с логотипом в Москве — печать оптом",
   description:
     "Бирка Маркет в Москве: телефон +7 495 003-88-81, почта, Telegram и Max. Бирки и упаковка на заказ от производителя. Печать оптом, менеджер ответит за 10 минут.",
   alternates: { canonical: "https://birka-market.ru/kontakty" },

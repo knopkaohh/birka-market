@@ -4,7 +4,7 @@ import { CalculatorBlock } from "@/components/calculator-block";
 import { company } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Доставка бирок и упаковки по Москве",
+  title: "Доставка бирок и этикеток для одежды с логотипом по Москве — производство оптом",
   description:
     "Доставка бирок и упаковки на заказ от производителя Бирка Маркет по Москве, России и СНГ. Печать оптом. Курьер, СДЭК, Почта России и самовывоз со склада.",
   alternates: { canonical: "https://birka-market.ru/dostavka" },

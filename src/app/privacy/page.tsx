@@ -3,7 +3,7 @@ import { Breadcrumbs } from "@/components/breadcrumbs";
 import { company } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Политика конфиденциальности",
+  title: "Политика конфиденциальности — бирки и этикетки для одежды с логотипом, производство оптом в Москве",
   description:
     "Политика обработки персональных данных Бирка Маркет. Заявки на бирки и упаковку на заказ от производителя в Москве. Печать оптом — через формы сайта и по телефону.",
   alternates: { canonical: "https://birka-market.ru/privacy" },

@@ -6,6 +6,7 @@ import { Breadcrumbs } from "@/components/breadcrumbs";
 import { GoldEnd } from "@/components/gold-end";
 import { CalculatorBlock } from "@/components/calculator-block";
 import { formatNewsDate, getNewsNeighbors, getNewsPost, newsPosts } from "@/lib/news";
+import { pageTitle } from "@/lib/seo";
 import { company } from "@/lib/site";
 
 type Params = { slug: string };
@@ -18,13 +19,16 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
   const { slug } = await params;
   const post = getNewsPost(slug);
   if (!post) return {};
-  const description = `${post.excerpt} Бирка Маркет: бирки и упаковка на заказ в Москве.`;
+  const raw = `${post.excerpt} Бирки и этикетки для одежды с логотипом на заказ в Москве, производство оптом.`.replace(/\s+/g, " ").trim();
+  const description = raw.length > 200 ? `${raw.slice(0, 197).trimEnd()}…` : raw;
+  const plain = post.title.replace(/\p{Extended_Pictographic}/gu, "").replace(/\s+/g, " ").trim();
+  const title = pageTitle(`${plain} — бирки и этикетки для одежды с логотипом, производство оптом в Москве`);
   return {
-    title: post.title,
+    title,
     description,
     alternates: { canonical: `https://birka-market.ru/novosti/${post.slug}` },
     openGraph: {
-      title: `${post.title} | Бирка Маркет`,
+      title: title.absolute,
       description,
       url: `https://birka-market.ru/novosti/${post.slug}`,
       locale: "ru_RU",

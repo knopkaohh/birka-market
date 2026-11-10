@@ -6,7 +6,7 @@ import { CalculatorBlock } from "@/components/calculator-block";
 import { faqItems } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Вопросы о бирках на заказ в Москве",
+  title: "Вопросы о бирках и этикетках для одежды с логотипом на заказ в Москве — производство оптом",
   description:
     "Тираж, макет, сроки и оплата бирок и упаковки от производителя Бирка Маркет в Москве. Печать оптом: жаккард, сатин, хлопок, нейлон, силикон.",
   alternates: { canonical: "https://birka-market.ru/faq" },

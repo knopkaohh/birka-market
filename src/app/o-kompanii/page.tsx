@@ -7,7 +7,7 @@ import { CasesSection } from "@/components/cases-section";
 import { company } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Производитель бирок и упаковки в Москве",
+  title: "Производство бирок и этикеток для одежды с логотипом на заказ в Москве — оптом",
   description:
     "Бирка Маркет — производитель бирок, упаковки, мерча и полиграфии в Москве. На заказ, печать оптом, один менеджер на весь тираж.",
   alternates: { canonical: "https://birka-market.ru/o-kompanii" },

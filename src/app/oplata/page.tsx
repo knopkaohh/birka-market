@@ -3,7 +3,7 @@ import { Breadcrumbs } from "@/components/breadcrumbs";
 import { CalculatorBlock } from "@/components/calculator-block";
 
 export const metadata: Metadata = {
-  title: "Оплата тиража бирок и упаковки",
+  title: "Оплата тиража бирок и этикеток для одежды с логотипом в Москве — производство оптом",
   description:
     "Оплата заказа Бирка Маркет: счёт для юрлиц и электронный платёж, без НДС. Бирки и упаковка на заказ от производителя в Москве, печать оптом.",
   alternates: { canonical: "https://birka-market.ru/oplata" },

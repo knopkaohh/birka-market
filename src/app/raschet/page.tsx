@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { CalculatorBlock } from "@/components/calculator-block";
 
 export const metadata: Metadata = {
-  title: "Расчёт бирок и упаковки на заказ в Москве",
+  title: "Расчёт бирок и этикеток для одежды с логотипом на заказ в Москве — производство оптом",
   description:
     "Расчёт бирок, упаковки, ПВХ-патчей и мерча на заказ от производителя Бирка Маркет в Москве. Печать оптом, менеджер ответит за 10 минут.",
   alternates: { canonical: "https://birka-market.ru/raschet" },

@@ -7,7 +7,7 @@ import { GoldRun } from "@/components/gold-run";
 import { WebsiteRequest } from "@/components/website-request";
 
 export const metadata: Metadata = {
-  title: "Создание сайтов для брендов одежды в Москве",
+  title: "Создание сайтов для брендов одежды с логотипом на заказ в Москве — бирки, этикетки и производство оптом",
   description:
     "Сайты и редизайн на заказ от Бирка Маркет в Москве: структура, стиль и связь с производством бирок и упаковки. Печать оптом остаётся на том же менеджере.",
   alternates: { canonical: "https://birka-market.ru/sozdanie-sajtov" },

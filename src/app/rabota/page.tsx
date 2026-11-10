@@ -5,7 +5,7 @@ import { GoldRun } from "@/components/gold-run";
 import { JobApplication, JobsMotion } from "@/components/job-application";
 
 export const metadata: Metadata = {
-  title: "Работа на производстве бирок в Москве",
+  title: "Работа на производстве бирок и этикеток для одежды с логотипом в Москве — оптом",
   description:
     "Вакансии Бирка Маркет: производство бирок и упаковки на заказ в Москве. Печать оптом, полный цикл для бренда одежды. Ждём отклик.",
   alternates: { canonical: "https://birka-market.ru/rabota" },

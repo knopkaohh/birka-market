@@ -8,7 +8,7 @@ import { CalculatorBlock } from "@/components/calculator-block";
 import { MaterialCatalog, catalogBlurb } from "@/components/material-catalog";
 import { catalogItems, catalogOrderHref, getCatalogItem } from "@/lib/catalog";
 import { getLanding } from "@/lib/landings";
-import { canonical, offerDescription, offerTitle, siteUrl } from "@/lib/seo";
+import { canonical, offerDescription, pageTitle, siteUrl } from "@/lib/seo";
 import { getCategory, getProduct } from "@/lib/site";
 
 type Params = { slug: string; item: string };
@@ -39,7 +39,7 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
   const product = getProduct(slug);
   if (!item || !product) return {};
   const description = offerDescription(`${item.title}, ${product.name}`, catalogBlurb(item));
-  const title = offerTitle(`${item.title} — ${product.shortName}`);
+  const title = pageTitle(`${item.title} для одежды с логотипом на заказ в Москве — этикетки, производство оптом`);
   return {
     title,
     description,
