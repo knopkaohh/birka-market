@@ -331,7 +331,7 @@ export const tracingLanding: LandingContent = {
 
 export const plasticLanding: LandingContent = {
   slug: "plastic",
-  seoTitle: "Пластиковые бирки для маркировки одежды с логотипом на заказ",
+  seoTitle: "Пластиковые бирки для одежды с логотипом на заказ в Москве — производство и печать",
   seoDescription: "Пластиковые бирки для маркировки одежды с логотипом на заказ",
   eyebrow: "Промышленная маркировка • Тираж от 100 шт.",
   title: "Пластиковые бирки",

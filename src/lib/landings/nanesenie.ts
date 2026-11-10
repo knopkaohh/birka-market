@@ -494,7 +494,7 @@ export const dtfLanding: LandingContent = {
 
 export const embroideryLanding: LandingContent = {
   slug: "embroideryprint",
-  seoTitle: "Вышивка и шелкография на заказ в Москве",
+  seoTitle: "Вышивка и шелкография на одежде с логотипом на заказ в Москве — производство",
   seoDescription:
     "Вышивка, шелкография и DTF на одежду на заказ в Москве от 10 шт. Подберём технологию под тираж. Менеджер свяжется за 10 минут.",
   eyebrow: "Подбор технологии • Тираж от 10 шт.",

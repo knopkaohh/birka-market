@@ -6,12 +6,12 @@ import { CalculatorBlock } from "@/components/calculator-block";
 import { CatalogBrowser } from "@/components/catalog-browser";
 
 export const metadata: Metadata = {
-  title: "Каталог бирок и упаковки на заказ",
+  title: "Каталог бирок и этикеток для одежды с логотипом на заказ в Москве",
   description:
     "Каталог Бирка Маркет: вшивные и навесные бирки, ZIP-пакеты, полиграфия, мерч, фурнитура и ПВХ-патчи на заказ от производителя в Москве. Печать оптом.",
   alternates: { canonical: "https://birka-market.ru/katalog" },
   openGraph: {
-    title: "Каталог бирок и упаковки на заказ | Бирка Маркет",
+    title: "Каталог бирок и этикеток для одежды с логотипом на заказ в Москве | Бирка Маркет",
     description:
       "Жаккард, сатин, хлопок, нейлон, силикон, светоотражающие бирки, ZIP-пакеты и ПВХ-патчи на заказ от производителя в Москве. Печать оптом.",
     url: "https://birka-market.ru/katalog",

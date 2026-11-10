@@ -3,7 +3,7 @@ import { g, gallery, p } from "./types";
 
 export const merchLanding: LandingContent = {
   slug: "merchi",
-  seoTitle: "Корпоративный мерч на заказ в Москве — от 30 шт.",
+  seoTitle: "Мерч для одежды с логотипом на заказ в Москве — производство оптом",
   seoDescription:
     "Корпоративный мерч под ключ на заказ в Москве от 30 изделий: одежда, нанесение, бирки и упаковка. КП после заявки. Ответ за 10 минут.",
   eyebrow: "Под ключ • От 30 изделий",
@@ -169,7 +169,7 @@ export const merchLanding: LandingContent = {
 
 export const stickerpackLanding: LandingContent = {
   slug: "stickerpack",
-  seoTitle: "Стикерпаки на заказ в Москве — от 50 шт.",
+  seoTitle: "Стикерпаки с логотипом на заказ в Москве — печать оптом",
   seoDescription:
     "Стикерпаки с логотипом на заказ в Москве от 50 шт. Дизайн, вырубка, наборы для мерча и посылок. Оставьте заявку — ответ за 10 минут.",
   eyebrow: "Носимый мерч • Тираж от 50 шт.",

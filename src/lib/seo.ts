@@ -8,9 +8,15 @@ export function canonical(path: string) {
   return { canonical: path === "/" ? `${siteUrl}/` : `${siteUrl}${path}` };
 }
 
-/** Уникальный title: материал, «на заказ», город и бренд. Шаблон сайта не дублирует имя. */
+/** Title без шаблона сайта, чтобы бренд не дублировался. */
+export function pageTitle(title: string): { absolute: string } {
+  const clean = title.replace(/\s+/g, " ").trim().replace(/\s*\|\s*Бирка Маркет\s*$/i, "");
+  return { absolute: `${clean} | Бирка Маркет` };
+}
+
+/** Уникальный title карточки: материал, «на заказ», город и бренд. */
 export function offerTitle(subject: string): { absolute: string } {
-  return { absolute: `${subject} на заказ в Москве | Бирка Маркет` };
+  return pageTitle(`${subject} на заказ в Москве`);
 }
 
 /** Description с материалом, производителем, городом и печатью оптом. */
@@ -22,12 +28,13 @@ export function offerDescription(subject: string, detail: string) {
 
 export function landingMetadata(landing: LandingContent, product: Product): Metadata {
   const description = offerDescription(product.name, product.summary || landing.seoDescription);
+  const title = pageTitle(landing.seoTitle);
   return {
-    title: offerTitle(product.name),
+    title,
     description,
     alternates: { canonical: `${siteUrl}/${landing.slug}` },
     openGraph: {
-      title: `${product.name} на заказ в Москве | Бирка Маркет`,
+      title: title.absolute,
       description,
       url: `${siteUrl}/${landing.slug}`,
       locale: "ru_RU",

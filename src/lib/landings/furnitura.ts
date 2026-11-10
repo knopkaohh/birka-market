@@ -3,7 +3,7 @@ import { g, gallery, p } from "./types";
 
 export const fastenersLanding: LandingContent = {
   slug: "fasteners",
-  seoTitle: "Биркодержатели на заказ в Москве — от 1 000 шт.",
+  seoTitle: "Биркодержатели для одежды на заказ в Москве — производство оптом",
   seoDescription:
     "Биркодержатели для одежды на заказ в Москве от 1 000 шт. Длина и цвет под навесные бирки и ценники. Производство и доставка. Ответ за 10 минут.",
   eyebrow: "Крепление ярлыка • Тираж от 1 000 шт.",
@@ -168,7 +168,7 @@ export const fastenersLanding: LandingContent = {
 
 export const elasticLanding: LandingContent = {
   slug: "elastic",
-  seoTitle: "Жаккардовая резинка на заказ в Москве — от 100 шт.",
+  seoTitle: "Жаккардовая резинка для одежды с логотипом на заказ в Москве — производство",
   seoDescription:
     "Жаккардовая резинка и стропа с логотипом на заказ в Москве от 100 шт. Тканый рисунок для поясов и отделки. Ответ за 10 минут.",
   eyebrow: "Тканый рисунок • Тираж от 100",
@@ -334,7 +334,7 @@ export const elasticLanding: LandingContent = {
 
 export const pullLanding: LandingContent = {
   slug: "pull",
-  seoTitle: "Пуллеры для молний с логотипом на заказ",
+  seoTitle: "Пуллеры для молний с логотипом на заказ в Москве — производство оптом",
   seoDescription: "Пуллеры для молний с логотипом на заказ",
   eyebrow: "Деталь фурнитуры • Тираж от 100 шт.",
   title: "Пуллеры для молний",
@@ -500,7 +500,7 @@ export const pullLanding: LandingContent = {
 
 export const jibbitzLanding: LandingContent = {
   slug: "jibbitz",
-  seoTitle: "Джибитсы на заказ в Москве — от 100 шт.",
+  seoTitle: "Джибитсы с логотипом на заказ в Москве — производство оптом",
   seoDescription:
     "Джибитсы с логотипом на заказ в Москве от 100 шт. Для Crocs, кед и детской обуви. Своя форма и цвет. Оставьте заявку — ответ за 10 минут.",
   eyebrow: "Аксессуар для обуви • Тираж от 100 шт.",

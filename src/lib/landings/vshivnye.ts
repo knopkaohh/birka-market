@@ -889,7 +889,7 @@ export const neylonLanding: LandingContent = {
 
 export const reflectiveLanding: LandingContent = {
   slug: "reflective",
-  seoTitle: "Светоотражающие бирки для одежды с логотипом на заказ",
+  seoTitle: "Светоотражающие бирки, этикетки для одежды с логотипом на заказ в Москве — производство",
   seoDescription: "Светоотражающие бирки для одежды с логотипом на заказ",
   eyebrow: "Видимость в темноте • Тираж от 100 шт.",
   title: "Светоотражающие бирки",

@@ -169,7 +169,7 @@ export const zipLanding: LandingContent = {
 
 export const kraftLanding: LandingContent = {
   slug: "kraft",
-  seoTitle: "Крафтовые пакеты для одежды с логотипом на заказ - изготовление",
+  seoTitle: "Крафтовые пакеты для одежды с логотипом на заказ в Москве — производство оптом",
   seoDescription: "Крафтовые пакеты для одежды с логотипом на заказ - изготовление",
   eyebrow: "Натуральная бумага • Тираж от 100 шт.",
   title: "Крафтовые пакеты",
@@ -333,7 +333,7 @@ export const kraftLanding: LandingContent = {
 
 export const paperLanding: LandingContent = {
   slug: "paper",
-  seoTitle: "Бумажные пакеты на заказ в Москве — от 100 шт.",
+  seoTitle: "Бумажные пакеты для одежды с логотипом на заказ в Москве — печать оптом",
   seoDescription:
     "Фирменные бумажные пакеты на заказ в Москве от 100 шт. Для бутиков и косметики. Печать логотипа, доставка по России. Ответ за 10 минут.",
   eyebrow: "Фирменная упаковка • Тираж от 100 шт.",
@@ -658,7 +658,7 @@ export const ldpeLanding: LandingContent = {
 
 export const boxLanding: LandingContent = {
   slug: "cardboardbox",
-  seoTitle: "Картонные коробки на заказ в Москве — от 100 шт.",
+  seoTitle: "Картонные коробки с логотипом на заказ в Москве — производство оптом",
   seoDescription:
     "Картонные коробки с логотипом на заказ в Москве от 100 шт. Самосбор, крышка-дно, подарочная конструкция. Оставьте заявку — ответ за 10 минут.",
   eyebrow: "Защита и подача • Тираж от 100 шт.",

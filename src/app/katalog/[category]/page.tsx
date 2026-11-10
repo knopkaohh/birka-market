@@ -5,7 +5,7 @@ import { Breadcrumbs } from "@/components/breadcrumbs";
 import { GoldEnd } from "@/components/gold-end";
 import { CalculatorBlock } from "@/components/calculator-block";
 import { ProductCard } from "@/components/product-card";
-import { canonical, offerDescription, offerTitle } from "@/lib/seo";
+import { canonical, offerDescription, pageTitle } from "@/lib/seo";
 import { categories, getCategory, productsByCategory } from "@/lib/site";
 
 type Params = { category: string };
@@ -18,8 +18,18 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
   const { category } = await params;
   const item = getCategory(category);
   if (!item) return {};
+  const titles: Record<string, string> = {
+    "vshivnye-birki": "Вшивные бирки и этикетки для одежды с логотипом на заказ в Москве — производство оптом",
+    "navesnye-birki": "Навесные бирки для одежды с логотипом на заказ в Москве — производство оптом",
+    upakovka: "Упаковка для одежды с логотипом на заказ в Москве — печать оптом",
+    poligrafiya: "Полиграфия с логотипом на заказ в Москве — печать оптом",
+    merch: "Мерч с логотипом на заказ в Москве — производство оптом",
+    furnitura: "Фурнитура для одежды с логотипом на заказ в Москве — производство оптом",
+    nanesenie: "ПВХ-патчи и нанесение для одежды с логотипом на заказ в Москве — производство",
+    sajty: "Создание сайтов для брендов одежды на заказ в Москве",
+  };
   return {
-    title: offerTitle(item.name),
+    title: pageTitle(titles[item.slug] ?? `${item.name} для одежды с логотипом на заказ в Москве`),
     description: offerDescription(item.name, item.intro),
     alternates:
       item.slug === "sajty" ? canonical("/sozdanie-sajtov") : canonical(`/katalog/${item.slug}`),
