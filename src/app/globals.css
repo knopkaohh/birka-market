@@ -234,7 +234,8 @@ button { cursor: pointer; }
 }
 
 .site-header {
-  position: sticky; top: 0; z-index: 160;
+  position: relative;
+  z-index: 160;
   border-bottom: 1px solid rgba(34,35,34,.13);
   background: #fff;
 }
