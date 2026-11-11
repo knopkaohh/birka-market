@@ -66,6 +66,7 @@ export function Footer() {
           <p>{company.schedule[2]}</p>
         </div>
         <div>
+          <img className="footer-tag" src="/images/brand/tag-logo.png" alt="Бирка Маркет" width={84} height={78} />
           <span className="footer-heading-amber">Компания</span>
           <Link href="/o-kompanii">О нас</Link>
           <Link href="/rabota">Работа у нас</Link>

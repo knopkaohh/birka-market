@@ -269,6 +269,18 @@ button { cursor: pointer; }
   font-weight: 500;
   color: var(--yellow);
 }
+.slogan-care {
+  display: inline-flex;
+  align-items: center;
+  gap: .16em;
+  white-space: nowrap;
+}
+.slogan-tag {
+  display: block;
+  width: auto;
+  height: 1.55em;
+  flex: 0 0 auto;
+}
 .header-brandlab {
   order: 0;
   flex: 1 1 100%;
@@ -1233,6 +1245,7 @@ body.quick-calc-open.quick-calc-in > *:not(.quick-calc-overlay):not(.thanks-over
 footer { padding: 56px var(--page-gutter) 24px; color: var(--paper); background: #1f201f; }
 footer .logo { color: #f2c555; background: transparent; }
 footer .logo svg { height: 56px; }
+.footer-tag { display: block; width: 84px; height: auto; margin: 0 0 4px; }
 .footer-top { display: grid; grid-template-columns: .4fr 1.3fr .3fr; align-items: start; gap: 30px; padding-bottom: 90px; }
 .footer-top h2 { margin: -10px 0 0; font-size: clamp(56px, 7vw, 100px); font-weight: 590; line-height: .88; letter-spacing: -.07em; }
 .footer-top h2 em { color: var(--yellow); }
@@ -1309,6 +1322,7 @@ footer .logo svg { height: 56px; }
   .site-header:not(.is-home) .header-mark svg { height: 34px; }
   .site-header:not(.is-home) .header-calc { font-size: 15px; }
   .header-slogan { font-size: 22px; }
+  .slogan-tag { height: 1.7em; }
   .header-brandlab {
     position: static;
     order: -1;
@@ -3592,7 +3606,8 @@ footer .logo svg { height: 56px; }
   box-shadow: 0 0 0 6px rgba(136, 19, 55, .12);
 }
 
-.side-menu-logo { flex-direction: column; align-items: flex-start; }
+.side-menu-logo { flex-direction: row; align-items: center; justify-content: space-between; }
+.side-tag { display: block; width: 58px; height: auto; flex: 0 0 auto; }
 .side-slogan { margin: 8px 0 0; color: #f2c555; font-size: 13px; line-height: 1.35; }
 .footer-copy {
   margin: 36px 0 0;

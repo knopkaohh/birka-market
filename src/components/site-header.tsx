@@ -93,7 +93,10 @@ export function SiteHeader({
           }}
         >
           Ваш бренд —<br />
-          наша <em>забота!</em>
+          <span className="slogan-care">
+            наша <em>забота!</em>
+            <img className="slogan-tag" src="/images/brand/tag-logo.png" alt="" width={72} height={67} />
+          </span>
         </Link>
         <nav className="desktop-nav" aria-label="Основная навигация">
           {navLinks.map((item) => (
