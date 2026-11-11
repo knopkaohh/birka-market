@@ -272,10 +272,10 @@ button { cursor: pointer; }
 }
 .slogan-tag {
   position: absolute;
-  left: calc(100% + .55em);
+  left: calc(100% + .95em);
   top: 50%;
   width: auto;
-  height: 1.15em;
+  height: 1.42em;
   transform: translateY(-52%);
   pointer-events: none;
 }
@@ -1329,7 +1329,7 @@ footer .logo svg { height: 56px; }
   .site-header:not(.is-home) .header-mark svg { height: 34px; }
   .site-header:not(.is-home) .header-calc { font-size: 15px; }
   .header-slogan { font-size: 22px; }
-  .slogan-tag { height: 1.15em; left: calc(100% + .75em); }
+  .slogan-tag { height: 1.35em; left: calc(100% + 1.05em); }
   .header-brandlab {
     position: static;
     order: -1;
@@ -1352,7 +1352,7 @@ footer .logo svg { height: 56px; }
   .header-calc { order: 1; font-size: 16px; }
   .menu-toggle { order: 2; }
   .header-mail, .phone-link, .header-messengers { display: none; }
-  .site-header.is-home .header-slogan { margin-bottom: 14px; }
+  .site-header.is-home .header-slogan { margin-bottom: 18px; }
   .site-header.is-home .phone-link { display: flex; font-size: 13px; }
   .site-header.is-home .header-phones { display: flex; gap: 2px; }
   .site-header.is-home .header-actions-line {
