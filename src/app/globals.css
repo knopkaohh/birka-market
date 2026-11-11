@@ -1253,7 +1253,6 @@ footer { padding: 56px var(--page-gutter) 24px; color: var(--paper); background:
 footer .logo { color: #f2c555; background: transparent; }
 footer .logo svg { height: 56px; }
 .footer-tag { display: block; width: 84px; height: auto; margin: 0 0 4px; }
-.footer-grid a.footer-phone + a.footer-phone { margin-top: -6px; font-size: 22px !important; }
 .footer-top { display: grid; grid-template-columns: .4fr 1.3fr .3fr; align-items: start; gap: 30px; padding-bottom: 90px; }
 .footer-top h2 { margin: -10px 0 0; font-size: clamp(56px, 7vw, 100px); font-weight: 590; line-height: .88; letter-spacing: -.07em; }
 .footer-top h2 em { color: var(--yellow); }
@@ -3841,7 +3840,7 @@ footer .logo svg { height: 56px; }
 }
 .footer-contact { width: 100%; }
 .footer-contact .footer-heading-amber { font-size: 20px; }
-.footer-grid a.footer-phone { font-size: 28px !important; font-weight: 800; color: #f2c555; letter-spacing: -.02em; }
+.footer-grid a.footer-phone { font-size: 28px !important; font-weight: 800; color: #f2c555; letter-spacing: -.02em; font-variant-numeric: tabular-nums; }
 .footer-grid .footer-messengers {
   flex-direction: row;
   align-items: flex-start;
