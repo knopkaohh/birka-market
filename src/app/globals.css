@@ -255,6 +255,7 @@ button { cursor: pointer; }
 }
 .logo svg { display: block; width: auto; height: 40px; }
 .header-slogan {
+  position: relative;
   display: block;
   color: #111;
   font-family: var(--font-manrope), Arial, sans-serif;
@@ -264,7 +265,6 @@ button { cursor: pointer; }
   letter-spacing: -.07em;
 }
 .header-slogan em {
-  position: relative;
   font-family: var(--font-cormorant), Georgia, serif;
   font-style: italic;
   font-weight: 500;
@@ -272,11 +272,10 @@ button { cursor: pointer; }
 }
 .slogan-tag {
   position: absolute;
-  left: calc(100% + .95em);
-  top: 50%;
+  left: calc(100% + .7em);
+  top: 0;
   width: auto;
-  height: 1.42em;
-  transform: translateY(-52%);
+  height: 100%;
   pointer-events: none;
 }
 .header-brandlab {
@@ -1329,7 +1328,7 @@ footer .logo svg { height: 56px; }
   .site-header:not(.is-home) .header-mark svg { height: 34px; }
   .site-header:not(.is-home) .header-calc { font-size: 15px; }
   .header-slogan { font-size: 22px; }
-  .slogan-tag { height: 1.35em; left: calc(100% + 1.05em); }
+  .slogan-tag { left: calc(100% + .85em); }
   .header-brandlab {
     position: static;
     order: -1;
