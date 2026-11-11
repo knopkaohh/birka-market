@@ -54,7 +54,11 @@ export function ThanksCard({
       <div className="thanks-actions">
         <a className="primary-cta" href={company.phoneHref}>
           <Phone size={18} />
-          Позвонить
+          {company.phone}
+        </a>
+        <a className="primary-cta" href={company.phone2Href}>
+          <Phone size={18} />
+          {company.phone2}
         </a>
         {onClose ? (
           <button type="button" className="text-link" onClick={onClose}>

@@ -8,7 +8,7 @@ import { company, team } from "@/lib/site";
 export const metadata: Metadata = {
   title: "Контакты производителя бирок и этикеток для одежды с логотипом в Москве — печать оптом",
   description:
-    "Бирка Маркет в Москве: телефон +7 495 003-88-81, почта, Telegram и Max. Бирки и упаковка на заказ от производителя. Печать оптом, менеджер ответит за 10 минут.",
+    "Бирка Маркет в Москве: телефоны +7 495 003-88-81 и +7 495 003-88-82, почта, Telegram и Max. Бирки и упаковка на заказ от производителя. Печать оптом, менеджер ответит за 10 минут.",
   alternates: { canonical: "https://birka-market.ru/kontakty" },
 };
 
@@ -26,10 +26,15 @@ export default function ContactsPage() {
           <p>Менеджер поможет выбрать материал и оформить заказ. Срок и тираж подтверждаем до запуска в производство.</p>
         </div>
         <div className="contact-board">
-          <a href={company.phoneHref}>
+          <div className="contact-phones">
             <span>ТЕЛЕФОН</span>
-            <strong>{company.phone}</strong>
-          </a>
+            <a href={company.phoneHref}>
+              <strong>{company.phone}</strong>
+            </a>
+            <a href={company.phone2Href}>
+              <strong>{company.phone2}</strong>
+            </a>
+          </div>
           <a href={`mailto:${company.email}`}>
             <span>ПОЧТА</span>
             <strong>{company.email}</strong>

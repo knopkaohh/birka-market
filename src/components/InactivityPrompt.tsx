@@ -5,6 +5,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { usePathname } from "next/navigation";
 import { X } from "lucide-react";
 import { formatRuPhone, isCompleteRuPhone } from "@/lib/phone";
+import { company } from "@/lib/site";
 
 const IDLE_MS = 50_000;
 
@@ -176,7 +177,7 @@ export function InactivityPrompt() {
       setStatus("done");
     } catch {
       setStatus("idle");
-      setError("Не удалось отправить. Позвоните +7 495 003-88-81.");
+      setError(`Не удалось отправить. Позвоните ${company.phone} или ${company.phone2}.`);
     }
   };
 

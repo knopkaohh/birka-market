@@ -170,7 +170,6 @@ export function SidebarMenu({ open, onClose }: SidebarMenuProps) {
         <div className="side-menu-inner">
           <div className="side-menu-logo">
             <Logo onNavigate={onClose} />
-            <img className="side-tag" src="/images/brand/tag-logo.png" alt="" width={64} height={60} />
           </div>
 
           <form className="side-search-panel" onSubmit={submitSearch}>

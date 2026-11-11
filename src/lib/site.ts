@@ -3,6 +3,8 @@ export const company = {
   slogan: "Ваш бренд — наша забота!",
   phone: "+7 495 003-88-81",
   phoneHref: "tel:+74950038881",
+  phone2: "+7 495 003-88-82",
+  phone2Href: "tel:+74950038882",
   email: "prod@birka-market.ru",
   telegram: "https://t.me/birka_market_ru?direct",
   max: "https://max.ru/u/f9LHodD0cOKGRkpAHJyM_JXjwLbZ_oegbO35hGD4Y6uL3Rvlqd8_mkckv0o",

@@ -28,6 +28,8 @@ export default function DocumentsPage() {
         <br />
         <a href={company.phoneHref}>{company.phone}</a>
         <br />
+        <a href={company.phone2Href}>{company.phone2}</a>
+        <br />
         <a href={`mailto:${company.email}`}>{company.email}</a>
       </p>
       <p className="type-body">

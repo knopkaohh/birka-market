@@ -51,7 +51,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     "@type": "LocalBusiness",
     name: company.name,
     url: "https://birka-market.ru",
-    telephone: company.phoneHref.replace("tel:", ""),
+    telephone: [company.phoneHref.replace("tel:", ""), company.phone2Href.replace("tel:", "")],
     email: company.email,
     image: "https://birka-market.ru/images/products/jacquard.jpg",
     priceRange: "₽₽",

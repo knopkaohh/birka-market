@@ -132,12 +132,18 @@ export function SiteHeader({
             </button>
           </div>
           <div className="header-actions-line">
-            <a className="phone-link" href={company.phoneHref}>
-              <Phone size={14} />
-              {company.phone}
-            </a>
+            <div className="header-phones">
+              <a className="phone-link" href={company.phoneHref}>
+                <Phone size={14} />
+                {company.phone}
+              </a>
+              <a className="phone-link" href={company.phone2Href}>
+                <Phone size={14} />
+                {company.phone2}
+              </a>
+            </div>
             <Link className="header-calc" href="/raschet" prefetch={false}>
-              <ArrowDownRight size={16} aria-hidden="true" />
+              <ArrowDownRight size={onHome ? 14 : 16} aria-hidden="true" />
               Рассчитать заказ
             </Link>
           </div>

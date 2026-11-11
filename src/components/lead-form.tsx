@@ -8,7 +8,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { formatRuPhone, isCompleteRuPhone } from "@/lib/phone";
 import { MAX_FILE_BYTES } from "@/lib/lead";
-import { categories, products, productsByCategory } from "@/lib/site";
+import { categories, company, products, productsByCategory } from "@/lib/site";
 import { ThanksOverlay } from "@/components/thanks-overlay";
 import FluxLines from "@/components/fx/FluxLines";
 
@@ -138,7 +138,7 @@ export function LeadForm({
   const [phone, setPhone] = useState("");
   const [phoneError, setPhoneError] = useState("");
   const [status, setStatus] = useState<"idle" | "sending" | "error" | "done">("idle");
-  const [errorText, setErrorText] = useState("Не удалось отправить заявку. Позвоните: +7 495 003-88-81.");
+  const [errorText, setErrorText] = useState(`Не удалось отправить заявку. Позвоните: ${company.phone} или ${company.phone2}.`);
   const variantOptions = variants?.length ? variants : defaultJacquardVariants;
   const selectedVariant = defaultVariant && variantOptions.some((item) => item.id === defaultVariant)
     ? defaultVariant
@@ -204,7 +204,7 @@ export function LeadForm({
       setErrorText(
         error instanceof Error && error.message && error.message !== "Request failed"
           ? error.message
-          : "Не удалось отправить заявку. Позвоните: +7 495 003-88-81.",
+          : `Не удалось отправить заявку. Позвоните: ${company.phone} или ${company.phone2}.`,
       );
       setStatus("error");
     }

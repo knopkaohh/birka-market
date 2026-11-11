@@ -22,6 +22,9 @@ export function Footer() {
           <a className="footer-phone" href={company.phoneHref}>
             {company.phone}
           </a>
+          <a className="footer-phone" href={company.phone2Href}>
+            {company.phone2}
+          </a>
           <div className="footer-messengers">
             <a href={company.max} target="_blank" rel="noreferrer" aria-label="Написать в Макс">
               <span className="messenger-bubble" aria-hidden="true">
