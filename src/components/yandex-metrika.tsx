@@ -1,4 +1,6 @@
+import { Suspense } from "react";
 import Script from "next/script";
+import { MetrikaEvents } from "@/components/metrika-events";
 import { METRIKA_COUNTER_ID } from "@/lib/analytics";
 
 export function YandexMetrika() {
@@ -17,9 +19,13 @@ ym(${METRIKA_COUNTER_ID}, "init", {
   trackLinks:true,
   accurateTrackBounce:true,
   webvisor:true,
+  trackHash:true,
   ecommerce:"dataLayer"
 });`}
       </Script>
+      <Suspense fallback={null}>
+        <MetrikaEvents />
+      </Suspense>
       <noscript>
         <div>
           {/* Official Metrika pixel; next/image cannot run in noscript */}

@@ -4,6 +4,7 @@ import { FormEvent, useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { usePathname } from "next/navigation";
 import { X } from "lucide-react";
+import { trackLeadConversion } from "@/lib/analytics";
 import { formatRuPhone, isCompleteRuPhone } from "@/lib/phone";
 import { company } from "@/lib/site";
 
@@ -175,6 +176,7 @@ export function InactivityPrompt() {
       const response = await fetch("/lead.php", { method: "POST", body });
       if (!response.ok) throw new Error("lead");
       setStatus("done");
+      trackLeadConversion();
     } catch {
       setStatus("idle");
       setError(`Не удалось отправить. Позвоните ${company.phone} или ${company.phone2}.`);
