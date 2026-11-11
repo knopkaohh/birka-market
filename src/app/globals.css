@@ -264,22 +264,20 @@ button { cursor: pointer; }
   letter-spacing: -.07em;
 }
 .header-slogan em {
+  position: relative;
   font-family: var(--font-cormorant), Georgia, serif;
   font-style: italic;
   font-weight: 500;
   color: var(--yellow);
 }
-.slogan-care {
-  display: inline-flex;
-  align-items: center;
-  gap: .62em;
-  white-space: nowrap;
-}
 .slogan-tag {
-  display: block;
+  position: absolute;
+  left: calc(100% + .55em);
+  top: 50%;
   width: auto;
-  height: 1.05em;
-  flex: 0 0 auto;
+  height: 1.15em;
+  transform: translateY(-52%);
+  pointer-events: none;
 }
 .header-brandlab {
   order: 0;
@@ -384,7 +382,7 @@ button { cursor: pointer; }
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  gap: 1px;
+  gap: 4px;
 }
 .header-mail {
   display: inline-flex;
@@ -402,11 +400,13 @@ button { cursor: pointer; }
 .phone-link {
   display: flex;
   align-items: center;
+  justify-content: flex-end;
   gap: 6px;
   color: var(--yellow);
   font-size: 17px;
   font-weight: 750;
   letter-spacing: -.04em;
+  font-variant-numeric: tabular-nums;
   white-space: nowrap;
 }
 .phone-link svg { width: 16px; height: 16px; }
@@ -428,15 +428,7 @@ button { cursor: pointer; }
 .header-msg.is-vk { color: #2787f5; }
 .header-msg:hover { background: #ece7db; }
 .header-messengers .header-msg:hover { background: transparent; opacity: .72; }
-.site-header.is-home .header-actions-line {
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 2px;
-}
-.site-header.is-home .header-phones { display: contents; }
-.site-header.is-home .phone-link:first-child { order: 1; }
-.site-header.is-home .header-calc { order: 2; font-size: 16px; gap: 6px; }
-.site-header.is-home .phone-link:last-child { order: 3; }
+.site-header.is-home .header-calc { font-size: 16px; gap: 6px; }
 .header-calc {
   display: inline-flex;
   align-items: center;
@@ -1338,8 +1330,7 @@ footer .logo svg { height: 56px; }
   .site-header:not(.is-home) .header-mark svg { height: 34px; }
   .site-header:not(.is-home) .header-calc { font-size: 15px; }
   .header-slogan { font-size: 22px; }
-  .slogan-care { gap: .48em; }
-  .slogan-tag { height: 1.12em; }
+  .slogan-tag { height: 1.15em; left: calc(100% + .75em); }
   .header-brandlab {
     position: static;
     order: -1;
@@ -1362,12 +1353,17 @@ footer .logo svg { height: 56px; }
   .header-calc { order: 1; font-size: 16px; }
   .menu-toggle { order: 2; }
   .header-mail, .phone-link, .header-messengers { display: none; }
-  .site-header.is-home .phone-link { display: flex; font-size: 14px; }
+  .site-header.is-home .header-slogan { margin-bottom: 14px; }
+  .site-header.is-home .phone-link { display: flex; font-size: 13px; }
+  .site-header.is-home .header-phones { display: flex; gap: 2px; }
   .site-header.is-home .header-actions-line {
     display: flex;
+    flex-direction: row;
+    align-items: center;
     order: 1;
+    gap: 10px;
   }
-  .site-header.is-home .header-calc { font-size: 14px; }
+  .site-header.is-home .header-calc { font-size: 13px; }
   .hero { display: flex; flex-direction: column; min-height: auto; max-height: none; }
   .hero-copy { padding: 54px 18px 42px; }
   .eyebrow { font-size: 8px; }
