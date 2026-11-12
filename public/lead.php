@@ -52,7 +52,7 @@ function telegramSettings(): array
 }
 
 /** @return array{ok: bool, api: bool, error: string} */
-function telegramOnce(string $url, array $payload, bool $hasFile): array
+function telegramOnce(string $url, array $payload, bool $hasFile, ?int $ipResolve): array
 {
     $body = '';
     $transport = '';
@@ -61,11 +61,11 @@ function telegramOnce(string $url, array $payload, bool $hasFile): array
         $options = [
             CURLOPT_POST => true,
             CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_CONNECTTIMEOUT => 6,
-            CURLOPT_TIMEOUT => 15,
+            CURLOPT_CONNECTTIMEOUT => 5,
+            CURLOPT_TIMEOUT => 12,
         ];
-        if (defined('CURL_IPRESOLVE_V4')) {
-            $options[CURLOPT_IPRESOLVE] = CURL_IPRESOLVE_V4;
+        if ($ipResolve !== null) {
+            $options[CURLOPT_IPRESOLVE] = $ipResolve;
         }
         if ($hasFile) {
             $options[CURLOPT_POSTFIELDS] = $payload;
@@ -135,21 +135,80 @@ function telegramRequest(string $token, string $method, array $payload): bool
             break;
         }
     }
-    $attempts = 2;
+    $routes = [null];
+    if (defined('CURL_IPRESOLVE_V6') && defined('CURL_IPRESOLVE_V4')) {
+        $routes = [CURL_IPRESOLVE_V6, CURL_IPRESOLVE_V4];
+    }
     $last = 'Telegram не ответил';
-    for ($attempt = 1; $attempt <= $attempts; $attempt++) {
-        $result = telegramOnce($url, $payload, $hasFile);
+    foreach ($routes as $route) {
+        $result = telegramOnce($url, $payload, $hasFile, $route);
         if ($result['ok']) {
             return true;
         }
         $last = $result['error'];
-        if ($result['api'] || $attempt === $attempts) {
+        if ($result['api']) {
             break;
         }
-        usleep(400000);
     }
     $GLOBALS['telegramError'] = $last;
     return false;
+}
+
+function saveLead(string $path, array $lead): void
+{
+    $line = json_encode($lead, JSON_UNESCAPED_UNICODE);
+    $fh = fopen($path, 'c+');
+    if ($fh === false) {
+        file_put_contents($path, $line . "\n", FILE_APPEND | LOCK_EX);
+        return;
+    }
+    flock($fh, LOCK_EX);
+    $raw = stream_get_contents($fh);
+    $id = (string) ($lead['id'] ?? '');
+    $lines = $raw === false || $raw === '' ? [] : explode("\n", rtrim($raw, "\n"));
+    $found = false;
+    if ($id !== '') {
+        foreach ($lines as $index => $existing) {
+            $decoded = json_decode($existing, true);
+            if (is_array($decoded) && (string) ($decoded['id'] ?? '') === $id) {
+                $lines[$index] = $line;
+                $found = true;
+                break;
+            }
+        }
+    }
+    if (!$found) {
+        $lines[] = $line;
+    }
+    rewind($fh);
+    ftruncate($fh, 0);
+    fwrite($fh, implode("\n", $lines) . "\n");
+    fflush($fh);
+    flock($fh, LOCK_UN);
+    fclose($fh);
+}
+
+function finishHttpResponse(string $json): void
+{
+    ignore_user_abort(true);
+    if (function_exists('set_time_limit')) {
+        set_time_limit(40);
+    }
+    header('Connection: close');
+    header('Content-Length: ' . strlen($json));
+    echo $json;
+    if (function_exists('fastcgi_finish_request')) {
+        fastcgi_finish_request();
+        return;
+    }
+    if (function_exists('litespeed_finish_request')) {
+        litespeed_finish_request();
+        return;
+    }
+    while (ob_get_level() > 0) {
+        ob_end_flush();
+    }
+    flush();
 }
 
 function notifyTelegram(string $text, string $filePath): string
@@ -310,12 +369,20 @@ if (function_exists('mb_substr')) {
     $text = substr($text, 0, 4000);
 }
 
+$lead['telegram'] = 'pending';
+$logPath = $dir . '/leads.jsonl';
+saveLead($logPath, $lead);
+
+finishHttpResponse(json_encode(['ok' => true, 'id' => $lead['id'], 'goal' => 'LEAD'], JSON_UNESCAPED_UNICODE));
+
 $GLOBALS['telegramError'] = '';
 $lead['telegram'] = notifyTelegram($text, $filePath);
 if ($lead['telegram'] === 'failed' && $GLOBALS['telegramError'] !== '') {
     $lead['telegramError'] = $GLOBALS['telegramError'];
+} else {
+    unset($lead['telegramError']);
 }
-file_put_contents($dir . '/leads.jsonl', json_encode($lead, JSON_UNESCAPED_UNICODE) . "\n", FILE_APPEND | LOCK_EX);
+saveLead($logPath, $lead);
 
 $mailLines = [];
 foreach ($lead as $key => $value) {
@@ -325,5 +392,3 @@ foreach ($lead as $key => $value) {
 }
 $headers = "MIME-Version: 1.0\r\nContent-Type: text/plain; charset=UTF-8\r\nFrom: webmaster@birka-market.ru\r\n";
 @mail('prod@birka-market.ru', 'Заявка с сайта Бирка Маркет', implode("\n", $mailLines), $headers);
-
-echo json_encode(['ok' => true, 'id' => $lead['id'], 'goal' => 'LEAD'], JSON_UNESCAPED_UNICODE);
