@@ -22,6 +22,9 @@ export function Footer() {
           <a className="footer-phone" href={company.phoneHref}>
             {company.phone}
           </a>
+          <a className="footer-phone" href={company.phone2Href}>
+            {company.phone2}
+          </a>
           <div className="footer-messengers">
             <a href={company.max} target="_blank" rel="noreferrer" aria-label="Написать в Макс">
               <span className="messenger-bubble" aria-hidden="true">
@@ -66,6 +69,7 @@ export function Footer() {
           <p>{company.schedule[2]}</p>
         </div>
         <div>
+          <img className="footer-tag" src="/images/brand/tag-logo.png" alt="Бирка Маркет" width={84} height={78} />
           <span className="footer-heading-amber">Компания</span>
           <Link href="/o-kompanii">О нас</Link>
           <Link href="/rabota">Работа у нас</Link>

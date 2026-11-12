@@ -204,7 +204,8 @@ void main() {
   }
 
   vec3 light = tint * energy * uOpacity;
-  outColor = uOpaque > 0.5 ? vec4(uBackground + light, 1.0) : vec4(light, max(light.r, max(light.g, light.b)));
+  float cover = clamp(max(light.r, max(light.g, light.b)), 0.0, 1.0);
+  outColor = uOpaque > 0.5 ? vec4(uBackground + light, 1.0) : vec4(light, cover);
 }`;
 
 const clamp = (value: number, min: number, max: number) => Math.min(max, Math.max(min, value));
@@ -312,7 +313,7 @@ const FluxLines = ({
     const canvas = canvasRef.current;
     const gl = canvas?.getContext('webgl2', {
       alpha: true,
-      premultipliedAlpha: true,
+      premultipliedAlpha: false,
       antialias: false,
       depth: false,
       stencil: false
@@ -368,6 +369,8 @@ const FluxLines = ({
       s.colors.forEach((value, index) => palette.set(parse(value, [1, 1, 1]), index * 3));
       const intro = Math.min(1, reveal);
       gl.viewport(0, 0, canvas.width, canvas.height);
+      gl.clearColor(0, 0, 0, 0);
+      gl.clear(gl.COLOR_BUFFER_BIT);
       gl.useProgram(program.program);
       gl.bindVertexArray(vao);
       gl.uniform2f(u.uResolution, canvas.width, canvas.height);

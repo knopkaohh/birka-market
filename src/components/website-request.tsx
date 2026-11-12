@@ -5,6 +5,7 @@ import { FormEvent, useState } from "react";
 import { trackLeadConversion } from "@/lib/analytics";
 import { websiteCurrentOptions } from "@/lib/lead";
 import { formatRuPhone, isCompleteRuPhone } from "@/lib/phone";
+import { company } from "@/lib/site";
 
 export function WebsiteRequest() {
   const [phone, setPhone] = useState("+7");
@@ -74,7 +75,7 @@ export function WebsiteRequest() {
       setErrorText(
         error instanceof Error && error.message && error.message !== "Request failed"
           ? error.message
-          : "Не удалось отправить заявку. Позвоните: +7 495 003-88-81.",
+          : `Не удалось отправить заявку. Позвоните: ${company.phone} или ${company.phone2}.`,
       );
       setStatus("error");
     }

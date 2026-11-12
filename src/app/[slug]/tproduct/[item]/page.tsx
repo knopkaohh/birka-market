@@ -8,7 +8,7 @@ import { CalculatorBlock } from "@/components/calculator-block";
 import { MaterialCatalog, catalogBlurb } from "@/components/material-catalog";
 import { catalogItems, catalogOrderHref, getCatalogItem } from "@/lib/catalog";
 import { getLanding } from "@/lib/landings";
-import { canonical, siteUrl } from "@/lib/seo";
+import { canonical, offerDescription, pageTitle, siteUrl } from "@/lib/seo";
 import { getCategory, getProduct } from "@/lib/site";
 
 type Params = { slug: string; item: string };
@@ -38,14 +38,14 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
   const item = getCatalogItem(slug, path);
   const product = getProduct(slug);
   if (!item || !product) return {};
-  const description = `${catalogBlurb(item)}. ${product.shortName} на заказ в Москве, производство Бирка Маркет.`;
-  const title = `${item.title} на заказ в Москве`;
+  const description = offerDescription(`${item.title}, ${product.name}`, catalogBlurb(item));
+  const title = pageTitle(`${item.title} для одежды с логотипом на заказ в Москве — этикетки, производство оптом`);
   return {
     title,
     description,
     alternates: canonical(`/${slug}/tproduct/${item.path}`),
     openGraph: {
-      title,
+      title: title.absolute,
       description,
       url: `${siteUrl}/${slug}/tproduct/${item.path}`,
       images: [{ url: item.image, alt: item.title }],

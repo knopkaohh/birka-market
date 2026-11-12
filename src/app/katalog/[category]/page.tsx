@@ -5,7 +5,7 @@ import { Breadcrumbs } from "@/components/breadcrumbs";
 import { GoldEnd } from "@/components/gold-end";
 import { CalculatorBlock } from "@/components/calculator-block";
 import { ProductCard } from "@/components/product-card";
-import { canonical } from "@/lib/seo";
+import { canonical, offerDescription, pageTitle } from "@/lib/seo";
 import { categories, getCategory, productsByCategory } from "@/lib/site";
 
 type Params = { category: string };
@@ -18,9 +18,19 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
   const { category } = await params;
   const item = getCategory(category);
   if (!item) return {};
+  const titles: Record<string, string> = {
+    "vshivnye-birki": "Вшивные бирки и этикетки для одежды с логотипом на заказ в Москве — производство оптом",
+    "navesnye-birki": "Навесные бирки и этикетки для одежды с логотипом на заказ в Москве — производство оптом",
+    upakovka: "Упаковка и этикетки для одежды с логотипом на заказ в Москве — производство и печать оптом",
+    poligrafiya: "Полиграфия и этикетки для одежды с логотипом на заказ в Москве — производство и печать оптом",
+    merch: "Мерч и этикетки для одежды с логотипом на заказ в Москве — производство оптом",
+    furnitura: "Фурнитура и этикетки для одежды с логотипом на заказ в Москве — производство оптом",
+    nanesenie: "ПВХ-патчи и этикетки для одежды с логотипом на заказ в Москве — производство оптом",
+    sajty: "Создание сайтов для брендов одежды с логотипом на заказ в Москве — бирки, этикетки и производство оптом",
+  };
   return {
-    title: `${item.name} на заказ в Москве`,
-    description: `${item.intro} Оставьте заявку — менеджер свяжется за 10 минут.`,
+    title: pageTitle(titles[item.slug] ?? `${item.name} для одежды с логотипом на заказ в Москве`),
+    description: offerDescription(item.name, item.intro),
     alternates:
       item.slug === "sajty" ? canonical("/sozdanie-sajtov") : canonical(`/katalog/${item.slug}`),
   };

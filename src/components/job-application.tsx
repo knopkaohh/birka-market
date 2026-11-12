@@ -167,7 +167,7 @@ export function JobApplication({ part = "all" }: { part?: "form" | "direct" | "a
       setErrorText(
         error instanceof Error && error.message && error.message !== "Request failed"
           ? error.message
-          : "Не удалось отправить отклик. Позвоните: +7 495 003-88-81.",
+          : `Не удалось отправить отклик. Позвоните: ${company.phone} или ${company.phone2}.`,
       );
       setStatus("error");
     }
@@ -295,6 +295,7 @@ export function JobApplication({ part = "all" }: { part?: "form" | "direct" | "a
         </p>
         <div className="jobs-direct-row">
           <a href={company.phoneHref}>{company.phone}</a>
+          <a href={company.phone2Href}>{company.phone2}</a>
           <a href={`mailto:${company.email}`}>{company.email}</a>
           <div className="jobs-social">
             <a className="jobs-social-link" href={company.telegram} target="_blank" rel="noreferrer" aria-label="Telegram">

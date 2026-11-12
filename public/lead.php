@@ -51,6 +51,80 @@ function telegramSettings(): array
     return ['token' => $token, 'chatId' => $chatId];
 }
 
+/** @return array{ok: bool, api: bool, error: string} */
+function telegramOnce(string $url, array $payload, bool $hasFile, ?int $ipResolve): array
+{
+    $body = '';
+    $transport = '';
+    if (function_exists('curl_init')) {
+        $ch = curl_init($url);
+        $options = [
+            CURLOPT_POST => true,
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_CONNECTTIMEOUT => 5,
+            CURLOPT_TIMEOUT => 12,
+        ];
+        if ($ipResolve !== null) {
+            $options[CURLOPT_IPRESOLVE] = $ipResolve;
+        }
+        if ($hasFile) {
+            $options[CURLOPT_POSTFIELDS] = $payload;
+        } else {
+            $options[CURLOPT_HTTPHEADER] = ['Content-Type: application/json'];
+            $options[CURLOPT_POSTFIELDS] = json_encode($payload, JSON_UNESCAPED_UNICODE);
+        }
+        curl_setopt_array($ch, $options);
+        $raw = curl_exec($ch);
+        if ($raw === false) {
+            $transport = curl_error($ch) ?: ('соединение не установлено, код ' . curl_errno($ch));
+        } else {
+            $body = $raw;
+            $code = (int) curl_getinfo($ch, CURLINFO_RESPONSE_CODE);
+            if ($body === '' && $code > 0) {
+                $transport = 'HTTP ' . $code;
+            }
+        }
+        curl_close($ch);
+    } elseif (!$hasFile) {
+        $context = stream_context_create([
+            'http' => [
+                'method' => 'POST',
+                'header' => "Content-Type: application/json\r\n",
+                'content' => json_encode($payload, JSON_UNESCAPED_UNICODE),
+                'timeout' => 15,
+            ],
+        ]);
+        $raw = @file_get_contents($url, false, $context);
+        if (!is_string($raw) || $raw === '') {
+            $transport = 'нет ответа';
+        } else {
+            $body = $raw;
+        }
+    } else {
+        $transport = 'на хостинге нет curl, файл не отправлен';
+    }
+
+    $data = json_decode($body, true);
+    if (is_array($data) && !empty($data['ok'])) {
+        return ['ok' => true, 'api' => false, 'error' => ''];
+    }
+    if (is_array($data)) {
+        $description = trim((string) ($data['description'] ?? ''));
+        return [
+            'ok' => false,
+            'api' => true,
+            'error' => $description !== '' ? $description : 'Telegram не принял сообщение',
+        ];
+    }
+    $detail = $transport !== '' ? $transport : 'пустой ответ';
+    if (function_exists('mb_substr')) {
+        $detail = mb_substr($detail, 0, 180);
+    } else {
+        $detail = substr($detail, 0, 180);
+    }
+    return ['ok' => false, 'api' => false, 'error' => 'Telegram не ответил: ' . $detail];
+}
+
 function telegramRequest(string $token, string $method, array $payload): bool
 {
     $url = 'https://api.telegram.org/bot' . $token . '/' . $method;
@@ -61,43 +135,80 @@ function telegramRequest(string $token, string $method, array $payload): bool
             break;
         }
     }
-    $body = '';
-    if (function_exists('curl_init')) {
-        $ch = curl_init($url);
-        $options = [
-            CURLOPT_POST => true,
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_CONNECTTIMEOUT => 5,
-            CURLOPT_TIMEOUT => 12,
-        ];
-        if ($hasFile) {
-            $options[CURLOPT_POSTFIELDS] = $payload;
-        } else {
-            $options[CURLOPT_HTTPHEADER] = ['Content-Type: application/json'];
-            $options[CURLOPT_POSTFIELDS] = json_encode($payload, JSON_UNESCAPED_UNICODE);
+    $routes = [null];
+    if (defined('CURL_IPRESOLVE_V6') && defined('CURL_IPRESOLVE_V4')) {
+        $routes = [CURL_IPRESOLVE_V6, CURL_IPRESOLVE_V4];
+    }
+    $last = 'Telegram не ответил';
+    foreach ($routes as $route) {
+        $result = telegramOnce($url, $payload, $hasFile, $route);
+        if ($result['ok']) {
+            return true;
         }
-        curl_setopt_array($ch, $options);
-        $raw = curl_exec($ch);
-        curl_close($ch);
-        $body = is_string($raw) ? $raw : '';
-    } elseif (!$hasFile) {
-        $context = stream_context_create([
-            'http' => [
-                'method' => 'POST',
-                'header' => "Content-Type: application/json\r\n",
-                'content' => json_encode($payload, JSON_UNESCAPED_UNICODE),
-                'timeout' => 12,
-            ],
-        ]);
-        $raw = @file_get_contents($url, false, $context);
-        $body = is_string($raw) ? $raw : '';
+        $last = $result['error'];
+        if ($result['api']) {
+            break;
+        }
     }
-    $data = json_decode($body, true);
-    if (is_array($data) && !empty($data['ok'])) {
-        return true;
-    }
-    $GLOBALS['telegramError'] = is_array($data) ? (string) ($data['description'] ?? 'Telegram не принял сообщение') : 'Telegram не ответил';
+    $GLOBALS['telegramError'] = $last;
     return false;
+}
+
+function saveLead(string $path, array $lead): void
+{
+    $line = json_encode($lead, JSON_UNESCAPED_UNICODE);
+    $fh = fopen($path, 'c+');
+    if ($fh === false) {
+        file_put_contents($path, $line . "\n", FILE_APPEND | LOCK_EX);
+        return;
+    }
+    flock($fh, LOCK_EX);
+    $raw = stream_get_contents($fh);
+    $id = (string) ($lead['id'] ?? '');
+    $lines = $raw === false || $raw === '' ? [] : explode("\n", rtrim($raw, "\n"));
+    $found = false;
+    if ($id !== '') {
+        foreach ($lines as $index => $existing) {
+            $decoded = json_decode($existing, true);
+            if (is_array($decoded) && (string) ($decoded['id'] ?? '') === $id) {
+                $lines[$index] = $line;
+                $found = true;
+                break;
+            }
+        }
+    }
+    if (!$found) {
+        $lines[] = $line;
+    }
+    rewind($fh);
+    ftruncate($fh, 0);
+    fwrite($fh, implode("\n", $lines) . "\n");
+    fflush($fh);
+    flock($fh, LOCK_UN);
+    fclose($fh);
+}
+
+function finishHttpResponse(string $json): void
+{
+    ignore_user_abort(true);
+    if (function_exists('set_time_limit')) {
+        set_time_limit(40);
+    }
+    header('Connection: close');
+    header('Content-Length: ' . strlen($json));
+    echo $json;
+    if (function_exists('fastcgi_finish_request')) {
+        fastcgi_finish_request();
+        return;
+    }
+    if (function_exists('litespeed_finish_request')) {
+        litespeed_finish_request();
+        return;
+    }
+    while (ob_get_level() > 0) {
+        ob_end_flush();
+    }
+    flush();
 }
 
 function notifyTelegram(string $text, string $filePath): string
@@ -181,7 +292,6 @@ $title = $titles[$kind];
 
 $contacts = [
     'phone' => 'Телефон',
-    'whatsapp' => 'WhatsApp',
     'telegram' => 'Telegram',
     'max' => 'Макс',
 ];
@@ -259,12 +369,20 @@ if (function_exists('mb_substr')) {
     $text = substr($text, 0, 4000);
 }
 
+$lead['telegram'] = 'pending';
+$logPath = $dir . '/leads.jsonl';
+saveLead($logPath, $lead);
+
+finishHttpResponse(json_encode(['ok' => true, 'id' => $lead['id'], 'goal' => 'LEAD'], JSON_UNESCAPED_UNICODE));
+
 $GLOBALS['telegramError'] = '';
 $lead['telegram'] = notifyTelegram($text, $filePath);
 if ($lead['telegram'] === 'failed' && $GLOBALS['telegramError'] !== '') {
     $lead['telegramError'] = $GLOBALS['telegramError'];
+} else {
+    unset($lead['telegramError']);
 }
-file_put_contents($dir . '/leads.jsonl', json_encode($lead, JSON_UNESCAPED_UNICODE) . "\n", FILE_APPEND | LOCK_EX);
+saveLead($logPath, $lead);
 
 $mailLines = [];
 foreach ($lead as $key => $value) {
@@ -274,5 +392,3 @@ foreach ($lead as $key => $value) {
 }
 $headers = "MIME-Version: 1.0\r\nContent-Type: text/plain; charset=UTF-8\r\nFrom: webmaster@birka-market.ru\r\n";
 @mail('prod@birka-market.ru', 'Заявка с сайта Бирка Маркет', implode("\n", $mailLines), $headers);
-
-echo json_encode(['ok' => true, 'id' => $lead['id'], 'goal' => 'LEAD'], JSON_UNESCAPED_UNICODE);

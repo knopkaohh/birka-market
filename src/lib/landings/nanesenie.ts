@@ -3,7 +3,7 @@ import { g, gallery, p } from "./types";
 
 export const rubberLanding: LandingContent = {
   slug: "rubber",
-  seoTitle: "Резиновые бирки (ПВХ патчи) для одежды с логотипом на заказ - производство и печать",
+  seoTitle: "Резиновые бирки (ПВХ патчи), этикетки для одежды с логотипом на заказ в Москве — производство и печать оптом",
   seoDescription: "Резиновые бирки (ПВХ патчи) для одежды с логотипом на заказ - производство и печать",
   eyebrow: "Объёмный знак • Тираж от 100 шт.",
   title: "ПВХ-патчи",
@@ -166,7 +166,7 @@ export const rubberLanding: LandingContent = {
 
 export const flextranLanding: LandingContent = {
   slug: "flextran",
-  seoTitle: "ФлексТран -печать в Москве на заказ, нанесение на одежду логотипов",
+  seoTitle: "ФлексТран — печать логотипов на одежде на заказ в Москве, производство этикеток оптом",
   seoDescription: "ФлексТран -печать в Москве на заказ, нанесение на одежду логотипов",
   eyebrow: "3D-нанесение • Тираж от 50 шт.",
   title: "FlexTran",
@@ -330,7 +330,7 @@ export const flextranLanding: LandingContent = {
 
 export const dtfLanding: LandingContent = {
   slug: "directtofilm",
-  seoTitle: "DTF-печать на текстиле с логотипом на заказ в Москве - производство",
+  seoTitle: "DTF-печать на одежде с логотипом на заказ в Москве — этикетки и производство оптом",
   seoDescription: "DTF-печать на текстиле с логотипом на заказ в Москве - производство",
   eyebrow: "Полноцвет • Тираж от 10 шт.",
   title: "DTF-печать",
@@ -494,7 +494,7 @@ export const dtfLanding: LandingContent = {
 
 export const embroideryLanding: LandingContent = {
   slug: "embroideryprint",
-  seoTitle: "Вышивка и шелкография на заказ в Москве",
+  seoTitle: "Вышивка и шелкография на одежде с логотипом на заказ в Москве — этикетки и производство оптом",
   seoDescription:
     "Вышивка, шелкография и DTF на одежду на заказ в Москве от 10 шт. Подберём технологию под тираж. Менеджер свяжется за 10 минут.",
   eyebrow: "Подбор технологии • Тираж от 10 шт.",

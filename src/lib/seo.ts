@@ -8,20 +8,34 @@ export function canonical(path: string) {
   return { canonical: path === "/" ? `${siteUrl}/` : `${siteUrl}${path}` };
 }
 
-/** Старые заголовки Тильды уже содержат ключи и город, шаблон «| Бирка Маркет» их дублирует. */
-function landingTitle(title: string): Metadata["title"] {
-  const keepExact = /логотип|производств|оптом|этикет|ФлексТран|DTF-печать|Пуллеры|ПВД-пакеты|Крафтовые пакеты|маркировки/.test(title);
-  return keepExact ? { absolute: title } : title;
+/** Title без шаблона сайта, чтобы бренд не дублировался. */
+export function pageTitle(title: string): { absolute: string } {
+  const clean = title.replace(/\s+/g, " ").trim().replace(/\s*\|\s*Бирка Маркет\s*$/i, "");
+  return { absolute: `${clean} | Бирка Маркет` };
+}
+
+/** Уникальный title карточки: материал, «на заказ», город и бренд. */
+export function offerTitle(subject: string): { absolute: string } {
+  return pageTitle(`${subject} на заказ в Москве`);
+}
+
+/** Description с материалом, производителем, городом и печатью оптом. */
+export function offerDescription(subject: string, detail: string) {
+  const text = detail.replace(/\s+/g, " ").trim();
+  const body = `${subject} на заказ от производителя Бирка Маркет в Москве. Печать оптом. ${text} Доставка по России.`;
+  return body.length > 200 ? `${body.slice(0, 197).trimEnd()}…` : body;
 }
 
 export function landingMetadata(landing: LandingContent, product: Product): Metadata {
+  const description = offerDescription(product.name, product.summary || landing.seoDescription);
+  const title = pageTitle(landing.seoTitle);
   return {
-    title: landingTitle(landing.seoTitle),
-    description: landing.seoDescription,
+    title,
+    description,
     alternates: { canonical: `${siteUrl}/${landing.slug}` },
     openGraph: {
-      title: landing.seoTitle,
-      description: landing.seoDescription,
+      title: title.absolute,
+      description,
       url: `${siteUrl}/${landing.slug}`,
       locale: "ru_RU",
       type: "website",
@@ -35,7 +49,7 @@ export function landingJsonLd(landing: LandingContent, product: Product) {
     "@context": "https://schema.org",
     "@type": "Product",
     name: product.name,
-    description: landing.seoDescription,
+    description: offerDescription(product.name, product.summary || landing.seoDescription),
     image: `${siteUrl}${product.image}`,
     brand: { "@type": "Brand", name: company.name },
     offers: {

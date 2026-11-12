@@ -1,14 +1,7 @@
-import { MaxGlyph, MaxIcon, TelegramIcon, VkIcon, WhatsAppIcon } from "@/components/messenger-icons";
+import { MaxGlyph, MaxIcon, TelegramIcon, VkIcon } from "@/components/messenger-icons";
 import { company } from "@/lib/site";
 
 export const messengerLinks = [
-  {
-    id: "whatsapp",
-    href: company.whatsapp,
-    label: "WhatsApp",
-    tone: "wa",
-    Icon: WhatsAppIcon,
-  },
   {
     id: "telegram",
     href: company.telegram,
@@ -26,8 +19,7 @@ export const messengerLinks = [
 ] as const;
 
 const headerMessengerLinks = [
-  messengerLinks[1],
-  messengerLinks[2],
+  ...messengerLinks,
   {
     id: "vk",
     href: company.vk,

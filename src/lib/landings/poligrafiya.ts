@@ -3,7 +3,7 @@ import { g, gallery, p } from "./types";
 
 export const printingLanding: LandingContent = {
   slug: "printing",
-  seoTitle: "Полиграфия для бизнеса на заказ в Москве",
+  seoTitle: "Полиграфия и этикетки для одежды с логотипом на заказ в Москве — печать и производство оптом",
   seoDescription:
     "Визитки, наклейки, флаеры, буклеты и журналы на заказ в Москве от 50 шт. Доставка по России. Оставьте заявку — ответ за 10 минут.",
   eyebrow: "Печатные носители • Тираж от 50 шт.",
@@ -168,7 +168,7 @@ export const printingLanding: LandingContent = {
 
 export const businesscardLanding: LandingContent = {
   slug: "businesscard",
-  seoTitle: "Визитки на заказ в Москве — от 100 шт.",
+  seoTitle: "Визитки для брендов одежды с логотипом на заказ в Москве — печать этикеток и производство оптом",
   seoDescription:
     "Визитки на заказ в Москве от 100 шт. Плотность, ламинация, односторонние и двусторонние. Менеджер свяжется за 10 минут.",
   eyebrow: "Первое знакомство • Тираж от 100 шт.",
@@ -330,7 +330,7 @@ export const businesscardLanding: LandingContent = {
 
 export const stickerLanding: LandingContent = {
   slug: "sticker",
-  seoTitle: "Наклейки на заказ в Москве — от 50 шт.",
+  seoTitle: "Наклейки и этикетки для одежды с логотипом на заказ в Москве — печать и производство оптом",
   seoDescription:
     "Наклейки с логотипом на заказ в Москве от 50 шт. Вырубка и клей под товар, упаковку и витрину. Оставьте заявку — ответ за 10 минут.",
   eyebrow: "Маркировка и реклама • Тираж от 50 шт.",
@@ -495,7 +495,7 @@ export const stickerLanding: LandingContent = {
 
 export const leafletLanding: LandingContent = {
   slug: "leaflet",
-  seoTitle: "Флаеры и листовки на заказ в Москве — от 100 шт.",
+  seoTitle: "Флаеры и листовки для брендов одежды с логотипом на заказ в Москве — печать этикеток и производство оптом",
   seoDescription:
     "Флаеры и листовки на заказ в Москве от 100 шт. Для акций и открытия точек. Быстрый тираж. Менеджер свяжется за 10 минут.",
   eyebrow: "Быстрый промо-носитель • Тираж от 100 шт.",
@@ -659,7 +659,7 @@ export const leafletLanding: LandingContent = {
 
 export const bookletLanding: LandingContent = {
   slug: "booklet",
-  seoTitle: "Буклеты на заказ в Москве — от 50 шт.",
+  seoTitle: "Буклеты для брендов одежды с логотипом на заказ в Москве — печать этикеток и производство оптом",
   seoDescription:
     "Буклеты на заказ в Москве от 50 шт. Евро, гармошка, 8 полос. Производство и доставка. Оставьте заявку — ответ за 10 минут.",
   eyebrow: "Сложенный лист • Тираж от 50 шт.",
@@ -824,7 +824,7 @@ export const bookletLanding: LandingContent = {
 
 export const magazineLanding: LandingContent = {
   slug: "magazine",
-  seoTitle: "Печать журналов и lookbook на заказ в Москве",
+  seoTitle: "Печать журналов и lookbook для брендов одежды с логотипом на заказ в Москве — этикетки и производство оптом",
   seoDescription:
     "Журналы и lookbook на заказ в Москве от 50 шт. Мягкая обложка, каталог, отчёт. Доставка по России. Ответ за 10 минут.",
   eyebrow: "Многостраничное издание • Тираж от 50 шт.",
@@ -990,7 +990,7 @@ export const magazineLanding: LandingContent = {
 
 export const flagsLanding: LandingContent = {
   slug: "flags",
-  seoTitle: "Печать флагов на заказ в Москве — от 1 шт.",
+  seoTitle: "Печать флагов с логотипом для брендов одежды на заказ в Москве — производство этикеток оптом",
   seoDescription:
     "Флаги с индивидуальным дизайном на заказ в Москве от 1 шт. Для мероприятий, офиса и улицы. Оставьте заявку — ответ за 10 минут.",
   eyebrow: "Имидж и события • От 1 штуки",
@@ -1156,7 +1156,7 @@ export const flagsLanding: LandingContent = {
 
 export const bannerLanding: LandingContent = {
   slug: "banner",
-  seoTitle: "Печать баннеров на заказ в Москве — до 320 см",
+  seoTitle: "Печать баннеров с логотипом для брендов одежды на заказ в Москве — производство этикеток оптом",
   seoDescription:
     "Баннеры на заказ в Москве от 1 шт., ширина до 320 см. Для улицы, витрин и интерьера. Люверсы. Менеджер свяжется за 10 минут.",
   eyebrow: "Широкоформат • До 320 см",

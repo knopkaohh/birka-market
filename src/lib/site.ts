@@ -1,14 +1,13 @@
-const messengerGreeting = "Здравствуйте! Пишу с сайта Бирка Маркет.";
-
 export const company = {
   name: "Бирка Маркет",
   slogan: "Ваш бренд — наша забота!",
   phone: "+7 495 003-88-81",
   phoneHref: "tel:+74950038881",
+  phone2: "+7 495 003-88-82",
+  phone2Href: "tel:+74950038882",
   email: "prod@birka-market.ru",
-  telegram: "https://t.me/birka_market_ru",
-  whatsapp: `https://wa.me/79163549287?text=${encodeURIComponent(messengerGreeting)}`,
-  max: `https://max.ru/u/f9LHodD0cOKy8mEM_ckeVhpbwBK4cRsaiewG8RPER9i1TxrrWpYlzfw3OG0?text=${encodeURIComponent(messengerGreeting)}`,
+  telegram: "https://t.me/birka_market_ru?direct",
+  max: "https://max.ru/u/f9LHodD0cOKGRkpAHJyM_JXjwLbZ_oegbO35hGD4Y6uL3Rvlqd8_mkckv0o",
   vk: "https://vk.me/birka_market",
   address: "Москва, Строительный проезд, дом 2, стр. 1, офис № 1",
   hours: "Пн–Пт, 10:00–18:00",

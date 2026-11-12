@@ -71,6 +71,11 @@ function htaccess() {
     "DirectoryIndex index.html",
     "Options -MultiViews",
     "RewriteEngine On",
+    "RewriteCond %{HTTP_HOST} ^www\\.birka-market\\.ru$ [NC]",
+    "RewriteRule ^ https://birka-market.ru%{REQUEST_URI} [R=301,L]",
+    "RewriteCond %{HTTPS} !=on",
+    "RewriteCond %{HTTP:X-Forwarded-Proto} !https [NC]",
+    "RewriteRule ^ https://birka-market.ru%{REQUEST_URI} [R=301,L]",
     "RewriteRule ^api/lead/?$ /lead.php [L]",
     ...fixed.map(([source, destination]) => rule(source, destination)),
   ];
@@ -106,6 +111,12 @@ try {
     throw new Error("out/index.html was not created");
   }
   htaccess();
+  const telegramConfig = path.join(root, "public/leads/telegram.php");
+  if (fs.existsSync(telegramConfig)) {
+    const leadsDir = path.join(outDir, "leads");
+    fs.mkdirSync(leadsDir, { recursive: true });
+    fs.copyFileSync(telegramConfig, path.join(leadsDir, "telegram.php"));
+  }
   const adminHtml = path.join(outDir, "admin", "index.html");
   fs.mkdirSync(path.dirname(adminHtml), { recursive: true });
   fs.writeFileSync(

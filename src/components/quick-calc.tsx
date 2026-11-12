@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { ThanksOverlay } from "@/components/thanks-overlay";
 import { formatRuPhone, isCompleteRuPhone } from "@/lib/phone";
-import { getProduct } from "@/lib/site";
+import { company, getProduct } from "@/lib/site";
 
 export const OPEN_QUICK_CALC = "birka:open-quick-calc";
 
@@ -30,7 +30,7 @@ export function QuickCalc() {
   const [phone, setPhone] = useState("");
   const [phoneError, setPhoneError] = useState("");
   const [status, setStatus] = useState<"idle" | "sending" | "error" | "done">("idle");
-  const [errorText, setErrorText] = useState("Не удалось отправить заявку. Позвоните: +7 495 003-88-81.");
+  const [errorText, setErrorText] = useState(`Не удалось отправить заявку. Позвоните: ${company.phone} или ${company.phone2}.`);
 
   if (path !== pathname) {
     setPath(pathname);
@@ -126,7 +126,7 @@ export function QuickCalc() {
       setErrorText(
         error instanceof Error && error.message && error.message !== "Request failed"
           ? error.message
-          : "Не удалось отправить заявку. Позвоните: +7 495 003-88-81.",
+          : `Не удалось отправить заявку. Позвоните: ${company.phone} или ${company.phone2}.`,
       );
       setStatus("error");
     }

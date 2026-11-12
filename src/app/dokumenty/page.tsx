@@ -4,8 +4,9 @@ import { Breadcrumbs } from "@/components/breadcrumbs";
 import { company } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Документы",
-  description: "Реквизиты ИП Федотов Антон Вадимович: ИНН, ОГРНИП и контакты Бирка Маркет.",
+  title: "Реквизиты производителя бирок и этикеток для одежды с логотипом в Москве — печать оптом",
+  description:
+    "Реквизиты производителя Бирка Маркет: ИП Федотов Антон Вадимович, ИНН и ОГРНИП. Бирки и упаковка на заказ в Москве, печать оптом.",
   alternates: { canonical: "https://birka-market.ru/dokumenty" },
 };
 
@@ -26,6 +27,8 @@ export default function DocumentsPage() {
         {company.address}
         <br />
         <a href={company.phoneHref}>{company.phone}</a>
+        <br />
+        <a href={company.phone2Href}>{company.phone2}</a>
         <br />
         <a href={`mailto:${company.email}`}>{company.email}</a>
       </p>

@@ -29,16 +29,16 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   metadataBase: new URL("https://birka-market.ru"),
   title: {
-    default: "Бирки, упаковка и мерч на заказ в Москве | Бирка Маркет",
+    default: "Бирки для одежды с логотипом на заказ в Москве, печать этикеток оптом | Бирка Маркет",
     template: "%s | Бирка Маркет",
   },
   description:
-    "Производство бирок, упаковки, фурнитуры, мерча и полиграфии в Москве. Тираж от 100 штук, доставка по России. Оставьте заявку — менеджер свяжется за 10 минут.",
+    "Бирки, упаковка, фурнитура, мерч и полиграфия на заказ от производителя Бирка Маркет в Москве. Печать оптом, тираж от 100 штук, доставка по России.",
   verification: { yandex: "778b0edaaf074370" },
   openGraph: {
-    title: `Бирка Маркет — ${company.slogan}`,
+    title: "Бирки для одежды с логотипом на заказ в Москве, печать этикеток оптом | Бирка Маркет",
     description:
-      "Бирки, упаковка и фурнитура на заказ в Москве: тираж от 100 штук, доставка по России.",
+      "Бирки, упаковка, фурнитура, мерч и полиграфия на заказ от производителя Бирка Маркет в Москве. Печать оптом, доставка по России.",
     type: "website",
     locale: "ru_RU",
     images: [{ url: "/images/products/jacquard.jpg", alt: "Жаккардовые бирки Бирка Маркет" }],
@@ -51,7 +51,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     "@type": "LocalBusiness",
     name: company.name,
     url: "https://birka-market.ru",
-    telephone: company.phoneHref.replace("tel:", ""),
+    telephone: [company.phoneHref.replace("tel:", ""), company.phone2Href.replace("tel:", "")],
     email: company.email,
     image: "https://birka-market.ru/images/products/jacquard.jpg",
     priceRange: "₽₽",

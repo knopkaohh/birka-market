@@ -6,13 +6,14 @@ import { CalculatorBlock } from "@/components/calculator-block";
 import { formatNewsDate, newsPosts } from "@/lib/news";
 
 export const metadata: Metadata = {
-  title: "Новости производства и акций",
+  title: "Новости о бирках и этикетках для одежды с логотипом — производство оптом в Москве",
   description:
-    "Новости Бирка Маркет: акции на бирки и упаковку, выставки, кейсы и обновления производства.",
+    "Новости Бирка Маркет: акции на бирки и упаковку на заказ от производителя в Москве. Печать оптом, выставки и кейсы производства.",
   alternates: { canonical: "https://birka-market.ru/novosti" },
   openGraph: {
-    title: "Новости Бирка Маркет",
-    description: "Акции, выставки и материалы о бирках, упаковке и мерче.",
+    title: "Новости о бирках и этикетках для одежды с логотипом — производство оптом в Москве | Бирка Маркет",
+    description:
+      "Новости Бирка Маркет: бирки и упаковка на заказ от производителя в Москве. Печать оптом, акции и выставки.",
     url: "https://birka-market.ru/novosti",
     locale: "ru_RU",
     type: "website",

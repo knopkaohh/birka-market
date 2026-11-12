@@ -6,9 +6,9 @@ import { YandexMap } from "@/components/yandex-map";
 import { company, team } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Контакты производства в Москве",
+  title: "Контакты производителя бирок и этикеток для одежды с логотипом в Москве — печать оптом",
   description:
-    "Телефон +7 495 003-88-81, почта, Telegram, WhatsApp и адрес склада Бирка Маркет в Москве. Менеджер свяжется за 10 минут в рабочее время.",
+    "Бирка Маркет в Москве: телефоны +7 495 003-88-81 и +7 495 003-88-82, почта, Telegram и Max. Бирки и упаковка на заказ от производителя. Печать оптом, менеджер ответит за 10 минут.",
   alternates: { canonical: "https://birka-market.ru/kontakty" },
 };
 
@@ -26,10 +26,15 @@ export default function ContactsPage() {
           <p>Менеджер поможет выбрать материал и оформить заказ. Срок и тираж подтверждаем до запуска в производство.</p>
         </div>
         <div className="contact-board">
-          <a href={company.phoneHref}>
+          <div className="contact-phones">
             <span>ТЕЛЕФОН</span>
-            <strong>{company.phone}</strong>
-          </a>
+            <a href={company.phoneHref}>
+              <strong>{company.phone}</strong>
+            </a>
+            <a href={company.phone2Href}>
+              <strong>{company.phone2}</strong>
+            </a>
+          </div>
           <a href={`mailto:${company.email}`}>
             <span>ПОЧТА</span>
             <strong>{company.email}</strong>
@@ -37,10 +42,6 @@ export default function ContactsPage() {
           <a className="is-messenger" href={company.telegram} target="_blank" rel="noreferrer">
             <span>TELEGRAM</span>
             <strong>birka_market_ru</strong>
-          </a>
-          <a className="is-messenger" href={company.whatsapp} target="_blank" rel="noreferrer">
-            <span>WHATSAPP</span>
-            <strong>+7 916 354-92-87</strong>
           </a>
           <a className="is-messenger" href={company.max} target="_blank" rel="noreferrer">
             <span>МАКС</span>

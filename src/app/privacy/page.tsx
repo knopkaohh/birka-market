@@ -3,8 +3,9 @@ import { Breadcrumbs } from "@/components/breadcrumbs";
 import { company } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Политика конфиденциальности",
-  description: "Политика обработки персональных данных Бирка Маркет.",
+  title: "Политика конфиденциальности — бирки и этикетки для одежды с логотипом, производство оптом в Москве",
+  description:
+    "Политика обработки персональных данных Бирка Маркет. Заявки на бирки и упаковку на заказ от производителя в Москве. Печать оптом — через формы сайта и по телефону.",
   alternates: { canonical: "https://birka-market.ru/privacy" },
 };
 
@@ -17,7 +18,8 @@ export default function PrivacyPage() {
       </h1>
       <p>
         Оператор: {company.legal}, ИНН {company.inn}, ОГРНИП {company.ogrnip}. Контакт для вопросов по данным:{" "}
-        <a href={`mailto:${company.email}`}>{company.email}</a>, {company.phone}.
+        <a href={`mailto:${company.email}`}>{company.email}</a>,{" "}
+        <a href={company.phoneHref}>{company.phone}</a>, <a href={company.phone2Href}>{company.phone2}</a>.
       </p>
       <p>
         Мы обрабатываем имя, телефон, комментарий к заказу, выбранную продукцию, тираж и приложенный макет,
