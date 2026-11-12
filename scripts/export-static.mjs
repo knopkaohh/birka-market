@@ -111,6 +111,12 @@ try {
     throw new Error("out/index.html was not created");
   }
   htaccess();
+  const telegramConfig = path.join(root, "public/leads/telegram.php");
+  if (fs.existsSync(telegramConfig)) {
+    const leadsDir = path.join(outDir, "leads");
+    fs.mkdirSync(leadsDir, { recursive: true });
+    fs.copyFileSync(telegramConfig, path.join(leadsDir, "telegram.php"));
+  }
   const adminHtml = path.join(outDir, "admin", "index.html");
   fs.mkdirSync(path.dirname(adminHtml), { recursive: true });
   fs.writeFileSync(
